@@ -21,3 +21,41 @@ code {
 label {
 	cursor: pointer;
 }
+
+.animate-alert-enter {
+	opacity: 0;
+	transform: scale(0);
+}
+.animate-alert-enter-active {
+	opacity: 1;
+	transform: scale(1);
+	transition: all 500ms ease-out;
+}
+.animate-alert-exit {
+	opacity: 1;
+	transform: scale(1);
+}
+.animate-alert-exit-active {
+	opacity: 0;
+	transform: scale(0);
+	transition: all 200ms ease-in;
+}
+
+.animate-note-enter {
+	opacity: 0;
+	transform: translateX(-100%);
+}
+.animate-note-enter-active {
+	opacity: 1;
+	transform: translateX(0);
+	transition: all 500ms ease-out;
+}
+.animate-note-exit {
+	opacity: 1;
+	transform: translateX(0);
+}
+.animate-note-exit-active {
+	opacity: 0;
+	transform: translateX(-100%);
+	transition: all 500ms ease-in;
+}
