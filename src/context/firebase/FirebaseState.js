@@ -36,15 +36,15 @@ const FirebaseState = ({ children }) => {
 		})
 	}
 
-	const addNote = async (title) => {
-		const note = { title, date: new Date().toJSON() }
+	const addNote = async (title, isImportant) => {
+		const note = { title, date: new Date().toJSON(), isImportant }
 
 		try {
 			const response = await axios.post(`${url}/notes.json`, note)
 
 			const payload = {
-				...note,
 				id: response.data.name,
+				...note,
 			}
 
 			dispatch({

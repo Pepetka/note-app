@@ -6,11 +6,16 @@ import { alertReducer } from "./alertReducer"
 const AlertState = ({ children }) => {
 	const [state, dispatch] = React.useReducer(alertReducer, { visible: false })
 
-	const showAlert = (text, type = "warning") =>
+	const showAlert = (text, type = "warning") => {
 		dispatch({
 			type: SHOW_ALERT,
 			payload: { text, type },
 		})
+
+		setTimeout(() => {
+			hideAlert()
+		}, 5000)
+	}
 
 	const hideAlert = () =>
 		dispatch({
