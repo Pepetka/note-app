@@ -2,7 +2,7 @@ import React from "react"
 import axios from "axios"
 import { FirebaseContext } from "./firebaseContext"
 import { firebaseReducer } from "./firebaseReducer"
-import { ADD_NOTE, FETCH_NOTES, REMOVE_NOTE, SHOW_LOADER } from "../types"
+import { ADD_NOTE, FETCH_NOTES, REMOVE_NOTE, SHOW_LOADER, SORT_NOTES } from "../types"
 
 const url = process.env.REACT_APP_DB_URL
 
@@ -56,12 +56,24 @@ const FirebaseState = ({ children }) => {
 		}
 	}
 
-	const removeNote = async (id) => {
+	const removeNote = (id) => {
 		axios.delete(`${url}/notes/${id}.json`)
 
 		dispatch({
 			type: REMOVE_NOTE,
 			payload: id,
+		})
+	}
+
+	const sortNotes = (currentNote, note) => {
+		const payload = [currentNote, note]
+
+		axios.put(`${url}/notes/${currentNote.id}.json`, note)
+		axios.put(`${url}/notes/${note.id}.json`, currentNote)
+
+		dispatch({
+			type: SORT_NOTES,
+			payload,
 		})
 	}
 
@@ -72,6 +84,7 @@ const FirebaseState = ({ children }) => {
 				addNote,
 				fetchNotes,
 				removeNote,
+				sortNotes,
 				loading: state.loading,
 				notes: state.notes,
 			}}
