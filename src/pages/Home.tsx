@@ -1,6 +1,6 @@
 import React from "react"
-import { useDispatch, useSelector } from "react-redux"
 import axios from "axios"
+import { useAppDispatch, useAppSelector } from "hooks/redux-hooks"
 import Form from "../components/Form"
 import Loader from "../components/Loader"
 import Notes from "../components/Notes"
@@ -9,8 +9,8 @@ import { fetchNotes, showLoader } from "../store/slices/firebaseSlice"
 const url = process.env.REACT_APP_DB_URL
 
 function Home() {
-	const dispatch = useDispatch()
-	const { loading } = useSelector((state) => state.firebase)
+	const dispatch = useAppDispatch()
+	const { loading } = useAppSelector((state) => state.firebase)
 
 	React.useEffect(() => {
 		dispatch(showLoader)

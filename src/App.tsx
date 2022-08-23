@@ -1,4 +1,3 @@
-import React from "react"
 import { Provider } from "react-redux/es/exports"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Home from "./pages/Home"

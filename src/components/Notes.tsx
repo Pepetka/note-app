@@ -1,23 +1,37 @@
 import React from "react"
-import { useSelector, useDispatch } from "react-redux"
+import { useAppDispatch, useAppSelector } from "hooks/redux-hooks"
 import { CSSTransition, TransitionGroup } from "react-transition-group"
 import axios from "axios"
 import { removeNote, sortNotes } from "../store/slices/firebaseSlice"
 
 const url = process.env.REACT_APP_DB_URL
 
-const Notes = () => {
-	const { notes } = useSelector((state) => state.firebase)
-	const dispatch = useDispatch()
-	const [currentNote, setCurrentNode] = React.useState(null)
+interface Note {
+	id: string
+	date: string
+	title: string
+	isImportant: boolean
+}
 
-	const onRemoveNote = (id) => {
+const initialCurrentNote = {
+	id: "",
+	date: "",
+	title: "",
+	isImportant: false,
+}
+
+const Notes = () => {
+	const { notes } = useAppSelector((state) => state.firebase)
+	const dispatch = useAppDispatch()
+	const [currentNote, setCurrentNode] = React.useState<Note>(initialCurrentNote)
+
+	const onRemoveNote = (id: string) => {
 		axios.delete(`${url}/notes/${id}.json`)
 
 		dispatch(removeNote({ id }))
 	}
 
-	const onSortNote = (note) => {
+	const onSortNote = (note: Note) => {
 		axios.put(`${url}/notes/${currentNote.id}.json`, note)
 		axios.put(`${url}/notes/${note.id}.json`, currentNote)
 
@@ -29,15 +43,15 @@ const Notes = () => {
 		)
 	}
 
-	const dragStartHandler = (event, note) => {
+	const dragStartHandler = (note: Note) => {
 		setCurrentNode(note)
 	}
 
-	const dragOverHandler = (event) => {
+	const dragOverHandler = (event: React.DragEvent<HTMLLIElement>) => {
 		event.preventDefault()
 	}
 
-	const dragDropHandler = (event, note) => {
+	const dragDropHandler = (event: React.DragEvent<HTMLLIElement>, note: Note) => {
 		event.preventDefault()
 
 		onSortNote(note)
@@ -55,7 +69,7 @@ const Notes = () => {
 						<li
 							className={noteClass}
 							draggable={true}
-							onDragStart={(e) => dragStartHandler(e, note)}
+							onDragStart={(e) => dragStartHandler(note)}
 							onDragOver={(e) => dragOverHandler(e)}
 							onDrop={(e) => dragDropHandler(e, note)}
 						>

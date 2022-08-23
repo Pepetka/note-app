@@ -1,5 +1,3 @@
-import React from "react"
-
 function About() {
 	return (
 		<div className='h-100 p-5 bg-light border rounded-3'>

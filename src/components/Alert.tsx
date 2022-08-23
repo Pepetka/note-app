@@ -1,11 +1,10 @@
-import React from "react"
-import { useSelector, useDispatch } from "react-redux"
 import { CSSTransition } from "react-transition-group"
 import { hideAlert } from "../store/slices/alertSlice"
+import { useAppDispatch, useAppSelector } from "hooks/redux-hooks"
 
 const Alert = () => {
-	const dispatch = useDispatch()
-	const { type, visible, text } = useSelector((store) => store.alert)
+	const dispatch = useAppDispatch()
+	const { type, visible, text } = useAppSelector((store) => store.alert)
 
 	return (
 		<CSSTransition
