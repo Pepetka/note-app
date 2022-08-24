@@ -18,6 +18,12 @@ code {
 	strong {
 		margin-right: 1rem;
 	}
+
+	&__disable {
+		strong {
+			text-decoration: line-through;
+		}
+	}
 }
 
 label {

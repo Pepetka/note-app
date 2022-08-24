@@ -38,7 +38,7 @@ const Form = () => {
 	}
 
 	const onAddNote = async (title: string, isImportant: boolean) => {
-		const note = { title, date: new Date().toJSON(), isImportant }
+		const note = { title, date: new Date().toJSON(), isImportant, isActive: false }
 
 		try {
 			const response = await axios.post(`${url}/notes.json`, note)
@@ -54,7 +54,7 @@ const Form = () => {
 		}
 	}
 
-	const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+	const submitHandler = (e: React.FormEvent) => {
 		e.preventDefault()
 
 		if (value.trim()) {
@@ -96,6 +96,9 @@ const Form = () => {
 						type='checkbox'
 					/>
 				</div>
+				<button onClick={(e) => submitHandler(e)} className='btn btn-outline-primary' type='button'>
+					Add Note
+				</button>
 			</div>
 		</form>
 	)
