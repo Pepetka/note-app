@@ -13,8 +13,16 @@ code {
 }
 
 .note {
+	cursor: grab;
+
 	strong {
 		margin-right: 1rem;
+	}
+
+	&__disable {
+		strong {
+			text-decoration: line-through;
+		}
 	}
 }
 
@@ -58,4 +66,16 @@ label {
 	opacity: 0;
 	transform: translateX(-100%);
 	transition: all 500ms ease-in;
+}
+
+@media screen and (max-width: 480px) {
+	.note {
+		&__info {
+			flex-direction: column;
+		}
+
+		strong {
+			margin-right: 0;
+		}
+	}
 }
