@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 interface FirebaseState {
-	notes: { id: string, title: string, isImportant: boolean, date: string }[],
+	notes: { id: string; title: string; isImportant: boolean; date: string }[]
 	loading: boolean
 }
 
@@ -33,11 +33,7 @@ const firebaseSlice = createSlice({
 			state.notes = state.notes.filter((note) => note.id !== action.payload.id)
 		},
 		sortNotes(state, action) {
-			state.notes = state.notes.map((note) => {
-				if (note.id === action.payload.prevNote.id) return action.payload.currentNote
-				if (note.id === action.payload.currentNote.id) return action.payload.prevNote
-				return note
-			})
+			state.notes = action.payload
 		},
 	},
 })
