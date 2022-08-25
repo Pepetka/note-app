@@ -1,7 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 interface FirebaseState {
-	notes: { id: string; title: string; isImportant: boolean; isDisable: boolean; date: string }[]
+	notes: {
+		id: string
+		title: string
+		isImportant: boolean
+		isDisable: boolean
+		date: string
+		order: number
+	}[]
 	loading: boolean
 }
 
@@ -26,11 +33,17 @@ const firebaseSlice = createSlice({
 			state.loading = false
 		},
 		removeNote(state, action) {
-			state.notes = state.notes.filter((note) => note.id !== action.payload.id)
+			state.notes = state.notes.filter((note) => note.id !== action.payload.note.id)
 		},
 		disableNote(state, action) {
 			state.notes = state.notes.map((note) => {
 				if (note.id === action.payload.id) return { ...note, isDisable: !note.isDisable }
+				return note
+			})
+		},
+		importantNote(state, action) {
+			state.notes = state.notes.map((note) => {
+				if (note.id === action.payload.id) return { ...note, isImportant: !note.isImportant }
 				return note
 			})
 		},
@@ -40,6 +53,13 @@ const firebaseSlice = createSlice({
 	},
 })
 
-export const { showLoader, addNote, fetchNotes, removeNote, sortNotes, disableNote } =
-	firebaseSlice.actions
+export const {
+	showLoader,
+	addNote,
+	fetchNotes,
+	removeNote,
+	sortNotes,
+	disableNote,
+	importantNote,
+} = firebaseSlice.actions
 export default firebaseSlice.reducer

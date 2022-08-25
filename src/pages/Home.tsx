@@ -19,10 +19,16 @@ function Home() {
 			.get(`${url}/notes.json`)
 			.then((response) =>
 				response.data
-					? Object.keys(response.data).map((key) => ({
-							...response.data[key],
-							id: key,
-					  }))
+					? Object.keys(response.data)
+							.map((key) => ({
+								...response.data[key],
+								id: key,
+							}))
+							.sort((a, b) => {
+								if (!a.hasOwnProperty("order")) return 1
+
+								return a.order - b.order
+							})
 					: []
 			)
 			.then((response) => dispatch(fetchNotes({ users: response })))

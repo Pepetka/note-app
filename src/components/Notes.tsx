@@ -11,7 +11,18 @@ interface Note {
 	title: string
 	date: string
 	isImportant: boolean
-	isActive: boolean
+	isDisable: boolean
+	order: number
+}
+
+function filterProps(obj: { [key: string]: string | number | boolean }, props: string) {
+	var result: { [key: string]: string | number | boolean } = {}
+	for (let key of Object.keys(obj)) {
+		if (props !== key) {
+			result[key] = obj[key]
+		}
+	}
+	return result
 }
 
 const Notes = () => {
@@ -19,9 +30,13 @@ const Notes = () => {
 	const dispatch = useAppDispatch()
 
 	const onSortNote = (notes: Note[]) => {
-		axios.put(`${url}/notes.json`, notes)
+		const newNotes = notes.map((note, i) => ({ ...note, order: i }))
 
-		dispatch(sortNotes(notes))
+		newNotes.forEach((note) => {
+			axios.put(`${url}/notes/${note.id}.json`, filterProps(note, "id"))
+		})
+
+		dispatch(sortNotes(newNotes))
 	}
 
 	return (

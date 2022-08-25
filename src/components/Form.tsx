@@ -3,13 +3,31 @@ import { ChangeEvent } from "react"
 import axios from "axios"
 import { showAlert, hideAlert } from "../store/slices/alertSlice"
 import { addNote } from "../store/slices/firebaseSlice"
-import { useAppDispatch } from "hooks/redux-hooks"
+import { useAppDispatch, useAppSelector } from "hooks/redux-hooks"
 
 const url = process.env.REACT_APP_DB_URL
+
+interface Note {
+	id: string
+	title: string
+	date: string
+	isImportant: boolean
+	isDisable: boolean
+	order: number
+}
+
+function getMaxOrder(notes: Note[]) {
+	let max = 0
+	notes.forEach((note) => {
+		max = Math.max(max, note.order)
+	})
+	return max
+}
 
 const Form = () => {
 	const [value, setValue] = React.useState("")
 	const dispatch = useAppDispatch()
+	const { notes } = useAppSelector((state) => state.firebase)
 	const [isChecked, setIsChecked] = React.useState(false)
 
 	const onValueChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -38,7 +56,13 @@ const Form = () => {
 	}
 
 	const onAddNote = async (title: string, isImportant: boolean) => {
-		const note = { title, date: new Date().toJSON(), isImportant, isActive: false }
+		const note = {
+			title,
+			date: new Date().toLocaleString(),
+			isImportant,
+			isDisable: false,
+			order: getMaxOrder(notes) + 1,
+		}
 
 		try {
 			const response = await axios.post(`${url}/notes.json`, note)
@@ -96,7 +120,7 @@ const Form = () => {
 						type='checkbox'
 					/>
 				</div>
-				<button onClick={(e) => submitHandler(e)} className='btn btn-outline-primary' type='button'>
+				<button onClick={(e) => submitHandler(e)} className='btn btn-primary' type='button'>
 					Add Note
 				</button>
 			</div>

@@ -49,23 +49,9 @@ label {
 	transition: all 200ms ease-in;
 }
 
-.animate-note-enter {
-	opacity: 0;
-	transform: translateX(-100%);
-}
-.animate-note-enter-active {
-	opacity: 1;
-	transform: translateX(0);
-	transition: all 500ms ease-out;
-}
-.animate-note-exit {
-	opacity: 1;
-	transform: translateX(0);
-}
-.animate-note-exit-active {
-	opacity: 0;
-	transform: translateX(-100%);
-	transition: all 500ms ease-in;
+.btn:focus,
+.btn:active {
+	box-shadow: none !important;
 }
 
 @media screen and (max-width: 480px) {
@@ -75,7 +61,10 @@ label {
 		}
 
 		strong {
-			margin-right: 0;
+			margin: 0;
+			display: inline-block;
+			max-width: 190px;
+			text-align: center;
 		}
 	}
 }
