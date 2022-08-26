@@ -4,6 +4,11 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 }
 
+.note-app {
+	width: 80%;
+	margin: 0 auto;
+}
+
 h1 {
 	text-align: center;
 }
@@ -19,11 +24,6 @@ h1 {
 .btn-group > .btn,
 .btn-group-vertical > .btn {
 	flex: none;
-}
-
-.home {
-	width: 80%;
-	margin: 0 auto;
 }
 
 .note {
@@ -79,7 +79,7 @@ label {
 }
 
 @media screen and (max-width: 768px) {
-	.home {
+	.note-app {
 		width: 100%;
 	}
 	.filter {

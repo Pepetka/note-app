@@ -1,5 +1,4 @@
 import { useAppDispatch, useAppSelector } from "hooks/redux-hooks"
-import React from "react"
 import { changeFilter } from "store/slices/firebaseSlice"
 
 const buttons = [

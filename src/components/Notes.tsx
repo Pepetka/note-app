@@ -28,12 +28,14 @@ function withoutId(obj: { [key: string]: string | number | boolean }) {
 
 const Notes = () => {
 	const { notes, filter } = useAppSelector((state) => state.firebase)
+	const { id } = useAppSelector((state) => state.user)
 	const dispatch = useAppDispatch()
 
 	React.useEffect(() => {
 		notes.forEach((note) => {
-			axios.put(`${url}/notes/${note.id}.json`, withoutId(note))
+			axios.put(`${url}/${id}/notes/${note.id}.json`, withoutId(note))
 		})
+		// eslint-disable-next-line
 	}, [notes])
 
 	const onSortNotes = (notes: Note[]) => {

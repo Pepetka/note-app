@@ -11,6 +11,7 @@ const Form = () => {
 	const [value, setValue] = React.useState("")
 	const dispatch = useAppDispatch()
 	const { notes } = useAppSelector((state) => state.firebase)
+	const { id } = useAppSelector((state) => state.user)
 	const [isChecked, setIsChecked] = React.useState(false)
 
 	const onValueChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -48,7 +49,7 @@ const Form = () => {
 		}
 
 		try {
-			const response = await axios.post(`${url}/notes.json`, note)
+			const response = await axios.post(`${url}/${id}/notes.json`, note)
 
 			const user = {
 				id: response.data.name,

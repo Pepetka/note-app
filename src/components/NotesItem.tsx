@@ -1,7 +1,7 @@
 import { Reorder, useDragControls } from "framer-motion"
 import axios from "axios"
 import { removeNote, disableNote, importantNote } from "../store/slices/firebaseSlice"
-import { useAppDispatch } from "hooks/redux-hooks"
+import { useAppDispatch, useAppSelector } from "hooks/redux-hooks"
 
 const url = process.env.REACT_APP_DB_URL
 
@@ -40,11 +40,12 @@ interface NotesItemProps {
 
 function NotesItem({ note }: NotesItemProps) {
 	const dispatch = useAppDispatch()
+	const { id } = useAppSelector((state) => state.user)
 	const controls = useDragControls()
 
-	const onRemoveNote = (id: string) => {
-		axios.delete(`${url}/notes/${id}.json`)
-		dispatch(removeNote({ id }))
+	const onRemoveNote = (note: Note) => {
+		axios.delete(`${url}/${id}/notes/${note.id}.json`)
+		dispatch(removeNote({ id: note.id }))
 	}
 
 	const onDisableNote = (id: string) => {
@@ -57,7 +58,7 @@ function NotesItem({ note }: NotesItemProps) {
 
 	let noteClass = "note list-group-item d-flex justify-content-between align-items-center w-100"
 	noteClass = note.isDisable
-		? noteClass + " note__disable list-group-item-secondary"
+		? noteClass + " note__disable list-group-item-success"
 		: note.isImportant
 		? noteClass + " list-group-item-danger"
 		: noteClass
@@ -105,7 +106,7 @@ function NotesItem({ note }: NotesItemProps) {
 					</div>
 				</div>
 				<button
-					onClick={() => onRemoveNote(note.id)}
+					onClick={() => onRemoveNote(note)}
 					type='button'
 					className='btn btn-outline-danger btn-close ps-5'
 				></button>
