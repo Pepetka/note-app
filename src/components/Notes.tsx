@@ -1,8 +1,9 @@
 import { useAppDispatch, useAppSelector } from "hooks/redux-hooks"
-import { Reorder } from "framer-motion"
+import { Reorder, AnimatePresence } from "framer-motion"
 import axios from "axios"
 import { sortNotes } from "../store/slices/firebaseSlice"
 import NotesItem from "./NotesItem"
+import React from "react"
 
 const url = process.env.REACT_APP_DB_URL
 
@@ -15,10 +16,10 @@ interface Note {
 	order: number
 }
 
-function filterProps(obj: { [key: string]: string | number | boolean }, props: string) {
-	var result: { [key: string]: string | number | boolean } = {}
+function withoutId(obj: { [key: string]: string | number | boolean }) {
+	const result: { [key: string]: string | number | boolean } = {}
 	for (let key of Object.keys(obj)) {
-		if (props !== key) {
+		if ("id" !== key) {
 			result[key] = obj[key]
 		}
 	}
@@ -26,24 +27,32 @@ function filterProps(obj: { [key: string]: string | number | boolean }, props: s
 }
 
 const Notes = () => {
-	const { notes } = useAppSelector((state) => state.firebase)
+	const { notes, filter } = useAppSelector((state) => state.firebase)
 	const dispatch = useAppDispatch()
 
-	const onSortNote = (notes: Note[]) => {
-		const newNotes = notes.map((note, i) => ({ ...note, order: i }))
-
-		newNotes.forEach((note) => {
-			axios.put(`${url}/notes/${note.id}.json`, filterProps(note, "id"))
+	React.useEffect(() => {
+		notes.forEach((note) => {
+			axios.put(`${url}/notes/${note.id}.json`, withoutId(note))
 		})
+	}, [notes])
 
-		dispatch(sortNotes(newNotes))
+	const onSortNotes = (notes: Note[]) => {
+		dispatch(sortNotes({ notes }))
 	}
 
 	return (
-		<Reorder.Group axis='y' values={notes} onReorder={onSortNote} className='list-group'>
-			{notes.map((note) => {
-				return <NotesItem key={note.id} note={note} />
-			})}
+		<Reorder.Group axis='y' values={notes} onReorder={onSortNotes} className='list-group notes'>
+			<AnimatePresence>
+				{notes
+					.filter((note: { [key: string]: number | string | boolean }) => {
+						if (filter === "all") return true
+						if (filter === "active") return !note["isDisable"]
+						return note[filter]
+					})
+					.map((note) => {
+						return <NotesItem key={note.id} note={note} />
+					})}
+			</AnimatePresence>
 		</Reorder.Group>
 	)
 }

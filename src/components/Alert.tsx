@@ -1,4 +1,4 @@
-import { CSSTransition } from "react-transition-group"
+import { motion, AnimatePresence } from "framer-motion"
 import { hideAlert } from "../store/slices/alertSlice"
 import { useAppDispatch, useAppSelector } from "hooks/redux-hooks"
 
@@ -6,24 +6,36 @@ const Alert = () => {
 	const dispatch = useAppDispatch()
 	const { type, visible, text } = useAppSelector((store) => store.alert)
 
+	const variants = {
+		initial: {
+			opacity: 0,
+			scale: 0,
+		},
+		animate: {
+			opacity: 1,
+			scale: 1,
+		},
+		exit: {
+			opacity: 0,
+			scale: 0,
+		},
+	}
+
 	return (
-		<CSSTransition
-			mountOnEnter
-			unmountOnExit
-			in={visible}
-			timeout={{
-				enter: 500,
-				exit: 200,
-			}}
-			classNames='animate-alert'
-		>
-			<div className={`alert alert-${type} alert-dismissible`}>
-				<strong>Attention!</strong>
-				<br />
-				{text}
-				<button onClick={() => dispatch(hideAlert())} type='button' className='btn-close'></button>
-			</div>
-		</CSSTransition>
+		<AnimatePresence>
+			{visible ? (
+				<motion.div {...variants} className={`alert alert-${type} alert-dismissible`}>
+					<strong>Attention!</strong>
+					<br />
+					{text}
+					<button
+						onClick={() => dispatch(hideAlert())}
+						type='button'
+						className='btn-close'
+					></button>
+				</motion.div>
+			) : null}
+		</AnimatePresence>
 	)
 }
 

@@ -7,23 +7,6 @@ import { useAppDispatch, useAppSelector } from "hooks/redux-hooks"
 
 const url = process.env.REACT_APP_DB_URL
 
-interface Note {
-	id: string
-	title: string
-	date: string
-	isImportant: boolean
-	isDisable: boolean
-	order: number
-}
-
-function getMaxOrder(notes: Note[]) {
-	let max = 0
-	notes.forEach((note) => {
-		max = Math.max(max, note.order)
-	})
-	return max
-}
-
 const Form = () => {
 	const [value, setValue] = React.useState("")
 	const dispatch = useAppDispatch()
@@ -61,7 +44,7 @@ const Form = () => {
 			date: new Date().toLocaleString(),
 			isImportant,
 			isDisable: false,
-			order: getMaxOrder(notes) + 1,
+			order: notes.length,
 		}
 
 		try {

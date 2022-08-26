@@ -10,22 +10,30 @@ interface FirebaseState {
 		order: number
 	}[]
 	loading: boolean
+	filter: string
+}
+
+interface Note {
+	id: string
+	title: string
+	date: string
+	isImportant: boolean
+	isDisable: boolean
+	order: number
 }
 
 const initialState: FirebaseState = {
 	notes: [],
 	loading: true,
+	filter: "all",
 }
 
 const firebaseSlice = createSlice({
 	name: "firebase",
 	initialState,
 	reducers: {
-		showLoader(state) {
-			state.loading = true
-		},
 		addNote(state, action) {
-			state.notes = [...state.notes, action.payload.user]
+			state.notes.push(action.payload.user)
 			state.loading = false
 		},
 		fetchNotes(state, action) {
@@ -33,10 +41,12 @@ const firebaseSlice = createSlice({
 			state.loading = false
 		},
 		removeNote(state, action) {
-			state.notes = state.notes.filter((note) => note.id !== action.payload.note.id)
+			state.notes = state.notes
+				.filter((note) => note.id !== action.payload.id)
+				.map((note, i) => ({ ...note, order: i }))
 		},
 		disableNote(state, action) {
-			state.notes = state.notes.map((note) => {
+			state.notes = state.notes.map((note, i) => {
 				if (note.id === action.payload.id) return { ...note, isDisable: !note.isDisable }
 				return note
 			})
@@ -48,18 +58,21 @@ const firebaseSlice = createSlice({
 			})
 		},
 		sortNotes(state, action) {
-			state.notes = action.payload
+			state.notes = action.payload.notes.map((note: Note, i: number) => ({ ...note, order: i }))
+		},
+		changeFilter(state, action) {
+			state.filter = action.payload.filter
 		},
 	},
 })
 
 export const {
-	showLoader,
 	addNote,
 	fetchNotes,
 	removeNote,
 	sortNotes,
 	disableNote,
 	importantNote,
+	changeFilter,
 } = firebaseSlice.actions
 export default firebaseSlice.reducer

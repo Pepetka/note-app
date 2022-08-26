@@ -4,17 +4,16 @@ import { useAppDispatch, useAppSelector } from "hooks/redux-hooks"
 import Form from "../components/Form"
 import Loader from "../components/Loader"
 import Notes from "../components/Notes"
-import { fetchNotes, showLoader } from "../store/slices/firebaseSlice"
+import { fetchNotes } from "../store/slices/firebaseSlice"
+import Filters from "components/Filters"
 
 const url = process.env.REACT_APP_DB_URL
 
 function Home() {
 	const dispatch = useAppDispatch()
-	const { loading } = useAppSelector((state) => state.firebase)
+	const { loading, notes } = useAppSelector((state) => state.firebase)
 
 	React.useEffect(() => {
-		dispatch(showLoader)
-
 		axios
 			.get(`${url}/notes.json`)
 			.then((response) =>
@@ -36,12 +35,13 @@ function Home() {
 	}, [])
 
 	return (
-		<>
+		<div className='pb-5 home'>
 			<h1>Home Page</h1>
 			<Form />
-			<hr />
+			<div className='pt-3 pb-3 text-end num-notes'>Number of notes: {notes.length}</div>
+			<Filters />
 			{loading ? <Loader /> : <Notes />}
-		</>
+		</div>
 	)
 }
 
