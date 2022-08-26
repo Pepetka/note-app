@@ -8,6 +8,7 @@ import { fetchNotes } from "../store/slices/firebaseSlice"
 import Filters from "components/Filters"
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "hooks/use-auth"
+import { setUser } from "store/slices/userSlice"
 
 const url = process.env.REACT_APP_DB_URL
 
@@ -37,6 +38,9 @@ function Home() {
 						: []
 				)
 				.then((response) => dispatch(fetchNotes({ users: response })))
+		} else if (localStorage.getItem("user") !== null) {
+			const user = localStorage.getItem("user") || ""
+			dispatch(setUser(JSON.parse(user)))
 		} else {
 			navigate("/login", { replace: true })
 		}

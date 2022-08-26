@@ -13,13 +13,14 @@ function Login() {
 
 		signInWithEmailAndPassword(auth, email, password)
 			.then(({ user }) => {
-				dispatch(
-					setUser({
-						email: user.email,
-						id: user.uid,
-						token: user.refreshToken,
-					})
-				)
+				const userData = {
+					email: user.email,
+					id: user.uid,
+					token: user.refreshToken,
+				}
+
+				dispatch(setUser(userData))
+				localStorage.setItem("user", JSON.stringify(userData))
 				navigate("/", { replace: true })
 			})
 			.catch((error) => {
