@@ -74,6 +74,7 @@ function NotesItem({ note }: NotesItemProps) {
 			key={note.id}
 			value={note}
 			dragControls={controls}
+			dragListener={false}
 			className={noteClass}
 		>
 			<div className='note__info'>
