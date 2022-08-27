@@ -25,7 +25,7 @@ interface Note {
 const initialState: FirebaseState = {
 	notes: [],
 	loading: true,
-	filter: "all",
+	filter: "active",
 }
 
 const firebaseSlice = createSlice({
@@ -46,14 +46,16 @@ const firebaseSlice = createSlice({
 				.map((note, i) => ({ ...note, order: i }))
 		},
 		disableNote(state, action) {
-			state.notes = state.notes.map((note, i) => {
-				if (note.id === action.payload.id) return { ...note, isDisable: !note.isDisable }
+			state.notes = state.notes.map((note) => {
+				if (note.id === action.payload.id)
+					return { ...note, isDisable: !note.isDisable, isImportant: false }
 				return note
 			})
 		},
 		importantNote(state, action) {
 			state.notes = state.notes.map((note) => {
-				if (note.id === action.payload.id) return { ...note, isImportant: !note.isImportant }
+				if (note.id === action.payload.id)
+					return { ...note, isImportant: !note.isImportant, isDisable: false }
 				return note
 			})
 		},

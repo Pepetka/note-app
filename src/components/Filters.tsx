@@ -2,10 +2,10 @@ import { useAppDispatch, useAppSelector } from "hooks/redux-hooks"
 import { changeFilter } from "store/slices/firebaseSlice"
 
 const buttons = [
-	{ name: "All", data: "all" },
+	{ name: "Active", data: "active" },
 	{ name: "Important", data: "isImportant" },
 	{ name: "Disable", data: "isDisable" },
-	{ name: "Active", data: "active" },
+	{ name: "All", data: "all" },
 ]
 
 function Filters() {
