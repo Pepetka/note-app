@@ -77,39 +77,25 @@ function NotesItem({ note }: NotesItemProps) {
 			dragListener={false}
 			className={noteClass}
 		>
+			<div className='form-check form-check-inline note__important'>
+				<button onClick={() => onImportantNote(note.id)} className={"btn " + importantClass}>
+					&#33;
+				</button>
+			</div>
 			<div className='note__info'>
 				<strong>{note.title}</strong>
 				<small>{note.date}</small>
 			</div>
 			<div className='d-flex justify-content-between align-items-center'>
-				<div className='form-check p-0 note__check-panel'>
-					<div className='form-check form-check-inline p-0 note__disable'>
-						<label className='form-check-label'>
-							<input
-								checked={note.isDisable}
-								onChange={() => onDisableNote(note.id)}
-								className='form-check-input d-none'
-								type='checkbox'
-							/>
-							<span className={disableClass}>&#8856;</span>
-						</label>
-					</div>
-					<div className='form-check form-check-inline note__important'>
-						<label className='form-check-label'>
-							<input
-								checked={note.isImportant}
-								onChange={() => onImportantNote(note.id)}
-								className='form-check-input d-none'
-								type='checkbox'
-							/>
-							<span className={importantClass}>&#33;</span>
-						</label>
-					</div>
+				<div className='form-check form-check-inline p-0 note__disable'>
+					<button onClick={() => onDisableNote(note.id)} className={"btn " + disableClass}>
+						&#8856;
+					</button>
 				</div>
 				<button
 					onClick={() => onRemoveNote(note)}
 					type='button'
-					className='btn btn-outline-danger btn-close ps-5'
+					className='btn btn-outline-danger btn-close'
 				></button>
 				<div className='drag-ico' onPointerDown={(e) => controls.start(e)}>
 					<div className='bar'></div>
