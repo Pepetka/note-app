@@ -3,25 +3,25 @@ import { ChangeEvent } from "react"
 import axios from "axios"
 import { showAlert, hideAlert } from "../store/slices/alertSlice"
 import { addNote } from "../store/slices/firebaseSlice"
-import { useAppDispatch } from "hooks/redux-hooks"
+import { useAppDispatch, useAppSelector } from "hooks/redux-hooks"
 
 const url = process.env.REACT_APP_DB_URL
 
 const Form = () => {
 	const [value, setValue] = React.useState("")
 	const dispatch = useAppDispatch()
+	const { notes } = useAppSelector((state) => state.firebase)
+	const { id } = useAppSelector((state) => state.user)
 	const [isChecked, setIsChecked] = React.useState(false)
 
 	const onValueChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setValue(e.target.value)
 	}
 
-	const onChecked = () => {
+	const onChecked = (event: React.MouseEvent<HTMLButtonElement>) => {
+		event.preventDefault()
+		event.stopPropagation()
 		setIsChecked((isChecked) => !isChecked)
-	}
-
-	const onKeyDown = (e: React.KeyboardEvent<HTMLLabelElement>) => {
-		if (e.key === "Enter" || e.key === " ") onChecked()
 	}
 
 	const onShowAlert = (text: string, type: string) => {
@@ -38,10 +38,16 @@ const Form = () => {
 	}
 
 	const onAddNote = async (title: string, isImportant: boolean) => {
-		const note = { title, date: new Date().toJSON(), isImportant, isActive: false }
+		const note = {
+			title,
+			date: new Date().toLocaleString(),
+			isImportant,
+			isDisable: false,
+			order: notes.length,
+		}
 
 		try {
-			const response = await axios.post(`${url}/notes.json`, note)
+			const response = await axios.post(`${url}/${id}/notes.json`, note)
 
 			const user = {
 				id: response.data.name,
@@ -54,7 +60,7 @@ const Form = () => {
 		}
 	}
 
-	const submitHandler = (e: React.FormEvent) => {
+	const submitHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault()
 
 		if (value.trim()) {
@@ -69,7 +75,7 @@ const Form = () => {
 	}
 
 	return (
-		<form onSubmit={(e) => submitHandler(e)}>
+		<form>
 			<div className='input-group'>
 				<input
 					value={value}
@@ -78,25 +84,18 @@ const Form = () => {
 					className='form-control border border-primary p-2'
 					placeholder='Enter note title'
 				/>
-				<div
+				<button
+					onClick={(e) => onChecked(e)}
 					className={
 						isChecked
 							? "input-group-text bg-primary text-white border border-primary"
 							: "input-group-text bg-white text-primary border border-primary"
 					}
+					type='button'
 				>
-					<label htmlFor='checkbox' tabIndex={0} onKeyDown={(e) => onKeyDown(e)}>
-						Important
-					</label>
-					<input
-						checked={isChecked}
-						onChange={onChecked}
-						id='checkbox'
-						className='form-check-input d-none'
-						type='checkbox'
-					/>
-				</div>
-				<button onClick={(e) => submitHandler(e)} className='btn btn-outline-primary' type='button'>
+					!
+				</button>
+				<button onClick={(e) => submitHandler(e)} className='btn btn-primary' type='submit'>
 					Add Note
 				</button>
 			</div>
