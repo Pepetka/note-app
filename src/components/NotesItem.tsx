@@ -1,18 +1,7 @@
 import { Reorder } from "framer-motion"
-import axios from "axios"
 import { removeNote, disableNote, importantNote } from "../store/slices/firebaseSlice"
 import { useAppDispatch, useAppSelector } from "hooks/redux-hooks"
-
-const url = process.env.REACT_APP_DB_URL
-
-interface Note {
-	id: string
-	title: string
-	date: string
-	isImportant: boolean
-	isDisable: boolean
-	order: number
-}
+import { Note } from "store/slices/firebaseSlice"
 
 const variants = {
 	initial: {
@@ -40,20 +29,19 @@ interface NotesItemProps {
 
 function NotesItem({ note }: NotesItemProps) {
 	const dispatch = useAppDispatch()
-	const { id } = useAppSelector((state) => state.user)
+	const userId = useAppSelector((state) => state.user.user.id)
 	const { filter, leftHand } = useAppSelector((state) => state.firebase)
 
-	const onRemoveNote = (note: Note) => {
-		axios.delete(`${url}/${id}/notes/${note.id}.json`)
-		dispatch(removeNote({ id: note.id }))
+	const onRemoveNote = (noteId: string) => {
+		dispatch(removeNote({ userId: userId!, noteId }))
 	}
 
-	const onDisableNote = (id: string) => {
-		dispatch(disableNote({ id }))
+	const onDisableNote = (noteId: string) => {
+		dispatch(disableNote({ noteId }))
 	}
 
-	const onImportantNote = (id: string) => {
-		dispatch(importantNote({ id }))
+	const onImportantNote = (noteId: string) => {
+		dispatch(importantNote({ noteId }))
 	}
 
 	const getNoteClasses = () => {
@@ -104,7 +92,7 @@ function NotesItem({ note }: NotesItemProps) {
 			</div>
 
 			<button
-				onClick={() => onRemoveNote(note)}
+				onClick={() => onRemoveNote(note.id)}
 				type='button'
 				className='btn btn-outline-danger btn-close'
 			></button>

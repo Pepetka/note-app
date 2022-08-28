@@ -1,8 +1,8 @@
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
-import { useAppDispatch } from "hooks/redux-hooks"
+import { useAppDispatch, useAppSelector } from "hooks/redux-hooks"
 import { useNavigate } from "react-router-dom"
 import Form from "./LoginRegisterForm"
-import { setUser } from "store/slices/userSlice"
+import { setRemember, setUser } from "store/slices/userSlice"
 import { showAlert, hideAlert } from "store/slices/alertSlice"
 
 function toUpperFirs(string: string) {
@@ -11,6 +11,7 @@ function toUpperFirs(string: string) {
 
 function Login() {
 	const dispatch = useAppDispatch()
+	const { remember } = useAppSelector((state) => state.user)
 	const navigate = useNavigate()
 
 	const onShowAlert = (text: string) => {
@@ -38,7 +39,9 @@ function Login() {
 				}
 
 				dispatch(setUser(userData))
-				localStorage.setItem("user", JSON.stringify(userData))
+
+				if (remember) localStorage.setItem("user", JSON.stringify(userData))
+
 				navigate("/", { replace: true })
 			})
 			.catch((error) => {
@@ -51,7 +54,21 @@ function Login() {
 			})
 	}
 
-	return <Form title='Login' onSubmit={handleLogin} />
+	return (
+		<Form title='Login' onSubmit={handleLogin}>
+			<div className='mb-3 form-check'>
+				<label className='form-check-label'>
+					<input
+						checked={remember}
+						onChange={() => dispatch(setRemember())}
+						type='checkbox'
+						className='form-check-input'
+					/>
+					Remember me
+				</label>
+			</div>
+		</Form>
+	)
 }
 
 export default Login

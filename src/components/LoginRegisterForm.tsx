@@ -1,11 +1,12 @@
 import React from "react"
 
 interface FormProps {
+	children?: React.ReactNode
 	title: string
 	onSubmit: (email: string, password: string) => void
 }
 
-function Form({ title, onSubmit }: FormProps) {
+function Form({ children, title, onSubmit }: FormProps) {
 	const [email, setEmail] = React.useState("")
 	const [password, setPassword] = React.useState("")
 
@@ -36,6 +37,7 @@ function Form({ title, onSubmit }: FormProps) {
 					id='form-password'
 				/>
 			</div>
+			{children}
 			<button
 				onClick={(e) => {
 					e.preventDefault()

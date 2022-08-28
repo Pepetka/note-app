@@ -1,20 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import axios from "axios"
 
-interface FirebaseState {
-	notes: {
-		id: string
-		title: string
-		isImportant: boolean
-		isDisable: boolean
-		date: string
-		order: number
-	}[]
-	loading: boolean
-	filter: string
-	leftHand: boolean
-}
-
-interface Note {
+const url = process.env.REACT_APP_DB_URL
+export interface Note {
 	id: string
 	title: string
 	date: string
@@ -23,9 +11,44 @@ interface Note {
 	order: number
 }
 
+interface FirebaseState {
+	notes: Note[]
+	loading: boolean
+	filter: string
+	leftHand: boolean
+}
+
+export const fetchNotes = createAsyncThunk("firebase/fetchNotes", async (userId: string) => {
+	const notes: Array<Note> = await axios.get(`${url}/${userId}/notes.json`).then((response) =>
+		response.data
+			? Object.keys(response.data)
+					.map((key) => ({
+						...response.data[key],
+						id: key,
+					}))
+					.sort((a, b) => {
+						if (!a.hasOwnProperty("order")) return 1
+
+						return a.order - b.order
+					})
+			: []
+	)
+
+	return { notes }
+})
+
+export const removeNote = createAsyncThunk(
+	"firebase/removeNote",
+	({ userId, noteId }: { userId: string; noteId: string }) => {
+		axios.delete(`${url}/${userId}/notes/${noteId}.json`)
+
+		return noteId
+	}
+)
+
 const initialState: FirebaseState = {
 	notes: [],
-	loading: true,
+	loading: false,
 	filter: "active",
 	leftHand: false,
 }
@@ -38,17 +61,8 @@ const firebaseSlice = createSlice({
 			state.notes.push(action.payload.user)
 			state.loading = false
 		},
-		fetchNotes(state, action) {
-			state.notes = action.payload.users
-			state.loading = false
-		},
 		clearNotes(state) {
 			state.notes = []
-		},
-		removeNote(state, action) {
-			state.notes = state.notes
-				.filter((note) => note.id !== action.payload.id)
-				.map((note, i) => ({ ...note, order: i }))
 		},
 		disableNote(state, action) {
 			state.notes = state.notes.map((note) => {
@@ -77,13 +91,29 @@ const firebaseSlice = createSlice({
 			state.leftHand = action.payload.leftHand
 		},
 	},
+	extraReducers(builder) {
+		builder
+			.addCase(fetchNotes.pending, (state) => {
+				state.loading = true
+			})
+			.addCase(fetchNotes.fulfilled, (state, action) => {
+				state.notes = action.payload.notes
+				state.loading = false
+			})
+			.addCase(fetchNotes.rejected, (state) => {
+				state.loading = false
+			})
+			.addCase(removeNote.fulfilled, (state, action) => {
+				state.notes = state.notes
+					.filter((note) => note.id !== action.payload)
+					.map((note, i) => ({ ...note, order: i }))
+			})
+	},
 })
 
 export const {
 	addNote,
-	fetchNotes,
 	clearNotes,
-	removeNote,
 	sortNotes,
 	disableNote,
 	importantNote,

@@ -22,17 +22,19 @@ h1 {
 }
 
 .note-hide {
-	height: 0;
-	visibility: hidden;
-	position: relative;
-	left: -100vw;
+	// height: 0;
+	// visibility: hidden;
+	display: none;
+	// position: relative;
+	// left: -100vw;
 }
 
 .note-hide-L {
-	height: 0;
-	visibility: hidden;
-	position: relative;
-	left: 100vw;
+	// height: 0;
+	// visibility: hidden;
+	display: none;
+	// position: relative;
+	// left: 100vw;
 }
 
 .controller-wrapper {
