@@ -1,6 +1,7 @@
 import { useAppDispatch } from "hooks/redux-hooks"
 import { useAuth } from "hooks/use-auth"
 import { NavLink } from "react-router-dom"
+import { clearNotes } from "store/slices/firebaseSlice"
 import { removeUser } from "store/slices/userSlice"
 
 const NavBar = () => {
@@ -9,6 +10,7 @@ const NavBar = () => {
 
 	const onLogOut = () => {
 		dispatch(removeUser())
+		dispatch(clearNotes())
 		localStorage.removeItem("user")
 	}
 
