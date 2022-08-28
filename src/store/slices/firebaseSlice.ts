@@ -11,6 +11,7 @@ interface FirebaseState {
 	}[]
 	loading: boolean
 	filter: string
+	leftHand: boolean
 }
 
 interface Note {
@@ -26,6 +27,7 @@ const initialState: FirebaseState = {
 	notes: [],
 	loading: true,
 	filter: "active",
+	leftHand: false,
 }
 
 const firebaseSlice = createSlice({
@@ -68,6 +70,12 @@ const firebaseSlice = createSlice({
 		changeFilter(state, action) {
 			state.filter = action.payload.filter
 		},
+		changeHand(state) {
+			state.leftHand = !state.leftHand
+		},
+		setHand(state, action) {
+			state.leftHand = action.payload.leftHand
+		},
 	},
 })
 
@@ -80,5 +88,7 @@ export const {
 	disableNote,
 	importantNote,
 	changeFilter,
+	changeHand,
+	setHand,
 } = firebaseSlice.actions
 export default firebaseSlice.reducer

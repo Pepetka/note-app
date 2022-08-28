@@ -28,6 +28,38 @@ h1 {
 	left: -100vw;
 }
 
+.note-hide-L {
+	height: 0;
+	visibility: hidden;
+	position: relative;
+	left: 100vw;
+}
+
+.controller-wrapper {
+	padding: 20px 0;
+}
+
+.left-right-controller {
+	margin: 0 10px;
+	position: relative;
+	display: none;
+	justify-content: center;
+
+	&::before {
+		content: "L";
+		position: absolute;
+		left: -10px;
+		top: 0;
+	}
+
+	&::after {
+		content: "R";
+		position: absolute;
+		right: -10px;
+		top: 0;
+	}
+}
+
 .btn-group > .btn,
 .btn-group-vertical > .btn {
 	flex: none;
@@ -96,8 +128,16 @@ label {
 	.filter {
 		max-width: 100%;
 	}
-	.notes {
+	.notes-scroll {
+		margin: 0;
 		margin-right: 70px;
+	}
+	.notes-scroll-L {
+		margin: 0;
+		margin-left: 70px;
+	}
+	.left-right-controller {
+		display: flex;
 	}
 	.note {
 		padding: 0;

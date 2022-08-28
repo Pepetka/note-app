@@ -41,7 +41,7 @@ interface NotesItemProps {
 function NotesItem({ note }: NotesItemProps) {
 	const dispatch = useAppDispatch()
 	const { id } = useAppSelector((state) => state.user)
-	const { filter } = useAppSelector((state) => state.firebase)
+	const { filter, leftHand } = useAppSelector((state) => state.firebase)
 
 	const onRemoveNote = (note: Note) => {
 		axios.delete(`${url}/${id}/notes/${note.id}.json`)
@@ -69,7 +69,7 @@ function NotesItem({ note }: NotesItemProps) {
 			(filter === "active" && note.isDisable) ||
 			(filter === "isImportant" && !note.isImportant)
 		)
-			return "note-hide"
+			return leftHand ? "note-hide-L" : "note-hide"
 
 		return noteClass
 	}

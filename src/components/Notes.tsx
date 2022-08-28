@@ -27,7 +27,7 @@ function withoutId(obj: { [key: string]: string | number | boolean }) {
 }
 
 const Notes = () => {
-	const { notes } = useAppSelector((state) => state.firebase)
+	const { notes, leftHand } = useAppSelector((state) => state.firebase)
 	const { id } = useAppSelector((state) => state.user)
 	const dispatch = useAppDispatch()
 
@@ -42,8 +42,12 @@ const Notes = () => {
 		dispatch(sortNotes({ notes }))
 	}
 
+	const getNotesClasses = () => {
+		return leftHand ? "list-group notes notes-scroll-L" : "list-group notes notes-scroll"
+	}
+
 	return (
-		<Reorder.Group axis='y' values={notes} onReorder={onSortNotes} className='list-group notes'>
+		<Reorder.Group axis='y' values={notes} onReorder={onSortNotes} className={getNotesClasses()}>
 			<AnimatePresence>
 				{notes.map((note) => (
 					<NotesItem key={note.id} note={note} />
