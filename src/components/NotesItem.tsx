@@ -1,4 +1,4 @@
-import { Reorder, useDragControls } from "framer-motion"
+import { Reorder } from "framer-motion"
 import axios from "axios"
 import { removeNote, disableNote, importantNote } from "../store/slices/firebaseSlice"
 import { useAppDispatch, useAppSelector } from "hooks/redux-hooks"
@@ -41,7 +41,7 @@ interface NotesItemProps {
 function NotesItem({ note }: NotesItemProps) {
 	const dispatch = useAppDispatch()
 	const { id } = useAppSelector((state) => state.user)
-	const controls = useDragControls()
+	const { filter } = useAppSelector((state) => state.firebase)
 
 	const onRemoveNote = (note: Note) => {
 		axios.delete(`${url}/${id}/notes/${note.id}.json`)
@@ -56,12 +56,23 @@ function NotesItem({ note }: NotesItemProps) {
 		dispatch(importantNote({ id }))
 	}
 
-	let noteClass = "note list-group-item d-flex justify-content-between align-items-center w-100"
-	noteClass = note.isDisable
-		? noteClass + " note__disable list-group-item-success"
-		: note.isImportant
-		? noteClass + " list-group-item-danger"
-		: noteClass
+	const getNoteClasses = () => {
+		let noteClass = "note list-group-item d-flex justify-content-between align-items-center w-100"
+		noteClass = note.isDisable
+			? noteClass + " note__disable list-group-item-success"
+			: note.isImportant
+			? noteClass + " list-group-item-danger"
+			: noteClass
+
+		if (
+			(filter === "isDisable" && !note.isDisable) ||
+			(filter === "active" && note.isDisable) ||
+			(filter === "isImportant" && !note.isImportant)
+		)
+			return "note-hide"
+
+		return noteClass
+	}
 
 	const importantClass = note.isImportant ? "text-danger fw-bold" : "text-secondary"
 	const disableClass = note.isDisable ? "text-dark fw-bold" : "text-secondary"
@@ -73,36 +84,30 @@ function NotesItem({ note }: NotesItemProps) {
 			transition={{ duration: 0.5, ease: "easeOut" }}
 			key={note.id}
 			value={note}
-			dragControls={controls}
-			dragListener={false}
-			className={noteClass}
+			className={getNoteClasses()}
 		>
-			<div className='form-check form-check-inline note__important'>
-				<button onClick={() => onImportantNote(note.id)} className={"btn " + importantClass}>
-					&#33;
-				</button>
-			</div>
-			<div className='note__info'>
-				<strong>{note.title}</strong>
-				<small>{note.date}</small>
-			</div>
 			<div className='d-flex justify-content-between align-items-center'>
 				<div className='form-check form-check-inline p-0 note__disable'>
 					<button onClick={() => onDisableNote(note.id)} className={"btn " + disableClass}>
 						&#8856;
 					</button>
 				</div>
-				<button
-					onClick={() => onRemoveNote(note)}
-					type='button'
-					className='btn btn-outline-danger btn-close'
-				></button>
-				<div className='drag-ico' onPointerDown={(e) => controls.start(e)}>
-					<div className='bar'></div>
-					<div className='bar'></div>
-					<div className='bar'></div>
+				<div className='form-check form-check-inline note__important'>
+					<button onClick={() => onImportantNote(note.id)} className={"btn " + importantClass}>
+						&#33;
+					</button>
 				</div>
 			</div>
+			<div className='note__info'>
+				<strong>{note.title}</strong>
+				<small>{note.date}</small>
+			</div>
+
+			<button
+				onClick={() => onRemoveNote(note)}
+				type='button'
+				className='btn btn-outline-danger btn-close'
+			></button>
 		</Reorder.Item>
 	)
 }

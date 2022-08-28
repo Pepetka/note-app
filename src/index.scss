@@ -21,6 +21,13 @@ h1 {
 	max-width: 80%;
 }
 
+.note-hide {
+	height: 0;
+	visibility: hidden;
+	position: relative;
+	left: -100vw;
+}
+
 .btn-group > .btn,
 .btn-group-vertical > .btn {
 	flex: none;
@@ -89,6 +96,9 @@ label {
 	.filter {
 		max-width: 100%;
 	}
+	.notes {
+		margin-right: 70px;
+	}
 	.note {
 		padding: 0;
 		margin: 0;
@@ -108,7 +118,7 @@ label {
 		strong {
 			margin: 0;
 			display: inline-block;
-			width: 190px;
+			width: 170px;
 			text-align: center;
 		}
 

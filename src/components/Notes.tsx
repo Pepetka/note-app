@@ -27,7 +27,7 @@ function withoutId(obj: { [key: string]: string | number | boolean }) {
 }
 
 const Notes = () => {
-	const { notes, filter } = useAppSelector((state) => state.firebase)
+	const { notes } = useAppSelector((state) => state.firebase)
 	const { id } = useAppSelector((state) => state.user)
 	const dispatch = useAppDispatch()
 
@@ -45,15 +45,9 @@ const Notes = () => {
 	return (
 		<Reorder.Group axis='y' values={notes} onReorder={onSortNotes} className='list-group notes'>
 			<AnimatePresence>
-				{notes
-					.filter((note: { [key: string]: number | string | boolean }) => {
-						if (filter === "all") return true
-						if (filter === "active") return !note["isDisable"]
-						return note[filter]
-					})
-					.map((note) => {
-						return <NotesItem key={note.id} note={note} />
-					})}
+				{notes.map((note) => (
+					<NotesItem key={note.id} note={note} />
+				))}
 			</AnimatePresence>
 		</Reorder.Group>
 	)
