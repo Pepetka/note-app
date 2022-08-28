@@ -40,6 +40,9 @@ const firebaseSlice = createSlice({
 			state.notes = action.payload.users
 			state.loading = false
 		},
+		clearNotes(state) {
+			state.notes = []
+		},
 		removeNote(state, action) {
 			state.notes = state.notes
 				.filter((note) => note.id !== action.payload.id)
@@ -71,6 +74,7 @@ const firebaseSlice = createSlice({
 export const {
 	addNote,
 	fetchNotes,
+	clearNotes,
 	removeNote,
 	sortNotes,
 	disableNote,
