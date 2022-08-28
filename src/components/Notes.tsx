@@ -4,20 +4,12 @@ import axios from "axios"
 import { sortNotes } from "../store/slices/firebaseSlice"
 import NotesItem from "./NotesItem"
 import React from "react"
+import { Note } from "store/slices/firebaseSlice"
 
 const url = process.env.REACT_APP_DB_URL
 
-interface Note {
-	id: string
-	title: string
-	date: string
-	isImportant: boolean
-	isDisable: boolean
-	order: number
-}
-
-function withoutId(obj: { [key: string]: string | number | boolean }) {
-	const result: { [key: string]: string | number | boolean } = {}
+function withoutId(obj: { [key: string]: any }) {
+	const result: { [key: string]: any } = {}
 	for (let key of Object.keys(obj)) {
 		if ("id" !== key) {
 			result[key] = obj[key]
@@ -28,17 +20,17 @@ function withoutId(obj: { [key: string]: string | number | boolean }) {
 
 const Notes = () => {
 	const { notes, leftHand } = useAppSelector((state) => state.firebase)
-	const { id } = useAppSelector((state) => state.user)
+	const userId = useAppSelector((state) => state.user.user.id)
 	const dispatch = useAppDispatch()
 
 	React.useEffect(() => {
 		notes.forEach((note) => {
-			axios.put(`${url}/${id}/notes/${note.id}.json`, withoutId(note))
+			axios.put(`${url}/${userId}/notes/${note.id}.json`, withoutId(note))
 		})
 		// eslint-disable-next-line
 	}, [notes])
 
-	const onSortNotes = (notes: Note[]) => {
+	const onSortNotes = (notes: Array<Note>) => {
 		dispatch(sortNotes({ notes }))
 	}
 

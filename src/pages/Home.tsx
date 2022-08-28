@@ -1,5 +1,4 @@
 import React from "react"
-import axios from "axios"
 import { useAppDispatch, useAppSelector } from "hooks/redux-hooks"
 import Form from "../components/Form"
 import Loader from "../components/Loader"
@@ -10,12 +9,10 @@ import { useNavigate } from "react-router-dom"
 import { useAuth } from "hooks/use-auth"
 import { setUser } from "store/slices/userSlice"
 
-const url = process.env.REACT_APP_DB_URL
-
 function Home() {
 	const dispatch = useAppDispatch()
 	const { loading, notes, leftHand } = useAppSelector((state) => state.firebase)
-	const { id } = useAppSelector((state) => state.user)
+	const userId = useAppSelector((state) => state.user.user.id)
 	const navigate = useNavigate()
 	const { isAuth } = useAuth()
 
@@ -30,23 +27,7 @@ function Home() {
 		}
 
 		if (isAuth) {
-			axios
-				.get(`${url}/${id}/notes.json`)
-				.then((response) =>
-					response.data
-						? Object.keys(response.data)
-								.map((key) => ({
-									...response.data[key],
-									id: key,
-								}))
-								.sort((a, b) => {
-									if (!a.hasOwnProperty("order")) return 1
-
-									return a.order - b.order
-								})
-						: []
-				)
-				.then((response) => dispatch(fetchNotes({ users: response })))
+			dispatch(fetchNotes(userId!))
 		} else if (localStorage.getItem("user") !== null) {
 			const user = localStorage.getItem("user") || ""
 			dispatch(setUser(JSON.parse(user)))

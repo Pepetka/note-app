@@ -1,5 +1,4 @@
 import React from "react"
-import { ChangeEvent } from "react"
 import axios from "axios"
 import { showAlert, hideAlert } from "../store/slices/alertSlice"
 import { addNote } from "../store/slices/firebaseSlice"
@@ -11,16 +10,15 @@ const Form = () => {
 	const [value, setValue] = React.useState("")
 	const dispatch = useAppDispatch()
 	const { notes } = useAppSelector((state) => state.firebase)
-	const { id } = useAppSelector((state) => state.user)
+	const userId = useAppSelector((state) => state.user.user.id)
 	const [isChecked, setIsChecked] = React.useState(false)
 
-	const onValueChange = (e: ChangeEvent<HTMLInputElement>) => {
+	const onValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setValue(e.target.value)
 	}
 
 	const onChecked = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
-		event.stopPropagation()
 		setIsChecked((isChecked) => !isChecked)
 	}
 
@@ -47,7 +45,7 @@ const Form = () => {
 		}
 
 		try {
-			const response = await axios.post(`${url}/${id}/notes.json`, note)
+			const response = await axios.post(`${url}/${userId}/notes.json`, note)
 
 			const user = {
 				id: response.data.name,
