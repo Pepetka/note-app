@@ -37,11 +37,11 @@ function NotesItem({ note }: NotesItemProps) {
 	}
 
 	const onDisableNote = (noteId: string) => {
-		dispatch(disableNote({ noteId }))
+		dispatch(disableNote({ id: noteId }))
 	}
 
 	const onImportantNote = (noteId: string) => {
-		dispatch(importantNote({ noteId }))
+		dispatch(importantNote({ id: noteId }))
 	}
 
 	const getNoteClasses = () => {
