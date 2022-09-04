@@ -5,7 +5,7 @@ import Form from "./LoginRegisterForm"
 import { setRemember, setUser } from "store/slices/userSlice"
 import { showAlert, hideAlert } from "store/slices/alertSlice"
 
-function toUpperFirs(string: string) {
+function toUpperFirs(string: string): string {
 	return string[0].toUpperCase() + string.slice(1)
 }
 

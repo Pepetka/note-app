@@ -4,12 +4,12 @@ import axios from "axios"
 import { sortNotes } from "../store/slices/firebaseSlice"
 import NotesItem from "./NotesItem"
 import React from "react"
-import { Note } from "store/slices/firebaseSlice"
+import { Note } from "types"
 
 const url = process.env.REACT_APP_DB_URL
 
-function withoutId(obj: { [key: string]: any }) {
-	const result: { [key: string]: any } = {}
+function withoutId(obj: Record<string, any>): Record<string, any> {
+	const result: Record<string, any> = {}
 	for (let key of Object.keys(obj)) {
 		if ("id" !== key) {
 			result[key] = obj[key]
@@ -18,8 +18,12 @@ function withoutId(obj: { [key: string]: any }) {
 	return result
 }
 
-const Notes = () => {
-	const { notes, leftHand } = useAppSelector((state) => state.firebase)
+interface Prop {
+	handleSort: boolean
+}
+
+const Notes = ({ handleSort }: Prop) => {
+	const { notes } = useAppSelector((state) => state.firebase)
 	const userId = useAppSelector((state) => state.user.user.id)
 	const dispatch = useAppDispatch()
 
@@ -34,15 +38,11 @@ const Notes = () => {
 		dispatch(sortNotes({ notes }))
 	}
 
-	const getNotesClasses = () => {
-		return leftHand ? "list-group notes notes-scroll-L" : "list-group notes notes-scroll"
-	}
-
 	return (
-		<Reorder.Group axis='y' values={notes} onReorder={onSortNotes} className={getNotesClasses()}>
+		<Reorder.Group axis='y' values={notes} onReorder={onSortNotes} className='list-group notes'>
 			<AnimatePresence>
 				{notes.map((note) => (
-					<NotesItem key={note.id} note={note} />
+					<NotesItem handleSort={handleSort} key={note.id} note={note} />
 				))}
 			</AnimatePresence>
 		</Reorder.Group>
