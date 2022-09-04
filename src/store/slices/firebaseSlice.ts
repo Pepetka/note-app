@@ -1,22 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import axios from "axios"
+import { Note, FirebaseState } from "types"
 
 const url = process.env.REACT_APP_DB_URL
-export interface Note {
-	id: string
-	title: string
-	date: string
-	isImportant: boolean
-	isDisable: boolean
-	order: number
-}
-
-interface FirebaseState {
-	notes: Note[]
-	loading: boolean
-	filter: string
-	leftHand: boolean
-}
 
 export const fetchNotes = createAsyncThunk("firebase/fetchNotes", async (userId: string) => {
 	const notes: Array<Note> = await axios.get(`${url}/${userId}/notes.json`).then((response) =>
@@ -50,7 +36,6 @@ const initialState: FirebaseState = {
 	notes: [],
 	loading: false,
 	filter: "active",
-	leftHand: false,
 }
 
 const firebaseSlice = createSlice({
@@ -84,12 +69,6 @@ const firebaseSlice = createSlice({
 		changeFilter(state, action) {
 			state.filter = action.payload.filter
 		},
-		changeHand(state) {
-			state.leftHand = !state.leftHand
-		},
-		setHand(state, action) {
-			state.leftHand = action.payload.leftHand
-		},
 	},
 	extraReducers(builder) {
 		builder
@@ -111,14 +90,6 @@ const firebaseSlice = createSlice({
 	},
 })
 
-export const {
-	addNote,
-	clearNotes,
-	sortNotes,
-	disableNote,
-	importantNote,
-	changeFilter,
-	changeHand,
-	setHand,
-} = firebaseSlice.actions
+export const { addNote, clearNotes, sortNotes, disableNote, importantNote, changeFilter } =
+	firebaseSlice.actions
 export default firebaseSlice.reducer

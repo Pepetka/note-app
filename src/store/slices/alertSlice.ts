@@ -1,8 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-const initialState = {
+type AlertType = "success" | "warning" | "danger"
+
+interface AlertState {
+	text: string
+	type: AlertType
+	visible: boolean
+}
+
+const initialState: AlertState = {
 	text: "",
-	type: "",
+	type: "danger",
 	visible: false,
 }
 
@@ -17,7 +25,7 @@ const alertSlice = createSlice({
 		},
 		hideAlert(state) {
 			state.text = ""
-			state.type = ""
+			state.type = "danger"
 			state.visible = false
 		},
 	},

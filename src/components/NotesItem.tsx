@@ -1,7 +1,7 @@
 import { Reorder } from "framer-motion"
 import { removeNote, disableNote, importantNote } from "../store/slices/firebaseSlice"
 import { useAppDispatch, useAppSelector } from "hooks/redux-hooks"
-import { Note } from "store/slices/firebaseSlice"
+import { Note } from "types"
 
 const variants = {
 	initial: {
@@ -25,12 +25,13 @@ const whileDrag = {
 
 interface NotesItemProps {
 	note: Note
+	handleSort: boolean
 }
 
-function NotesItem({ note }: NotesItemProps) {
+function NotesItem({ note, handleSort }: NotesItemProps) {
 	const dispatch = useAppDispatch()
 	const userId = useAppSelector((state) => state.user.user.id)
-	const { filter, leftHand } = useAppSelector((state) => state.firebase)
+	const { filter } = useAppSelector((state) => state.firebase)
 
 	const onRemoveNote = (noteId: string) => {
 		dispatch(removeNote({ userId: userId!, noteId }))
@@ -57,7 +58,7 @@ function NotesItem({ note }: NotesItemProps) {
 			(filter === "active" && note.isDisable) ||
 			(filter === "isImportant" && !note.isImportant)
 		)
-			return leftHand ? "note-hide-L" : "note-hide"
+			return "note-hide"
 
 		return noteClass
 	}
@@ -70,9 +71,9 @@ function NotesItem({ note }: NotesItemProps) {
 			whileDrag={whileDrag}
 			{...variants}
 			transition={{ duration: 0.5, ease: "easeOut" }}
-			key={note.id}
 			value={note}
 			className={getNoteClasses()}
+			dragListener={handleSort}
 		>
 			<div className='d-flex justify-content-between align-items-center'>
 				<div className='form-check form-check-inline p-0 note__disable'>
