@@ -11,4 +11,8 @@ export interface FirebaseState {
 	notes: Note[]
 	loading: boolean
 	filter: string
+	error: {
+		get: string | null
+		update: string | null
+	}
 }

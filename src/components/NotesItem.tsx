@@ -34,15 +34,15 @@ function NotesItem({ note, handleSort }: NotesItemProps) {
 	const { filter } = useAppSelector((state) => state.firebase)
 
 	const onRemoveNote = (noteId: string) => {
-		dispatch(removeNote({ userId: userId!, noteId }))
+		dispatch(removeNote({ noteId, userId: userId! }))
 	}
 
 	const onDisableNote = (noteId: string) => {
-		dispatch(disableNote({ id: noteId }))
+		dispatch(disableNote({ noteId, userId: userId! }))
 	}
 
 	const onImportantNote = (noteId: string) => {
-		dispatch(importantNote({ id: noteId }))
+		dispatch(importantNote({ noteId, userId: userId! }))
 	}
 
 	const getNoteClasses = () => {

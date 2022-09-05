@@ -26,18 +26,29 @@ function Register() {
 		}, 5000)
 	}
 
-	const handleRegister = (email: string, password: string) => {
+	const handleRegister = ({
+		email,
+		password,
+		rememberMe,
+	}: {
+		email: string
+		password: string
+		rememberMe: boolean
+	}) => {
 		const auth = getAuth()
 
 		createUserWithEmailAndPassword(auth, email, password)
 			.then(({ user }) => {
-				dispatch(
-					setUser({
-						email: user.email,
-						id: user.uid,
-						token: user.refreshToken,
-					})
-				)
+				const userData = {
+					email: user.email,
+					id: user.uid,
+					token: user.refreshToken,
+				}
+
+				dispatch(setUser(userData))
+
+				if (rememberMe) localStorage.setItem("user", JSON.stringify(userData))
+
 				navigate("/", { replace: true })
 			})
 			.catch((error) => {
@@ -51,7 +62,7 @@ function Register() {
 			})
 	}
 
-	return <Form title='Register' onSubmit={handleRegister} />
+	return <Form title='Register' onSubmitForm={handleRegister} />
 }
 
 export default Register
