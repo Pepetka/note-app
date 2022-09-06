@@ -12,7 +12,7 @@ import { setUser } from "store/slices/userSlice"
 function Home() {
 	const [handleSort, setHandleSort] = useState(false)
 	const dispatch = useAppDispatch()
-	const { loading, notes } = useAppSelector((state) => state.firebase)
+	const { loading, notes, error } = useAppSelector((state) => state.firebase)
 	const userId = useAppSelector((state) => state.user.user.id)
 	const navigate = useNavigate()
 	const { isAuth } = useAuth()
@@ -33,6 +33,10 @@ function Home() {
 		setHandleSort((handleSort) => !handleSort)
 	}
 
+	const onReload = () => {
+		dispatch(fetchNotes(userId!))
+	}
+
 	return (
 		<div className='pb-5'>
 			<h1>Home Page</h1>
@@ -50,6 +54,14 @@ function Home() {
 			</div>
 			<Filters />
 			{loading ? <Loader /> : <Notes handleSort={handleSort} />}
+			{error.get ? (
+				<div className='d-flex justify-content-center align-items-center flex-column'>
+					<h1>{error.get}</h1>
+					<button className='btn btn-primary' onClick={onReload}>
+						Click to reload notes
+					</button>
+				</div>
+			) : null}
 		</div>
 	)
 }

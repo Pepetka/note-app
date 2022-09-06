@@ -6,7 +6,6 @@ const initialState = {
 		token: null,
 		id: null,
 	},
-	remember: false,
 }
 
 const userSlice = createSlice({
@@ -23,12 +22,9 @@ const userSlice = createSlice({
 			state.user.token = null
 			state.user.id = null
 		},
-		setRemember(state) {
-			state.remember = !state.remember
-		},
 	},
 })
 
-export const { setUser, removeUser, setRemember } = userSlice.actions
+export const { setUser, removeUser } = userSlice.actions
 
 export default userSlice.reducer

@@ -1,8 +1,8 @@
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
-import { useAppDispatch, useAppSelector } from "hooks/redux-hooks"
+import { useAppDispatch } from "hooks/redux-hooks"
 import { useNavigate } from "react-router-dom"
 import Form from "./LoginRegisterForm"
-import { setRemember, setUser } from "store/slices/userSlice"
+import { setUser } from "store/slices/userSlice"
 import { showAlert, hideAlert } from "store/slices/alertSlice"
 
 function toUpperFirs(string: string): string {
@@ -11,7 +11,6 @@ function toUpperFirs(string: string): string {
 
 function Login() {
 	const dispatch = useAppDispatch()
-	const { remember } = useAppSelector((state) => state.user)
 	const navigate = useNavigate()
 
 	const onShowAlert = (text: string) => {
@@ -27,7 +26,15 @@ function Login() {
 		}, 5000)
 	}
 
-	const handleLogin = (email: string, password: string) => {
+	const handleLogin = ({
+		email,
+		password,
+		rememberMe,
+	}: {
+		email: string
+		password: string
+		rememberMe: boolean
+	}) => {
 		const auth = getAuth()
 
 		signInWithEmailAndPassword(auth, email, password)
@@ -40,35 +47,16 @@ function Login() {
 
 				dispatch(setUser(userData))
 
-				if (remember) localStorage.setItem("user", JSON.stringify(userData))
+				if (rememberMe) localStorage.setItem("user", JSON.stringify(userData))
 
-				navigate("/", { replace: true })
+				navigate("/")
 			})
 			.catch((error) => {
-				let errorMessage = error.message
-				const index = errorMessage.indexOf("/") + 1
-
-				errorMessage = errorMessage.slice(index, -2).split("-").join(" ")
-
-				onShowAlert(toUpperFirs(errorMessage))
+				onShowAlert(toUpperFirs(error.message))
 			})
 	}
 
-	return (
-		<Form title='Login' onSubmit={handleLogin}>
-			<div className='mb-3 form-check'>
-				<label className='form-check-label'>
-					<input
-						checked={remember}
-						onChange={() => dispatch(setRemember())}
-						type='checkbox'
-						className='form-check-input'
-					/>
-					Remember me
-				</label>
-			</div>
-		</Form>
-	)
+	return <Form title='Login' onSubmitForm={handleLogin} />
 }
 
 export default Login

@@ -1,51 +1,84 @@
 import React from "react"
+import { useForm, SubmitHandler, UseFormRegister } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
+import * as yup from "yup"
 
-interface FormProps {
-	children?: React.ReactNode
-	title: string
-	onSubmit: (email: string, password: string) => void
+interface SubmitArgs {
+	email: string
+	password: string
+	rememberMe: boolean
 }
 
-function Form({ children, title, onSubmit }: FormProps) {
-	const [email, setEmail] = React.useState("")
-	const [password, setPassword] = React.useState("")
+export type FuncArgs = {
+	register: UseFormRegister<SubmitArgs>
+}
+
+interface FormProps {
+	title: string
+	onSubmitForm: ({ email, password, rememberMe }: SubmitArgs) => void
+}
+
+type Inputs = {
+	email: string
+	password: string
+	rememberMe: boolean
+}
+
+const schema = yup
+	.object({
+		email: yup.string().email().required(),
+		password: yup.string().min(6).required(),
+		rememberMe: yup.boolean(),
+	})
+	.required()
+
+function Form({ title, onSubmitForm }: FormProps) {
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm<Inputs>({
+		resolver: yupResolver(schema),
+		mode: "onChange",
+	})
+	const onSubmit: SubmitHandler<Inputs> = (data) => onSubmitForm(data)
 
 	return (
-		<form>
+		<form onSubmit={handleSubmit(onSubmit)} noValidate>
 			<div className='mb-3'>
 				<label htmlFor='form-email' className='form-label'>
 					Email address
 				</label>
 				<input
-					value={email}
-					onChange={(e) => setEmail(e.target.value)}
+					{...register("email")}
 					type='email'
 					className='form-control'
 					id='form-email'
 					placeholder='name@example.com'
 				/>
+				{errors.email && <div className='form-text text-danger mt-2'>{errors.email?.message}</div>}
 			</div>
 			<div className='mb-3'>
 				<label htmlFor='form-password' className='form-label'>
 					Password
 				</label>
 				<input
-					value={password}
-					onChange={(e) => setPassword(e.target.value)}
+					{...register("password")}
 					type='password'
 					className='form-control'
 					id='form-password'
 				/>
+				{errors.password && (
+					<div className='form-text text-danger mt-2'>{errors.password?.message}</div>
+				)}
 			</div>
-			{children}
-			<button
-				onClick={(e) => {
-					e.preventDefault()
-					onSubmit(email, password)
-				}}
-				type='submit'
-				className='btn btn-primary'
-			>
+			<div className='mb-3 form-check'>
+				<label className='form-check-label'>
+					<input {...register("rememberMe")} type='checkbox' className='form-check-input' />
+					Remember me
+				</label>
+			</div>
+			<button type='submit' className='btn btn-primary'>
 				{title}
 			</button>
 		</form>
