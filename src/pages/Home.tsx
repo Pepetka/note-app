@@ -8,6 +8,7 @@ import Filters from "components/Filters"
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "hooks/use-auth"
 import { setUser } from "store/slices/userSlice"
+import { showAlert } from "store/slices/alertSlice"
 
 function Home() {
 	const [handleSort, setHandleSort] = useState(false)
@@ -21,13 +22,18 @@ function Home() {
 		if (isAuth) {
 			dispatch(fetchNotes(userId!))
 		} else if (localStorage.getItem("user") !== null) {
-			const user = localStorage.getItem("user") || ""
-			dispatch(setUser(JSON.parse(user)))
+			const user = localStorage.getItem("user")
+			dispatch(setUser(JSON.parse(user!)))
 		} else {
 			navigate("/login", { replace: true })
 		}
 		// eslint-disable-next-line
 	}, [isAuth])
+
+	React.useEffect(() => {
+		if (error.update) dispatch(showAlert({ type: "danger", text: error.update }))
+		// eslint-disable-next-line
+	}, [error.update])
 
 	const onHandleSort = () => {
 		setHandleSort((handleSort) => !handleSort)

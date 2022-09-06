@@ -137,6 +137,38 @@ export const sortNotes = createAsyncThunk<void, { notes: Note[]; userId: string 
 	}
 )
 
+export const addNote = createAsyncThunk<
+	Note,
+	{ title: string; isImportant: boolean },
+	{ state: RootState }
+>("firebase/addNote", async ({ title, isImportant }, { getState, rejectWithValue }) => {
+	const { notes } = getState().firebase
+	const { id } = getState().user.user
+
+	try {
+		const note: Note = {
+			title,
+			date: new Date().toLocaleString(),
+			isImportant,
+			isDisable: false,
+			order: notes.length,
+		}
+
+		const response = await axios.post(`${url}/${id}/notes.json`, note)
+
+		if (response.statusText !== "OK") throw new Error("Server Error")
+
+		const newNote = {
+			id: response.data.name,
+			...note,
+		}
+
+		return newNote
+	} catch (error) {
+		return rejectWithValue((error as Error).message)
+	}
+})
+
 const initialState: FirebaseState = {
 	notes: [],
 	loading: false,
@@ -151,9 +183,6 @@ const firebaseSlice = createSlice({
 	name: "firebase",
 	initialState,
 	reducers: {
-		addNote(state, action) {
-			state.notes.push(action.payload.user)
-		},
 		clearNotes(state) {
 			state.notes = []
 		},
@@ -210,8 +239,15 @@ const firebaseSlice = createSlice({
 			.addCase(importantNote.rejected, (state, action: { payload: any }) => {
 				state.error.update = action.payload
 			})
+			.addCase(addNote.fulfilled, (state, action) => {
+				state.notes.push(action.payload)
+				state.error.update = null
+			})
+			.addCase(addNote.rejected, (state, action: { payload: any }) => {
+				state.error.update = action.payload
+			})
 	},
 })
 
-export const { addNote, clearNotes, setNotes, changeFilter } = firebaseSlice.actions
+export const { clearNotes, setNotes, changeFilter } = firebaseSlice.actions
 export default firebaseSlice.reducer

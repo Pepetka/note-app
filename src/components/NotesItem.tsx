@@ -77,12 +77,12 @@ function NotesItem({ note, handleSort }: NotesItemProps) {
 		>
 			<div className='d-flex justify-content-between align-items-center'>
 				<div className='form-check form-check-inline p-0 note__disable'>
-					<button onClick={() => onDisableNote(note.id)} className={"btn " + disableClass}>
+					<button onClick={() => onDisableNote(note.id!)} className={"btn " + disableClass}>
 						&#8856;
 					</button>
 				</div>
 				<div className='form-check form-check-inline note__important'>
-					<button onClick={() => onImportantNote(note.id)} className={"btn " + importantClass}>
+					<button onClick={() => onImportantNote(note.id!)} className={"btn " + importantClass}>
 						&#33;
 					</button>
 				</div>
@@ -93,7 +93,7 @@ function NotesItem({ note, handleSort }: NotesItemProps) {
 			</div>
 
 			<button
-				onClick={() => onRemoveNote(note.id)}
+				onClick={() => onRemoveNote(note.id!)}
 				type='button'
 				className='btn btn-outline-danger btn-close'
 			></button>

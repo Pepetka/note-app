@@ -1,16 +1,11 @@
 import React from "react"
-import axios from "axios"
 import { showAlert, hideAlert } from "../store/slices/alertSlice"
 import { addNote } from "../store/slices/firebaseSlice"
-import { useAppDispatch, useAppSelector } from "hooks/redux-hooks"
-
-const url = process.env.REACT_APP_DB_URL
+import { useAppDispatch } from "hooks/redux-hooks"
 
 const Form = () => {
 	const [value, setValue] = React.useState("")
 	const dispatch = useAppDispatch()
-	const { notes } = useAppSelector((state) => state.firebase)
-	const userId = useAppSelector((state) => state.user.user.id)
 	const [isChecked, setIsChecked] = React.useState(false)
 
 	const onValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,36 +30,11 @@ const Form = () => {
 		}, 3000)
 	}
 
-	const onAddNote = async (title: string, isImportant: boolean) => {
-		const note = {
-			title,
-			date: new Date().toLocaleString(),
-			isImportant,
-			isDisable: false,
-			order: notes.length,
-		}
-
-		try {
-			const response = await axios.post(`${url}/${userId}/notes.json`, note)
-
-			const user = {
-				id: response.data.name,
-				...note,
-			}
-
-			dispatch(addNote({ user }))
-		} catch (error) {
-			throw new Error((error as Error).message)
-		}
-	}
-
 	const submitHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault()
 
 		if (value.trim()) {
-			onAddNote(value.trim(), isChecked)
-				.then(() => onShowAlert("Note created", "success"))
-				.catch(() => onShowAlert("Note wasn't created", "danger"))
+			dispatch(addNote({ title: value.trim(), isImportant: isChecked }))
 			setValue("")
 			setIsChecked(false)
 		} else {
