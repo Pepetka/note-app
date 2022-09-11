@@ -1,11 +1,19 @@
 import { useAppDispatch, useAppSelector } from "hooks/redux-hooks"
-import { Reorder, AnimatePresence } from "framer-motion"
 import { sortNotes } from "../store/slices/firebaseSlice"
 import NotesItem from "./NotesItem"
 import { Note } from "types"
+import { DragDropContext, Droppable } from "react-beautiful-dnd"
 
 interface Prop {
 	handleSort: boolean
+}
+
+const reorder = (list: Array<Note>, startIndex: number, endIndex: number) => {
+	const result = Array.from(list)
+	const [removed] = result.splice(startIndex, 1)
+	result.splice(endIndex, 0, removed)
+
+	return result
 }
 
 const Notes = ({ handleSort }: Prop) => {
@@ -13,18 +21,40 @@ const Notes = ({ handleSort }: Prop) => {
 	const { id } = useAppSelector((state) => state.user.user)
 	const dispatch = useAppDispatch()
 
-	const onSortNotes = (notes: Array<Note>) => {
-		dispatch(sortNotes({ notes, userId: id! }))
+	function onDragEnd(result: any) {
+		if (!result.destination) {
+			return
+		}
+
+		if (result.destination.index === result.source.index) {
+			return
+		}
+
+		const orderedNotes = reorder(notes, result.source.index, result.destination.index)
+
+		dispatch(sortNotes({ notes: orderedNotes, userId: id! }))
 	}
 
+	if (notes.length < 1)
+		return (
+			<div className='d-flex justify-content-center align-items-center flex-column'>
+				<h1>There are no notes</h1>
+			</div>
+		)
+
 	return (
-		<Reorder.Group axis='y' values={notes} onReorder={onSortNotes} className='list-group notes'>
-			<AnimatePresence>
-				{notes.map((note) => (
-					<NotesItem handleSort={handleSort} key={note.id} note={note} />
-				))}
-			</AnimatePresence>
-		</Reorder.Group>
+		<DragDropContext onDragEnd={onDragEnd}>
+			<Droppable droppableId='droppable'>
+				{(provided) => (
+					<div {...provided.droppableProps} ref={provided.innerRef}>
+						{notes.map((note: Note, index: number) => (
+							<NotesItem note={note} index={index} key={note.id} handleSort={handleSort} />
+						))}
+						{provided.placeholder}
+					</div>
+				)}
+			</Droppable>
+		</DragDropContext>
 	)
 }
 

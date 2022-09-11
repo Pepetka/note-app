@@ -29,6 +29,8 @@ export const fetchNotes = createAsyncThunk<{ notes: Note[] }, string, ThunkApi>(
 
 			if (response.statusText !== "OK") throw new Error("Server Error")
 
+			if (!response.data) return { notes: [] }
+
 			const notes = Object.keys(response.data)
 				.map((key) => ({
 					...response.data[key],
@@ -122,6 +124,42 @@ export const importantNote = createAsyncThunk<
 	}
 })
 
+export const setContent = createAsyncThunk<
+	{
+		noteId: string
+		content: string
+	},
+	{
+		content: string
+		userId: string
+		noteId: string
+	},
+	ThunkApi
+>(
+	"firebase/setContent",
+	async ({ content, noteId, userId }, { getState, rejectWithValue, dispatch }) => {
+		try {
+			const { notes } = getState().firebase
+
+			const data = withoutId({
+				...notes.filter((el) => el.id === noteId)[0],
+				content,
+			})
+
+			const response = await axios.put(`${url}/${userId}/notes/${noteId}.json`, data)
+
+			if (response.statusText !== "OK") {
+				throw new Error("Server Error")
+			} else {
+				return { noteId, content }
+			}
+		} catch (error) {
+			dispatch(showAlert({ text: (error as Error).message, type: "danger" }))
+			return rejectWithValue((error as Error).message)
+		}
+	}
+)
+
 export const sortNotes = createAsyncThunk<void, { notes: Note[]; userId: string }, ThunkApi>(
 	"firebase/sortNotes",
 	({ notes, userId }, { dispatch, getState }) => {
@@ -198,24 +236,29 @@ const firebaseSlice = createSlice({
 			.addCase(fetchNotes.pending, (state) => {
 				state.loading = true
 				state.error.get = null
+				state.error.update = null
 			})
 			.addCase(fetchNotes.fulfilled, (state, action) => {
 				state.notes = action.payload!.notes
 				state.loading = false
 				state.error.get = null
+				state.error.update = null
 			})
 			.addCase(fetchNotes.rejected, (state, action: { payload: any }) => {
 				state.loading = false
 				state.error.get = action.payload
+				state.error.update = null
 			})
 			.addCase(removeNote.fulfilled, (state, action) => {
 				state.notes = state.notes
 					.filter((note) => note.id !== action.payload)
 					.map((note, i) => ({ ...note, order: i }))
 				state.error.update = null
+				state.error.get = null
 			})
 			.addCase(removeNote.rejected, (state, action: { payload: any }) => {
 				state.error.update = action.payload
+				state.error.get = null
 			})
 			.addCase(disableNote.fulfilled, (state, action) => {
 				state.notes = state.notes.map((note) => {
@@ -224,9 +267,11 @@ const firebaseSlice = createSlice({
 					return note
 				})
 				state.error.update = null
+				state.error.get = null
 			})
 			.addCase(disableNote.rejected, (state, action: { payload: any }) => {
 				state.error.update = action.payload
+				state.error.get = null
 			})
 			.addCase(importantNote.fulfilled, (state, action) => {
 				state.notes = state.notes.map((note) => {
@@ -235,6 +280,7 @@ const firebaseSlice = createSlice({
 					return note
 				})
 				state.error.update = null
+				state.error.get = null
 			})
 			.addCase(importantNote.rejected, (state, action: { payload: any }) => {
 				state.error.update = action.payload
@@ -242,8 +288,22 @@ const firebaseSlice = createSlice({
 			.addCase(addNote.fulfilled, (state, action) => {
 				state.notes.push(action.payload)
 				state.error.update = null
+				state.error.get = null
 			})
 			.addCase(addNote.rejected, (state, action: { payload: any }) => {
+				state.error.update = action.payload
+				state.error.get = null
+			})
+			.addCase(setContent.fulfilled, (state, action) => {
+				state.notes = state.notes.map((note) => {
+					if (note.id === action.payload.noteId) return { ...note, content: action.payload.content }
+
+					return note
+				})
+				state.error.update = null
+				state.error.get = null
+			})
+			.addCase(setContent.rejected, (state, action: { payload: any }) => {
 				state.error.update = action.payload
 			})
 	},

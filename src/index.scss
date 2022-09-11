@@ -110,6 +110,16 @@ label {
 	}
 }
 
+.active-visible {
+	transform: rotateZ(180deg);
+}
+
+[contenteditable]:empty:before {
+	content: attr(data-placeholder);
+	color: grey;
+	display: inline-block;
+}
+
 @media screen and (max-width: 768px) {
 	.note-app {
 		width: 100%;
