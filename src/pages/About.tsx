@@ -3,7 +3,7 @@ function About() {
 		<div className='h-100 p-5 border rounded-3 primary-elem'>
 			<h2>About Note App</h2>
 			<p>
-				<strong>App version: </strong> v3.0.0
+				<strong>App version: </strong> v3.1.0
 				<br />
 				<strong>Description: </strong>
 				Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facere reiciendis fugiat quisquam
