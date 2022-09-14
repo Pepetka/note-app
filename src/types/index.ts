@@ -17,3 +17,9 @@ export interface FirebaseState {
 		update: string | null
 	}
 }
+
+export interface User {
+	email: string | null
+	token: string | null
+	id: string | null
+}

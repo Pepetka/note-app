@@ -1,6 +1,6 @@
 function About() {
 	return (
-		<div className='h-100 p-5 bg-light border rounded-3'>
+		<div className='h-100 p-5 border rounded-3 primary-elem'>
 			<h2>About Note App</h2>
 			<p>
 				<strong>App version: </strong> v3.0.0

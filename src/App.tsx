@@ -8,25 +8,44 @@ import { store } from "./store"
 import LoginPage from "pages/LoginPage"
 import RegisterPage from "pages/RegisterPage"
 import "./firebase"
+import ThemeButton from "components/ThemeButton"
+import { useState } from "react"
+
+type Theme = "dark" | "light"
+
+const defaultTheme: Theme = (localStorage.getItem("theme") as Theme) ?? "light"
 
 function App() {
+	const [theme, setTheme] = useState<Theme>(defaultTheme)
+
+	const onThemeChange = () => {
+		const newTheme = theme === "light" ? "dark" : "light"
+
+		setTheme(newTheme)
+
+		localStorage.setItem("theme", newTheme)
+	}
+
 	return (
 		<Provider store={store}>
 			<BrowserRouter>
-				<NavBar />
-				<main>
-					<div className='container pt-4'>
-						<div className='note-app'>
-							<Alert />
-							<Routes>
-								<Route path='/' element={<Home />} />
-								<Route path='/about' element={<About />} />
-								<Route path='/login' element={<LoginPage />} />
-								<Route path='/register' element={<RegisterPage />} />
-							</Routes>
+				<div className={`App ${theme}`}>
+					<NavBar />
+					<main>
+						<div className='container pt-4'>
+							<div className='note-app'>
+								<Alert />
+								<Routes>
+									<Route path='/' element={<Home />} />
+									<Route path='/about' element={<About />} />
+									<Route path='/login' element={<LoginPage />} />
+									<Route path='/register' element={<RegisterPage />} />
+								</Routes>
+							</div>
 						</div>
-					</div>
-				</main>
+					</main>
+					<ThemeButton onThemeChange={onThemeChange} theme={theme} />
+				</div>
 			</BrowserRouter>
 		</Provider>
 	)

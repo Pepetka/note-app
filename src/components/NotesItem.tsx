@@ -62,10 +62,10 @@ function NotesItem({ note, handleSort, index }: NotesItemProps) {
 	const getNoteClasses = () => {
 		let noteClass = "note list-group-item w-100 border-bottom border-secondary"
 		noteClass = note.isDisable
-			? noteClass + " note__disable list-group-item-success"
+			? noteClass + " note__disable secondary-elem"
 			: note.isImportant
-			? noteClass + " list-group-item-danger"
-			: noteClass
+			? noteClass + " primary-elem"
+			: noteClass + " secondary-elem"
 
 		if (
 			(filter === "isDisable" && !note.isDisable) ||
@@ -106,8 +106,8 @@ function NotesItem({ note, handleSort, index }: NotesItemProps) {
 							</div>
 
 							<div className='note__info col-4 text-center'>
-								<strong className='m-0'>{note.title}</strong>
-								<small className='text-dark'>{note.date}</small>
+								<strong className='m-0 primary-text'>{note.title}</strong>
+								<small className='secondary-text'>{note.date}</small>
 							</div>
 
 							<div className='col-4 d-flex justify-content-end'>
@@ -130,7 +130,7 @@ function NotesItem({ note, handleSort, index }: NotesItemProps) {
 										ref={inputRef}
 										contentEditable={canText}
 										data-placeholder='Вставьте текст'
-										className={`p-2${canText ? " border border-secondary" : ""}`}
+										className={`p-2 primary-text${canText ? " border border-secondary" : ""}`}
 									></div>
 								</div>
 

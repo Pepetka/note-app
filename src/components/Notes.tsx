@@ -3,6 +3,7 @@ import { sortNotes } from "../store/slices/firebaseSlice"
 import NotesItem from "./NotesItem"
 import { Note } from "types"
 import { DragDropContext, Droppable } from "react-beautiful-dnd"
+import { memo } from "react"
 
 interface Prop {
 	handleSort: boolean
@@ -47,9 +48,7 @@ const Notes = ({ handleSort }: Prop) => {
 			<Droppable droppableId='droppable'>
 				{(provided) => (
 					<div {...provided.droppableProps} ref={provided.innerRef}>
-						{notes.map((note: Note, index: number) => (
-							<NotesItem note={note} index={index} key={note.id} handleSort={handleSort} />
-						))}
+						<NotesList notes={notes} handleSort={handleSort} />
 						{provided.placeholder}
 					</div>
 				)}
@@ -57,5 +56,20 @@ const Notes = ({ handleSort }: Prop) => {
 		</DragDropContext>
 	)
 }
+
+interface NotesListProps {
+	notes: Note[]
+	handleSort: boolean
+}
+
+const NotesList = memo(({ notes, handleSort }: NotesListProps) => {
+	return (
+		<>
+			{notes.map((note: Note, index: number) => (
+				<NotesItem note={note} index={index} key={note.id} handleSort={handleSort} />
+			))}
+		</>
+	)
+})
 
 export default Notes

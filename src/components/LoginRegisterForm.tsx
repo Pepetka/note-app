@@ -52,7 +52,7 @@ function Form({ title, onSubmitForm }: FormProps) {
 				<input
 					{...register("email")}
 					type='email'
-					className='form-control'
+					className='form-control secondary-elem'
 					id='form-email'
 					placeholder='name@example.com'
 				/>
@@ -65,7 +65,7 @@ function Form({ title, onSubmitForm }: FormProps) {
 				<input
 					{...register("password")}
 					type='password'
-					className='form-control'
+					className='form-control secondary-elem'
 					id='form-password'
 				/>
 				{errors.password && (
@@ -78,7 +78,7 @@ function Form({ title, onSubmitForm }: FormProps) {
 					Remember me
 				</label>
 			</div>
-			<button type='submit' className='btn btn-primary'>
+			<button type='submit' className='btn btn-primary primary-elem'>
 				{title}
 			</button>
 		</form>

@@ -15,19 +15,19 @@ const NavBar = () => {
 	}
 
 	return (
-		<nav className='navbar navbar-dark navbar-expand bg-primary d-flex justify-content-between'>
+		<nav className='navbar navbar-expand d-flex justify-content-between primary-elem'>
 			<div className='container-fluid d-flex justify-content-between'>
 				<div className='d-flex justify-content-between'>
-					<div className='navbar-brand'>Note App</div>
+					<div className='navbar-brand primary-text'>Note App</div>
 
 					<ul className='navbar-nav'>
 						<li className='nav-item'>
-							<NavLink className='nav-link' to={"/"}>
+							<NavLink className='nav-link primary-link' to={"/"}>
 								Home
 							</NavLink>
 						</li>
 						<li className='nav-item'>
-							<NavLink className='nav-link' to={"/about"}>
+							<NavLink className='nav-link primary-link' to={"/about"}>
 								About
 							</NavLink>
 						</li>
@@ -37,11 +37,11 @@ const NavBar = () => {
 				<ul className='navbar-nav'>
 					<li className='nav-item'>
 						{isAuth ? (
-							<NavLink className='nav-link' to={"/login"} onClick={onLogOut}>
+							<NavLink className='nav-link primary-link' to={"/login"} onClick={onLogOut}>
 								Logout
 							</NavLink>
 						) : (
-							<NavLink className='nav-link' to={"/login"}>
+							<NavLink className='nav-link primary-link' to={"/login"}>
 								Login
 							</NavLink>
 						)}
