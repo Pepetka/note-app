@@ -51,7 +51,7 @@ function Home() {
 				<div className='num-notes text-primary'>Number of notes: {notes.length}</div>
 				<div className='form-check form-switch sort-controller text-primary'>
 					<input
-						className='form-check-input'
+						className='form-check-input primary-elem'
 						type='checkbox'
 						checked={handleSort}
 						onChange={onHandleSort}

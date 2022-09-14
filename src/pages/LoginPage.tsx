@@ -48,7 +48,11 @@ function LoginPage() {
 				Or <Link to='/register'>register</Link>
 			</p>
 
-			<button onClick={onLogin} type='button' className='btn btn-outline-primary w-100 mt-3'>
+			<button
+				onClick={onLogin}
+				type='button'
+				className='btn btn-outline-primary w-100 mt-3 primary-elem'
+			>
 				Login with Google
 			</button>
 		</>

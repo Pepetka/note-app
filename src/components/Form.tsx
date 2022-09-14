@@ -49,21 +49,23 @@ const Form = () => {
 					value={value}
 					onChange={(e) => onValueChange(e)}
 					type='text'
-					className='form-control border border-primary p-2'
+					className='form-control border border-primary p-2 secondary-elem primary-text'
 					placeholder='Enter note title'
 				/>
 				<button
 					onClick={(e) => onChecked(e)}
-					className={
-						isChecked
-							? "input-group-text bg-primary text-white border border-primary"
-							: "input-group-text bg-white text-primary border border-primary"
-					}
+					className={`input-group-text border border-primary ${
+						!isChecked ? " secondary-elem" : " primary-elem"
+					}`}
 					type='button'
 				>
 					!
 				</button>
-				<button onClick={(e) => submitHandler(e)} className='btn btn-primary' type='submit'>
+				<button
+					onClick={(e) => submitHandler(e)}
+					className='btn btn-primary primary-elem'
+					type='submit'
+				>
 					Add Note
 				</button>
 			</div>
