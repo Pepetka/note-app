@@ -21,8 +21,8 @@ function Filters() {
 			{buttons.map((el) => {
 				const classBtn =
 					filter === el.data
-						? "btn btn-outline-primary active primary-elem"
-						: "btn btn-outline-primary"
+						? "btn btn-outline-primary primary-bg primary-text"
+						: "btn btn-outline-primary secondary-bg secondary-text"
 
 				return (
 					<button

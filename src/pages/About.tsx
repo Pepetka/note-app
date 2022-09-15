@@ -1,9 +1,9 @@
 function About() {
 	return (
-		<div className='h-100 p-5 border rounded-3 primary-elem'>
+		<div className='h-100 p-5 border rounded-3 primary-bg primary-text'>
 			<h2>About Note App</h2>
 			<p>
-				<strong>App version: </strong> v3.1.0
+				<strong>App version: </strong> v3.2.0
 				<br />
 				<strong>Description: </strong>
 				Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facere reiciendis fugiat quisquam

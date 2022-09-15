@@ -51,7 +51,7 @@ function LoginPage() {
 			<button
 				onClick={onLogin}
 				type='button'
-				className='btn btn-outline-primary w-100 mt-3 primary-elem'
+				className='btn btn-outline-primary w-100 mt-3 primary-bg primary-text'
 			>
 				Login with Google
 			</button>

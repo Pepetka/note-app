@@ -49,13 +49,13 @@ const Form = () => {
 					value={value}
 					onChange={(e) => onValueChange(e)}
 					type='text'
-					className='form-control border border-primary p-2 secondary-elem primary-text'
+					className='form-control border border-primary p-2 secondary-bg primary-text'
 					placeholder='Enter note title'
 				/>
 				<button
 					onClick={(e) => onChecked(e)}
-					className={`input-group-text border border-primary ${
-						!isChecked ? " secondary-elem" : " primary-elem"
+					className={`input-group-text border border-primary primary-text ${
+						!isChecked ? " secondary-bg" : " primary-bg"
 					}`}
 					type='button'
 				>
@@ -63,7 +63,7 @@ const Form = () => {
 				</button>
 				<button
 					onClick={(e) => submitHandler(e)}
-					className='btn btn-primary primary-elem'
+					className='btn btn-outline-primary primary-bg primary-text'
 					type='submit'
 				>
 					Add Note
