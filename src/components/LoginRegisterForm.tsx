@@ -52,11 +52,7 @@ function Form({ title, onSubmitForm }: FormProps) {
 				<input
 					{...register("email")}
 					type='email'
-<<<<<<< HEAD
-					className='form-control secondary-elem primary-text'
-=======
 					className='form-control secondary-bg primary-text'
->>>>>>> dev
 					id='form-email'
 					placeholder='name@example.com'
 				/>
@@ -69,11 +65,7 @@ function Form({ title, onSubmitForm }: FormProps) {
 				<input
 					{...register("password")}
 					type='password'
-<<<<<<< HEAD
-					className='form-control secondary-elem primary-text'
-=======
 					className='form-control secondary-bg primary-text'
->>>>>>> dev
 					id='form-password'
 				/>
 				{errors.password && (
