@@ -62,10 +62,10 @@ function NotesItem({ note, handleSort, index }: NotesItemProps) {
 	const getNoteClasses = () => {
 		let noteClass = "note list-group-item w-100 border-bottom border-secondary"
 		noteClass = note.isDisable
-			? noteClass + " note__disable secondary-elem"
+			? noteClass + " note__disable default-bg"
 			: note.isImportant
-			? noteClass + " primary-elem"
-			: noteClass + " secondary-elem"
+			? noteClass + " primary-bg"
+			: noteClass + " secondary-bg"
 
 		if (
 			(filter === "isDisable" && !note.isDisable) ||
@@ -129,7 +129,7 @@ function NotesItem({ note, handleSort, index }: NotesItemProps) {
 									<div
 										ref={inputRef}
 										contentEditable={canText}
-										data-placeholder='Вставьте текст'
+										data-placeholder='Add text'
 										className={`p-2 primary-text${canText ? " border border-secondary" : ""}`}
 									></div>
 								</div>
@@ -138,14 +138,14 @@ function NotesItem({ note, handleSort, index }: NotesItemProps) {
 									<div>
 										<button
 											onClick={onTextNote}
-											className={`btn ${canText ? "text-primary" : "text-secondary"}`}
+											className={`btn ${canText ? "primary-text" : "secondary-text"}`}
 										>
 											<i className='fa-solid fa-pen-clip'></i>
 										</button>
 									</div>
 
 									<div>
-										<button onClick={() => onContentSave(note.id!)} className={`btn text-primary`}>
+										<button onClick={() => onContentSave(note.id!)} className='btn primary-text'>
 											<i className='fa-solid fa-floppy-disk'></i>
 										</button>
 									</div>

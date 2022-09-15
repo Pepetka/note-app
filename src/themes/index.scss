@@ -2,19 +2,30 @@
 @import "./light/light.scss";
 
 .App {
-	background-color: var(--bg-primary-color);
-	color: var(--primary-color);
+	background-color: var(--bg-default-color);
+	color: var(--default-color);
 
 	min-height: 100vh;
 
-	.primary-elem {
-		background-color: var(--bg-button-color);
-		color: var(--primary-color);
+	input:-webkit-autofill,
+	input:-webkit-autofill:hover,
+	input:-webkit-autofill:focus,
+	input:-webkit-autofill:active {
+		transition: background-color 5000s ease-in-out 0s;
+		-webkit-text-fill-color: var(--primary-color);
+		caret-color: var(--primary-color);
 	}
 
-	.secondary-elem {
+	.default-bg {
+		background-color: var(--bg-default-color);
+	}
+
+	.primary-bg {
+		background-color: var(--bg-primary-color);
+	}
+
+	.secondary-bg {
 		background-color: var(--bg-secondary-color);
-		color: var(--secondary-color);
 	}
 
 	.primary-link {
@@ -31,6 +42,10 @@
 		&.active {
 			color: var(--secondary-color);
 		}
+	}
+
+	.default-text {
+		color: var(--default-color);
 	}
 
 	.primary-text {

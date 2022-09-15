@@ -25,7 +25,7 @@ export const fetchNotes = createAsyncThunk<{ notes: Note[] }, string, ThunkApi>(
 	"firebase/fetchNotes",
 	async (userId, { rejectWithValue }) => {
 		try {
-			const response = await axios.get(`${url}/${userId}/notes.json`)
+			const response = await axios.get(`${url}/notes/${userId}.json`)
 
 			if (response.statusText !== "OK") throw new Error("Server Error")
 
@@ -56,7 +56,7 @@ export const removeNote = createAsyncThunk<
 	ThunkApi
 >("firebase/removeNote", ({ userId, noteId }, { rejectWithValue }) => {
 	try {
-		axios.delete(`${url}/${userId}/notes/${noteId}.json`)
+		axios.delete(`${url}/notes/${userId}/${noteId}.json`)
 
 		return noteId
 	} catch (error) {
@@ -81,7 +81,7 @@ export const disableNote = createAsyncThunk<
 			isImportant: false,
 		})
 
-		const response = await axios.put(`${url}/${userId}/notes/${noteId}.json`, data)
+		const response = await axios.put(`${url}/notes/${userId}/${noteId}.json`, data)
 
 		if (response.statusText !== "OK") {
 			throw new Error("Server Error")
@@ -111,7 +111,7 @@ export const importantNote = createAsyncThunk<
 			isDisable: false,
 		})
 
-		const response = await axios.put(`${url}/${userId}/notes/${noteId}.json`, data)
+		const response = await axios.put(`${url}/notes/${userId}/${noteId}.json`, data)
 
 		if (response.statusText !== "OK") {
 			throw new Error("Server Error")
@@ -146,7 +146,7 @@ export const setContent = createAsyncThunk<
 				content,
 			})
 
-			const response = await axios.put(`${url}/${userId}/notes/${noteId}.json`, data)
+			const response = await axios.put(`${url}/notes/${userId}/${noteId}.json`, data)
 
 			if (response.statusText !== "OK") {
 				throw new Error("Server Error")
@@ -168,7 +168,7 @@ export const sortNotes = createAsyncThunk<void, { notes: Note[]; userId: string 
 
 		data.forEach((note: Note) => {
 			if (note.order !== prevNotes.filter((el) => el.id === note.id)[0].order)
-				axios.put(`${url}/${userId}/notes/${note.id}.json`, withoutId(note))
+				axios.put(`${url}/notes/${userId}/${note.id}.json`, withoutId(note))
 		})
 
 		dispatch(setNotes({ notes: data }))
@@ -192,7 +192,7 @@ export const addNote = createAsyncThunk<
 			order: notes.length,
 		}
 
-		const response = await axios.post(`${url}/${id}/notes.json`, note)
+		const response = await axios.post(`${url}/notes/${id}.json`, note)
 
 		if (response.statusText !== "OK") throw new Error("Server Error")
 

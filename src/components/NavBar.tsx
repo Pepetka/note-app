@@ -15,7 +15,7 @@ const NavBar = () => {
 	}
 
 	return (
-		<nav className='navbar navbar-expand d-flex justify-content-between primary-elem'>
+		<nav className='navbar navbar-expand d-flex justify-content-between primary-bg'>
 			<div className='container-fluid d-flex justify-content-between'>
 				<div className='d-flex justify-content-between'>
 					<div className='navbar-brand primary-text'>Note App</div>

@@ -52,7 +52,7 @@ function Form({ title, onSubmitForm }: FormProps) {
 				<input
 					{...register("email")}
 					type='email'
-					className='form-control secondary-elem'
+					className='form-control secondary-bg primary-text'
 					id='form-email'
 					placeholder='name@example.com'
 				/>
@@ -65,7 +65,7 @@ function Form({ title, onSubmitForm }: FormProps) {
 				<input
 					{...register("password")}
 					type='password'
-					className='form-control secondary-elem'
+					className='form-control secondary-bg primary-text'
 					id='form-password'
 				/>
 				{errors.password && (
@@ -74,11 +74,15 @@ function Form({ title, onSubmitForm }: FormProps) {
 			</div>
 			<div className='mb-3 form-check'>
 				<label className='form-check-label'>
-					<input {...register("rememberMe")} type='checkbox' className='form-check-input' />
+					<input
+						{...register("rememberMe")}
+						type='checkbox'
+						className='form-check-input secondary-bg'
+					/>
 					Remember me
 				</label>
 			</div>
-			<button type='submit' className='btn btn-primary primary-elem'>
+			<button type='submit' className='btn btn-outline-primary primary-bg primary-text'>
 				{title}
 			</button>
 		</form>
