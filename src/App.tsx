@@ -1,16 +1,16 @@
-import { Route, Routes } from "react-router-dom"
-import Home from "./pages/Home"
-import About from "./pages/About"
-import NavBar from "./components/NavBar"
-import Alert from "./components/Alert"
-import LoginPage from "pages/LoginPage"
-import RegisterPage from "pages/RegisterPage"
-import "./firebase"
-import ThemeButton from "components/ThemeButton"
-import { useTheme } from "hooks/theme-hooks"
+import {Route, Routes} from 'react-router-dom';
+import HomePage from 'pages/HomePage/HomePage';
+import AboutPage from 'pages/AboutPage/AboutPage';
+import NavBar from 'components/NavBar/NavBar';
+import Alert from 'components/Alert/Alert';
+import LoginPage from 'pages/LoginPage/LoginPage';
+import RegisterPage from 'pages/RegisterPage/RegisterPage';
+import './firebase';
+import ThemeButton from 'components/ThemeButton/ThemeButton';
+import {useTheme} from 'hooks/useTheme';
 
 function App() {
-	const { theme } = useTheme()
+	const {theme} = useTheme();
 
 	return (
 		<div className={`App ${theme}`}>
@@ -20,8 +20,8 @@ function App() {
 					<div className='note-app'>
 						<Alert />
 						<Routes>
-							<Route path='/' element={<Home />} />
-							<Route path='/about' element={<About />} />
+							<Route path='/' element={<HomePage />} />
+							<Route path='/about' element={<AboutPage />} />
 							<Route path='/login' element={<LoginPage />} />
 							<Route path='/register' element={<RegisterPage />} />
 						</Routes>
@@ -30,7 +30,7 @@ function App() {
 			</main>
 			<ThemeButton />
 		</div>
-	)
+	);
 }
 
-export default App
+export default App;

@@ -1,27 +1,16 @@
-import React from "react"
-import { useForm, SubmitHandler, UseFormRegister } from "react-hook-form"
-import { yupResolver } from "@hookform/resolvers/yup"
-import * as yup from "yup"
+import {useForm, SubmitHandler} from 'react-hook-form';
+import {yupResolver} from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 
-interface SubmitArgs {
+export interface SubmitArgs {
 	email: string
 	password: string
 	rememberMe: boolean
 }
 
-export type FuncArgs = {
-	register: UseFormRegister<SubmitArgs>
-}
-
-interface FormProps {
+interface AuthFormProps {
 	title: string
-	onSubmitForm: ({ email, password, rememberMe }: SubmitArgs) => void
-}
-
-type Inputs = {
-	email: string
-	password: string
-	rememberMe: boolean
+	onSubmitForm: ({email, password, rememberMe}: SubmitArgs) => void
 }
 
 const schema = yup
@@ -30,18 +19,18 @@ const schema = yup
 		password: yup.string().min(6).required(),
 		rememberMe: yup.boolean(),
 	})
-	.required()
+	.required();
 
-function Form({ title, onSubmitForm }: FormProps) {
+function AuthForm({title, onSubmitForm}: AuthFormProps) {
 	const {
 		register,
 		handleSubmit,
-		formState: { errors },
-	} = useForm<Inputs>({
+		formState: {errors},
+	} = useForm<SubmitArgs>({
 		resolver: yupResolver(schema),
-		mode: "onChange",
-	})
-	const onSubmit: SubmitHandler<Inputs> = (data) => onSubmitForm(data)
+		mode: 'onChange',
+	});
+	const onSubmit: SubmitHandler<SubmitArgs> = (data) => onSubmitForm(data);
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -50,20 +39,22 @@ function Form({ title, onSubmitForm }: FormProps) {
 					Email address
 				</label>
 				<input
-					{...register("email")}
+					{...register('email')}
 					type='email'
 					className='form-control secondary-bg primary-text'
 					id='form-email'
 					placeholder='name@example.com'
 				/>
-				{errors.email && <div className='form-text text-danger mt-2'>{errors.email?.message}</div>}
+				{errors.email && <div className='form-text text-danger mt-2'>
+					{errors.email?.message}
+				</div>}
 			</div>
 			<div className='mb-3'>
 				<label htmlFor='form-password' className='form-label'>
 					Password
 				</label>
 				<input
-					{...register("password")}
+					{...register('password')}
 					type='password'
 					className='form-control secondary-bg primary-text'
 					id='form-password'
@@ -75,7 +66,7 @@ function Form({ title, onSubmitForm }: FormProps) {
 			<div className='mb-3 form-check'>
 				<label className='form-check-label'>
 					<input
-						{...register("rememberMe")}
+						{...register('rememberMe')}
 						type='checkbox'
 						className='form-check-input secondary-bg'
 					/>
@@ -86,7 +77,7 @@ function Form({ title, onSubmitForm }: FormProps) {
 				{title}
 			</button>
 		</form>
-	)
+	);
 }
 
-export default Form
+export default AuthForm;

@@ -1,10 +1,9 @@
-@import "./dark/dark.scss";
-@import "./light/light.scss";
+@import "./dark/dark";
+@import "./light/light";
 
 .App {
 	background-color: var(--bg-default-color);
 	color: var(--default-color);
-
 	min-height: 100vh;
 
 	input:-webkit-autofill,

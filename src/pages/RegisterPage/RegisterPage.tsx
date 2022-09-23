@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom"
-import Register from "components/Register"
+import {Link} from 'react-router-dom';
+import Register from 'components/Register/Register';
 
 function RegisterPage() {
 	return (
@@ -12,7 +12,7 @@ function RegisterPage() {
 				Or <Link to='/login'>login</Link>
 			</p>
 		</>
-	)
+	);
 }
 
-export default RegisterPage
+export default RegisterPage;

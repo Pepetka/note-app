@@ -1,18 +1,18 @@
-import { useAppDispatch } from "hooks/redux-hooks"
-import { useAuth } from "hooks/use-auth"
-import { NavLink } from "react-router-dom"
-import { clearNotes } from "store/slices/firebaseSlice"
-import { removeUser } from "store/slices/userSlice"
+import {useAppDispatch} from 'hooks/useRedux';
+import {useAuth} from 'hooks/useAuth';
+import {NavLink} from 'react-router-dom';
+import {clearNotes} from 'store/slices/firebaseSlice';
+import {removeUser} from 'store/slices/userSlice';
 
 const NavBar = () => {
-	const dispatch = useAppDispatch()
-	const { isAuth } = useAuth()
+	const dispatch = useAppDispatch();
+	const {isAuth} = useAuth();
 
 	const onLogOut = () => {
-		dispatch(removeUser())
-		dispatch(clearNotes())
-		localStorage.removeItem("user")
-	}
+		dispatch(removeUser());
+		dispatch(clearNotes());
+		localStorage.removeItem('user');
+	};
 
 	return (
 		<nav className='navbar navbar-expand d-flex justify-content-between primary-bg'>
@@ -22,12 +22,12 @@ const NavBar = () => {
 
 					<ul className='navbar-nav'>
 						<li className='nav-item'>
-							<NavLink className='nav-link primary-link' to={"/"}>
+							<NavLink className='nav-link primary-link' to={'/'}>
 								Home
 							</NavLink>
 						</li>
 						<li className='nav-item'>
-							<NavLink className='nav-link primary-link' to={"/about"}>
+							<NavLink className='nav-link primary-link' to={'/about'}>
 								About
 							</NavLink>
 						</li>
@@ -37,11 +37,14 @@ const NavBar = () => {
 				<ul className='navbar-nav'>
 					<li className='nav-item'>
 						{isAuth ? (
-							<NavLink className='nav-link primary-link' to={"/login"} onClick={onLogOut}>
+							<NavLink
+								className='nav-link primary-link'
+								to={'/login'}
+								onClick={onLogOut}>
 								Logout
 							</NavLink>
 						) : (
-							<NavLink className='nav-link primary-link' to={"/login"}>
+							<NavLink className='nav-link primary-link' to={'/login'}>
 								Login
 							</NavLink>
 						)}
@@ -49,7 +52,7 @@ const NavBar = () => {
 				</ul>
 			</div>
 		</nav>
-	)
-}
+	);
+};
 
-export default NavBar
+export default NavBar;

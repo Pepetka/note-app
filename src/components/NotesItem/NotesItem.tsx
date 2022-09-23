@@ -1,8 +1,8 @@
-import { removeNote, disableNote, importantNote, setContent } from "../store/slices/firebaseSlice"
-import { useAppDispatch, useAppSelector } from "hooks/redux-hooks"
-import { Note } from "types"
-import { MouseEvent, useEffect, useRef, useState } from "react"
-import { Draggable } from "react-beautiful-dnd"
+import {removeNote, disableNote, importantNote, setContent} from '../../store/slices/firebaseSlice';
+import {useAppDispatch, useAppSelector} from 'hooks/useRedux';
+import {Note} from 'types';
+import {MouseEvent, useEffect, useRef, useState} from 'react';
+import {Draggable} from 'react-beautiful-dnd';
 
 interface NotesItemProps {
 	note: Note
@@ -10,87 +10,96 @@ interface NotesItemProps {
 	index: number
 }
 
-function NotesItem({ note, handleSort, index }: NotesItemProps) {
-	const dispatch = useAppDispatch()
-	const userId = useAppSelector((state) => state.user.user.id)
-	const { filter } = useAppSelector((state) => state.firebase)
-	const [canText, setCanText] = useState(false)
-	const [contentVisibility, setContentVisibility] = useState(false)
-	const inputRef = useRef<null | HTMLDivElement>(null)
+function NotesItem({note, handleSort, index}: NotesItemProps) {
+	const dispatch = useAppDispatch();
+	const userId = useAppSelector((state) => state.user.user.id);
+	const {filter} = useAppSelector((state) => state.firebase);
+	const [canText, setCanText] = useState(false);
+	const [contentVisibility, setContentVisibility] = useState(false);
+	const inputRef = useRef<null | HTMLDivElement>(null);
 
 	useEffect(() => {
-		if (note.content && inputRef.current) inputRef.current.innerHTML = note.content
-	})
+		if (note.content && inputRef.current) inputRef.current.innerHTML = note.content;
+	});
 
 	useEffect(() => {
-		if (canText && inputRef.current) inputRef.current.focus()
-	}, [canText])
+		if (canText && inputRef.current) inputRef.current.focus();
+	}, [canText]);
 
 	const onContentSave = (id: string) => {
-		setCanText(false)
+		setCanText(false);
 
-		if (inputRef.current?.innerHTML)
-			dispatch(setContent({ userId: userId!, content: inputRef.current.innerHTML, noteId: id }))
-	}
+		if (inputRef.current?.innerHTML) {
+			dispatch(setContent({
+				userId: userId!,
+				content: inputRef.current.innerHTML,
+				noteId: id,
+			}));
+		}
+	};
 
 	const onRemoveNote = (event: MouseEvent<HTMLButtonElement>, noteId: string) => {
-		event.stopPropagation()
-		dispatch(removeNote({ noteId, userId: userId! }))
-	}
+		event.stopPropagation();
+		dispatch(removeNote({noteId, userId: userId!}));
+	};
 
 	const onDisableNote = (event: MouseEvent<HTMLButtonElement>, noteId: string) => {
-		event.stopPropagation()
-		dispatch(disableNote({ noteId, userId: userId! }))
-	}
+		event.stopPropagation();
+		dispatch(disableNote({noteId, userId: userId!}));
+	};
 
 	const onImportantNote = (event: MouseEvent<HTMLButtonElement>, noteId: string) => {
-		event.stopPropagation()
-		dispatch(importantNote({ noteId, userId: userId! }))
-	}
+		event.stopPropagation();
+		dispatch(importantNote({noteId, userId: userId!}));
+	};
 
 	const onTextNote = (event: MouseEvent<HTMLButtonElement>) => {
-		event.stopPropagation()
+		event.stopPropagation();
 
-		setCanText((canText) => !canText)
-	}
+		setCanText((canText) => !canText);
+	};
 
 	const onChangeVisibility = (event: MouseEvent<HTMLButtonElement>) => {
-		event.stopPropagation()
-		setContentVisibility((contentVisibility) => !contentVisibility)
-	}
+		event.stopPropagation();
+		setContentVisibility((contentVisibility) => !contentVisibility);
+	};
 
 	const getNoteClasses = () => {
-		let noteClass = "note list-group-item w-100 border-bottom border-secondary"
-		noteClass = note.isDisable
-			? noteClass + " note__disable default-bg"
-			: note.isImportant
-			? noteClass + " primary-bg"
-			: noteClass + " secondary-bg"
+		let noteClass = 'note list-group-item w-100 border-bottom border-secondary';
+		noteClass = note.isDisable ?
+			noteClass + ' note__disable default-bg' :
+			note.isImportant ?
+				noteClass + ' primary-bg' :
+				noteClass + ' secondary-bg';
 
 		if (
-			(filter === "isDisable" && !note.isDisable) ||
-			(filter === "active" && note.isDisable) ||
-			(filter === "isImportant" && !note.isImportant)
-		)
-			return "note-hide"
+			(filter === 'isDisable' && !note.isDisable) ||
+			(filter === 'active' && note.isDisable) ||
+			(filter === 'isImportant' && !note.isImportant)
+		) {
+			return 'note-hide';
+		}
 
-		return noteClass
-	}
+		return noteClass;
+	};
 
-	const importantClass = note.isImportant ? "text-danger fw-bold" : "text-secondary"
-	const disableClass = note.isDisable ? "text-dark fw-bold" : "text-secondary"
+	const importantClass = note.isImportant ? 'text-danger fw-bold' : 'text-secondary';
+	const disableClass = note.isDisable ? 'text-dark fw-bold' : 'text-secondary';
 
 	return (
 		<Draggable draggableId={note.id!} index={index} isDragDisabled={!handleSort}>
 			{(provided) => (
-				<div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+				<div
+					ref={provided.innerRef}
+					{...provided.draggableProps}
+					{...provided.dragHandleProps}>
 					<div className={getNoteClasses()}>
 						<div className='row container-fluid w-100 ms-auto me-auto'>
 							<div className='col-4 d-flex justify-content-start align-items-center'>
 								<div className='form-check form-check-inline p-0 note__disable'>
 									<button
 										onClick={(e) => onDisableNote(e, note.id!)}
-										className={"btn " + disableClass}
+										className={'btn ' + disableClass}
 									>
 										<i className='fa-solid fa-eye-slash'></i>
 									</button>
@@ -98,7 +107,7 @@ function NotesItem({ note, handleSort, index }: NotesItemProps) {
 								<div className='form-check form-check-inline note__important'>
 									<button
 										onClick={(e) => onImportantNote(e, note.id!)}
-										className={"btn " + importantClass}
+										className={'btn ' + importantClass}
 									>
 										<i className='fa-solid fa-circle-exclamation'></i>
 									</button>
@@ -130,7 +139,7 @@ function NotesItem({ note, handleSort, index }: NotesItemProps) {
 										ref={inputRef}
 										contentEditable={canText}
 										data-placeholder='Add text'
-										className={`p-2 primary-text${canText ? " border border-secondary" : ""}`}
+										className={`p-2 primary-text${canText ? ' border border-secondary' : ''}`}
 									></div>
 								</div>
 
@@ -138,7 +147,7 @@ function NotesItem({ note, handleSort, index }: NotesItemProps) {
 									<div>
 										<button
 											onClick={onTextNote}
-											className={`btn ${canText ? "primary-text" : "secondary-text"}`}
+											className={`btn ${canText ? 'primary-text' : 'secondary-text'}`}
 										>
 											<i className='fa-solid fa-pen-clip'></i>
 										</button>
@@ -156,7 +165,7 @@ function NotesItem({ note, handleSort, index }: NotesItemProps) {
 						<div className='text-center'>
 							<button className='btn text-secondary w-100' onClick={(e) => onChangeVisibility(e)}>
 								<i
-									className={`fa-solid fa-sort-down${contentVisibility ? " active-visible" : ""}`}
+									className={`fa-solid fa-sort-down${contentVisibility ? ' active-visible' : ''}`}
 								></i>
 							</button>
 						</div>
@@ -164,7 +173,7 @@ function NotesItem({ note, handleSort, index }: NotesItemProps) {
 				</div>
 			)}
 		</Draggable>
-	)
+	);
 }
 
-export default NotesItem
+export default NotesItem;

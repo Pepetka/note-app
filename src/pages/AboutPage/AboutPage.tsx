@@ -1,4 +1,4 @@
-function About() {
+function AboutPage() {
 	return (
 		<div className='h-100 p-5 border rounded-3 primary-bg primary-text'>
 			<h2>About Note App</h2>
@@ -14,7 +14,7 @@ function About() {
 				doloribus aut modi vero placeat nam sunt sapiente blanditiis adipisci!
 			</p>
 		</div>
-	)
+	);
 }
 
-export default About
+export default AboutPage;
