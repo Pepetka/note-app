@@ -1,9 +1,9 @@
 import {NavBar} from 'components/NavBar/NavBar';
 import {Alert} from 'components/Alert/Alert';
 import '../../firebase';
-import {ThemeButton} from 'components/ThemeButton/ThemeButton';
 import {useTheme} from 'hooks/useTheme';
 import {AppRouter} from 'components/AppRouter/AppRouter';
+import {SideBar} from 'components/SideBar/SideBar';
 
 export const App = () => {
 	const {theme} = useTheme();
@@ -19,7 +19,7 @@ export const App = () => {
 					</div>
 				</div>
 			</main>
-			<ThemeButton />
+			<SideBar />
 		</div>
 	);
 };
