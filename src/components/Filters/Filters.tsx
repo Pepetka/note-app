@@ -8,7 +8,7 @@ const buttons = [
 	{name: 'All', data: 'all'},
 ];
 
-function Filters() {
+export const Filters = () => {
 	const dispatch = useAppDispatch();
 	const {filter} = useAppSelector((state) => state.firebase);
 
@@ -35,6 +35,4 @@ function Filters() {
 			})}
 		</div>
 	);
-}
-
-export default Filters;
+};

@@ -21,7 +21,7 @@ const schema = yup
 	})
 	.required();
 
-function AuthForm({title, onSubmitForm}: AuthFormProps) {
+export const AuthForm = ({title, onSubmitForm}: AuthFormProps) => {
 	const {
 		register,
 		handleSubmit,
@@ -78,6 +78,4 @@ function AuthForm({title, onSubmitForm}: AuthFormProps) {
 			</button>
 		</form>
 	);
-}
-
-export default AuthForm;
+};

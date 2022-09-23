@@ -1,4 +1,4 @@
-import {removeNote, disableNote, importantNote, setContent} from '../../store/slices/firebaseSlice';
+import {removeNote, disableNote, importantNote, setContent} from 'store/slices/firebaseSlice';
 import {useAppDispatch, useAppSelector} from 'hooks/useRedux';
 import {Note} from 'types';
 import {MouseEvent, useEffect, useRef, useState} from 'react';
@@ -10,7 +10,7 @@ interface NotesItemProps {
 	index: number
 }
 
-function NotesItem({note, handleSort, index}: NotesItemProps) {
+export const NotesItem = ({note, handleSort, index}: NotesItemProps) => {
 	const dispatch = useAppDispatch();
 	const userId = useAppSelector((state) => state.user.user.id);
 	const {filter} = useAppSelector((state) => state.firebase);
@@ -174,6 +174,6 @@ function NotesItem({note, handleSort, index}: NotesItemProps) {
 			)}
 		</Draggable>
 	);
-}
+};
 
 export default NotesItem;

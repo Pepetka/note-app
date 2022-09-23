@@ -1,16 +1,13 @@
 import {getAuth, signInWithEmailAndPassword} from 'firebase/auth';
 import {useAppDispatch} from 'hooks/useRedux';
 import {useNavigate} from 'react-router-dom';
-import AuthForm, {SubmitArgs} from '../AuthForm/AuthForm';
+import {AuthForm, SubmitArgs} from 'components/AuthForm/AuthForm';
 import {setUser} from 'store/slices/userSlice';
 import {showAlert, hideAlert} from 'store/slices/alertSlice';
-import {User} from '../../types';
+import {User} from 'types';
+import {toUpperFirs} from 'helpers/toUpperFirst';
 
-function toUpperFirs(string: string): string {
-	return string[0].toUpperCase() + string.slice(1);
-}
-
-function Login() {
+export const Login = () => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
@@ -54,6 +51,4 @@ function Login() {
 	};
 
 	return <AuthForm title='Login' onSubmitForm={handleLogin} />;
-}
-
-export default Login;
+};

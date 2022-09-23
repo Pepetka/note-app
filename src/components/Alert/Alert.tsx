@@ -1,8 +1,8 @@
 import {motion, AnimatePresence} from 'framer-motion';
-import {hideAlert} from '../../store/slices/alertSlice';
+import {hideAlert} from 'store/slices/alertSlice';
 import {useAppDispatch, useAppSelector} from 'hooks/useRedux';
 
-const Alert = () => {
+export const Alert = () => {
 	const dispatch = useAppDispatch();
 	const {type, visible, text} = useAppSelector((store) => store.alert);
 
@@ -38,5 +38,3 @@ const Alert = () => {
 		</AnimatePresence>
 	);
 };
-
-export default Alert;

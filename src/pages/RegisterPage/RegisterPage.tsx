@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom';
-import Register from 'components/Register/Register';
+import {Register} from 'components/Register/Register';
 
-function RegisterPage() {
+export const RegisterPage = () => {
 	return (
 		<>
 			<h1>Register</h1>
@@ -13,6 +13,4 @@ function RegisterPage() {
 			</p>
 		</>
 	);
-}
-
-export default RegisterPage;
+};

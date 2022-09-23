@@ -2,7 +2,7 @@ import {useAppDispatch, useAppSelector} from 'hooks/useRedux';
 import {sortNotes} from 'store/slices/firebaseSlice';
 import {Note} from 'types';
 import {DragDropContext, Droppable} from 'react-beautiful-dnd';
-import NotesList from 'components/NotesList/NotesList';
+import {NotesList} from 'components/NotesList/NotesList';
 
 interface Prop {
 	handleSort: boolean
@@ -16,7 +16,7 @@ const reorder = (list: Array<Note>, startIndex: number, endIndex: number) => {
 	return result;
 };
 
-const Notes = ({handleSort}: Prop) => {
+export const Notes = ({handleSort}: Prop) => {
 	const {notes} = useAppSelector((state) => state.firebase);
 	const {id} = useAppSelector((state) => state.user.user);
 	const dispatch = useAppDispatch();
@@ -56,5 +56,3 @@ const Notes = ({handleSort}: Prop) => {
 		</DragDropContext>
 	);
 };
-
-export default Notes;

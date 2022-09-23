@@ -1,5 +1,5 @@
 import React from 'react';
-import {useAppSelector} from '../../hooks/useRedux';
+import {useAppSelector} from 'hooks/useRedux';
 
 interface ReloadTemplateProps {
 	onReload: () => void

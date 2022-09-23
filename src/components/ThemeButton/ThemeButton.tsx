@@ -1,6 +1,6 @@
 import {useTheme} from 'hooks/useTheme';
 
-const ThemeButton = () => {
+export const ThemeButton = () => {
 	const {theme, onThemeChange} = useTheme();
 
 	return (
@@ -16,5 +16,3 @@ const ThemeButton = () => {
 		</button>
 	);
 };
-
-export default ThemeButton;

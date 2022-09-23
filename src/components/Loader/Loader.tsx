@@ -1,4 +1,4 @@
-const Loader = () => {
+export const Loader = () => {
 	return (
 		<div className='text-center'>
 			<div className='spinner-border primary-text' role='status'>
@@ -7,5 +7,3 @@ const Loader = () => {
 		</div>
 	);
 };
-
-export default Loader;

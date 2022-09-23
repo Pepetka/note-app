@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useAppDispatch, useAppSelector} from 'hooks/useRedux';
-import NoteAddForm from 'components/NoteAddForm/NoteAddForm';
-import Loader from 'components/Loader/Loader';
-import Notes from 'components/Notes/Notes';
+import {NoteAddForm} from 'components/NoteAddForm/NoteAddForm';
+import {Loader} from 'components/Loader/Loader';
+import {Notes} from 'components/Notes/Notes';
 import {fetchNotes} from 'store/slices/firebaseSlice';
-import Filters from 'components/Filters/Filters';
+import {Filters} from 'components/Filters/Filters';
 import {useNavigate} from 'react-router-dom';
 import {useAuth} from 'hooks/useAuth';
 import {setUser} from 'store/slices/userSlice';
@@ -12,7 +12,7 @@ import {showAlert} from 'store/slices/alertSlice';
 import {NotesControlPanel} from 'components/NotesControlPanel/NotesControlPanel';
 import {ReloadTemplate} from 'components/ReloadTemplate/ReloadTemplate';
 
-function HomePage() {
+export const HomePage = () => {
 	const [handleSort, setHandleSort] = useState(false);
 	const dispatch = useAppDispatch();
 	const {loading, notes, error} = useAppSelector((state) => state.firebase);
@@ -20,7 +20,7 @@ function HomePage() {
 	const navigate = useNavigate();
 	const {isAuth} = useAuth();
 
-	React.useEffect(() => {
+	useEffect(() => {
 		if (isAuth) {
 			dispatch(fetchNotes(userId!));
 		} else if (localStorage.getItem('user') !== null) {
@@ -32,7 +32,7 @@ function HomePage() {
 		// eslint-disable-next-line
 	}, [isAuth])
 
-	React.useEffect(() => {
+	useEffect(() => {
 		if (error.update) dispatch(showAlert({type: 'danger', text: error.update}));
 		// eslint-disable-next-line
 	}, [error.update])
@@ -57,6 +57,4 @@ function HomePage() {
 			) : null}
 		</div>
 	);
-}
-
-export default HomePage;
+};

@@ -1,12 +1,12 @@
 import {Link, useNavigate} from 'react-router-dom';
 import {getAuth, signInWithPopup, GoogleAuthProvider} from 'firebase/auth';
-import Login from 'components/Login/Login';
+import {Login} from 'components/Login/Login';
 import {useAppDispatch} from 'hooks/useRedux';
 import {setUser} from 'store/slices/userSlice';
 import {User} from 'types';
 import {showAlert} from 'store/slices/alertSlice';
 
-function LoginPage() {
+export const LoginPage = () => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
@@ -57,6 +57,4 @@ function LoginPage() {
 			</button>
 		</>
 	);
-}
-
-export default LoginPage;
+};

@@ -3,7 +3,7 @@ import {showAlert, hideAlert} from '../../store/slices/alertSlice';
 import {addNote} from '../../store/slices/firebaseSlice';
 import {useAppDispatch} from 'hooks/useRedux';
 
-const NoteAddForm = () => {
+export const NoteAddForm = () => {
 	const [value, setValue] = useState('');
 	const dispatch = useAppDispatch();
 	const [isChecked, setIsChecked] = useState(false);
@@ -72,5 +72,3 @@ const NoteAddForm = () => {
 		</form>
 	);
 };
-
-export default NoteAddForm;

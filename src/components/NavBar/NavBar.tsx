@@ -4,7 +4,7 @@ import {NavLink} from 'react-router-dom';
 import {clearNotes} from 'store/slices/firebaseSlice';
 import {removeUser} from 'store/slices/userSlice';
 
-const NavBar = () => {
+export const NavBar = () => {
 	const dispatch = useAppDispatch();
 	const {isAuth} = useAuth();
 
@@ -55,4 +55,3 @@ const NavBar = () => {
 	);
 };
 
-export default NavBar;

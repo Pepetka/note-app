@@ -1,15 +1,12 @@
 import {getAuth, createUserWithEmailAndPassword} from 'firebase/auth';
 import {useAppDispatch} from 'hooks/useRedux';
 import {useNavigate} from 'react-router-dom';
-import AuthForm from 'components/AuthForm/AuthForm';
+import {AuthForm} from 'components/AuthForm/AuthForm';
 import {setUser} from 'store/slices/userSlice';
 import {showAlert, hideAlert} from 'store/slices/alertSlice';
+import {toUpperFirs} from 'helpers/toUpperFirst';
 
-function toUpperFirs(string: string) {
-	return string[0].toUpperCase() + string.slice(1);
-}
-
-function Register() {
+export const Register = () => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
@@ -63,6 +60,4 @@ function Register() {
 	};
 
 	return <AuthForm title='Register' onSubmitForm={handleRegister} />;
-}
-
-export default Register;
+};
