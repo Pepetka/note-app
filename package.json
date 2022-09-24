@@ -49,6 +49,7 @@
       "i18next"
     ],
     "rules": {
+      "linebreak-style": ["error", "windows"],
       "react/jsx-indent": [
         2,
         "tab"

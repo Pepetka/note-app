@@ -2,10 +2,5 @@
 	"About Note App": "About Note App",
 	"Description": "Description:",
 	"App version": "App version:",
-	"App description": "The application allows registered users to create notes, mark them as important and completed. It is possible to filter notes, as well as sort them using drag-and-drop functionality.",
-	"v3": {
-		"2": {
-			"0": "v3.2.0"
-		}
-	}
+	"App description": "The application allows registered users to create notes, mark them as important and completed. It is possible to filter notes, as well as sort them using drag-and-drop functionality."
 }
