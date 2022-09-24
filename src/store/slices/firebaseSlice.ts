@@ -5,18 +5,9 @@ import {RootState} from 'store';
 import {Note, FirebaseState} from 'types';
 import {showAlert} from './alertSlice';
 import {database} from '../../firebase';
+import {withoutId} from 'helpers/withoutId';
 
 const url = process.env.REACT_APP_DB_URL;
-
-function withoutId(obj: Record<string, any>): Record<string, any> {
-	const result: Record<string, any> = {};
-	for (const key of Object.keys(obj)) {
-		if ('id' !== key) {
-			result[key] = obj[key];
-		}
-	}
-	return result;
-}
 
 type ThunkApi = {
 	rejectValue: string
@@ -36,7 +27,7 @@ export const fetchNotes = createAsyncThunk<Note[], string, ThunkApi>(
 			if (response.exists()) {
 				const notes: Note[] = Object.entries(response.val()).map((el) => ({...el[1], id: el[0]}));
 
-				return notes;
+				return notes.sort((a, b) => a.order - b.order);
 			} else {
 				return [];
 			}
