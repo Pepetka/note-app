@@ -3,6 +3,7 @@ import {useAppDispatch, useAppSelector} from 'hooks/useRedux';
 import {Note} from 'types';
 import {MouseEvent, useEffect, useRef, useState} from 'react';
 import {Draggable} from 'react-beautiful-dnd';
+import {useTranslation} from 'react-i18next';
 
 interface NotesItemProps {
 	note: Note
@@ -17,6 +18,7 @@ export const NotesItem = ({note, handleSort, index}: NotesItemProps) => {
 	const [canText, setCanText] = useState(false);
 	const [contentVisibility, setContentVisibility] = useState(false);
 	const inputRef = useRef<null | HTMLDivElement>(null);
+	const {t} = useTranslation('home');
 
 	useEffect(() => {
 		if (note.content && inputRef.current) inputRef.current.innerHTML = note.content;
@@ -138,7 +140,7 @@ export const NotesItem = ({note, handleSort, index}: NotesItemProps) => {
 									<div
 										ref={inputRef}
 										contentEditable={canText}
-										data-placeholder='Add text'
+										data-placeholder={t('Add text')}
 										className={`p-2 primary-text${canText ? ' border border-secondary' : ''}`}
 									></div>
 								</div>
@@ -175,5 +177,3 @@ export const NotesItem = ({note, handleSort, index}: NotesItemProps) => {
 		</Draggable>
 	);
 };
-
-export default NotesItem;

@@ -1,12 +1,12 @@
-import {useState} from 'react';
+import {useTranslation} from 'react-i18next';
 
 export const LocalizationButton = () => {
-	const [lang, setLang] = useState('en');
+	const {i18n} = useTranslation();
 
 	const onChangeLang = () => {
-		const newLang = lang === 'en' ? 'ru' : 'en';
+		const newLang = i18n.language === 'en' ? 'ru' : 'en';
 
-		setLang(newLang);
+		i18n.changeLanguage(newLang);
 	};
 
 	return (
@@ -14,7 +14,7 @@ export const LocalizationButton = () => {
 			onClick={onChangeLang}
 			className='theme-button d-flex justify-content-center align-items-center secondary-bg secondary-text'
 		>
-			{lang}
+			{i18n.language}
 		</button>
 	);
 };

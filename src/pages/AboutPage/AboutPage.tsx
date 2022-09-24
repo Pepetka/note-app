@@ -1,17 +1,16 @@
+import {useTranslation} from 'react-i18next';
+
 export const AboutPage = () => {
+	const {t} = useTranslation('about');
+
 	return (
 		<div className='h-100 p-5 border rounded-3 primary-bg primary-text'>
-			<h2>About Note App</h2>
+			<h2>{t('About Note App')}</h2>
 			<p>
-				<strong>App version: </strong> v3.2.0
+				<strong>{t('App version')} </strong> {t('v3.2.0')}
 				<br />
-				<strong>Description: </strong>
-				Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facere reiciendis fugiat quisquam
-				itaque perferendis, eius sint vel error et libero ex, autem architecto asperiores temporibus
-				quam? Itaque officiis repudiandae quibusdam, ratione culpa iusto dignissimos alias nulla
-				nemo quidem enim ullam placeat. Voluptatibus id ipsa mollitia aliquid odio eius architecto
-				obcaecati, dolorem cum sapiente labore optio quidem nesciunt neque delectus! Maiores
-				doloribus aut modi vero placeat nam sunt sapiente blanditiis adipisci!
+				<strong>{t('Description')} </strong>
+				{t('App description')}
 			</p>
 		</div>
 	);

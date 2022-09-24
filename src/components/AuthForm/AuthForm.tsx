@@ -1,6 +1,7 @@
 import {useForm, SubmitHandler} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import {useTranslation} from 'react-i18next';
 
 export interface SubmitArgs {
 	email: string
@@ -22,6 +23,7 @@ const schema = yup
 	.required();
 
 export const AuthForm = ({title, onSubmitForm}: AuthFormProps) => {
+	const {t} = useTranslation('auth');
 	const {
 		register,
 		handleSubmit,
@@ -36,7 +38,7 @@ export const AuthForm = ({title, onSubmitForm}: AuthFormProps) => {
 		<form onSubmit={handleSubmit(onSubmit)} noValidate>
 			<div className='mb-3'>
 				<label htmlFor='form-email' className='form-label'>
-					Email address
+					{t('Email address')}
 				</label>
 				<input
 					{...register('email')}
@@ -51,7 +53,7 @@ export const AuthForm = ({title, onSubmitForm}: AuthFormProps) => {
 			</div>
 			<div className='mb-3'>
 				<label htmlFor='form-password' className='form-label'>
-					Password
+					{t('Password')}
 				</label>
 				<input
 					{...register('password')}
@@ -70,11 +72,11 @@ export const AuthForm = ({title, onSubmitForm}: AuthFormProps) => {
 						type='checkbox'
 						className='form-check-input secondary-bg'
 					/>
-					Remember me
+					{t('Remember me')}
 				</label>
 			</div>
 			<button type='submit' className='btn btn-outline-primary primary-bg primary-text'>
-				{title}
+				{t(title)}
 			</button>
 		</form>
 	);

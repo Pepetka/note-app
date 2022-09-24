@@ -3,6 +3,7 @@ import {sortNotes} from 'store/slices/firebaseSlice';
 import {Note} from 'types';
 import {DragDropContext, Droppable} from 'react-beautiful-dnd';
 import {NotesList} from 'components/NotesList/NotesList';
+import {useTranslation} from 'react-i18next';
 
 interface Prop {
 	handleSort: boolean
@@ -20,6 +21,7 @@ export const Notes = ({handleSort}: Prop) => {
 	const {notes} = useAppSelector((state) => state.firebase);
 	const {id} = useAppSelector((state) => state.user.user);
 	const dispatch = useAppDispatch();
+	const {t} = useTranslation('home');
 
 	function onDragEnd(result: any) {
 		if (!result.destination) {
@@ -38,7 +40,7 @@ export const Notes = ({handleSort}: Prop) => {
 	if (notes.length < 1) {
 		return (
 			<div className='d-flex justify-content-center align-items-center flex-column'>
-				<h1>There are no notes</h1>
+				<h1>{t('There are no notes')}</h1>
 			</div>
 		);
 	}

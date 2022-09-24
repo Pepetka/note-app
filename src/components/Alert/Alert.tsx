@@ -1,10 +1,12 @@
 import {motion, AnimatePresence} from 'framer-motion';
 import {hideAlert} from 'store/slices/alertSlice';
 import {useAppDispatch, useAppSelector} from 'hooks/useRedux';
+import {useTranslation} from 'react-i18next';
 
 export const Alert = () => {
 	const dispatch = useAppDispatch();
 	const {type, visible, text} = useAppSelector((store) => store.alert);
+	const {t} = useTranslation();
 
 	const variants = {
 		initial: {
@@ -25,7 +27,7 @@ export const Alert = () => {
 		<AnimatePresence>
 			{visible ? (
 				<motion.div {...variants} className={`alert alert-${type} alert-dismissible`}>
-					<strong>Attention!</strong>
+					<strong>{t('Attention')}</strong>
 					<br />
 					{text}
 					<button

@@ -5,10 +5,12 @@ import {useAppDispatch} from 'hooks/useRedux';
 import {setUser} from 'store/slices/userSlice';
 import {User} from 'types';
 import {showAlert} from 'store/slices/alertSlice';
+import {useTranslation} from 'react-i18next';
 
 export const LoginPage = () => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
+	const {t} = useTranslation('auth');
 
 	const onLogin = () => {
 		const provider = new GoogleAuthProvider();
@@ -40,12 +42,12 @@ export const LoginPage = () => {
 
 	return (
 		<>
-			<h1>Login</h1>
+			<h1>{t('Login')}</h1>
 
 			<Login />
 
 			<p>
-				Or <Link to='/register'>register</Link>
+				{t('Or')} <Link to='/register'>{t('register')}</Link>
 			</p>
 
 			<button
@@ -53,7 +55,7 @@ export const LoginPage = () => {
 				type='button'
 				className='btn btn-outline-primary w-100 mt-3 primary-bg primary-text'
 			>
-				Login with Google
+				{t('Login with Google')}
 			</button>
 		</>
 	);

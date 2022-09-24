@@ -45,15 +45,18 @@ h1 {
 	}
 
 	&__open {
+		width: 50px;
+		height: 50px;
+		text-align: center;
 		background: none;
-		border: none;
 		color: var(--primary-color);
-		margin-block: 10px;
-		transform: rotateZ(90deg);
+		margin-bottom: 20px;
+		border-radius: 50%;
+		border: 1px solid var(--primary-color);
+		transform: rotateZ(180deg);
 
 		&_collapsed {
-			transform: rotateZ(-90deg);
-			margin-bottom: 20px;
+			transform: rotateZ(0deg);
 		}
 	}
 }
@@ -91,13 +94,9 @@ h1 {
 }
 
 .form-check {
-	position: relative;
-
-	.handle-sort-label {
-		position: absolute;
-		left: -90px;
-		top: 0;
-	}
+	display: flex;
+	justify-content: space-between;
+	width: 180px;
 }
 
 .btn-group > .btn,

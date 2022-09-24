@@ -1,5 +1,6 @@
 import {useAppDispatch, useAppSelector} from 'hooks/useRedux';
 import {changeFilter} from 'store/slices/firebaseSlice';
+import {useTranslation} from 'react-i18next';
 
 const buttons = [
 	{name: 'Active', data: 'active'},
@@ -11,6 +12,7 @@ const buttons = [
 export const Filters = () => {
 	const dispatch = useAppDispatch();
 	const {filter} = useAppSelector((state) => state.firebase);
+	const {t} = useTranslation('home');
 
 	const onChangeFilter = (data: string) => {
 		dispatch(changeFilter({filter: data}));
@@ -29,7 +31,7 @@ export const Filters = () => {
 						className={btnClasses}
 						onClick={() => onChangeFilter(el.data)}
 					>
-						{el.name}
+						{t(el.name)}
 					</button>
 				);
 			})}

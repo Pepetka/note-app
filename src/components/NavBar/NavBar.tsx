@@ -3,10 +3,12 @@ import {useAuth} from 'hooks/useAuth';
 import {NavLink} from 'react-router-dom';
 import {clearNotes} from 'store/slices/firebaseSlice';
 import {removeUser} from 'store/slices/userSlice';
+import {useTranslation} from 'react-i18next';
 
 export const NavBar = () => {
 	const dispatch = useAppDispatch();
 	const {isAuth} = useAuth();
+	const {t} = useTranslation();
 
 	const onLogOut = () => {
 		dispatch(removeUser());
@@ -18,17 +20,17 @@ export const NavBar = () => {
 		<nav className='navbar navbar-expand d-flex justify-content-between primary-bg'>
 			<div className='container-fluid d-flex justify-content-between'>
 				<div className='d-flex justify-content-between'>
-					<div className='navbar-brand primary-text'>Note App</div>
+					<div className='navbar-brand primary-text'>{t('Note App')}</div>
 
 					<ul className='navbar-nav'>
 						<li className='nav-item'>
 							<NavLink className='nav-link primary-link' to={'/'}>
-								Home
+								{t('Home')}
 							</NavLink>
 						</li>
 						<li className='nav-item'>
 							<NavLink className='nav-link primary-link' to={'/about'}>
-								About
+								{t('About')}
 							</NavLink>
 						</li>
 					</ul>
@@ -41,11 +43,11 @@ export const NavBar = () => {
 								className='nav-link primary-link'
 								to={'/login'}
 								onClick={onLogOut}>
-								Logout
+								{t('Logout')}
 							</NavLink>
 						) : (
 							<NavLink className='nav-link primary-link' to={'/login'}>
-								Login
+								{t('Login')}
 							</NavLink>
 						)}
 					</li>

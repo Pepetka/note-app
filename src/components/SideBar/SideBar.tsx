@@ -11,11 +11,13 @@ export const SideBar = () => {
 
 	return (
 		<div className={`sideBar ${collapsed ? 'sideBar_collapsed' : ''}`}>
-			<button
-				className={`sideBar__open ${collapsed ? 'sideBar__open_collapsed' : ''}`}
-				onClick={onCollapsed}>
-				<i className="fa-solid fa-arrow-right"></i>
-			</button>
+			<div>
+				<button
+					className={`sideBar__open ${collapsed ? 'sideBar__open_collapsed' : ''}`}
+					onClick={onCollapsed}>
+					<i className="fa-solid fa-arrow-up"></i>
+				</button>
+			</div>
 			<div className='sideBar__btn-group'>
 				<ThemeButton/>
 				<LocalizationButton />

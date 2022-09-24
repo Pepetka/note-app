@@ -11,6 +11,7 @@ import {setUser} from 'store/slices/userSlice';
 import {showAlert} from 'store/slices/alertSlice';
 import {NotesControlPanel} from 'components/NotesControlPanel/NotesControlPanel';
 import {ReloadTemplate} from 'components/ReloadTemplate/ReloadTemplate';
+import {useTranslation} from 'react-i18next';
 
 export const HomePage = () => {
 	const [handleSort, setHandleSort] = useState(false);
@@ -19,6 +20,7 @@ export const HomePage = () => {
 	const userId = useAppSelector((state) => state.user.user.id);
 	const navigate = useNavigate();
 	const {isAuth} = useAuth();
+	const {t} = useTranslation('home');
 
 	useEffect(() => {
 		if (isAuth) {
@@ -47,7 +49,7 @@ export const HomePage = () => {
 
 	return (
 		<div className='pb-5'>
-			<h1>Home Page</h1>
+			<h1>{t('Home Page')}</h1>
 			<NoteAddForm />
 			<NotesControlPanel notesLength={notes.length} handleSort={handleSort} onHandleSort={onHandleSort}/>
 			<Filters />
