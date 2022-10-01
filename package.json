@@ -9,7 +9,6 @@
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
-    "bootstrap": "^5.2.0",
     "firebaseui": "^6.0.1",
     "framer-motion": "^7.2.1",
     "i18next": "^21.9.2",
@@ -49,7 +48,10 @@
       "i18next"
     ],
     "rules": {
-      "linebreak-style": ["error", "windows"],
+      "linebreak-style": [
+        "error",
+        "unix"
+      ],
       "react/jsx-indent": [
         2,
         "tab"

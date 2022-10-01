@@ -12,11 +12,9 @@ export const App = () => {
 		<div className={`App ${theme}`}>
 			<NavBar />
 			<main>
-				<div className='container pt-4'>
-					<div className='note-app'>
-						<Alert />
-						<AppRouter/>
-					</div>
+				<div className='AppContainer'>
+					<Alert />
+					<AppRouter/>
 				</div>
 			</main>
 			<SideBar />

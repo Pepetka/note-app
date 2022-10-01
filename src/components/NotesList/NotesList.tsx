@@ -10,9 +10,10 @@ interface NotesListProps {
 export const NotesList = memo(({notes, handleSort}: NotesListProps) => {
 	return (
 		<>
-			{notes.map((note: Note, index: number) => (
-				<NotesItem note={note} index={index} key={note.id} handleSort={handleSort} />
-			))}
+			{notes
+				.map((note: Note, index: number) => (
+					<NotesItem note={note} index={index} key={note.id} handleSort={handleSort} />
+				))}
 		</>
 	);
 });

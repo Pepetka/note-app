@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from 'hooks/useRedux';
 import {NoteAddForm} from 'components/NoteAddForm/NoteAddForm';
 import {Loader} from 'components/Loader/Loader';
@@ -12,9 +12,10 @@ import {showAlert} from 'store/slices/alertSlice';
 import {NotesControlPanel} from 'components/NotesControlPanel/NotesControlPanel';
 import {ReloadTemplate} from 'components/ReloadTemplate/ReloadTemplate';
 import {useTranslation} from 'react-i18next';
+import {useHandleSort} from 'hooks/useHandleSort';
 
 export const HomePage = () => {
-	const [handleSort, setHandleSort] = useState(false);
+	const {handleSort} = useHandleSort();
 	const dispatch = useAppDispatch();
 	const {loading, notes, error} = useAppSelector((state) => state.firebase);
 	const userId = useAppSelector((state) => state.user.user.id);
@@ -39,24 +40,19 @@ export const HomePage = () => {
 		// eslint-disable-next-line
 	}, [error.update])
 
-	const onHandleSort = () => {
-		setHandleSort((handleSort) => !handleSort);
-	};
-
 	const onReload = () => {
 		dispatch(fetchNotes(userId!));
 	};
 
 	return (
-		<div className='pb-5'>
+		<>
 			<h1>{t('Home Page')}</h1>
 			<NoteAddForm />
-			<NotesControlPanel notesLength={notes.length} handleSort={handleSort} onHandleSort={onHandleSort}/>
+			<NotesControlPanel notesLength={notes.length}/>
 			<Filters />
-			{loading ? <Loader /> : <Notes handleSort={handleSort} />}
 			{error.get ? (
 				<ReloadTemplate onReload={onReload}/>
-			) : null}
-		</div>
+			) : loading ? <Loader /> : <Notes handleSort={handleSort} />}
+		</>
 	);
 };

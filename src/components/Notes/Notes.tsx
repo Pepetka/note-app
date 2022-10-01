@@ -1,21 +1,15 @@
 import {useAppDispatch, useAppSelector} from 'hooks/useRedux';
 import {sortNotes} from 'store/slices/firebaseSlice';
-import {Note} from 'types';
 import {DragDropContext, Droppable} from 'react-beautiful-dnd';
 import {NotesList} from 'components/NotesList/NotesList';
 import {useTranslation} from 'react-i18next';
+import {reorder} from 'helpers/reorder';
+
+import './Notes.scss';
 
 interface Prop {
 	handleSort: boolean
 }
-
-const reorder = (list: Array<Note>, startIndex: number, endIndex: number) => {
-	const result = Array.from(list);
-	const [removed] = result.splice(startIndex, 1);
-	result.splice(endIndex, 0, removed);
-
-	return result;
-};
 
 export const Notes = ({handleSort}: Prop) => {
 	const {notes} = useAppSelector((state) => state.firebase);
@@ -39,7 +33,7 @@ export const Notes = ({handleSort}: Prop) => {
 
 	if (notes.length < 1) {
 		return (
-			<div className='d-flex justify-content-center align-items-center flex-column'>
+			<div className='notes__empty'>
 				<h1>{t('There are no notes')}</h1>
 			</div>
 		);
@@ -49,7 +43,7 @@ export const Notes = ({handleSort}: Prop) => {
 		<DragDropContext onDragEnd={onDragEnd}>
 			<Droppable droppableId='droppable'>
 				{(provided) => (
-					<div {...provided.droppableProps} ref={provided.innerRef}>
+					<div className='notes' {...provided.droppableProps} ref={provided.innerRef}>
 						<NotesList notes={notes} handleSort={handleSort} />
 						{provided.placeholder}
 					</div>

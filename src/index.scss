@@ -1,10 +1,21 @@
-@import "bootstrap/scss/bootstrap";
 @import "./themes/index";
 
 * {
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
+	font-size: 16px;
+}
+
+ul,
+li,
+input {
+	margin: 0;
+	padding: 0;
+}
+
+button {
+	cursor: pointer;
 }
 
 body {
@@ -12,201 +23,42 @@ body {
 	overflow-y: scroll;
 }
 
-.note-app {
+.input {
+	width: 100%;
+	background: var(--bg-secondary-color);
+	padding: 7px;
+	color: var(--primary-color);
+	border: 2px solid var(--default-color);
+	border-radius: 5px;
+}
+
+.button {
+	background: var(--bg-primary-color);
+	border: 2px solid var(--default-color);
+	color: var(--primary-color);
+	padding: 7px;
+	border-radius: 5px;
+	white-space: nowrap;
+}
+
+.AppContainer {
 	width: 80%;
 	margin: 0 auto;
+	padding-top: 20px;
 }
 
 h1 {
 	text-align: center;
-}
-
-.sideBar {
-	position: fixed;
-	right: 20px;
-	bottom: 20px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	transition: all 0.3s linear;
-
-	&_collapsed {
-		bottom: -120px;
-	}
-
-	&__btn-group {
-		height: 120px;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		gap: 15px;
-	}
-
-	&__open {
-		width: 50px;
-		height: 50px;
-		text-align: center;
-		background: none;
-		color: var(--primary-color);
-		margin-bottom: 20px;
-		border-radius: 50%;
-		border: 1px solid var(--primary-color);
-		transform: rotateZ(180deg);
-
-		&_collapsed {
-			transform: rotateZ(0deg);
-		}
-	}
-}
-
-.theme-button {
-	margin-inline: auto;
-	width: 50px;
-	height: 50px;
-	border-radius: 50%;
-	border: 1px solid var(--primary-color);
-	box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.7);
-}
-
-.filter {
-	margin: 0 auto;
-	display: flex;
-	justify-content: space-between;
-	width: 400px;
-	max-width: 80%;
-}
-
-.note-hide {
-	display: none;
-}
-
-.controller-wrapper {
-	padding: 20px 0;
-}
-
-.sort-controller {
-	margin: 0;
-	position: relative;
-	display: flex;
-	justify-content: center;
-}
-
-.form-check {
-	display: flex;
-	justify-content: space-between;
-	width: 180px;
-}
-
-.btn-group > .btn,
-.btn-group-vertical > .btn {
-	flex: none;
-}
-
-.note {
-	cursor: grab;
-
-	strong {
-		margin-right: 1rem;
-	}
-
-	&__info {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		flex-direction: column;
-		margin: 0 auto;
-	}
-
-	&__disable {
-		strong {
-			text-decoration: line-through;
-		}
-	}
-
-	.btn-close {
-		padding-left: 50px;
-	}
+	margin-bottom: 10px;
+	font-size: 32px;
 }
 
 label {
 	cursor: pointer;
 }
 
-.btn:focus,
-.btn:active {
-	box-shadow: none !important;
-}
-
-.drag-ico {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	width: 30px;
-	height: 30px;
-	cursor: grab;
-	margin-left: 10px;
-	margin-right: 10px;
-}
-
-.bar {
-	background-color: gray;
-	width: 30px;
-	height: 4px;
-	border-radius: 2px;
-
-	&:nth-child(2) {
-		margin: 6px 0;
-	}
-}
-
-.active-visible {
-	transform: rotateZ(180deg);
-}
-
-[contenteditable]:empty::before {
-	content: attr(data-placeholder);
-	color: grey;
-	display: inline-block;
-}
-
 @media screen and (max-width: 768px) {
-	.note-app {
+	.AppContainer {
 		width: 100%;
-	}
-
-	.filter {
-		max-width: 100%;
-	}
-
-	.note {
-		padding: 0;
-		margin: 0;
-
-		&__info {
-			flex-direction: column;
-			margin: 0;
-		}
-
-		&__disable,
-		&__important {
-			padding: 0;
-			margin: 0;
-			text-align: center;
-			align-self: center;
-		}
-
-		strong {
-			margin: 0;
-			display: inline-block;
-			width: 170px;
-			text-align: center;
-		}
-
-		.btn-close {
-			padding: 0 10px;
-		}
 	}
 }

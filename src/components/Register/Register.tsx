@@ -1,14 +1,16 @@
 import {getAuth, createUserWithEmailAndPassword} from 'firebase/auth';
 import {useAppDispatch} from 'hooks/useRedux';
-import {useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {AuthForm} from 'components/AuthForm/AuthForm';
 import {setUser} from 'store/slices/userSlice';
 import {showAlert, hideAlert} from 'store/slices/alertSlice';
 import {toUpperFirs} from 'helpers/toUpperFirst';
+import {useTranslation} from 'react-i18next';
 
 export const Register = () => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
+	const {t} = useTranslation('auth');
 
 	const onShowAlert = (text: string) => {
 		dispatch(
@@ -59,5 +61,11 @@ export const Register = () => {
 			});
 	};
 
-	return <AuthForm title='Register' onSubmitForm={handleRegister} />;
+	return (
+		<div>
+			<AuthForm title='Register' onSubmitForm={handleRegister}/>
+			<p>
+				{t('Or')} <Link to='/login'>{t('login')}</Link>
+			</p>
+		</div>);
 };

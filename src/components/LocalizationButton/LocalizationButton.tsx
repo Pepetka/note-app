@@ -1,5 +1,7 @@
-import {useTranslation} from 'react-i18next';
 import {useEffect} from 'react';
+import {useTranslation} from 'react-i18next';
+
+import './LocalizationButton.scss';
 
 export const LocalizationButton = () => {
 	const {i18n} = useTranslation();
@@ -26,7 +28,7 @@ export const LocalizationButton = () => {
 	return (
 		<button
 			onClick={onChangeLang}
-			className='theme-button d-flex justify-content-center align-items-center secondary-bg secondary-text'
+			className='localizationButton'
 		>
 			{i18n.language}
 		</button>

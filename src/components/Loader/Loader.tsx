@@ -1,12 +1,13 @@
-import {useTranslation} from 'react-i18next';
+import './Loader.scss';
 
 export const Loader = () => {
-	const {t} = useTranslation();
-
 	return (
-		<div className='text-center'>
-			<div className='spinner-border primary-text' role='status'>
-				<span className='visually-hidden'>{t('Loading')}...</span>
+		<div className='loader'>
+			<div className="loader__wrapper">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
 			</div>
 		</div>
 	);

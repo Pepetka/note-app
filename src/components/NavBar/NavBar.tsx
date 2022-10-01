@@ -5,6 +5,8 @@ import {clearNotes} from 'store/slices/firebaseSlice';
 import {removeUser} from 'store/slices/userSlice';
 import {useTranslation} from 'react-i18next';
 
+import './NavBar.scss';
+
 export const NavBar = () => {
 	const dispatch = useAppDispatch();
 	const {isAuth} = useAuth();
@@ -17,36 +19,36 @@ export const NavBar = () => {
 	};
 
 	return (
-		<nav className='navbar navbar-expand d-flex justify-content-between primary-bg'>
-			<div className='container-fluid d-flex justify-content-between'>
-				<div className='d-flex justify-content-between'>
-					<div className='navbar-brand primary-text'>{t('Note App')}</div>
+		<nav className='navBar'>
+			<div className='navBar__wrapper'>
+				<div className='navBar__mainLinks'>
+					<div className='navBar__brand'>{t('Note App')}</div>
 
-					<ul className='navbar-nav'>
-						<li className='nav-item'>
-							<NavLink className='nav-link primary-link' to={'/'}>
+					<ul className='navBar__list'>
+						<li className='navBar__item'>
+							<NavLink className='navBar__link' to={'/'}>
 								{t('Home')}
 							</NavLink>
 						</li>
-						<li className='nav-item'>
-							<NavLink className='nav-link primary-link' to={'/about'}>
+						<li className='navBar__item'>
+							<NavLink className='navBar__link' to={'/about'}>
 								{t('About')}
 							</NavLink>
 						</li>
 					</ul>
 				</div>
 
-				<ul className='navbar-nav'>
-					<li className='nav-item'>
+				<ul className='navBar__list'>
+					<li className='navBar__item'>
 						{isAuth ? (
 							<NavLink
-								className='nav-link primary-link'
+								className='navBar__link'
 								to={'/login'}
 								onClick={onLogOut}>
 								{t('Logout')}
 							</NavLink>
 						) : (
-							<NavLink className='nav-link primary-link' to={'/login'}>
+							<NavLink className='navBar__link' to={'/login'}>
 								{t('Login')}
 							</NavLink>
 						)}

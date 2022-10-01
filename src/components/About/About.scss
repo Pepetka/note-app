@@ -1,0 +1,10 @@
+.about {
+	background-color: var(--bg-primary-color);
+	padding: 20px;
+	border: solid 1px var(--primary-color);
+	border-radius: 5px;
+
+	&__strong {
+		text-decoration: underline;
+	}
+}

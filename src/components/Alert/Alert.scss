@@ -1,0 +1,35 @@
+.appAlert {
+	width: 100%;
+	padding: 20px;
+	display: flex;
+	justify-content: space-between;
+	border-radius: 5px;
+
+	&_danger {
+		background-color: #ff7d7d;
+		color: #830000;
+	}
+
+	&_success {
+		background-color: #95ff7d;
+		color: #095600;
+	}
+
+	&_warning {
+		background-color: #fff47d;
+		color: #6c5f00;
+	}
+
+	&__close {
+		height: 30px;
+		width: 30px;
+		background: none;
+		border: none;
+		align-self: start;
+
+		&:hover {
+			border: 1px solid #720000;
+			border-radius: 5px;
+		}
+	}
+}

@@ -1,5 +1,5 @@
 import {useContext} from 'react';
-import {LOCAL_STORAGE_THEME_KEY, Theme, ThemeContext} from 'themes/context/ThemeContext';
+import {LOCAL_STORAGE_THEME_KEY, Theme, ThemeContext} from 'context/theme/ThemeContext';
 
 export interface ThemeHook {
 	theme: Theme

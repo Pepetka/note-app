@@ -5,12 +5,12 @@ import {LoginPage} from 'pages/LoginPage/LoginPage';
 import {RegisterPage} from 'pages/RegisterPage/RegisterPage';
 import {NotFoundPage} from '../../pages/NotFoundPage/NotFoundPage';
 
-const enum AppRoutes {
-	HOME = 'home',
-	ABOUT = 'about',
-	LOGIN = 'login',
-	REGISTER = 'register',
-	NOT_FOUND = 'not_found'
+const enum AppRoutes { // eslint-disable-line
+	HOME = 'home', // eslint-disable-line
+	ABOUT = 'about', // eslint-disable-line
+	LOGIN = 'login', // eslint-disable-line
+	REGISTER = 'register', // eslint-disable-line
+	NOT_FOUND = 'not_found' // eslint-disable-line
 }
 
 const routePaths: Record<AppRoutes, string> = {

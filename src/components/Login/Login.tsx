@@ -1,15 +1,19 @@
-import {getAuth, signInWithEmailAndPassword} from 'firebase/auth';
+import {getAuth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup} from 'firebase/auth';
 import {useAppDispatch} from 'hooks/useRedux';
-import {useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {AuthForm, SubmitArgs} from 'components/AuthForm/AuthForm';
 import {setUser} from 'store/slices/userSlice';
 import {showAlert, hideAlert} from 'store/slices/alertSlice';
 import {User} from 'types';
 import {toUpperFirs} from 'helpers/toUpperFirst';
+import {useTranslation} from 'react-i18next';
+
+import './Login.scss';
 
 export const Login = () => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
+	const {t} = useTranslation('auth');
 
 	const onShowAlert = (text: string) => {
 		dispatch(
@@ -50,5 +54,47 @@ export const Login = () => {
 			});
 	};
 
-	return <AuthForm title='Login' onSubmitForm={handleLogin} />;
+	const onLogin = () => {
+		const provider = new GoogleAuthProvider();
+		const auth = getAuth();
+
+		signInWithPopup(auth, provider)
+			.then((result) => {
+				const user: User = {
+					id: result!.user.uid,
+					token: result!.user.refreshToken,
+					email: result!.user.email,
+				};
+
+				dispatch(setUser(user));
+
+				localStorage.setItem('user', JSON.stringify(user));
+
+				navigate('/');
+			})
+			.catch((error) => {
+				dispatch(
+					showAlert({
+						message: error.message,
+						alertType: 'danger',
+					}),
+				);
+			});
+	};
+
+	return (
+		<div className='login'>
+			<AuthForm title='Login' onSubmitForm={handleLogin}/>
+			<p>
+				{t('Or')} <Link to='/register'>{t('register')}</Link>
+			</p>
+
+			<button
+				onClick={onLogin}
+				type='button'
+				className='button login__button'
+			>
+				{t('Login with Google')}
+			</button>
+		</div>);
 };

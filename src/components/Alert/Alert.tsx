@@ -3,6 +3,8 @@ import {hideAlert} from 'store/slices/alertSlice';
 import {useAppDispatch, useAppSelector} from 'hooks/useRedux';
 import {useTranslation} from 'react-i18next';
 
+import './Alert.scss';
+
 export const Alert = () => {
 	const dispatch = useAppDispatch();
 	const {type, visible, text} = useAppSelector((store) => store.alert);
@@ -26,15 +28,16 @@ export const Alert = () => {
 	return (
 		<AnimatePresence>
 			{visible ? (
-				<motion.div {...variants} className={`alert alert-${type} alert-dismissible`}>
-					<strong>{t('Attention')}</strong>
-					<br />
-					{text}
+				<motion.div {...variants} className={`appAlert appAlert_${type}`}>
+					<div><strong className='appAlert__attention'>{t('Attention')}</strong>
+						<br/>
+						<div className='appAlert__text'>{text}</div>
+					</div>
 					<button
 						onClick={() => dispatch(hideAlert())}
 						type='button'
-						className='btn-close'
-					></button>
+						className='appAlert__close'
+					><i className="fa-solid fa-xmark"></i></button>
 				</motion.div>
 			) : null}
 		</AnimatePresence>

@@ -1,0 +1,140 @@
+.note {
+	cursor: grab;
+	background: var(--bg-secondary-color);
+	border-radius: 10px;
+
+	&_hide {
+		display: none;
+	}
+
+	&_disable {
+		background: var(--bg-default-color);
+
+		.note__title {
+			text-decoration: line-through;
+		}
+	}
+
+	&_important {
+		background: var(--bg-primary-color);
+	}
+
+	&__wrapper {
+		display: flex;
+		align-items: center;
+		margin-inline: auto;
+		padding: 10px;
+	}
+
+	&__buttonGroup {
+		display: flex;
+		flex: 1 1 0;
+		justify-content: start;
+	}
+
+	&__info {
+		flex: 1 1 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		margin: 0 auto;
+	}
+
+	&__delete {
+		flex: 1 1 0;
+		display: flex;
+		justify-content: end;
+	}
+
+	&__date {
+		color: var(--secondary-color);
+	}
+
+	&__button {
+		background: none;
+		color: var(--secondary-color);
+		border: none;
+		width: 50px;
+		height: 50px;
+
+		&:hover {
+			border: 1px solid var(--primary-color);
+			border-radius: 5px;
+		}
+
+		&_disable {
+			color: var(--primary-color);
+		}
+
+		&_important {
+			color: red;
+		}
+
+		&_canText {
+			color: var(--primary-color);
+		}
+
+		&_save {
+			color: var(--primary-color);
+		}
+
+		&_delete {
+			color: red;
+		}
+
+		&_collapse {
+			width: 100%;
+		}
+
+		&_open {
+			transform: rotateZ(180deg);
+		}
+	}
+
+	&__collapse {
+		width: 100%;
+		text-align: center;
+	}
+
+	.content {
+		display: flex;
+		gap: 20px;
+		justify-content: space-between;
+		padding: 10px;
+
+		&__input {
+			flex: 1 1;
+			padding: 10px;
+		}
+
+		&__control {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-end;
+			justify-content: end;
+		}
+	}
+}
+
+[contenteditable]:empty::before {
+	content: attr(data-placeholder);
+	color: var(--secondary-color);
+	display: inline-block;
+}
+
+@media screen and (max-width: 768px) {
+	.note {
+		padding: 0;
+		margin: 0;
+
+		&__title {
+			width: 170px;
+			text-align: center;
+		}
+
+		.btn-close {
+			padding: 0 10px;
+		}
+	}
+}

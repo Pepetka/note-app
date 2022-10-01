@@ -3,6 +3,8 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import {useTranslation} from 'react-i18next';
 
+import './AuthForm.scss';
+
 export interface SubmitArgs {
 	email: string
 	password: string
@@ -15,15 +17,22 @@ interface AuthFormProps {
 }
 
 const schema = yup
-	.object({
-		email: yup.string().email().required(),
-		password: yup.string().min(6).required(),
+	.object().shape({
+		email: yup
+			.string()
+			.required('Required field')
+			.email('Email must be a valid email'),
+		password: yup
+			.string()
+			.required('Required field')
+			.min(6, 'Password must be at least 6 characters'),
 		rememberMe: yup.boolean(),
 	})
 	.required();
 
 export const AuthForm = ({title, onSubmitForm}: AuthFormProps) => {
 	const {t} = useTranslation('auth');
+
 	const {
 		register,
 		handleSubmit,
@@ -35,49 +44,59 @@ export const AuthForm = ({title, onSubmitForm}: AuthFormProps) => {
 	const onSubmit: SubmitHandler<SubmitArgs> = (data) => onSubmitForm(data);
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)} noValidate>
-			<div className='mb-3'>
-				<label htmlFor='form-email' className='form-label'>
+		<form className='authForm' onSubmit={handleSubmit(onSubmit)} noValidate>
+			<div className='authForm__inputGroup'>
+				<label htmlFor='form-email' className='authForm__label'>
 					{t('Email address')}
 				</label>
 				<input
 					{...register('email')}
 					type='email'
-					className='form-control secondary-bg primary-text'
+					className='input authForm__input'
 					id='form-email'
 					placeholder='name@example.com'
 				/>
-				{errors.email && <div className='form-text text-danger mt-2'>
-					{errors.email?.message}
-				</div>}
+				{errors.email && (
+					<ErrorMessage errorMessage={errors.email.message!}/>
+				)}
 			</div>
-			<div className='mb-3'>
-				<label htmlFor='form-password' className='form-label'>
+			<div className='authForm__inputGroup'>
+				<label htmlFor='form-password' className='authForm__label'>
 					{t('Password')}
 				</label>
 				<input
 					{...register('password')}
 					type='password'
-					className='form-control secondary-bg primary-text'
+					className='input authForm__input'
 					id='form-password'
 				/>
 				{errors.password && (
-					<div className='form-text text-danger mt-2'>{errors.password?.message}</div>
+					<ErrorMessage errorMessage={errors.password.message!}/>
 				)}
 			</div>
-			<div className='mb-3 form-check'>
-				<label className='form-check-label'>
+			<div className='authForm__inputGroupCheck'>
+				<label className='authForm__labelCheck'>
 					<input
 						{...register('rememberMe')}
 						type='checkbox'
-						className='form-check-input secondary-bg'
+						className='authForm__inputCheck'
 					/>
 					{t('Remember me')}
 				</label>
 			</div>
-			<button type='submit' className='btn btn-outline-primary primary-bg primary-text'>
+			<button type='submit' className='button authForm__button'>
 				{t(title)}
 			</button>
 		</form>
+	);
+};
+
+const ErrorMessage = ({errorMessage}: { errorMessage: string }) => {
+	const {t} = useTranslation('auth');
+
+	return (
+		<div className='authForm__error'>
+			{t(errorMessage)}
+		</div>
 	);
 };

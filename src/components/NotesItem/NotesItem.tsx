@@ -5,6 +5,8 @@ import {MouseEvent, useEffect, useRef, useState} from 'react';
 import {Draggable} from 'react-beautiful-dnd';
 import {useTranslation} from 'react-i18next';
 
+import './NotesItem.scss';
+
 interface NotesItemProps {
 	note: Note
 	handleSort: boolean
@@ -67,26 +69,19 @@ export const NotesItem = ({note, handleSort, index}: NotesItemProps) => {
 	};
 
 	const getNoteClasses = () => {
-		let noteClass = 'note list-group-item w-100 border-bottom border-secondary';
+		let noteClass = 'note';
 		noteClass = note.isDisable ?
-			noteClass + ' note__disable default-bg' :
+			noteClass + ' note_disable' :
 			note.isImportant ?
-				noteClass + ' primary-bg' :
-				noteClass + ' secondary-bg';
+				noteClass + ' note_important' :
+				noteClass + '';
 
-		if (
-			(filter === 'isDisable' && !note.isDisable) ||
+		if ((filter === 'isDisable' && !note.isDisable) ||
 			(filter === 'active' && note.isDisable) ||
-			(filter === 'isImportant' && !note.isImportant)
-		) {
-			return 'note-hide';
-		}
+			(filter === 'isImportant' && !note.isImportant)) return 'note_hide';
 
 		return noteClass;
 	};
-
-	const importantClass = note.isImportant ? 'text-danger fw-bold' : 'text-secondary';
-	const disableClass = note.isDisable ? 'text-dark fw-bold' : 'text-secondary';
 
 	return (
 		<Draggable draggableId={note.id!} index={index} isDragDisabled={!handleSort}>
@@ -96,36 +91,36 @@ export const NotesItem = ({note, handleSort, index}: NotesItemProps) => {
 					{...provided.draggableProps}
 					{...provided.dragHandleProps}>
 					<div className={getNoteClasses()}>
-						<div className='row container-fluid w-100 ms-auto me-auto'>
-							<div className='col-4 d-flex justify-content-start align-items-center'>
-								<div className='form-check form-check-inline p-0 note__disable'>
+						<div className='note__wrapper'>
+							<div className='note__buttonGroup'>
+								<div className='note__buttonDisable'>
 									<button
 										onClick={(e) => onDisableNote(e, note.id!)}
-										className={'btn ' + disableClass}
+										className={`note__button ${note.isDisable ? 'note__button_disable' : ''}`}
 									>
 										<i className='fa-solid fa-eye-slash'></i>
 									</button>
 								</div>
-								<div className='form-check form-check-inline note__important'>
+								<div className='note__buttonImportant'>
 									<button
 										onClick={(e) => onImportantNote(e, note.id!)}
-										className={'btn ' + importantClass}
+										className={`note__button ${note.isImportant ? 'note__button_important' : ''}`}
 									>
 										<i className='fa-solid fa-circle-exclamation'></i>
 									</button>
 								</div>
 							</div>
 
-							<div className='note__info col-4 text-center'>
-								<strong className='m-0 primary-text'>{note.title}</strong>
-								<small className='secondary-text'>{note.date}</small>
+							<div className='note__info'>
+								<strong className='note__title'>{note.title}</strong>
+								<small className='note__date'>{note.date}</small>
 							</div>
 
-							<div className='col-4 d-flex justify-content-end'>
+							<div className='note__delete'>
 								<button
 									onClick={(e) => onRemoveNote(e, note.id!)}
 									type='button'
-									className='btn text-danger'
+									className='note__button note__button_delete'
 								>
 									<i className='fa-solid fa-trash-can'></i>
 								</button>
@@ -133,30 +128,26 @@ export const NotesItem = ({note, handleSort, index}: NotesItemProps) => {
 						</div>
 
 						{contentVisibility && (
-							<div className='note__content w-100 pt-4 pb-2 text-dark row container-fluid ms-auto me-auto align-items-start'>
-								<div className='col-2'></div>
+							<div className='content'>
+								<div
+									ref={inputRef}
+									contentEditable={canText}
+									data-placeholder={t('Add text')}
+									className={`content__input`}
+								></div>
 
-								<div className='ms-auto me-auto col-8'>
-									<div
-										ref={inputRef}
-										contentEditable={canText}
-										data-placeholder={t('Add text')}
-										className={`p-2 primary-text${canText ? ' border border-secondary' : ''}`}
-									></div>
-								</div>
-
-								<div className='d-flex flex-column align-items-end col-2'>
+								<div className='content__control'>
 									<div>
 										<button
 											onClick={onTextNote}
-											className={`btn ${canText ? 'primary-text' : 'secondary-text'}`}
+											className={`note__button ${canText ? 'note__button_canText' : ''}`}
 										>
 											<i className='fa-solid fa-pen-clip'></i>
 										</button>
 									</div>
 
 									<div>
-										<button onClick={() => onContentSave(note.id!)} className='btn primary-text'>
+										<button onClick={() => onContentSave(note.id!)} className={`note__button note__button_save`}>
 											<i className='fa-solid fa-floppy-disk'></i>
 										</button>
 									</div>
@@ -164,10 +155,12 @@ export const NotesItem = ({note, handleSort, index}: NotesItemProps) => {
 							</div>
 						)}
 
-						<div className='text-center'>
-							<button className='btn text-secondary w-100' onClick={(e) => onChangeVisibility(e)}>
+						<div className='note__collapse'>
+							<button
+								className={`note__button note__button_collapse ${contentVisibility ? 'note__button_open' : ''}`}
+								onClick={(e) => onChangeVisibility(e)}>
 								<i
-									className={`fa-solid fa-sort-down${contentVisibility ? ' active-visible' : ''}`}
+									className={`fa-solid fa-sort-down`}
 								></i>
 							</button>
 						</div>

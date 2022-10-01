@@ -17,7 +17,7 @@ type ThunkApi = {
 
 export const fetchNotes = createAsyncThunk<Note[], string, ThunkApi>(
 	'firebase/fetchNotes',
-	async (userId, {rejectWithValue, fulfillWithValue}) => {
+	async (userId, {rejectWithValue}) => {
 		try {
 			const dbRef = ref(database);
 			const response: { exists: () => boolean; val: () => { [id: string]: Note } } = await get(

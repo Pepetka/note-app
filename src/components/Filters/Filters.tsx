@@ -2,6 +2,8 @@ import {useAppDispatch, useAppSelector} from 'hooks/useRedux';
 import {changeFilter} from 'store/slices/firebaseSlice';
 import {useTranslation} from 'react-i18next';
 
+import './Filters.scss';
+
 const buttons = [
 	{name: 'Active', data: 'active'},
 	{name: 'Important', data: 'isImportant'},
@@ -19,10 +21,10 @@ export const Filters = () => {
 	};
 
 	return (
-		<div className='filter mb-3'>
+		<div className='filter'>
 			{buttons.map((el) => {
-				const btnClasses = `btn btn-outline-primary ${filter === el.data ? 'primary-bg primary-text' :
-					'secondary-bg secondary-text'}`;
+				const btnClasses = `button filter__button ${filter === el.data ? 'filter__button_active' :
+					''}`;
 
 				return (
 					<button
