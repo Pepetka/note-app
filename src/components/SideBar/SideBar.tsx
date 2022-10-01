@@ -13,19 +13,24 @@ export const SideBar = () => {
 	};
 
 	return (
-		<div className={`sideBar ${collapsed ? 'sideBar_collapsed' : ''}`}>
-			<div>
-				<button
-					className={`sideBar__open ${collapsed ? 'sideBar__open_collapsed' : ''}`}
-					onClick={onCollapsed}>
-					<i className="fa-solid fa-arrow-up"></i>
-				</button>
+		<div className='sideBar'>
+			<div className={`sideBar__button ${collapsed ? 'sideBar__button_collapsed' : ''}`}>
+				<ThemeButton />
 			</div>
-			<div className='sideBar__btnGroup'>
-				<ThemeButton/>
+
+			<div className={`sideBar__button ${collapsed ? 'sideBar__button_collapsed' : ''}`}>
 				<LocalizationButton />
+			</div>
+
+			<div className={`sideBar__button ${collapsed ? 'sideBar__button_collapsed' : ''}`}>
 				<HandleSortButton />
 			</div>
+
+			<button
+				className={`sideBar__open ${collapsed ? 'sideBar__open_collapsed' : ''}`}
+				onClick={onCollapsed}>
+				<i className="fa-solid fa-xmark"></i>
+			</button>
 		</div>
 	);
 };
