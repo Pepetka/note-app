@@ -5,7 +5,7 @@ import {RootState} from 'store';
 import {Note, FirebaseState} from 'types';
 import {showAlert} from './alertSlice';
 import {database} from '../../firebase';
-import {withoutId} from 'helpers/withoutId';
+import {withoutId} from 'helpers/withoutId/withoutId';
 
 const url = process.env.REACT_APP_DB_URL;
 

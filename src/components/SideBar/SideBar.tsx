@@ -2,7 +2,7 @@ import {useState} from 'react';
 import {ThemeButton} from 'components/ThemeButton/ThemeButton';
 import {LocalizationButton} from 'components/LocalizationButton/LocalizationButton';
 import {HandleSortButton} from 'components/HandleSortButton/HandleSortButton';
-import {classNames} from 'helpers/classNames';
+import {classNames} from 'helpers/classNames/classNames';
 
 import cls from './SideBar.module.scss';
 
@@ -14,7 +14,7 @@ export const SideBar = () => {
 	};
 
 	return (
-		<div className={classNames([cls.SideBar], {[cls.collapsed]: collapsed})}>
+		<div data-testid='SideBar' className={classNames([cls.SideBar], {[cls.collapsed]: collapsed})}>
 			<div className={cls.button}>
 				<ThemeButton />
 			</div>
@@ -28,6 +28,7 @@ export const SideBar = () => {
 			</div>
 
 			<button
+				data-testid='SideBar-collapse'
 				className={cls.open}
 				onClick={onCollapsed}>
 				<i className="fa-solid fa-xmark"></i>

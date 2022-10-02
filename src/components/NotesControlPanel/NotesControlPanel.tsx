@@ -1,6 +1,6 @@
 import {useTranslation} from 'react-i18next';
 import {useHandleSort} from 'hooks/useHandleSort';
-import {classNames} from 'helpers/classNames';
+import {classNames} from 'helpers/classNames/classNames';
 
 import cls from './NotesControlPanel.module.scss';
 

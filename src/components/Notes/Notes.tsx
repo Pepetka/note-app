@@ -3,7 +3,7 @@ import {sortNotes} from 'store/slices/firebaseSlice';
 import {DragDropContext, Droppable} from 'react-beautiful-dnd';
 import {NotesList} from 'components/NotesList/NotesList';
 import {useTranslation} from 'react-i18next';
-import {reorder} from 'helpers/reorder';
+import {reorder} from 'helpers/reorder/reorder';
 
 import cls from './Notes.module.scss';
 

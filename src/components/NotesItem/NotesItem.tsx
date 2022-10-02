@@ -4,7 +4,7 @@ import {Note} from 'types';
 import {MouseEvent, useEffect, useRef, useState} from 'react';
 import {Draggable} from 'react-beautiful-dnd';
 import {useTranslation} from 'react-i18next';
-import {classNames} from 'helpers/classNames';
+import {classNames} from 'helpers/classNames/classNames';
 import {Button, ButtonThemes} from 'components/lib/Button/Button';
 
 import cls from './NotesItem.module.scss';

@@ -1,5 +1,5 @@
 import {MouseEvent, ReactNode} from 'react';
-import {classNames} from 'helpers/classNames';
+import {classNames} from 'helpers/classNames/classNames';
 
 import cls from './Button.module.scss';
 

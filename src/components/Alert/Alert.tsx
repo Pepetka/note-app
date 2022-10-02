@@ -2,7 +2,7 @@ import {AnimatePresence, motion} from 'framer-motion';
 import {hideAlert} from 'store/slices/alertSlice';
 import {useAppDispatch, useAppSelector} from 'hooks/useRedux';
 import {useTranslation} from 'react-i18next';
-import {classNames} from 'helpers/classNames';
+import {classNames} from 'helpers/classNames/classNames';
 import {Button, ButtonThemes} from 'components/lib/Button/Button';
 
 import cls from './Alert.module.scss';

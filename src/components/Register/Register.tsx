@@ -4,7 +4,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import {AuthForm} from 'components/AuthForm/AuthForm';
 import {setUser} from 'store/slices/userSlice';
 import {showAlert, hideAlert} from 'store/slices/alertSlice';
-import {toUpperFirs} from 'helpers/toUpperFirst';
+import {toUpperFirs} from 'helpers/toUpperFirst/toUpperFirst';
 import {useTranslation} from 'react-i18next';
 
 import cls from './Register.module.scss';

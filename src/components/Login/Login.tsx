@@ -5,7 +5,7 @@ import {AuthForm, SubmitArgs} from 'components/AuthForm/AuthForm';
 import {setUser} from 'store/slices/userSlice';
 import {hideAlert, showAlert} from 'store/slices/alertSlice';
 import {User} from 'types';
-import {toUpperFirs} from 'helpers/toUpperFirst';
+import {toUpperFirs} from 'helpers/toUpperFirst/toUpperFirst';
 import {useTranslation} from 'react-i18next';
 
 import cls from './Login.module.scss';
