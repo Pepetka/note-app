@@ -1,0 +1,11 @@
+.AppContainer {
+	width: 80%;
+	margin: 0 auto;
+	padding-top: 20px;
+}
+
+@media screen and (max-width: 768px) {
+	.AppContainer {
+		width: 90%;
+	}
+}

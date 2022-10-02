@@ -7,6 +7,8 @@ import {showAlert, hideAlert} from 'store/slices/alertSlice';
 import {toUpperFirs} from 'helpers/toUpperFirst';
 import {useTranslation} from 'react-i18next';
 
+import cls from './Register.module.scss';
+
 export const Register = () => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
@@ -62,7 +64,7 @@ export const Register = () => {
 	};
 
 	return (
-		<div>
+		<div className={cls.Register}>
 			<AuthForm title='Register' onSubmitForm={handleRegister}/>
 			<p>
 				{t('Or')} <Link to='/login'>{t('login')}</Link>

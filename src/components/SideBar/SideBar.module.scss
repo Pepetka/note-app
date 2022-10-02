@@ -1,0 +1,61 @@
+.SideBar {
+	position: fixed;
+	right: 20px;
+	bottom: 20px;
+}
+
+.button {
+	position: fixed;
+	transform: rotateZ(0deg);
+	transition: 0.3s all ease-out;
+
+	&:nth-child(1) {
+		right: 10px;
+		bottom: 90px;
+	}
+
+	&:nth-child(2) {
+		right: 90px;
+		bottom: 10px;
+	}
+
+	&:nth-child(3) {
+		right: 68px;
+		bottom: 68px;
+	}
+}
+
+.open {
+	width: 50px;
+	height: 50px;
+	text-align: center;
+	color: var(--primary-color);
+	background: var(--bg-default-color);
+	border-radius: 50%;
+	border: 1px solid var(--primary-color);
+	transform: rotateZ(0deg);
+	transition: 0.2s all linear;
+}
+
+.collapsed .open {
+	transform: rotateZ(45deg);
+}
+
+.collapsed .button {
+	transform: rotateZ(120deg);
+
+	&:nth-child(1) {
+		right: 20px;
+		bottom: 20px;
+	}
+
+	&:nth-child(2) {
+		right: 20px;
+		bottom: 20px;
+	}
+
+	&:nth-child(3) {
+		right: 20px;
+		bottom: 20px;
+	}
+}

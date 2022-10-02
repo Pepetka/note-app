@@ -1,20 +1,19 @@
 import {useTheme} from 'hooks/useTheme';
-
-import './ThemeButton.scss';
+import {Button, ButtonThemes} from 'components/lib/Button/Button';
 
 export const ThemeButton = () => {
 	const {theme, onThemeChange} = useTheme();
 
 	return (
-		<button
+		<Button
 			onClick={onThemeChange}
-			className='themeButton'
+			theme={ButtonThemes.CIRCLE}
 		>
 			{theme === 'dark' ? (
 				<i className='fa-solid fa-moon'></i>
 			) : (
 				<i className='fa-solid fa-sun'></i>
 			)}
-		</button>
+		</Button>
 	);
 };

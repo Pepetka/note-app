@@ -1,10 +1,12 @@
 import {ChangeEvent, MouseEvent, useState} from 'react';
-import {showAlert, hideAlert} from 'store/slices/alertSlice';
+import {hideAlert, showAlert} from 'store/slices/alertSlice';
 import {addNote} from 'store/slices/firebaseSlice';
 import {useAppDispatch} from 'hooks/useRedux';
 import {useTranslation} from 'react-i18next';
+import {Button, ButtonThemes} from 'components/lib/Button/Button';
+import {Input} from 'components/lib/Input/Input';
 
-import './NoteAddForm.scss';
+import cls from './NoteAddForm.module.scss';
 
 export const NoteAddForm = () => {
 	const [value, setValue] = useState('');
@@ -47,30 +49,33 @@ export const NoteAddForm = () => {
 	};
 
 	return (
-		<form className='noteAddForm'>
-			<input
+		<form className={cls.NoteAddForm}>
+			<Input
 				value={value}
-				onChange={(e) => onValueChange(e)}
-				type='text'
-				className='input noteAddForm__input'
+				onChange={onValueChange}
+				className={cls.input}
 				placeholder={t('Enter note title')}
 			/>
-			<button
-				onClick={(e) => onChecked(e)}
-				className={`button noteAddForm__important ${
-					isChecked ? 'noteAddForm__important_active' : ''
-				}`}
+			<Button
+				onClick={onChecked}
+				className={cls.important}
+				corners
+				border={false}
+				active={isChecked}
+				theme={ButtonThemes.SECONDARY}
 				type='button'
 			>
 				<i className="fa-solid fa-exclamation"></i>
-			</button>
-			<button
-				onClick={(e) => submitHandler(e)}
-				className='button noteAddForm__button'
+			</Button>
+			<Button
+				onClick={submitHandler}
+				className={cls.button}
+				corners
+				theme={ButtonThemes.PRIMARY}
 				type='submit'
 			>
 				{t('Add Note')}
-			</button>
+			</Button>
 		</form>
 	);
 };

@@ -1,9 +1,10 @@
 import {useState} from 'react';
 import {ThemeButton} from 'components/ThemeButton/ThemeButton';
 import {LocalizationButton} from 'components/LocalizationButton/LocalizationButton';
+import {HandleSortButton} from 'components/HandleSortButton/HandleSortButton';
+import {classNames} from 'helpers/classNames';
 
-import './SideBar.scss';
-import {HandleSortButton} from '../HandleSortButton/HandleSortButton';
+import cls from './SideBar.module.scss';
 
 export const SideBar = () => {
 	const [collapsed, setCollapsed] = useState(true);
@@ -13,21 +14,21 @@ export const SideBar = () => {
 	};
 
 	return (
-		<div className='sideBar'>
-			<div className={`sideBar__button ${collapsed ? 'sideBar__button_collapsed' : ''}`}>
+		<div className={classNames([cls.SideBar], {[cls.collapsed]: collapsed})}>
+			<div className={cls.button}>
 				<ThemeButton />
 			</div>
 
-			<div className={`sideBar__button ${collapsed ? 'sideBar__button_collapsed' : ''}`}>
+			<div className={cls.button}>
 				<LocalizationButton />
 			</div>
 
-			<div className={`sideBar__button ${collapsed ? 'sideBar__button_collapsed' : ''}`}>
+			<div className={cls.button}>
 				<HandleSortButton />
 			</div>
 
 			<button
-				className={`sideBar__open ${collapsed ? 'sideBar__open_collapsed' : ''}`}
+				className={cls.open}
 				onClick={onCollapsed}>
 				<i className="fa-solid fa-xmark"></i>
 			</button>

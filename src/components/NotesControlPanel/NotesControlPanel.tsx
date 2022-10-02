@@ -1,6 +1,8 @@
 import {useTranslation} from 'react-i18next';
-import './NotesControlPanel.scss';
 import {useHandleSort} from 'hooks/useHandleSort';
+import {classNames} from 'helpers/classNames';
+
+import cls from './NotesControlPanel.module.scss';
 
 interface NotesControlPanelProps {
 	notesLength: number
@@ -10,13 +12,13 @@ export const NotesControlPanel = ({notesLength}: NotesControlPanelProps) => {
 	const {handleSort, onHandleSort} = useHandleSort();
 
 	return (
-		<div className='controlPanel'>
-			<div className='controlPanel__notesNumber'>{t('Number of notes')} {notesLength}</div>
-			<div className='controlPanel__wrapper'>
-				<label className='controlPanel__label' onClick={onHandleSort}>
+		<div className={cls.ControlPanel}>
+			<div>{t('Number of notes')} {notesLength}</div>
+			<div className={cls.wrapper}>
+				<label onClick={onHandleSort}>
 					{t('Handle Sort')}
 				</label>
-				<span className={`controlPanel__switcher ${handleSort ? 'controlPanel__switcher_active' : ''}`} onClick={onHandleSort}/>
+				<span className={classNames([cls.switcher], {[cls.active]: handleSort})} onClick={onHandleSort}/>
 			</div>
 		</div>
 	);

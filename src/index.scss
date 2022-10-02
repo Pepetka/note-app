@@ -23,30 +23,6 @@ body {
 	overflow-y: scroll;
 }
 
-.input {
-	width: 100%;
-	background: var(--bg-secondary-color);
-	padding: 7px;
-	color: var(--primary-color);
-	border: 2px solid var(--default-color);
-	border-radius: 5px;
-}
-
-.button {
-	background: var(--bg-primary-color);
-	border: 2px solid var(--default-color);
-	color: var(--primary-color);
-	padding: 7px;
-	border-radius: 5px;
-	white-space: nowrap;
-}
-
-.AppContainer {
-	width: 80%;
-	margin: 0 auto;
-	padding-top: 20px;
-}
-
 h1 {
 	text-align: center;
 	margin-bottom: 10px;
@@ -55,10 +31,4 @@ h1 {
 
 label {
 	cursor: pointer;
-}
-
-@media screen and (max-width: 768px) {
-	.AppContainer {
-		width: 90%;
-	}
 }

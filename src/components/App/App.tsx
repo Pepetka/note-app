@@ -5,6 +5,8 @@ import {useTheme} from 'hooks/useTheme';
 import {AppRouter} from 'components/AppRouter/AppRouter';
 import {SideBar} from 'components/SideBar/SideBar';
 
+import cls from './App.module.scss';
+
 export const App = () => {
 	const {theme} = useTheme();
 
@@ -12,7 +14,7 @@ export const App = () => {
 		<div className={`App ${theme}`}>
 			<NavBar />
 			<main>
-				<div className='AppContainer'>
+				<div className={cls.AppContainer}>
 					<Alert />
 					<AppRouter/>
 				</div>

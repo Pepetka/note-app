@@ -1,0 +1,36 @@
+.AuthForm {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 10px;
+}
+
+.inputGroup {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.inputGroupCheck {
+	display: flex;
+	justify-content: flex-start;
+}
+
+.inputCheck {
+	margin-right: 5px;
+}
+
+.button {
+	margin-bottom: 10px;
+	min-width: 100px;
+}
+
+.error {
+	color: red;
+	margin-top: 5px;
+
+	&::first-letter {
+		text-transform: uppercase;
+	}
+}

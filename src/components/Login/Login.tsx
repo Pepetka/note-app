@@ -3,12 +3,13 @@ import {useAppDispatch} from 'hooks/useRedux';
 import {Link, useNavigate} from 'react-router-dom';
 import {AuthForm, SubmitArgs} from 'components/AuthForm/AuthForm';
 import {setUser} from 'store/slices/userSlice';
-import {showAlert, hideAlert} from 'store/slices/alertSlice';
+import {hideAlert, showAlert} from 'store/slices/alertSlice';
 import {User} from 'types';
 import {toUpperFirs} from 'helpers/toUpperFirst';
 import {useTranslation} from 'react-i18next';
 
-import './Login.scss';
+import cls from './Login.module.scss';
+import {Button, ButtonThemes} from '../lib/Button/Button';
 
 export const Login = () => {
 	const dispatch = useAppDispatch();
@@ -83,18 +84,18 @@ export const Login = () => {
 	};
 
 	return (
-		<div className='login'>
+		<div className={cls.Login}>
 			<AuthForm title='Login' onSubmitForm={handleLogin}/>
 			<p>
 				{t('Or')} <Link to='/register'>{t('register')}</Link>
 			</p>
 
-			<button
+			<Button
 				onClick={onLogin}
-				type='button'
-				className='button login__button'
+				theme={ButtonThemes.PRIMARY}
+				className={cls.button}
 			>
 				{t('Login with Google')}
-			</button>
+			</Button>
 		</div>);
 };

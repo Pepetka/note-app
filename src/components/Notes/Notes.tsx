@@ -5,7 +5,7 @@ import {NotesList} from 'components/NotesList/NotesList';
 import {useTranslation} from 'react-i18next';
 import {reorder} from 'helpers/reorder';
 
-import './Notes.scss';
+import cls from './Notes.module.scss';
 
 interface Prop {
 	handleSort: boolean
@@ -33,7 +33,7 @@ export const Notes = ({handleSort}: Prop) => {
 
 	if (notes.length < 1) {
 		return (
-			<div className='notes__empty'>
+			<div className={cls.empty}>
 				<h1>{t('There are no notes')}</h1>
 			</div>
 		);
@@ -43,7 +43,7 @@ export const Notes = ({handleSort}: Prop) => {
 		<DragDropContext onDragEnd={onDragEnd}>
 			<Droppable droppableId='droppable'>
 				{(provided) => (
-					<div className='notes' {...provided.droppableProps} ref={provided.innerRef}>
+					<div className={cls.Notes} {...provided.droppableProps} ref={provided.innerRef}>
 						<NotesList notes={notes} handleSort={handleSort} />
 						{provided.placeholder}
 					</div>

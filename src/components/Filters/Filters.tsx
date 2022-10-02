@@ -1,8 +1,9 @@
 import {useAppDispatch, useAppSelector} from 'hooks/useRedux';
 import {changeFilter} from 'store/slices/firebaseSlice';
 import {useTranslation} from 'react-i18next';
+import {Button, ButtonThemes} from 'components/lib/Button/Button';
 
-import './Filters.scss';
+import cls from './Filters.module.scss';
 
 const buttons = [
 	{name: 'Active', data: 'active'},
@@ -21,20 +22,17 @@ export const Filters = () => {
 	};
 
 	return (
-		<div className='filter'>
+		<div className={cls.Filter}>
 			{buttons.map((el) => {
-				const btnClasses = `button filter__button ${filter === el.data ? 'filter__button_active' :
-					''}`;
-
 				return (
-					<button
+					<Button
 						key={el.data}
-						type='button'
-						className={btnClasses}
+						theme={ButtonThemes.SECONDARY}
 						onClick={() => onChangeFilter(el.data)}
+						active={filter === el.data}
 					>
 						{t(el.name)}
-					</button>
+					</Button>
 				);
 			})}
 		</div>

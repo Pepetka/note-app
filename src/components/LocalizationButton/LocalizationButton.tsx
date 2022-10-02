@@ -1,7 +1,6 @@
 import {useEffect} from 'react';
 import {useTranslation} from 'react-i18next';
-
-import './LocalizationButton.scss';
+import {Button, ButtonThemes} from 'components/lib/Button/Button';
 
 export const LocalizationButton = () => {
 	const {i18n} = useTranslation();
@@ -26,11 +25,12 @@ export const LocalizationButton = () => {
 	};
 
 	return (
-		<button
+		<Button
 			onClick={onChangeLang}
 			className='localizationButton'
+			theme={ButtonThemes.CIRCLE}
 		>
 			{i18n.language}
-		</button>
+		</Button>
 	);
 };

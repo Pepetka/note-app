@@ -1,0 +1,130 @@
+.Note {
+	cursor: grab;
+	background: var(--bg-secondary-color);
+	border-radius: 10px;
+	border: 1px solid var(--secondary-color);
+	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.8);
+	margin-bottom: 15px;
+}
+
+.hide {
+	display: none;
+}
+
+.disable {
+	background: var(--bg-default-color);
+}
+
+.title {
+	text-align: center;
+}
+
+.title.disable {
+	text-decoration: line-through;
+}
+
+.important {
+	background: var(--bg-primary-color);
+}
+
+.wrapper {
+	display: flex;
+	align-items: center;
+	margin-inline: auto;
+	padding: 10px;
+}
+
+.buttonGroup {
+	display: flex;
+	flex: 1 1 0;
+	justify-content: flex-start;
+}
+
+.info {
+	flex: 1 1 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin: 0 auto;
+}
+
+.delete {
+	flex: 1 1 0;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.date {
+	color: var(--secondary-color);
+}
+
+.btnDisable {
+	color: var(--primary-color);
+}
+
+.btnImportant {
+	color: red;
+}
+
+.btnCanText {
+	color: var(--primary-color);
+}
+
+.btnSave {
+	color: var(--primary-color);
+}
+
+.btnDelete {
+	color: red;
+}
+
+.btnCollapse {
+	width: 100%;
+}
+
+.btnOpen {
+	transform: rotateZ(180deg);
+}
+
+.collapse {
+	width: 100%;
+	text-align: center;
+}
+
+.content {
+	display: flex;
+	gap: 20px;
+	justify-content: space-between;
+	padding: 10px;
+}
+
+.input {
+	flex: 1 1;
+	padding: 10px;
+}
+
+.control {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	justify-content: flex-end;
+}
+
+[contenteditable]:empty::before {
+	content: attr(data-placeholder);
+	color: var(--secondary-color);
+	display: inline-block;
+}
+
+@media screen and (max-width: 768px) {
+	.Note {
+		padding: 0;
+		margin: 0;
+	}
+
+	.title {
+		width: 170px;
+		text-align: center;
+	}
+}

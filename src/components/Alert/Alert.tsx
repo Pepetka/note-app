@@ -1,9 +1,11 @@
-import {motion, AnimatePresence} from 'framer-motion';
+import {AnimatePresence, motion} from 'framer-motion';
 import {hideAlert} from 'store/slices/alertSlice';
 import {useAppDispatch, useAppSelector} from 'hooks/useRedux';
 import {useTranslation} from 'react-i18next';
+import {classNames} from 'helpers/classNames';
+import {Button, ButtonThemes} from 'components/lib/Button/Button';
 
-import './Alert.scss';
+import cls from './Alert.module.scss';
 
 export const Alert = () => {
 	const dispatch = useAppDispatch();
@@ -25,19 +27,23 @@ export const Alert = () => {
 		},
 	};
 
+	const onCloseAlert = () => {
+		dispatch(hideAlert());
+	};
+
 	return (
 		<AnimatePresence>
 			{visible ? (
-				<motion.div {...variants} className={`appAlert appAlert_${type}`}>
-					<div><strong className='appAlert__attention'>{t('Attention')}</strong>
+				<motion.div {...variants} className={classNames([cls.AppAlert, cls[type]])}>
+					<div><strong>{t('Attention')}</strong>
 						<br/>
-						<div className='appAlert__text'>{text}</div>
+						<div>{text}</div>
 					</div>
-					<button
-						onClick={() => dispatch(hideAlert())}
-						type='button'
-						className='appAlert__close'
-					><i className="fa-solid fa-xmark"></i></button>
+					<Button
+						onClick={onCloseAlert}
+						className={cls.close}
+						theme={ButtonThemes.CLEAR}
+					><i className="fa-solid fa-xmark"></i></Button>
 				</motion.div>
 			) : null}
 		</AnimatePresence>

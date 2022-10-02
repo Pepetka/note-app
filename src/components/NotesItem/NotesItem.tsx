@@ -1,11 +1,13 @@
-import {removeNote, disableNote, importantNote, setContent} from 'store/slices/firebaseSlice';
+import {disableNote, importantNote, removeNote, setContent} from 'store/slices/firebaseSlice';
 import {useAppDispatch, useAppSelector} from 'hooks/useRedux';
 import {Note} from 'types';
 import {MouseEvent, useEffect, useRef, useState} from 'react';
 import {Draggable} from 'react-beautiful-dnd';
 import {useTranslation} from 'react-i18next';
+import {classNames} from 'helpers/classNames';
+import {Button, ButtonThemes} from 'components/lib/Button/Button';
 
-import './NotesItem.scss';
+import cls from './NotesItem.module.scss';
 
 interface NotesItemProps {
 	note: Note
@@ -68,21 +70,6 @@ export const NotesItem = ({note, handleSort, index}: NotesItemProps) => {
 		setContentVisibility((contentVisibility) => !contentVisibility);
 	};
 
-	const getNoteClasses = () => {
-		let noteClass = 'note';
-		noteClass = note.isDisable ?
-			noteClass + ' note_disable' :
-			note.isImportant ?
-				noteClass + ' note_important' :
-				noteClass + '';
-
-		if ((filter === 'isDisable' && !note.isDisable) ||
-			(filter === 'active' && note.isDisable) ||
-			(filter === 'isImportant' && !note.isImportant)) return 'note_hide';
-
-		return noteClass;
-	};
-
 	return (
 		<Draggable draggableId={note.id!} index={index} isDragDisabled={!handleSort}>
 			{(provided) => (
@@ -90,79 +77,101 @@ export const NotesItem = ({note, handleSort, index}: NotesItemProps) => {
 					ref={provided.innerRef}
 					{...provided.draggableProps}
 					{...provided.dragHandleProps}>
-					<div className={getNoteClasses()}>
-						<div className='note__wrapper'>
-							<div className='note__buttonGroup'>
-								<div className='note__buttonDisable'>
-									<button
+					<div
+						className={
+							classNames(
+								[cls.Note],
+								{
+									[cls.disable]: note.isDisable,
+									[cls.important]: note.isImportant && !note.isDisable,
+									[cls.hide]: ((filter === 'isDisable' && !note.isDisable) ||
+										(filter === 'active' && note.isDisable) ||
+										(filter === 'isImportant' && !note.isImportant)),
+								},
+							)
+						}
+					>
+						<div className={cls.wrapper}>
+							<div className={cls.buttonGroup}>
+								<div>
+									<Button
 										onClick={(e) => onDisableNote(e, note.id!)}
-										className={`note__button ${note.isDisable ? 'note__button_disable' : ''}`}
+										className={classNames([], {[cls.btnDisable]: note.isDisable})}
+										theme={ButtonThemes.CLEAR}
 									>
 										<i className='fa-solid fa-eye-slash'></i>
-									</button>
+									</Button>
 								</div>
-								<div className='note__buttonImportant'>
-									<button
+								<div>
+									<Button
 										onClick={(e) => onImportantNote(e, note.id!)}
-										className={`note__button ${note.isImportant ? 'note__button_important' : ''}`}
+										className={classNames([], {[cls.btnImportant]: note.isImportant})}
+										theme={ButtonThemes.CLEAR}
 									>
 										<i className='fa-solid fa-circle-exclamation'></i>
-									</button>
+									</Button>
 								</div>
 							</div>
 
-							<div className='note__info'>
-								<strong className='note__title'>{note.title}</strong>
-								<small className='note__date'>{note.date}</small>
+							<div className={cls.info}>
+								<strong className={cls.title}>{note.title}</strong>
+								<small className={cls.date}>{note.date}</small>
 							</div>
 
-							<div className='note__delete'>
-								<button
+							<div className={cls.delete}>
+								<Button
 									onClick={(e) => onRemoveNote(e, note.id!)}
-									type='button'
-									className='note__button note__button_delete'
+									className={cls.btnDelete}
+									theme={ButtonThemes.CLEAR}
 								>
 									<i className='fa-solid fa-trash-can'></i>
-								</button>
+								</Button>
 							</div>
 						</div>
 
 						{contentVisibility && (
-							<div className='content'>
+							<div className={cls.content}>
 								<div
 									ref={inputRef}
 									contentEditable={canText}
 									data-placeholder={t('Add text')}
-									className={`content__input`}
+									className={cls.input}
 								></div>
 
-								<div className='content__control'>
+								<div className={cls.control}>
 									<div>
-										<button
+										<Button
 											onClick={onTextNote}
-											className={`note__button ${canText ? 'note__button_canText' : ''}`}
+											className={classNames([], {[cls.btnCanText]: canText})}
+											theme={ButtonThemes.CLEAR}
 										>
 											<i className='fa-solid fa-pen-clip'></i>
-										</button>
+										</Button>
 									</div>
 
 									<div>
-										<button onClick={() => onContentSave(note.id!)} className={`note__button note__button_save`}>
+										<Button
+											onClick={() => onContentSave(note.id!)}
+											className={cls.btnSave}
+											theme={ButtonThemes.CLEAR}
+										>
 											<i className='fa-solid fa-floppy-disk'></i>
-										</button>
+										</Button>
 									</div>
 								</div>
 							</div>
 						)}
 
-						<div className='note__collapse'>
-							<button
-								className={`note__button note__button_collapse ${contentVisibility ? 'note__button_open' : ''}`}
-								onClick={(e) => onChangeVisibility(e)}>
+						<div className={cls.collapse}>
+							<Button
+								className={classNames([cls.btnCollapse], {[cls.btnOpen]: contentVisibility})}
+								onClick={onChangeVisibility}
+								theme={ButtonThemes.CLEAR}
+							>
 								<i
 									className={`fa-solid fa-sort-down`}
 								></i>
-							</button>
+							</Button>
 						</div>
 					</div>
 				</div>
