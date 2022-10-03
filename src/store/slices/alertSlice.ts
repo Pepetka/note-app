@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 
-type AlertType = 'success' | 'warning' | 'danger'
+export type AlertType = 'success' | 'warning' | 'danger'
 
 interface AlertState {
 	text: string

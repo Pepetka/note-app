@@ -4,6 +4,7 @@ import {LOCAL_STORAGE_THEME_KEY, Theme, ThemeContext} from 'context/theme/ThemeC
 export interface ThemeHook {
 	theme: Theme
 	onThemeChange: () => void
+	setTheme: (theme: Theme) => void
 }
 
 export const useTheme = (): ThemeHook => {
@@ -20,5 +21,6 @@ export const useTheme = (): ThemeHook => {
 	return {
 		theme: theme,
 		onThemeChange,
+		setTheme,
 	};
 };

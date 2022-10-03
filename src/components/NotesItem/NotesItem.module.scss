@@ -11,16 +11,16 @@
 	display: none;
 }
 
-.disable {
-	background: var(--bg-default-color);
-}
-
 .title {
 	text-align: center;
 }
 
-.title.disable {
-	text-decoration: line-through;
+.disable {
+	background: var(--bg-default-color);
+
+	.title {
+		text-decoration: line-through;
+	}
 }
 
 .important {

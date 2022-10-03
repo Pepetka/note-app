@@ -7,9 +7,9 @@ import {hideAlert, showAlert} from 'store/slices/alertSlice';
 import {User} from 'types';
 import {toUpperFirs} from 'helpers/toUpperFirst/toUpperFirst';
 import {useTranslation} from 'react-i18next';
+import {Button, ButtonThemes} from 'components/lib/Button/Button';
 
 import cls from './Login.module.scss';
-import {Button, ButtonThemes} from '../lib/Button/Button';
 
 export const Login = () => {
 	const dispatch = useAppDispatch();

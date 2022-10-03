@@ -3,6 +3,8 @@ import {ThemeButton} from 'components/ThemeButton/ThemeButton';
 import {LocalizationButton} from 'components/LocalizationButton/LocalizationButton';
 import {HandleSortButton} from 'components/HandleSortButton/HandleSortButton';
 import {classNames} from 'helpers/classNames/classNames';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faXmark} from '@fortawesome/free-solid-svg-icons';
 
 import cls from './SideBar.module.scss';
 
@@ -31,7 +33,7 @@ export const SideBar = () => {
 				data-testid='SideBar-collapse'
 				className={cls.open}
 				onClick={onCollapsed}>
-				<i className="fa-solid fa-xmark"></i>
+				<FontAwesomeIcon icon={faXmark}/>
 			</button>
 		</div>
 	);

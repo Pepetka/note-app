@@ -1,5 +1,7 @@
 import {useHandleSort} from 'hooks/useHandleSort';
 import {Button, ButtonThemes} from 'components/lib/Button/Button';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faSort, faShuffle} from '@fortawesome/free-solid-svg-icons';
 
 export const HandleSortButton = () => {
 	const {handleSort, onHandleSort} = useHandleSort();
@@ -10,9 +12,9 @@ export const HandleSortButton = () => {
 			theme={ButtonThemes.CIRCLE}
 		>
 			{handleSort ? (
-				<i className="fa-solid fa-sort"></i>
+				<FontAwesomeIcon icon={faSort}/>
 			) : (
-				<i className="fa-solid fa-shuffle"></i>
+				<FontAwesomeIcon icon={faShuffle}/>
 			)}
 		</Button>
 	);

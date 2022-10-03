@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.2.0",
+    "@fortawesome/free-regular-svg-icons": "^6.2.0",
+    "@fortawesome/free-solid-svg-icons": "^6.2.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@hookform/resolvers": "^2.9.7",
     "@reduxjs/toolkit": "^1.8.5",
     "@testing-library/jest-dom": "^5.16.5",
@@ -34,7 +38,9 @@
     "lint:ts": "eslint \"**/*.{ts,tsx}\"",
     "lint:ts:fix": "eslint \"**/*.{ts,tsx}\" --fix",
     "lint:scss": "npx stylelint \"**/*.scss\"",
-    "lint:scss:fix": "npx stylelint \"**/*.scss\" --fix"
+    "lint:scss:fix": "npx stylelint \"**/*.scss\" --fix",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "eslintConfig": {
     "extends": [
@@ -99,6 +105,14 @@
         "files": [
           "**/*.ts?(x)"
         ]
+      },
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
       }
     ]
   },
@@ -115,6 +129,17 @@
     ]
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^6.5.12",
+    "@storybook/addon-essentials": "^6.5.12",
+    "@storybook/addon-interactions": "^6.5.12",
+    "@storybook/addon-links": "^6.5.12",
+    "@storybook/builder-webpack5": "^6.5.12",
+    "@storybook/manager-webpack5": "^6.5.12",
+    "@storybook/node-logger": "^6.5.12",
+    "@storybook/preset-create-react-app": "^4.1.2",
+    "@storybook/react": "^6.5.12",
+    "@storybook/testing-library": "^0.0.13",
+    "@types/firebase": "^3.2.1",
     "@types/jest": "^28.1.7",
     "@types/node": "^18.7.11",
     "@types/react": "^18.0.17",
@@ -122,11 +147,14 @@
     "@types/react-dom": "^18.0.6",
     "@types/react-redux": "^7.1.24",
     "@types/react-router-dom": "^5.3.3",
+    "babel-plugin-named-exports-order": "^0.0.2",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-i18next": "^6.0.0-4",
+    "prop-types": "^15.8.1",
     "react-app-rewired": "^2.2.1",
     "stylelint": "^14.12.1",
     "stylelint-config-standard": "^28.0.0",
-    "stylelint-config-standard-scss": "^5.0.0"
+    "stylelint-config-standard-scss": "^5.0.0",
+    "webpack": "^5.74.0"
   }
 }

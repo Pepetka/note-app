@@ -6,6 +6,15 @@ import {Draggable} from 'react-beautiful-dnd';
 import {useTranslation} from 'react-i18next';
 import {classNames} from 'helpers/classNames/classNames';
 import {Button, ButtonThemes} from 'components/lib/Button/Button';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {
+	faEyeSlash,
+	faCircleExclamation,
+	faTrashCan,
+	faPenClip,
+	faFloppyDisk,
+	faSortDown,
+} from '@fortawesome/free-solid-svg-icons';
 
 import cls from './NotesItem.module.scss';
 
@@ -13,9 +22,10 @@ interface NotesItemProps {
 	note: Note
 	handleSort: boolean
 	index: number
+	storybookFilter?: 'all' | undefined
 }
 
-export const NotesItem = ({note, handleSort, index}: NotesItemProps) => {
+export const NotesItem = ({note, handleSort, index, storybookFilter}: NotesItemProps) => {
 	const dispatch = useAppDispatch();
 	const userId = useAppSelector((state) => state.user.user.id);
 	const {filter} = useAppSelector((state) => state.firebase);
@@ -84,9 +94,9 @@ export const NotesItem = ({note, handleSort, index}: NotesItemProps) => {
 								{
 									[cls.disable]: note.isDisable,
 									[cls.important]: note.isImportant && !note.isDisable,
-									[cls.hide]: ((filter === 'isDisable' && !note.isDisable) ||
-										(filter === 'active' && note.isDisable) ||
-										(filter === 'isImportant' && !note.isImportant)),
+									[cls.hide]: (((storybookFilter ?? filter) === 'isDisable' && !note.isDisable) ||
+										((storybookFilter ?? filter) === 'active' && note.isDisable) ||
+										((storybookFilter ?? filter) === 'isImportant' && !note.isImportant)),
 								},
 							)
 						}
@@ -99,7 +109,7 @@ export const NotesItem = ({note, handleSort, index}: NotesItemProps) => {
 										className={classNames([], {[cls.btnDisable]: note.isDisable})}
 										theme={ButtonThemes.CLEAR}
 									>
-										<i className='fa-solid fa-eye-slash'></i>
+										<FontAwesomeIcon icon={faEyeSlash}/>
 									</Button>
 								</div>
 								<div>
@@ -108,7 +118,7 @@ export const NotesItem = ({note, handleSort, index}: NotesItemProps) => {
 										className={classNames([], {[cls.btnImportant]: note.isImportant})}
 										theme={ButtonThemes.CLEAR}
 									>
-										<i className='fa-solid fa-circle-exclamation'></i>
+										<FontAwesomeIcon icon={faCircleExclamation}/>
 									</Button>
 								</div>
 							</div>
@@ -124,7 +134,7 @@ export const NotesItem = ({note, handleSort, index}: NotesItemProps) => {
 									className={cls.btnDelete}
 									theme={ButtonThemes.CLEAR}
 								>
-									<i className='fa-solid fa-trash-can'></i>
+									<FontAwesomeIcon icon={faTrashCan}/>
 								</Button>
 							</div>
 						</div>
@@ -145,7 +155,7 @@ export const NotesItem = ({note, handleSort, index}: NotesItemProps) => {
 											className={classNames([], {[cls.btnCanText]: canText})}
 											theme={ButtonThemes.CLEAR}
 										>
-											<i className='fa-solid fa-pen-clip'></i>
+											<FontAwesomeIcon icon={faPenClip}/>
 										</Button>
 									</div>
 
@@ -155,7 +165,7 @@ export const NotesItem = ({note, handleSort, index}: NotesItemProps) => {
 											className={cls.btnSave}
 											theme={ButtonThemes.CLEAR}
 										>
-											<i className='fa-solid fa-floppy-disk'></i>
+											<FontAwesomeIcon icon={faFloppyDisk}/>
 										</Button>
 									</div>
 								</div>
@@ -168,9 +178,7 @@ export const NotesItem = ({note, handleSort, index}: NotesItemProps) => {
 								onClick={onChangeVisibility}
 								theme={ButtonThemes.CLEAR}
 							>
-								<i
-									className={`fa-solid fa-sort-down`}
-								></i>
+								<FontAwesomeIcon icon={faSortDown}/>
 							</Button>
 						</div>
 					</div>

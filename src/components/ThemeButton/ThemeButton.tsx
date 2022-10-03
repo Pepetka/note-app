@@ -1,5 +1,7 @@
 import {useTheme} from 'hooks/useTheme';
 import {Button, ButtonThemes} from 'components/lib/Button/Button';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faMoon, faSun} from '@fortawesome/free-solid-svg-icons';
 
 export const ThemeButton = () => {
 	const {theme, onThemeChange} = useTheme();
@@ -10,9 +12,9 @@ export const ThemeButton = () => {
 			theme={ButtonThemes.CIRCLE}
 		>
 			{theme === 'dark' ? (
-				<i className='fa-solid fa-moon'></i>
+				<FontAwesomeIcon icon={faMoon}/>
 			) : (
-				<i className='fa-solid fa-sun'></i>
+				<FontAwesomeIcon icon={faSun} />
 			)}
 		</Button>
 	);

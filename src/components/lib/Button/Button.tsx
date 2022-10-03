@@ -15,7 +15,7 @@ interface ButtonProps {
 	active?: boolean
 	type?: 'button' | 'submit' | 'reset'
 	onClick?: (e: MouseEvent<HTMLButtonElement>) => void
-	children: ReactNode
+	children?: ReactNode
 	theme: ButtonThemes
 	corners?: boolean
 	border?: boolean

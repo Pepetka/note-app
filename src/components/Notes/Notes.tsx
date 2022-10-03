@@ -4,18 +4,23 @@ import {DragDropContext, Droppable} from 'react-beautiful-dnd';
 import {NotesList} from 'components/NotesList/NotesList';
 import {useTranslation} from 'react-i18next';
 import {reorder} from 'helpers/reorder/reorder';
+import {Note} from 'types';
 
 import cls from './Notes.module.scss';
 
 interface Prop {
 	handleSort: boolean
+	storybookNotes?: Array<Note>
+	storybookFilter?: 'all'
 }
 
-export const Notes = ({handleSort}: Prop) => {
+export const Notes = ({handleSort, storybookNotes, storybookFilter}: Prop) => {
 	const {notes} = useAppSelector((state) => state.firebase);
 	const {id} = useAppSelector((state) => state.user.user);
 	const dispatch = useAppDispatch();
 	const {t} = useTranslation('home');
+
+	const notesArray = storybookNotes ?? notes;
 
 	function onDragEnd(result: any) {
 		if (!result.destination) {
@@ -26,12 +31,12 @@ export const Notes = ({handleSort}: Prop) => {
 			return;
 		}
 
-		const orderedNotes = reorder(notes, result.source.index, result.destination.index);
+		const orderedNotes = reorder(notesArray, result.source.index, result.destination.index);
 
 		dispatch(sortNotes({notes: orderedNotes, userId: id!}));
 	}
 
-	if (notes.length < 1) {
+	if (notesArray.length < 1) {
 		return (
 			<div className={cls.empty}>
 				<h1>{t('There are no notes')}</h1>
@@ -44,7 +49,7 @@ export const Notes = ({handleSort}: Prop) => {
 			<Droppable droppableId='droppable'>
 				{(provided) => (
 					<div className={cls.Notes} {...provided.droppableProps} ref={provided.innerRef}>
-						<NotesList notes={notes} handleSort={handleSort} />
+						<NotesList storybookFilter={storybookFilter} notes={notesArray} handleSort={handleSort} />
 						{provided.placeholder}
 					</div>
 				)}

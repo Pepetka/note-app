@@ -5,6 +5,8 @@ import {useAppDispatch} from 'hooks/useRedux';
 import {useTranslation} from 'react-i18next';
 import {Button, ButtonThemes} from 'components/lib/Button/Button';
 import {Input} from 'components/lib/Input/Input';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faExclamation} from '@fortawesome/free-solid-svg-icons';
 
 import cls from './NoteAddForm.module.scss';
 
@@ -65,7 +67,7 @@ export const NoteAddForm = () => {
 				theme={ButtonThemes.SECONDARY}
 				type='button'
 			>
-				<i className="fa-solid fa-exclamation"></i>
+				<FontAwesomeIcon icon={faExclamation} />
 			</Button>
 			<Button
 				onClick={submitHandler}

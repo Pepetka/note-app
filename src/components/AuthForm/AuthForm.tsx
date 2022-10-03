@@ -3,9 +3,9 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import {useTranslation} from 'react-i18next';
 import {Button, ButtonThemes} from '../lib/Button/Button';
+import {Input} from 'components/lib/Input/Input';
 
 import cls from './AuthForm.module.scss';
-import {Input} from 'components/lib/Input/Input';
 
 export interface SubmitArgs {
 	email: string
