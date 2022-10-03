@@ -51,9 +51,12 @@
       "google"
     ],
     "plugins": [
-      "i18next"
+      "i18next",
+      "react-hooks"
     ],
     "rules": {
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "error",
       "linebreak-style": [
         "error",
         "unix"
@@ -108,10 +111,11 @@
       },
       {
         "files": [
-          "**/*.stories.*"
+          "**/*.{stories,test}.{ts,tsx}"
         ],
         "rules": {
-          "import/no-anonymous-default-export": "off"
+          "import/no-anonymous-default-export": "off",
+          "max-len": "off"
         }
       }
     ]
@@ -150,6 +154,7 @@
     "babel-plugin-named-exports-order": "^0.0.2",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-i18next": "^6.0.0-4",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "prop-types": "^15.8.1",
     "stylelint": "^14.12.1",
     "stylelint-config-standard": "^28.0.0",
