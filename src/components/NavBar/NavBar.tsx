@@ -4,6 +4,7 @@ import {NavLink} from 'react-router-dom';
 import {clearNotes} from 'store/slices/firebaseSlice';
 import {removeUser} from 'store/slices/userSlice';
 import {useTranslation} from 'react-i18next';
+import {classNames} from 'helpers/classNames/classNames';
 
 import cls from './NavBar.module.scss';
 
@@ -26,12 +27,22 @@ export const NavBar = () => {
 
 					<ul className={cls.list}>
 						<li>
-							<NavLink className={cls.link} to={'/'}>
+							<NavLink
+								to={'/'}
+								className={({isActive}) =>
+									classNames([cls.link], {[cls.active]: isActive})
+								}
+							>
 								{t('Home')}
 							</NavLink>
 						</li>
 						<li>
-							<NavLink className={cls.link} to={'/about'}>
+							<NavLink
+								to={'/about'}
+								className={({isActive}) =>
+									classNames([cls.link], {[cls.active]: isActive})
+								}
+							>
 								{t('About')}
 							</NavLink>
 						</li>
@@ -42,13 +53,21 @@ export const NavBar = () => {
 					<li>
 						{isAuth ? (
 							<NavLink
-								className={cls.link}
 								to={'/login'}
-								onClick={onLogOut}>
+								className={({isActive}) =>
+									classNames([cls.link], {[cls.active]: isActive})
+								}
+								onClick={onLogOut}
+							>
 								{t('Logout')}
 							</NavLink>
 						) : (
-							<NavLink className={cls.link} to={'/login'}>
+							<NavLink
+								to={'/login'}
+								className={({isActive}) =>
+									classNames([cls.link], {[cls.active]: isActive})
+								}
+							>
 								{t('Login')}
 							</NavLink>
 						)}
