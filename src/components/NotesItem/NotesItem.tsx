@@ -1,7 +1,7 @@
+import {MouseEvent, useEffect, useRef, useState} from 'react';
 import {disableNote, importantNote, removeNote, setContent} from 'store/slices/firebaseSlice';
 import {useAppDispatch, useAppSelector} from 'hooks/useRedux';
 import {Note} from 'types';
-import {MouseEvent, useEffect, useRef, useState} from 'react';
 import {Draggable} from 'react-beautiful-dnd';
 import {useTranslation} from 'react-i18next';
 import {classNames} from 'helpers/classNames/classNames';

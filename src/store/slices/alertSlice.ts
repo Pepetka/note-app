@@ -24,8 +24,6 @@ const alertSlice = createSlice({
 			state.visible = true;
 		},
 		hideAlert(state) {
-			state.text = '';
-			state.type = 'danger';
 			state.visible = false;
 		},
 	},

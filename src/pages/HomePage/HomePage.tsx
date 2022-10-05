@@ -13,7 +13,6 @@ import {NotesControlPanel} from 'components/NotesControlPanel/NotesControlPanel'
 import {ReloadTemplate} from 'components/ReloadTemplate/ReloadTemplate';
 import {useTranslation} from 'react-i18next';
 import {useHandleSort} from 'hooks/useHandleSort';
-import {getScrollbarWidth} from 'helpers/scrollWidth/scrollWidth';
 
 export const HomePage = () => {
 	const {handleSort} = useHandleSort();
@@ -23,18 +22,6 @@ export const HomePage = () => {
 	const navigate = useNavigate();
 	const {isAuth} = useAuth();
 	const {t} = useTranslation('home');
-
-	useEffect(() => {
-		if (document.body.scrollHeight - window.innerHeight > 0) {
-			(document.querySelector('#homePage') as HTMLElement).style.paddingRight = '0';
-			(document.querySelector('header') as HTMLElement).style.paddingRight = '0';
-			(document.querySelector('#sideBar') as HTMLElement).style.marginRight = '0';
-		} else {
-			(document.querySelector('#homePage') as HTMLElement).style.paddingRight = `${getScrollbarWidth()}px`;
-			(document.querySelector('header') as HTMLElement).style.paddingRight = `${getScrollbarWidth()}px`;
-			(document.querySelector('#sideBar') as HTMLElement).style.marginRight = `${getScrollbarWidth()}px`;
-		}
-	});
 
 	useEffect(() => {
 		if (isAuth) {
