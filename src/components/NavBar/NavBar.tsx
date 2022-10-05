@@ -20,9 +20,9 @@ export const NavBar = () => {
 	};
 
 	return (
-		<nav className={cls.NavBar}>
+		<header className={cls.NavBar}>
 			<div className={cls.wrapper}>
-				<div className={cls.mainLinks}>
+				<nav className={cls.mainLinks}>
 					<div className={cls.brand}>{t('Note App')}</div>
 
 					<ul className={cls.list}>
@@ -47,7 +47,7 @@ export const NavBar = () => {
 							</NavLink>
 						</li>
 					</ul>
-				</div>
+				</nav>
 
 				<ul className={cls.list}>
 					<li>
@@ -74,7 +74,7 @@ export const NavBar = () => {
 					</li>
 				</ul>
 			</div>
-		</nav>
+		</header>
 	);
 };
 

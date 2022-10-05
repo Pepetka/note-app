@@ -16,7 +16,7 @@ export const SideBar = () => {
 	};
 
 	return (
-		<div data-testid='SideBar' className={classNames([cls.SideBar], {[cls.collapsed]: collapsed})}>
+		<div data-testid='SideBar' id='sideBar' className={classNames([cls.SideBar], {[cls.collapsed]: collapsed})}>
 			<div className={cls.button}>
 				<ThemeButton />
 			</div>
