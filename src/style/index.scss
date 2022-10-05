@@ -1,0 +1,46 @@
+@import "./themes/dark/dark";
+@import "./themes/light/light";
+@import "./variables/globals";
+@import "./reset";
+
+.App,
+.PageLoader {
+	color: var(--default-color);
+	background-color: var(--bg-default-color);
+	font: var(--font-m);
+}
+
+.PageLoader {
+	min-height: calc(100vh - var(--navbar-height));
+}
+
+.App {
+	min-height: 100vh;
+
+	input:-webkit-autofill,
+	input:-webkit-autofill:hover,
+	input:-webkit-autofill:focus,
+	input:-webkit-autofill:active {
+		transition: background-color 5000s ease-in-out 0s;
+		-webkit-text-fill-color: var(--primary-color);
+		caret-color: var(--primary-color);
+	}
+}
+
+.PageLoader_app {
+	min-height: 100vh;
+}
+
+button {
+	cursor: pointer;
+}
+
+h1 {
+	text-align: center;
+	margin-bottom: 10px;
+	font: var(--font-xl);
+}
+
+label {
+	cursor: pointer;
+}

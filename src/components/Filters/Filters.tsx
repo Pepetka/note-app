@@ -2,14 +2,15 @@ import {useAppDispatch, useAppSelector} from 'hooks/useRedux';
 import {changeFilter} from 'store/slices/firebaseSlice';
 import {useTranslation} from 'react-i18next';
 import {Button, ButtonThemes} from 'components/lib/Button/Button';
+import {FilterTypes} from 'types';
 
 import cls from './Filters.module.scss';
 
 const buttons = [
-	{name: 'Active', data: 'active'},
-	{name: 'Important', data: 'isImportant'},
-	{name: 'Finished', data: 'isDisable'},
-	{name: 'All', data: 'all'},
+	{name: 'Active', data: FilterTypes.ACTIVE},
+	{name: 'Important', data: FilterTypes.IMPORTANT},
+	{name: 'Finished', data: FilterTypes.DISABLE},
+	{name: 'All', data: FilterTypes.ALL},
 ];
 
 export const Filters = () => {
@@ -18,20 +19,30 @@ export const Filters = () => {
 	const {t} = useTranslation('home');
 
 	const onChangeFilter = (data: string) => {
+		if (filter === data) {
+			dispatch(changeFilter({filter: FilterTypes.ALL}));
+			return;
+		}
+
 		dispatch(changeFilter({filter: data}));
 	};
 
 	return (
 		<div className={cls.Filter}>
-			{buttons.map((el) => {
+			{buttons.map(({data, name}) => {
+				if (data === FilterTypes.ALL && window.innerWidth <= 768) {
+					return null;
+				}
+
 				return (
 					<Button
-						key={el.data}
+						key={data}
 						theme={ButtonThemes.SECONDARY}
-						onClick={() => onChangeFilter(el.data)}
-						active={filter === el.data}
+						onClick={() => onChangeFilter(data)}
+						active={filter === data}
+						className={cls.button}
 					>
-						{t(el.name)}
+						{t(name)}
 					</Button>
 				);
 			})}

@@ -1,16 +1,18 @@
+import {Suspense} from 'react';
 import {Route, RouteProps, Routes} from 'react-router-dom';
 import {HomePage} from 'pages/HomePage/HomePage';
-import {AboutPage} from 'pages/AboutPage/AboutPage';
-import {LoginPage} from 'pages/LoginPage/LoginPage';
-import {RegisterPage} from 'pages/RegisterPage/RegisterPage';
-import {NotFoundPage} from '../../pages/NotFoundPage/NotFoundPage';
+import {AboutPageLazy} from 'pages/AboutPage/AboutPage.lazy';
+import {PageLoader} from 'components/PageLoader/PageLoader';
+import {LoginPageLazy} from 'pages/LoginPage/LoginPage.lazy';
+import {RegisterPageLazy} from 'pages/RegisterPage/RegisterPage.lazy';
+import {NotFoundPageLazy} from 'pages/NotFoundPage/NotFoundPage.lazy';
 
-const enum AppRoutes { // eslint-disable-line
-	HOME = 'home', // eslint-disable-line
-	ABOUT = 'about', // eslint-disable-line
-	LOGIN = 'login', // eslint-disable-line
-	REGISTER = 'register', // eslint-disable-line
-	NOT_FOUND = 'not_found' // eslint-disable-line
+const enum AppRoutes {
+	HOME = 'home',
+	ABOUT = 'about',
+	LOGIN = 'login',
+	REGISTER = 'register',
+	NOT_FOUND = 'not_found'
 }
 
 const routePaths: Record<AppRoutes, string> = {
@@ -29,31 +31,33 @@ const routeConfig: Record<AppRoutes, RouteProps> = {
 	},
 	[AppRoutes.ABOUT]: {
 		path: routePaths.about,
-		element: <AboutPage />,
+		element: <AboutPageLazy />,
 	},
 	[AppRoutes.LOGIN]: {
 		path: routePaths.login,
-		element: <LoginPage />,
+		element: <LoginPageLazy />,
 	},
 	[AppRoutes.REGISTER]: {
 		path: routePaths.register,
-		element: <RegisterPage />,
+		element: <RegisterPageLazy />,
 	},
 	[AppRoutes.NOT_FOUND]: {
 		path: routePaths.not_found,
-		element: <NotFoundPage />,
+		element: <NotFoundPageLazy />,
 	},
 };
 
 export const AppRouter = () => {
 	return (
-		<Routes>
-			{Object.entries(routeConfig).map(([_, {path, element}]) => (
-				<Route
-					key={path}
-					path={path}
-					element={element} />
-			))}
-		</Routes>
+		<Suspense fallback={<PageLoader/>}>
+			<Routes>
+				{Object.entries(routeConfig).map(([_, {path, element}]) => (
+					<Route
+						key={path}
+						path={path}
+						element={element}/>
+				))}
+			</Routes>
+		</Suspense>
 	);
 };

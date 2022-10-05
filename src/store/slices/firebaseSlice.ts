@@ -1,8 +1,8 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {ref, child, get} from 'firebase/database';
+import {child, get, ref} from 'firebase/database';
 import axios from 'axios';
 import {RootState} from 'store';
-import {Note, FirebaseState} from 'types';
+import {FilterTypes, FirebaseState, Note} from 'types';
 import {showAlert} from './alertSlice';
 import {database} from '../../firebase';
 import {withoutId} from 'helpers/withoutId/withoutId';
@@ -201,7 +201,7 @@ export const addNote = createAsyncThunk<
 const initialState: FirebaseState = {
 	notes: [],
 	loading: false,
-	filter: 'active',
+	filter: FilterTypes.ACTIVE,
 	error: {
 		get: null,
 		update: null,

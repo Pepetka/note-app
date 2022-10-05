@@ -8,10 +8,17 @@ export interface Note {
 	order: number
 }
 
+export enum FilterTypes {
+	ALL = 'all',
+	DISABLE = 'isDisable',
+	IMPORTANT = 'isImportant',
+	ACTIVE = 'active'
+}
+
 export interface FirebaseState {
 	notes: Note[]
 	loading: boolean
-	filter: string
+	filter: FilterTypes
 	error: {
 		get: string | null
 		update: string | null

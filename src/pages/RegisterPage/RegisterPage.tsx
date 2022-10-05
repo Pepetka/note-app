@@ -1,7 +1,7 @@
 import {Register} from 'components/Register/Register';
 import {useTranslation} from 'react-i18next';
 
-export const RegisterPage = () => {
+const RegisterPage = () => {
 	const {t} = useTranslation('auth');
 
 	return (
@@ -12,3 +12,5 @@ export const RegisterPage = () => {
 		</>
 	);
 };
+
+export default RegisterPage;

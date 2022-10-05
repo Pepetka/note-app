@@ -1,5 +1,5 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react';
-import {RegisterPage} from './RegisterPage';
+import RegisterPage from './RegisterPage';
 
 export default {
 	title: 'pages/RegisterPage',

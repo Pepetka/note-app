@@ -1,10 +1,10 @@
-import 'index.scss';
 import {DecoratorFn, Story} from '@storybook/react';
 import {useEffect} from 'react';
 import {Theme} from 'context/theme/ThemeContext';
 import {useTheme} from 'hooks/useTheme';
 import {ThemeProvider} from 'context/theme/ThemeProvider';
 
+import 'style/index.scss';
 import './Storybook.scss';
 
 const StoryComponentWithTheme = ({StoryComponent, globalTheme}: {StoryComponent: Story, globalTheme: Theme}) => {

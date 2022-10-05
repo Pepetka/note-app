@@ -3,6 +3,7 @@ import {RouterDecorator} from "../src/helpers/storybook/RouterDecorator/RouterDe
 import {LocalizationDecorator} from "../src/helpers/storybook/LocalizationDecorator/LocalizationDecorator";
 import {StoreDecorator} from "../src/helpers/storybook/StoreDecorator/StoreDecorator";
 import {HandleSortDecorator} from "../src/helpers/storybook/HandleSortDecorator/HandleSortDecorator";
+import {Theme} from "../src/context/theme/ThemeContext";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -31,11 +32,11 @@ export const globalTypes = {
   globalTheme: {
     name: 'Theme',
     description: 'Global theme for components',
-    defaultValue: 'light',
+    defaultValue: Theme.LIGHT,
     toolbar: {
       items: [
-        { value: 'dark', title: 'Dark theme', icon: 'circle' },
-        { value: 'light', title: 'Light theme', icon: 'circlehollow' },
+        { value: Theme.DARK, title: 'Dark theme', icon: 'circle' },
+        { value: Theme.LIGHT, title: 'Light theme', icon: 'circlehollow' },
         { value: 'side-by-side', title: 'Side by Side', icon: 'sidebar' },
       ],
       showName: true,
