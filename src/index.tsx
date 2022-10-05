@@ -6,6 +6,7 @@ import {store} from 'store';
 import {BrowserRouter} from 'react-router-dom';
 import {HandleSortProvider} from 'context/handleSort/HandleSortProvider';
 import {PageLoader} from 'components/PageLoader/PageLoader';
+import {ErrorBoundary} from 'components/ErrorBoundary/ErrorBoundary';
 
 import 'style/index.scss';
 import 'localization/i18n';
@@ -17,7 +18,9 @@ root.render(
 			<HandleSortProvider>
 				<Provider store={store}>
 					<BrowserRouter>
-						<App/>
+						<ErrorBoundary>
+							<App/>
+						</ErrorBoundary>
 					</BrowserRouter>
 				</Provider>
 			</HandleSortProvider>

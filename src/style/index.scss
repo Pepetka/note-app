@@ -4,7 +4,8 @@
 @import "./reset";
 
 .App,
-.PageLoader {
+.PageLoader,
+.ErrorBoundary {
 	color: var(--default-color);
 	background-color: var(--bg-default-color);
 	font: var(--font-m);
@@ -12,6 +13,11 @@
 
 .PageLoader {
 	min-height: calc(100vh - var(--navbar-height));
+}
+
+.PageLoader_app,
+.ErrorBoundary {
+	min-height: 100vh;
 }
 
 .App {
@@ -25,10 +31,6 @@
 		-webkit-text-fill-color: var(--primary-color);
 		caret-color: var(--primary-color);
 	}
-}
-
-.PageLoader_app {
-	min-height: 100vh;
 }
 
 button {
