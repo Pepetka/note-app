@@ -10,14 +10,15 @@ interface InputProps {
 	value?: string
 	type?: HTMLInputTypeAttribute
 	id?: string
+	withCorners?: boolean
 }
-export const Input = ({className, placeholder, onChange, value, id, type = 'text', ...otherProps}: InputProps) => {
+export const Input = ({className, placeholder, onChange, value, id, withCorners = false, type = 'text', ...otherProps}: InputProps) => {
 	return (
 		<input
 			value={value}
 			onChange={(e) => onChange(e)}
 			type={type}
-			className={classNames([cls.Input, className], {})}
+			className={classNames([cls.Input, className], {[cls.withCorners]: withCorners})}
 			placeholder={placeholder}
 			id={id}
 			{...otherProps}

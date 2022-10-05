@@ -1,9 +1,12 @@
+import {useState} from 'react';
 import {SubmitHandler, useForm, Controller} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import {useTranslation} from 'react-i18next';
-import {Button, ButtonThemes} from '../lib/Button/Button';
+import {Button, ButtonThemes} from 'components/lib/Button/Button';
 import {Input} from 'components/lib/Input/Input';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
 
 import cls from './AuthForm.module.scss';
 
@@ -33,7 +36,12 @@ const schema = yup
 	.required();
 
 export const AuthForm = ({title, onSubmitForm}: AuthFormProps) => {
+	const [passwordVisibility, setPasswordVisibility] = useState(false);
 	const {t} = useTranslation('auth');
+
+	const onPassword = () => {
+		setPasswordVisibility((prev) => !prev);
+	};
 
 	const {
 		register,
@@ -73,18 +81,28 @@ export const AuthForm = ({title, onSubmitForm}: AuthFormProps) => {
 				<label htmlFor='form-password'>
 					{t('Password')}
 				</label>
-				<Controller
-					name="password"
-					control={control}
-					defaultValue=""
-					render={({field}) => (
-						<Input
-							{...field}
-							type='password'
-							id='form-password'
-						/>
-					)}
-				/>
+				<div className={cls.password}>
+					<Controller
+						name="password"
+						control={control}
+						render={({field}) => (
+							<Input
+								{...field}
+								type={passwordVisibility ? 'text' : 'password'}
+								id='form-password'
+								withCorners
+							/>
+						)}
+					/>
+					<Button
+						onClick={onPassword}
+						className={cls.visibilityBtn}
+						corners
+						theme={ButtonThemes.PRIMARY}
+					>
+						{passwordVisibility ? <FontAwesomeIcon icon={faEyeSlash}/> : <FontAwesomeIcon icon={faEye} />}
+					</Button>
+				</div>
 				{errors.password && (
 					<ErrorMessage errorMessage={errors.password.message!}/>
 				)}

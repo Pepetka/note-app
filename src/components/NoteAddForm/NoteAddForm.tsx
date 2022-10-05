@@ -55,8 +55,8 @@ export const NoteAddForm = () => {
 			<Input
 				value={value}
 				onChange={onValueChange}
-				className={cls.input}
 				placeholder={t('Enter note title')}
+				withCorners
 			/>
 			<Button
 				onClick={onChecked}

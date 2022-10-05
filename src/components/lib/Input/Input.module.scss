@@ -6,3 +6,8 @@
 	border: 2px solid var(--default-color);
 	border-radius: 5px;
 }
+
+.withCorners {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
