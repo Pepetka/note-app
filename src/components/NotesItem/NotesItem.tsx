@@ -1,4 +1,5 @@
 import {MouseEvent, useEffect, useRef, useState} from 'react';
+import {CSSTransition} from 'react-transition-group';
 import {disableNote, importantNote, removeNote, setContent} from 'store/slices/firebaseSlice';
 import {useAppDispatch, useAppSelector} from 'hooks/useRedux';
 import {Note} from 'types';
@@ -17,6 +18,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import cls from './NotesItem.module.scss';
+import './NotesItemAnimation.scss';
 
 interface NotesItemProps {
 	note: Note
@@ -139,7 +141,7 @@ export const NotesItem = ({note, handleSort, index, storybookFilter}: NotesItemP
 							</div>
 						</div>
 
-						{contentVisibility && (
+						<CSSTransition in={contentVisibility} classNames='noteContent' timeout={500} unmountOnExit>
 							<div className={cls.content}>
 								<div
 									ref={inputRef}
@@ -170,7 +172,7 @@ export const NotesItem = ({note, handleSort, index, storybookFilter}: NotesItemP
 									</div>
 								</div>
 							</div>
-						)}
+						</CSSTransition>
 
 						<div className={cls.collapse}>
 							<Button

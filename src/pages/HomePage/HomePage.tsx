@@ -32,13 +32,11 @@ export const HomePage = () => {
 		} else {
 			navigate('/login', {replace: true});
 		}
-		// eslint-disable-next-line
-	}, [isAuth])
+	}, [dispatch, isAuth, navigate, userId]);
 
 	useEffect(() => {
 		if (error.update) dispatch(showAlert({type: 'danger', text: error.update}));
-		// eslint-disable-next-line
-	}, [error.update])
+	}, [dispatch, error.update]);
 
 	const onReload = () => {
 		dispatch(fetchNotes(userId!));

@@ -12,8 +12,7 @@ const StoryComponentWithTheme = ({StoryComponent, globalTheme}: {StoryComponent:
 
 	useEffect(() => {
 		setTheme(globalTheme);
-		// eslint-disable-next-line
-	}, [globalTheme]);
+	}, [globalTheme, setTheme]);
 
 	return (
 		<div className={`App ${theme}`}>

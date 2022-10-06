@@ -1,0 +1,21 @@
+.noteContent-enter {
+	opacity: 0;
+	max-height: 0;
+}
+
+.noteContent-enter-active {
+	opacity: 1;
+	max-height: 800px;
+	transition: all 500ms ease-in-out;
+}
+
+.noteContent-exit {
+	opacity: 1;
+	max-height: 800px;
+}
+
+.noteContent-exit-active {
+	opacity: 0;
+	max-height: 0;
+	transition: all 500ms ease-in-out;
+}
