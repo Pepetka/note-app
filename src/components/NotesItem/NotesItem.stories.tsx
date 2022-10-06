@@ -16,7 +16,7 @@ const Template: ComponentStory<typeof NotesItem> = (args) => <NotesItem {...args
 const noteItem: Note = {
 	id: '10101',
 	title: 'Note title',
-	date: new Date().toLocaleString(),
+	date: '30.03.2000, 21:00:00',
 	isImportant: false,
 	isDisable: false,
 	order: 0,

@@ -102,6 +102,7 @@ export const NotesItem = ({note, handleSort, index, storybookFilter}: NotesItemP
 								},
 							)
 						}
+						style={handleSort ? {cursor: 'grab'} : {cursor: 'auto'}}
 					>
 						<div className={cls.wrapper}>
 							<div className={cls.buttonGroup}>
@@ -111,7 +112,7 @@ export const NotesItem = ({note, handleSort, index, storybookFilter}: NotesItemP
 										className={classNames([], {[cls.btnDisable]: note.isDisable})}
 										theme={ButtonThemes.CLEAR}
 									>
-										<FontAwesomeIcon icon={faEyeSlash}/>
+										<FontAwesomeIcon icon={faEyeSlash} />
 									</Button>
 								</div>
 								<div>
@@ -120,7 +121,7 @@ export const NotesItem = ({note, handleSort, index, storybookFilter}: NotesItemP
 										className={classNames([], {[cls.btnImportant]: note.isImportant})}
 										theme={ButtonThemes.CLEAR}
 									>
-										<FontAwesomeIcon icon={faCircleExclamation}/>
+										<FontAwesomeIcon icon={faCircleExclamation} />
 									</Button>
 								</div>
 							</div>
@@ -136,7 +137,7 @@ export const NotesItem = ({note, handleSort, index, storybookFilter}: NotesItemP
 									className={cls.btnDelete}
 									theme={ButtonThemes.CLEAR}
 								>
-									<FontAwesomeIcon icon={faTrashCan}/>
+									<FontAwesomeIcon icon={faTrashCan} />
 								</Button>
 							</div>
 						</div>
@@ -157,7 +158,7 @@ export const NotesItem = ({note, handleSort, index, storybookFilter}: NotesItemP
 											className={classNames([], {[cls.btnCanText]: canText})}
 											theme={ButtonThemes.CLEAR}
 										>
-											<FontAwesomeIcon icon={faPenClip}/>
+											<FontAwesomeIcon icon={faPenClip} />
 										</Button>
 									</div>
 
@@ -167,7 +168,7 @@ export const NotesItem = ({note, handleSort, index, storybookFilter}: NotesItemP
 											className={cls.btnSave}
 											theme={ButtonThemes.CLEAR}
 										>
-											<FontAwesomeIcon icon={faFloppyDisk}/>
+											<FontAwesomeIcon icon={faFloppyDisk} />
 										</Button>
 									</div>
 								</div>
@@ -180,7 +181,7 @@ export const NotesItem = ({note, handleSort, index, storybookFilter}: NotesItemP
 								onClick={onChangeVisibility}
 								theme={ButtonThemes.CLEAR}
 							>
-								<FontAwesomeIcon icon={faSortDown}/>
+								<FontAwesomeIcon icon={faSortDown} />
 							</Button>
 						</div>
 					</div>

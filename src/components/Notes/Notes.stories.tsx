@@ -16,7 +16,7 @@ const notes: Array<Note> = [
 	{
 		id: '10101',
 		title: 'Note title 1',
-		date: new Date().toLocaleString(),
+		date: '30.03.2000, 21:00:00',
 		isImportant: false,
 		isDisable: false,
 		order: 0,
@@ -24,7 +24,7 @@ const notes: Array<Note> = [
 	{
 		id: '10102',
 		title: 'Note title 2',
-		date: new Date().toLocaleString(),
+		date: '30.03.2000, 21:00:00',
 		isImportant: true,
 		isDisable: false,
 		order: 1,
@@ -32,7 +32,7 @@ const notes: Array<Note> = [
 	{
 		id: '10103',
 		title: 'Note title 3',
-		date: new Date().toLocaleString(),
+		date: '30.03.2000, 21:00:00',
 		isImportant: false,
 		isDisable: true,
 		order: 2,

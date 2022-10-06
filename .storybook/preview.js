@@ -1,3 +1,4 @@
+import 'loki/configure-react';
 import {StyleDecorator} from "../src/helpers/storybook/StyleDecorator/StyleDecorator";
 import {RouterDecorator} from "../src/helpers/storybook/RouterDecorator/RouterDecorator";
 import {LocalizationDecorator} from "../src/helpers/storybook/LocalizationDecorator/LocalizationDecorator";

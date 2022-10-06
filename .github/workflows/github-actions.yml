@@ -23,7 +23,7 @@ jobs:
         run: npm ci
 
       - name: build production project
-        run: npm run build
+        run: CI=false && npm run build
         if: always()
 
       - name: linting typescript
@@ -37,3 +37,9 @@ jobs:
       - name: testing units
         run: npm run test:unit
         if: always()
+
+      - name: build storybook
+        run: npm run storybook:build
+
+      - name: testing ui screenshots
+        run: npm run test:ui

@@ -1,15 +1,15 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react';
-import {HomePage} from './HomePage';
+import {HomePagetemplate} from './HomePageTemplate';
 
 export default {
 	title: 'pages/HomePage',
-	component: HomePage,
+	component: HomePagetemplate,
 	argTypes: {
 		backgroundColor: {control: 'color'},
 	},
-} as ComponentMeta<typeof HomePage>;
+} as ComponentMeta<typeof HomePagetemplate>;
 
-const Template: ComponentStory<typeof HomePage> = (args) => <HomePage />;
+const Template: ComponentStory<typeof HomePagetemplate> = (args) => <HomePagetemplate />;
 
 export const HomePageStory = Template.bind({});
 HomePageStory.args = {};
