@@ -12,8 +12,5 @@ module.exports = {
   staticDirs: ['../public'],
   core: {
     builder: "@storybook/builder-webpack5"
-  },
-  features: {
-    storyStoreV7: !global.navigator?.userAgent?.match?.('jsdom'),
-  },
+  }
 }
