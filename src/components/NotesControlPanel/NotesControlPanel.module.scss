@@ -22,12 +22,6 @@
 	border: 1px solid var(--primary-color);
 	transition: 0.2s;
 
-	&:hover {
-		&::before {
-			transform: scale(1.05);
-		}
-	}
-
 	&::before {
 		content: "";
 		position: absolute;
@@ -41,6 +35,12 @@
 		border: 1px solid var(--primary-color);
 		box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
 		transition: 0.15s;
+	}
+
+	&:hover {
+		&::before {
+			transform: scale(1.05);
+		}
 	}
 }
 
