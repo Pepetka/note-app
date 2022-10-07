@@ -8,5 +8,8 @@
 	"Loading": "Loading",
 	"Page not found": "Page not found",
 	"To main": "To main",
-	"Error loading page": "Error loading page"
+	"Error loading page": "Error loading page",
+	"Delete note? Are you sure?": "Delete note? Are you sure?",
+	"Close": "Close",
+	"Delete": "Delete"
 }

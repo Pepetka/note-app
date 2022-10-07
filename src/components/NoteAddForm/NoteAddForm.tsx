@@ -3,8 +3,8 @@ import {hideAlert, showAlert} from 'store/slices/alertSlice';
 import {addNote} from 'store/slices/firebaseSlice';
 import {useAppDispatch} from 'hooks/useRedux';
 import {useTranslation} from 'react-i18next';
-import {Button, ButtonThemes} from 'components/lib/Button/Button';
-import {Input} from 'components/lib/Input/Input';
+import {Button, ButtonThemes} from 'lib/Button/Button';
+import {Input} from 'lib/Input/Input';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faExclamation} from '@fortawesome/free-solid-svg-icons';
 

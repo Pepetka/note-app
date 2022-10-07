@@ -1,6 +1,6 @@
-import {MouseEvent, useCallback, useEffect, useRef} from 'react';
-import {Button, ButtonThemes} from 'components/lib/Button/Button';
-import {Modal} from 'components/Modal/Modal';
+import {useTranslation} from 'react-i18next';
+import {Button, ButtonThemes} from 'lib/Button/Button';
+import {Modal} from 'lib/Modal/Modal';
 
 import cls from './ModalConfirm.module.scss';
 
@@ -11,24 +11,26 @@ interface ModalConfirmProps {
 }
 
 export const ModalConfirm = ({isOpen, onClose, onConfirm}: ModalConfirmProps) => {
+	const {t} = useTranslation();
+
 	return (
 		<Modal isOpen={isOpen} onClose={onClose}>
 			<div className={cls.content}>
-				<p>{/* eslint-disable-line */}
-					Delete note? Are you sure?
+				<p>
+					{t('Delete note? Are you sure?')}
 				</p>
 				<div className={cls.control}>
 					<Button
 						theme={ButtonThemes.PRIMARY}
 						onClick={onConfirm}
-					>{/* eslint-disable-line */}
-						Delete
+					>
+						{t('Delete')}
 					</Button>
 					<Button
 						theme={ButtonThemes.PRIMARY}
 						onClick={onClose}
-					>{/* eslint-disable-line */}
-						Close
+					>
+						{t('Close')}
 					</Button>
 				</div>
 			</div>

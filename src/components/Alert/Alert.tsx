@@ -2,7 +2,7 @@ import {AlertType, hideAlert} from 'store/slices/alertSlice';
 import {useAppDispatch, useAppSelector} from 'hooks/useRedux';
 import {useTranslation} from 'react-i18next';
 import {classNames} from 'helpers/classNames/classNames';
-import {Button, ButtonThemes} from 'components/lib/Button/Button';
+import {Button, ButtonThemes} from 'lib/Button/Button';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faXmark} from '@fortawesome/free-solid-svg-icons';
 import {CSSTransition} from 'react-transition-group';
@@ -33,7 +33,7 @@ export const Alert = ({storybookType, storybookVisible, storybookText}: AlertPro
 				}
 			>
 				<div><strong>{t('Attention')}</strong>
-					<br/>
+					<br />
 					<div>{(storybookText ?? text)}</div>
 				</div>
 				<Button

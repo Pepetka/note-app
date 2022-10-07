@@ -1,7 +1,7 @@
 import React from 'react';
 import {useAppSelector} from 'hooks/useRedux';
 import {useTranslation} from 'react-i18next';
-import {Button, ButtonThemes} from 'components/lib/Button/Button';
+import {Button, ButtonThemes} from 'lib/Button/Button';
 
 import cls from './ReloadTemplate.module.scss';
 

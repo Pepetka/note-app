@@ -3,8 +3,8 @@ import {SubmitHandler, useForm, Controller} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import {useTranslation} from 'react-i18next';
-import {Button, ButtonThemes} from 'components/lib/Button/Button';
-import {Input} from 'components/lib/Input/Input';
+import {Button, ButtonThemes} from 'lib/Button/Button';
+import {Input} from 'lib/Input/Input';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
 
@@ -74,7 +74,7 @@ export const AuthForm = ({title, onSubmitForm}: AuthFormProps) => {
 					)}
 				/>
 				{errors.email && (
-					<ErrorMessage errorMessage={errors.email.message!}/>
+					<ErrorMessage errorMessage={errors.email.message!} />
 				)}
 			</div>
 			<div className={cls.inputGroup}>
@@ -100,11 +100,11 @@ export const AuthForm = ({title, onSubmitForm}: AuthFormProps) => {
 						corners
 						theme={ButtonThemes.PRIMARY}
 					>
-						{passwordVisibility ? <FontAwesomeIcon icon={faEyeSlash}/> : <FontAwesomeIcon icon={faEye} />}
+						{passwordVisibility ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />}
 					</Button>
 				</div>
 				{errors.password && (
-					<ErrorMessage errorMessage={errors.password.message!}/>
+					<ErrorMessage errorMessage={errors.password.message!} />
 				)}
 			</div>
 			<div className={cls.inputGroupCheck}>

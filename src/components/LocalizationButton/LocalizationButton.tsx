@@ -1,6 +1,6 @@
 import {useEffect} from 'react';
 import {useTranslation} from 'react-i18next';
-import {Button, ButtonThemes} from 'components/lib/Button/Button';
+import {Button, ButtonThemes} from 'lib/Button/Button';
 
 export const LocalizationButton = () => {
 	const {i18n} = useTranslation();

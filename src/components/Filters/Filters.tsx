@@ -1,7 +1,7 @@
 import {useAppDispatch, useAppSelector} from 'hooks/useRedux';
 import {changeFilter} from 'store/slices/firebaseSlice';
 import {useTranslation} from 'react-i18next';
-import {Button, ButtonThemes} from 'components/lib/Button/Button';
+import {Button, ButtonThemes} from 'lib/Button/Button';
 import {FilterTypes} from 'types';
 
 import cls from './Filters.module.scss';

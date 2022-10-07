@@ -7,7 +7,7 @@ import {hideAlert, showAlert} from 'store/slices/alertSlice';
 import {User} from 'types';
 import {toUpperFirs} from 'helpers/toUpperFirst/toUpperFirst';
 import {useTranslation} from 'react-i18next';
-import {Button, ButtonThemes} from 'components/lib/Button/Button';
+import {Button, ButtonThemes} from 'lib/Button/Button';
 
 import cls from './Login.module.scss';
 
@@ -85,7 +85,7 @@ export const Login = () => {
 
 	return (
 		<div className={cls.Login}>
-			<AuthForm title='Login' onSubmitForm={handleLogin}/>
+			<AuthForm title='Login' onSubmitForm={handleLogin} />
 			<p>
 				{t('Or')} <Link to='/register'>{t('register')}</Link>
 			</p>

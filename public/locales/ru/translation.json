@@ -8,5 +8,8 @@
 	"Loading": "Загрузка",
 	"Page not found": "Страница не найдена",
 	"To main": "На главную",
-	"Error loading page": "Ошибка при загрузке страницы"
+	"Error loading page": "Ошибка при загрузке страницы",
+	"Delete note? Are you sure?": "Удалить запись? Вы уверены?",
+	"Close": "Закрыть",
+	"Delete": "Удалить"
 }

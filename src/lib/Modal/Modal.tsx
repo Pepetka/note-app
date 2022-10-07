@@ -1,7 +1,7 @@
 import {ReactNode, useEffect, useRef, useState, MouseEvent, useCallback} from 'react';
 import {CSSTransition} from 'react-transition-group';
 import {classNames} from 'helpers/classNames/classNames';
-import {Portal} from 'components/Portal/Portal';
+import {Portal} from 'lib/Portal/Portal';
 import {useTheme} from 'hooks/useTheme';
 import {getScrollbarWidth} from 'helpers/scrollbarWidth/scrollbarWidth';
 
@@ -30,14 +30,18 @@ export const Modal = ({className, children, isOpen, onClose}: ModalProps) => {
 
 			window.addEventListener('keydown', onKeyClose);
 
-			(document.querySelector('#sideBar') as HTMLElement).style.marginRight = `${getScrollbarWidth()}px`;
+			if ((document.querySelector('#sideBar') as HTMLElement)) {
+				(document.querySelector('#sideBar') as HTMLElement).style.marginRight = `${getScrollbarWidth()}px`;
+			}
 			document.body.style.overflowY = 'hidden';
 			document.body.style.marginRight = `${getScrollbarWidth()}px`;
 		} else {
 			timerRef.current = setTimeout(() => {
 				setIsClose(true);
 
-				(document.querySelector('#sideBar') as HTMLElement).style.marginRight = '0';
+				if ((document.querySelector('#sideBar') as HTMLElement)) {
+					(document.querySelector('#sideBar') as HTMLElement).style.marginRight = '0';
+				}
 				document.body.style.overflowY = 'scroll';
 				document.body.style.marginRight = '0';
 			}, 300);

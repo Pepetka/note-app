@@ -1,4 +1,4 @@
-import {Loader} from 'components/Loader/Loader';
+import {Loader} from 'lib/Loader/Loader';
 import {classNames} from 'helpers/classNames/classNames';
 import {useTheme} from 'hooks/useTheme';
 
@@ -12,7 +12,7 @@ export const PageLoader = ({className}: PageLoaderProps) => {
 
 	return (
 		<div className={classNames([cls.PageLoader, theme, 'PageLoader', className])}>
-			<Loader/>
+			<Loader />
 		</div>
 	);
 };

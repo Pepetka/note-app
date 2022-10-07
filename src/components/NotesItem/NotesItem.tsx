@@ -6,7 +6,7 @@ import {Note} from 'types';
 import {Draggable} from 'react-beautiful-dnd';
 import {useTranslation} from 'react-i18next';
 import {classNames} from 'helpers/classNames/classNames';
-import {Button, ButtonThemes} from 'components/lib/Button/Button';
+import {Button, ButtonThemes} from 'lib/Button/Button';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {
 	faCircleExclamation,
@@ -17,11 +17,10 @@ import {
 	faSortDown,
 	faTrashCan,
 } from '@fortawesome/free-solid-svg-icons';
-import {Modal} from 'components/Modal/Modal';
 
 import cls from './NotesItem.module.scss';
 import './NotesItemAnimation.scss';
-import {ModalConfirm} from '../ModalConfirm/ModalConfirm';
+import {ModalConfirm} from 'components/ModalConfirm/ModalConfirm';
 
 interface NotesItemProps {
 	note: Note
@@ -115,7 +114,7 @@ export const NotesItem = ({note, handleSort, index, storybookFilter}: NotesItemP
 										className={classNames([], {[cls.btnDisable]: note.isDisable})}
 										theme={ButtonThemes.CLEAR}
 									>
-										{note.isDisable ? <FontAwesomeIcon icon={faEyeSlash}/> : <FontAwesomeIcon icon={faEye}/>}
+										{note.isDisable ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />}
 									</Button>
 								</div>
 								<div>
@@ -124,7 +123,7 @@ export const NotesItem = ({note, handleSort, index, storybookFilter}: NotesItemP
 										className={classNames([], {[cls.btnImportant]: note.isImportant})}
 										theme={ButtonThemes.CLEAR}
 									>
-										<FontAwesomeIcon icon={faCircleExclamation}/>
+										<FontAwesomeIcon icon={faCircleExclamation} />
 									</Button>
 								</div>
 							</div>
@@ -140,7 +139,7 @@ export const NotesItem = ({note, handleSort, index, storybookFilter}: NotesItemP
 									className={cls.btnDelete}
 									theme={ButtonThemes.CLEAR}
 								>
-									<FontAwesomeIcon icon={faTrashCan}/>
+									<FontAwesomeIcon icon={faTrashCan} />
 								</Button>
 							</div>
 
@@ -163,7 +162,7 @@ export const NotesItem = ({note, handleSort, index, storybookFilter}: NotesItemP
 											className={classNames([], {[cls.btnCanText]: canText})}
 											theme={ButtonThemes.CLEAR}
 										>
-											<FontAwesomeIcon icon={faPenClip}/>
+											<FontAwesomeIcon icon={faPenClip} />
 										</Button>
 									</div>
 
@@ -173,7 +172,7 @@ export const NotesItem = ({note, handleSort, index, storybookFilter}: NotesItemP
 											className={cls.btnSave}
 											theme={ButtonThemes.CLEAR}
 										>
-											<FontAwesomeIcon icon={faFloppyDisk}/>
+											<FontAwesomeIcon icon={faFloppyDisk} />
 										</Button>
 									</div>
 								</div>
@@ -186,7 +185,7 @@ export const NotesItem = ({note, handleSort, index, storybookFilter}: NotesItemP
 								onClick={onChangeVisibility}
 								theme={ButtonThemes.CLEAR}
 							>
-								<FontAwesomeIcon icon={faSortDown}/>
+								<FontAwesomeIcon icon={faSortDown} />
 							</Button>
 						</div>
 					</div>
