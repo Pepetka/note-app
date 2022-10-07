@@ -6,6 +6,11 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
+	&:hover:not(.clear),
+	&:focus:not(.clear) {
+		transform: scale(1.05);
+	}
 }
 
 .clear {
@@ -25,6 +30,11 @@
 	border: 2px solid var(--default-color);
 	background: var(--bg-primary-color);
 	color: var(--primary-color);
+
+	&:hover {
+		background: var(--bg-secondary-color);
+		color: var(--secondary-color);
+	}
 }
 
 .active.primary {
@@ -36,6 +46,11 @@
 	border: 2px solid var(--default-color);
 	background: var(--bg-secondary-color);
 	color: var(--secondary-color);
+
+	&:hover {
+		background: var(--bg-primary-color);
+		color: var(--primary-color);
+	}
 }
 
 .active.secondary {
@@ -52,6 +67,11 @@
 	box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.7);
 	background: var(--bg-secondary-color);
 	color: var(--primary-color);
+
+	&:hover {
+		background: var(--bg-primary-color);
+		color: var(--secondary-color);
+	}
 }
 
 .withoutCorners:not(.circle) {

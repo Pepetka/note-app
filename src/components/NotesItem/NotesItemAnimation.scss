@@ -6,7 +6,7 @@
 .noteContent-enter-active {
 	opacity: 1;
 	max-height: 800px;
-	transition: all 500ms ease-in-out;
+	transition: all 300ms ease-in-out;
 }
 
 .noteContent-exit {
@@ -17,5 +17,5 @@
 .noteContent-exit-active {
 	opacity: 0;
 	max-height: 0;
-	transition: all 500ms ease-in-out;
+	transition: all 300ms ease-in-out;
 }

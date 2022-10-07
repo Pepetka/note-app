@@ -6,6 +6,7 @@ import {classNames} from 'helpers/classNames/classNames';
 import {useTheme} from 'hooks/useTheme';
 
 import '../../firebase';
+
 import cls from './App.module.scss';
 
 export const App = () => {

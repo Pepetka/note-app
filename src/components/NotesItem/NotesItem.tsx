@@ -9,16 +9,19 @@ import {classNames} from 'helpers/classNames/classNames';
 import {Button, ButtonThemes} from 'components/lib/Button/Button';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {
-	faEyeSlash,
 	faCircleExclamation,
-	faTrashCan,
-	faPenClip,
+	faEye,
+	faEyeSlash,
 	faFloppyDisk,
+	faPenClip,
 	faSortDown,
+	faTrashCan,
 } from '@fortawesome/free-solid-svg-icons';
+import {Modal} from 'components/Modal/Modal';
 
 import cls from './NotesItem.module.scss';
 import './NotesItemAnimation.scss';
+import {ModalConfirm} from '../ModalConfirm/ModalConfirm';
 
 interface NotesItemProps {
 	note: Note
@@ -35,6 +38,7 @@ export const NotesItem = ({note, handleSort, index, storybookFilter}: NotesItemP
 	const [contentVisibility, setContentVisibility] = useState(false);
 	const inputRef = useRef<null | HTMLDivElement>(null);
 	const {t} = useTranslation('home');
+	const [isOpen, setIsOpen] = useState(false);
 
 	useEffect(() => {
 		if (note.content && inputRef.current) inputRef.current.innerHTML = note.content;
@@ -56,30 +60,29 @@ export const NotesItem = ({note, handleSort, index, storybookFilter}: NotesItemP
 		}
 	};
 
-	const onRemoveNote = (event: MouseEvent<HTMLButtonElement>, noteId: string) => {
-		event.stopPropagation();
+	const onRemoveNote = (noteId: string) => {
 		dispatch(removeNote({noteId, userId: userId!}));
 	};
 
-	const onDisableNote = (event: MouseEvent<HTMLButtonElement>, noteId: string) => {
-		event.stopPropagation();
+	const onDisableNote = (noteId: string) => {
 		dispatch(disableNote({noteId, userId: userId!}));
 	};
 
-	const onImportantNote = (event: MouseEvent<HTMLButtonElement>, noteId: string) => {
-		event.stopPropagation();
+	const onImportantNote = (noteId: string) => {
 		dispatch(importantNote({noteId, userId: userId!}));
 	};
 
-	const onTextNote = (event: MouseEvent<HTMLButtonElement>) => {
-		event.stopPropagation();
-
+	const onTextNote = () => {
 		setCanText((canText) => !canText);
 	};
 
-	const onChangeVisibility = (event: MouseEvent<HTMLButtonElement>) => {
-		event.stopPropagation();
+	const onChangeVisibility = () => {
 		setContentVisibility((contentVisibility) => !contentVisibility);
+	};
+
+	const onConfirmDelete = () => {
+		setIsOpen(false);
+		setTimeout(() => onRemoveNote(note.id!), 400);
 	};
 
 	return (
@@ -108,20 +111,20 @@ export const NotesItem = ({note, handleSort, index, storybookFilter}: NotesItemP
 							<div className={cls.buttonGroup}>
 								<div>
 									<Button
-										onClick={(e) => onDisableNote(e, note.id!)}
+										onClick={() => onDisableNote(note.id!)}
 										className={classNames([], {[cls.btnDisable]: note.isDisable})}
 										theme={ButtonThemes.CLEAR}
 									>
-										<FontAwesomeIcon icon={faEyeSlash} />
+										{note.isDisable ? <FontAwesomeIcon icon={faEyeSlash}/> : <FontAwesomeIcon icon={faEye}/>}
 									</Button>
 								</div>
 								<div>
 									<Button
-										onClick={(e) => onImportantNote(e, note.id!)}
+										onClick={() => onImportantNote(note.id!)}
 										className={classNames([], {[cls.btnImportant]: note.isImportant})}
 										theme={ButtonThemes.CLEAR}
 									>
-										<FontAwesomeIcon icon={faCircleExclamation} />
+										<FontAwesomeIcon icon={faCircleExclamation}/>
 									</Button>
 								</div>
 							</div>
@@ -133,16 +136,18 @@ export const NotesItem = ({note, handleSort, index, storybookFilter}: NotesItemP
 
 							<div className={cls.delete}>
 								<Button
-									onClick={(e) => onRemoveNote(e, note.id!)}
+									onClick={(e) => setIsOpen(true)}
 									className={cls.btnDelete}
 									theme={ButtonThemes.CLEAR}
 								>
-									<FontAwesomeIcon icon={faTrashCan} />
+									<FontAwesomeIcon icon={faTrashCan}/>
 								</Button>
 							</div>
+
+							<ModalConfirm isOpen={isOpen} onClose={() => setIsOpen(false)} onConfirm={onConfirmDelete} />
 						</div>
 
-						<CSSTransition in={contentVisibility} classNames='noteContent' timeout={500} unmountOnExit>
+						<CSSTransition in={contentVisibility} classNames='noteContent' timeout={300} unmountOnExit>
 							<div className={cls.content}>
 								<div
 									ref={inputRef}
@@ -158,7 +163,7 @@ export const NotesItem = ({note, handleSort, index, storybookFilter}: NotesItemP
 											className={classNames([], {[cls.btnCanText]: canText})}
 											theme={ButtonThemes.CLEAR}
 										>
-											<FontAwesomeIcon icon={faPenClip} />
+											<FontAwesomeIcon icon={faPenClip}/>
 										</Button>
 									</div>
 
@@ -168,7 +173,7 @@ export const NotesItem = ({note, handleSort, index, storybookFilter}: NotesItemP
 											className={cls.btnSave}
 											theme={ButtonThemes.CLEAR}
 										>
-											<FontAwesomeIcon icon={faFloppyDisk} />
+											<FontAwesomeIcon icon={faFloppyDisk}/>
 										</Button>
 									</div>
 								</div>
@@ -181,7 +186,7 @@ export const NotesItem = ({note, handleSort, index, storybookFilter}: NotesItemP
 								onClick={onChangeVisibility}
 								theme={ButtonThemes.CLEAR}
 							>
-								<FontAwesomeIcon icon={faSortDown} />
+								<FontAwesomeIcon icon={faSortDown}/>
 							</Button>
 						</div>
 					</div>

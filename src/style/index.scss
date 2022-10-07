@@ -8,6 +8,12 @@
 .ErrorBoundary {
 	color: var(--default-color);
 	background-color: var(--bg-default-color);
+}
+
+.App,
+.PageLoader,
+.ErrorBoundary,
+.AppModal {
 	font: var(--font-m);
 }
 

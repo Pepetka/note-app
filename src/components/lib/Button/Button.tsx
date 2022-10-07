@@ -30,15 +30,19 @@ export const Button = (
 		corners = false,
 		border = true,
 		type = 'button',
+		...otherProps
 	}: ButtonProps) => {
 	return (
-		<button type={type}
+		<button
+			type={type}
 			className={
 				classNames(
 					[cls.Button, cls[theme], className],
 					{[cls.active]: active, [cls.withoutCorners]: !corners, [cls.withoutBorders]: !border})
 			}
-			onClick={(e) => onClick(e)}>
+			onClick={(e) => onClick(e)}
+			{...otherProps}
+		>
 			{children}
 		</button>
 	);
