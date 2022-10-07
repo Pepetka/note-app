@@ -9,7 +9,9 @@ export default {
 	},
 } as ComponentMeta<typeof About>;
 
-const Template: ComponentStory<typeof About> = (args) => <About />;
+const Template: ComponentStory<typeof About> = (args) => <About {...args} />;
 
 export const AboutStory = Template.bind({});
-AboutStory.args = {};
+AboutStory.args = {
+	version: 'v1.0.0',
+};
