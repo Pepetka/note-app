@@ -1,4 +1,4 @@
-import {ChangeEvent, HTMLInputTypeAttribute} from 'react';
+import {ChangeEvent, ForwardedRef, forwardRef, HTMLInputTypeAttribute} from 'react';
 import {classNames} from 'helpers/classNames/classNames';
 
 import cls from './Input.module.scss';
@@ -12,9 +12,21 @@ interface InputProps {
 	id?: string
 	withCorners?: boolean
 }
-export const Input = ({className, placeholder, onChange, value, id, withCorners = false, type = 'text', ...otherProps}: InputProps) => {
+export const Input = forwardRef((props: InputProps, ref: ForwardedRef<HTMLInputElement>) => {
+	const {
+		className,
+		placeholder,
+		onChange,
+		value,
+		id,
+		withCorners = false,
+		type = 'text',
+		...otherProps
+	} = props;
+
 	return (
 		<input
+			ref={ref}
 			value={value}
 			onChange={(e) => onChange(e)}
 			type={type}
@@ -24,4 +36,5 @@ export const Input = ({className, placeholder, onChange, value, id, withCorners 
 			{...otherProps}
 		/>
 	);
-};
+},
+);

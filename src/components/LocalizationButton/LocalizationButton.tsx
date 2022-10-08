@@ -12,9 +12,7 @@ export const LocalizationButton = () => {
 			i18n.changeLanguage(lang);
 			document.documentElement.lang = lang;
 		}
-
-		// eslint-disable-next-line
-	}, []);
+	}, [i18n]);
 
 
 	const onChangeLang = () => {
@@ -27,7 +25,6 @@ export const LocalizationButton = () => {
 	return (
 		<Button
 			onClick={onChangeLang}
-			className='localizationButton'
 			theme={ButtonThemes.CIRCLE}
 		>
 			{i18n.language}

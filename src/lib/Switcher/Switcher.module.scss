@@ -1,0 +1,48 @@
+.Switcher {
+	cursor: pointer;
+	position: relative;
+	display: inline-block;
+	box-sizing: border-box;
+	width: 50px;
+	height: 20px;
+	border-radius: 25% / 63%;
+	vertical-align: top;
+	background: var(--bg-secondary-color);
+	border: 1px solid var(--primary-color);
+	transition: 0.2s;
+
+	&::before {
+		content: "";
+		position: absolute;
+		top: -4px;
+		left: -2px;
+		display: inline-block;
+		width: 26px;
+		height: 26px;
+		border-radius: 50%;
+		background: var(--bg-primary-color);
+		border: 1px solid var(--primary-color);
+		box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+		transition: 0.15s;
+	}
+
+	&:hover {
+		&::before {
+			transform: scale(1.05);
+		}
+	}
+}
+
+.active {
+	background: var(--primary-color);
+
+	&::before {
+		transform: translateX(28px);
+	}
+
+	&:hover {
+		&::before {
+			transform: translateX(28px) scale(1.05);
+		}
+	}
+}

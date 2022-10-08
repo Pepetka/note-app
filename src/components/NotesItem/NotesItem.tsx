@@ -1,4 +1,4 @@
-import {MouseEvent, useEffect, useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {CSSTransition} from 'react-transition-group';
 import {disableNote, importantNote, removeNote, setContent} from 'store/slices/firebaseSlice';
 import {useAppDispatch, useAppSelector} from 'hooks/useRedux';

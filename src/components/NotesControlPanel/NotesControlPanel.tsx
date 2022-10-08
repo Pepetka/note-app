@@ -1,6 +1,6 @@
 import {useTranslation} from 'react-i18next';
 import {useHandleSort} from 'hooks/useHandleSort';
-import {classNames} from 'helpers/classNames/classNames';
+import {Switcher} from 'lib/Switcher/Switcher';
 
 import cls from './NotesControlPanel.module.scss';
 
@@ -18,7 +18,7 @@ export const NotesControlPanel = ({notesLength}: NotesControlPanelProps) => {
 				<label onClick={onHandleSort}>
 					{t('Handle Sort')}
 				</label>
-				<span className={classNames([cls.switcher], {[cls.active]: handleSort})} onClick={onHandleSort}/>
+				<Switcher isActive={handleSort} onclick={onHandleSort} />
 			</div>
 		</div>
 	);
