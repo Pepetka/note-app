@@ -6,6 +6,7 @@ import {componentTestRender} from 'helpers/test/componentTestRender/componentTes
 describe('AboutPage', () => {
 	test('be in the document', () => {
 		componentTestRender(<AboutPage/>);
+		expect(screen.getByTestId('AboutPage')).toBeInTheDocument();
 		expect(screen.getByTestId('About')).toBeInTheDocument();
 	});
 });

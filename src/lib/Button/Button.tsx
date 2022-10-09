@@ -34,6 +34,7 @@ export const Button = (
 	}: ButtonProps) => {
 	return (
 		<button
+			data-testid={`Button-${theme}`}
 			type={type}
 			className={
 				classNames(

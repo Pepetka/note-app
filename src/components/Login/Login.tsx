@@ -84,7 +84,7 @@ export const Login = () => {
 	};
 
 	return (
-		<div className={cls.Login}>
+		<div className={cls.Login} data-testid='Login'>
 			<AuthForm title='Login' onSubmitForm={handleLogin} />
 			<p>
 				{t('Or')} <Link to='/register'>{t('register')}</Link>

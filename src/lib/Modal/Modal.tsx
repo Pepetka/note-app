@@ -59,7 +59,10 @@ export const Modal = ({className, children, isOpen, onClose}: ModalProps) => {
 
 	return (
 		<Portal>
-			<div className={classNames([cls.Modal, className, theme, 'AppModal'], {[cls.close]: isClose})}>
+			<div
+				className={classNames([cls.Modal, className, theme, 'AppModal'], {[cls.close]: isClose})}
+				data-testid='Modal'
+			>
 				<div className={cls.overlay} onClick={onClose}>
 					<CSSTransition in={isOpen} classNames='modalContent' timeout={300}>
 						<div className={cls.content} onClick={onContentClick}>

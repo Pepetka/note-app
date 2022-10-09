@@ -5,11 +5,11 @@ const RegisterPage = () => {
 	const {t} = useTranslation('auth');
 
 	return (
-		<>
+		<div data-testid='RegisterPage'>
 			<h1>{t('Register')}</h1>
 
 			<Register />
-		</>
+		</div>
 	);
 };
 

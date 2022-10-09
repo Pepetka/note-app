@@ -13,7 +13,7 @@ const NotFoundPage = () => {
 	};
 
 	return (
-		<div className={cls.NotFoundPage}>
+		<div className={cls.NotFoundPage} data-testid='NotFoundPage'>
 			<h1>{t('Page not found')}</h1>
 			<Button
 				theme={ButtonThemes.PRIMARY}

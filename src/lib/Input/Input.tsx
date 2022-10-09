@@ -6,7 +6,7 @@ import cls from './Input.module.scss';
 interface InputProps {
 	className?: string
 	placeholder?: string
-	onChange: (e: ChangeEvent<HTMLInputElement>) => void
+	onChange?: (e: ChangeEvent<HTMLInputElement>) => void
 	value?: string
 	type?: HTMLInputTypeAttribute
 	id?: string
@@ -26,9 +26,10 @@ export const Input = forwardRef((props: InputProps, ref: ForwardedRef<HTMLInputE
 
 	return (
 		<input
+			data-testid='Input'
 			ref={ref}
 			value={value}
-			onChange={(e) => onChange(e)}
+			onChange={onChange}
 			type={type}
 			className={classNames([cls.Input, className], {[cls.withCorners]: withCorners})}
 			placeholder={placeholder}
