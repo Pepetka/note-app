@@ -1,17 +1,16 @@
 import {memo} from 'react';
-import {Note} from 'types';
 import {NotesItem} from 'components/NotesItem/NotesItem';
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
+import {Note} from 'store/notes/types/NotesSchema';
 
 import './NotesListAnimation.scss';
 
 interface NotesListProps {
 	notes: Note[]
 	handleSort: boolean
-	storybookFilter?: 'all'
 }
 
-export const NotesList = memo(({notes, handleSort, storybookFilter}: NotesListProps) => {
+export const NotesList = memo(({notes, handleSort}: NotesListProps) => {
 	return (
 		<TransitionGroup>
 			{notes
@@ -26,7 +25,6 @@ export const NotesList = memo(({notes, handleSort, storybookFilter}: NotesListPr
 								note={note}
 								index={index}
 								handleSort={handleSort}
-								storybookFilter={storybookFilter}
 							/>
 						</CSSTransition>
 					);

@@ -2,9 +2,9 @@ import 'loki/configure-react';
 import {StyleDecorator} from "../src/helpers/storybook/StyleDecorator/StyleDecorator";
 import {RouterDecorator} from "../src/helpers/storybook/RouterDecorator/RouterDecorator";
 import {LocalizationDecorator} from "../src/helpers/storybook/LocalizationDecorator/LocalizationDecorator";
-import {StoreDecorator} from "../src/helpers/storybook/StoreDecorator/StoreDecorator";
 import {HandleSortDecorator} from "../src/helpers/storybook/HandleSortDecorator/HandleSortDecorator";
 import {Theme} from "../src/context/theme/ThemeContext";
+import {StoreDecorator} from "../src/helpers/storybook/StoreDecorator/StoreDecorator";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -49,6 +49,6 @@ export const decorators = [
   StyleDecorator,
   RouterDecorator,
   LocalizationDecorator,
-  StoreDecorator,
-  HandleSortDecorator
+  HandleSortDecorator,
+  StoreDecorator()
 ];

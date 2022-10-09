@@ -12,7 +12,7 @@ export const NotesControlPanel = ({notesLength}: NotesControlPanelProps) => {
 	const {handleSort, onHandleSort} = useHandleSort();
 
 	return (
-		<div className={cls.ControlPanel}>
+		<div className={cls.ControlPanel} data-testid='NotesControlPanel'>
 			<div>{t('Number of notes')} {notesLength}</div>
 			<div className={cls.wrapper}>
 				<label onClick={onHandleSort}>

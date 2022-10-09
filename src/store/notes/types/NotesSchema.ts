@@ -1,3 +1,5 @@
+import {FilterTypes} from '../slice/notesSlice';
+
 export interface Note {
 	id?: string
 	title: string
@@ -8,14 +10,7 @@ export interface Note {
 	order: number
 }
 
-export enum FilterTypes {
-	ALL = 'all',
-	DISABLE = 'isDisable',
-	IMPORTANT = 'isImportant',
-	ACTIVE = 'active'
-}
-
-export interface FirebaseState {
+export interface NotesSchema {
 	notes: Note[]
 	loading: boolean
 	filter: FilterTypes
@@ -23,10 +18,4 @@ export interface FirebaseState {
 		get: string | null
 		update: string | null
 	}
-}
-
-export interface User {
-	email: string | null
-	token: string | null
-	id: string | null
 }

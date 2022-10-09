@@ -1,40 +1,35 @@
-import {AlertType, hideAlert} from 'store/slices/alertSlice';
-import {useAppDispatch, useAppSelector} from 'hooks/useRedux';
+import {alertActions} from 'store/alert/slice/alertSlice';
 import {useTranslation} from 'react-i18next';
 import {classNames} from 'helpers/classNames/classNames';
 import {Button, ButtonThemes} from 'lib/Button/Button';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faXmark} from '@fortawesome/free-solid-svg-icons';
 import {CSSTransition} from 'react-transition-group';
+import {getAlertState} from 'store/alert/selectors/getState/getAlertState';
+import {useAppDispatch, useAppSelector} from 'hooks/useRedux';
 
 import cls from './Alert.module.scss';
 import './AlertAnimation.scss';
 
-interface AlertProps {
-	storybookText?: string
-	storybookType?: AlertType
-	storybookVisible?: boolean
-}
-
-export const Alert = ({storybookType, storybookVisible, storybookText}: AlertProps) => {
+export const Alert = () => {
 	const dispatch = useAppDispatch();
-	const {type, visible, text} = useAppSelector((store) => store.alert);
+	const {type, visible, text} = useAppSelector(getAlertState);
 	const {t} = useTranslation();
 
 	const onCloseAlert = () => {
-		dispatch(hideAlert());
+		dispatch(alertActions.hideAlert());
 	};
 
 	return (
-		<CSSTransition in={storybookVisible ?? visible} classNames='alert' timeout={300} unmountOnExit>
+		<CSSTransition in={visible} classNames='alert' timeout={300} unmountOnExit>
 			<div
 				className={
-					classNames([cls.AppAlert, cls[(storybookType ?? type)]])
+					classNames([cls.AppAlert, cls[type]])
 				}
 			>
 				<div><strong>{t('Attention')}</strong>
 					<br />
-					<div>{(storybookText ?? text)}</div>
+					<div>{text}</div>
 				</div>
 				<Button
 					onClick={onCloseAlert}

@@ -1,22 +1,23 @@
 import React from 'react';
-import {useAppSelector} from 'hooks/useRedux';
 import {useTranslation} from 'react-i18next';
 import {Button, ButtonThemes} from 'lib/Button/Button';
+import {getError} from 'store/notes/selectors/getError/getError';
+import {useAppSelector} from 'hooks/useRedux';
 
 import cls from './ReloadTemplate.module.scss';
 
 interface ReloadTemplateProps {
 	onReload: () => void
-	storybookError?: 'Error message'
 	errorMessage?: string
 }
-export const ReloadTemplate = ({onReload, storybookError, errorMessage}: ReloadTemplateProps) => {
-	const {error} = useAppSelector((state) => state.firebase);
+
+export const ReloadTemplate = ({onReload, errorMessage}: ReloadTemplateProps) => {
+	const error = useAppSelector(getError);
 	const {t} = useTranslation('home');
 
 	return (
-		<div className={cls.FetchError}>
-			<h1>{(errorMessage ?? storybookError) ?? error.get}</h1>
+		<div className={cls.FetchError} data-testid='ReloadTemplate'>
+			<h1>{errorMessage ?? error.get}</h1>
 			<Button
 				onClick={onReload}
 				theme={ButtonThemes.PRIMARY}

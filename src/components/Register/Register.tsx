@@ -1,11 +1,11 @@
 import {getAuth, createUserWithEmailAndPassword} from 'firebase/auth';
-import {useAppDispatch} from 'hooks/useRedux';
 import {Link, useNavigate} from 'react-router-dom';
 import {AuthForm} from 'components/AuthForm/AuthForm';
-import {setUser} from 'store/slices/userSlice';
-import {showAlert, hideAlert} from 'store/slices/alertSlice';
+import {userActions} from 'store/user/slice/userSlice';
+import {alertActions} from 'store/alert/slice/alertSlice';
 import {toUpperFirs} from 'helpers/toUpperFirst/toUpperFirst';
 import {useTranslation} from 'react-i18next';
+import {useAppDispatch} from 'hooks/useRedux';
 
 import cls from './Register.module.scss';
 
@@ -16,14 +16,14 @@ export const Register = () => {
 
 	const onShowAlert = (text: string) => {
 		dispatch(
-			showAlert({
+			alertActions.showAlert({
 				text,
 				type: 'danger',
 			}),
 		);
 
 		setTimeout(() => {
-			dispatch(hideAlert());
+			dispatch(alertActions.hideAlert());
 		}, 5000);
 	};
 
@@ -46,7 +46,7 @@ export const Register = () => {
 					token: user.refreshToken,
 				};
 
-				dispatch(setUser(userData));
+				dispatch(userActions.setUser(userData));
 
 				if (rememberMe) localStorage.setItem('user', JSON.stringify(userData));
 

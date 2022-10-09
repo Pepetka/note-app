@@ -12,5 +12,6 @@ describe('classNames', () => {
 		expect(classNames([], {true_class: true})).toBe('true_class');
 		expect(classNames([], {false_class: false})).toBe('');
 		expect(classNames([], {true_class: true, false_class: false})).toBe('true_class');
+		expect(classNames([], {true_class: true, false_class: false, true_class_second: true})).toBe('true_class true_class_second');
 	});
 });

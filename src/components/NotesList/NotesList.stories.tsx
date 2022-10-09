@@ -1,7 +1,11 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 import {NotesList} from './NotesList';
 import {DragDecorator} from 'helpers/storybook/DragDecorator/DragDecorator';
-import {Note} from 'types';
+import {Note} from 'store/notes/types/NotesSchema';
+import {StoreDecorator} from 'helpers/storybook/StoreDecorator/StoreDecorator';
+import {DeepPartial} from '@reduxjs/toolkit';
+import {StateSchema} from 'store/types/StateSchema';
+import {FilterTypes} from 'store/notes/slice/notesSlice';
 
 export default {
 	title: 'components/NotesList',
@@ -40,12 +44,25 @@ const notes: Array<Note> = [
 	},
 ];
 
+const initialState: DeepPartial<StateSchema> = {
+	notes: {
+		filter: FilterTypes.ALL,
+	},
+	user: {
+		user: {
+			id: 'id',
+			token: 'token',
+			email: 'mail@mail.ru',
+		},
+	},
+};
+
 export const NotesListStory = Template.bind({});
 NotesListStory.args = {
 	notes: notes,
 	handleSort: false,
-	storybookFilter: 'all',
 };
 NotesListStory.decorators = [
 	DragDecorator,
+	StoreDecorator(initialState as StateSchema),
 ];

@@ -1,10 +1,10 @@
-import {useAppDispatch} from 'hooks/useRedux';
 import {useAuth} from 'hooks/useAuth';
 import {NavLink} from 'react-router-dom';
-import {clearNotes} from 'store/slices/firebaseSlice';
-import {removeUser} from 'store/slices/userSlice';
+import {notesActions} from 'store/notes/slice/notesSlice';
+import {userActions} from 'store/user/slice/userSlice';
 import {useTranslation} from 'react-i18next';
 import {classNames} from 'helpers/classNames/classNames';
+import {useAppDispatch} from 'hooks/useRedux';
 
 import cls from './NavBar.module.scss';
 
@@ -14,8 +14,8 @@ export const NavBar = () => {
 	const {t} = useTranslation();
 
 	const onLogOut = () => {
-		dispatch(removeUser());
-		dispatch(clearNotes());
+		dispatch(userActions.removeUser());
+		dispatch(notesActions.clearNotes());
 		localStorage.removeItem('user');
 	};
 

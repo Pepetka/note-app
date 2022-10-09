@@ -1,8 +1,8 @@
-import {useAppDispatch, useAppSelector} from 'hooks/useRedux';
-import {changeFilter} from 'store/slices/firebaseSlice';
+import {FilterTypes, notesActions} from 'store/notes/slice/notesSlice';
 import {useTranslation} from 'react-i18next';
 import {Button, ButtonThemes} from 'lib/Button/Button';
-import {FilterTypes} from 'types';
+import {getFilter} from 'store/notes/selectors/getFilter/getFilter';
+import {useAppDispatch, useAppSelector} from 'hooks/useRedux';
 
 import cls from './Filters.module.scss';
 
@@ -15,20 +15,20 @@ const buttons = [
 
 export const Filters = () => {
 	const dispatch = useAppDispatch();
-	const {filter} = useAppSelector((state) => state.firebase);
+	const filter = useAppSelector(getFilter);
 	const {t} = useTranslation('home');
 
 	const onChangeFilter = (data: string) => {
 		if (filter === data) {
-			dispatch(changeFilter({filter: FilterTypes.ALL}));
+			dispatch(notesActions.changeFilter({filter: FilterTypes.ALL}));
 			return;
 		}
 
-		dispatch(changeFilter({filter: data}));
+		dispatch(notesActions.changeFilter({filter: data}));
 	};
 
 	return (
-		<div className={cls.Filter}>
+		<div className={cls.Filter} data-testid='Filters'>
 			{buttons.map(({data, name}) => {
 				if (data === FilterTypes.ALL && window.innerWidth <= 768) {
 					return null;

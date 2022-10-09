@@ -1,11 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {User} from 'types';
+import {UserSchema} from '../types/UserSchema';
 
-interface UserState {
-	user: User
-}
-
-const initialState: UserState = {
+const initialState: UserSchema = {
 	user: {
 		email: null,
 		token: null,
@@ -30,6 +26,5 @@ const userSlice = createSlice({
 	},
 });
 
-export const {setUser, removeUser} = userSlice.actions;
-
+export const userActions = userSlice.actions;
 export default userSlice.reducer;

@@ -1,7 +1,11 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 import {NotesItem} from './NotesItem';
-import {Note} from 'types';
 import {DragDecorator} from 'helpers/storybook/DragDecorator/DragDecorator';
+import {Note} from 'store/notes/types/NotesSchema';
+import {DeepPartial} from '@reduxjs/toolkit';
+import {StateSchema} from 'store/types/StateSchema';
+import {StoreDecorator} from 'helpers/storybook/StoreDecorator/StoreDecorator';
+import {FilterTypes} from 'store/notes/slice/notesSlice';
 
 export default {
 	title: 'components/NotesItem',
@@ -22,6 +26,19 @@ const noteItem: Note = {
 	order: 0,
 };
 
+const initialState: DeepPartial<StateSchema> = {
+	notes: {
+		filter: FilterTypes.ALL,
+	},
+	user: {
+		user: {
+			id: 'id',
+			token: 'token',
+			email: 'mail@mail.ru',
+		},
+	},
+};
+
 export const NotesItemDefault = Template.bind({});
 NotesItemDefault.args = {
 	note: noteItem,
@@ -30,6 +47,7 @@ NotesItemDefault.args = {
 };
 NotesItemDefault.decorators = [
 	DragDecorator,
+	StoreDecorator(initialState as StateSchema),
 ];
 
 export const NotesItemImportant = Template.bind({});
@@ -41,6 +59,8 @@ NotesItemImportant.args = {
 };
 NotesItemImportant.decorators = [
 	DragDecorator,
+	StoreDecorator(initialState as StateSchema),
+
 ];
 
 export const NotesItemDisable = Template.bind({});
@@ -48,9 +68,8 @@ NotesItemDisable.args = {
 	note: {...noteItem, isDisable: true},
 	handleSort: false,
 	index: 0,
-	storybookFilter: 'all',
-
 };
 NotesItemDisable.decorators = [
 	DragDecorator,
+	StoreDecorator(initialState as StateSchema),
 ];

@@ -1,12 +1,12 @@
 import {ChangeEvent, MouseEvent, useState} from 'react';
-import {hideAlert, showAlert} from 'store/slices/alertSlice';
-import {addNote} from 'store/slices/firebaseSlice';
-import {useAppDispatch} from 'hooks/useRedux';
+import {alertActions} from 'store/alert/slice/alertSlice';
+import {addNote} from 'store/notes/slice/notesSlice';
 import {useTranslation} from 'react-i18next';
 import {Button, ButtonThemes} from 'lib/Button/Button';
 import {Input} from 'lib/Input/Input';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faExclamation} from '@fortawesome/free-solid-svg-icons';
+import {useAppDispatch} from 'hooks/useRedux';
 
 import cls from './NoteAddForm.module.scss';
 
@@ -27,14 +27,14 @@ export const NoteAddForm = () => {
 
 	const onShowAlert = (text: string, type: string) => {
 		dispatch(
-			showAlert({
+			alertActions.showAlert({
 				text,
 				type,
 			}),
 		);
 
 		setTimeout(() => {
-			dispatch(hideAlert());
+			dispatch(alertActions.hideAlert());
 		}, 3000);
 	};
 
@@ -46,12 +46,12 @@ export const NoteAddForm = () => {
 			setValue('');
 			setIsChecked(false);
 		} else {
-			onShowAlert('Enter note title', 'warning');
+			onShowAlert(t('Please enter a note title'), 'warning');
 		}
 	};
 
 	return (
-		<form className={cls.NoteAddForm}>
+		<form className={cls.NoteAddForm} data-testid='NoteAddForm'>
 			<Input
 				value={value}
 				onChange={onValueChange}

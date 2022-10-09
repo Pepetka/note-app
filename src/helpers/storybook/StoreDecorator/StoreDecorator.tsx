@@ -1,9 +1,11 @@
-import {Provider} from 'react-redux';
 import {Story} from '@storybook/react';
-import {store} from 'store';
+import {StoreProvider} from 'store/StoreProvider/StoreProvider';
+import {StateSchema} from 'store/types/StateSchema';
 
-export const StoreDecorator = (StoryComponent: Story) => (
-	<Provider store={store}>
-		<StoryComponent />
-	</Provider>
-);
+export const StoreDecorator = (initialState?: StateSchema) => {
+	return (StoryComponent: Story) => (
+		<StoreProvider initialState={initialState}>
+			<StoryComponent />
+		</StoreProvider>
+	);
+};

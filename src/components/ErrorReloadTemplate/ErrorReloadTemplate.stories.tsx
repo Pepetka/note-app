@@ -1,5 +1,6 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 import {ErrorReloadTemplate} from './ErrorReloadTemplate';
+import {StoreDecorator} from 'helpers/storybook/StoreDecorator/StoreDecorator';
 
 export default {
 	title: 'components/ErrorReloadTemplate',
@@ -13,3 +14,6 @@ const Template: ComponentStory<typeof ErrorReloadTemplate> = (args) => <ErrorRel
 
 export const ErrorReloadTemplateStory = Template.bind({});
 ErrorReloadTemplateStory.args = {};
+ErrorReloadTemplateStory.decorators = [
+	StoreDecorator(),
+];

@@ -1,5 +1,8 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 import {Alert} from './Alert';
+import {StoreDecorator} from 'helpers/storybook/StoreDecorator/StoreDecorator';
+import {StateSchema} from 'store/types/StateSchema';
+import {DeepPartial} from '@reduxjs/toolkit';
 
 export default {
 	title: 'components/Alert',
@@ -9,25 +12,44 @@ export default {
 	},
 } as ComponentMeta<typeof Alert>;
 
-const Template: ComponentStory<typeof Alert> = (args) => <Alert {...args} />;
+const Template: ComponentStory<typeof Alert> = (args) => <Alert />;
+
+const initialStateDanger: DeepPartial<StateSchema> = {
+	alert: {
+		text: 'Alert message',
+		visible: true,
+		type: 'danger',
+	},
+};
+const initialStateSuccess: DeepPartial<StateSchema> = {
+	alert: {
+		text: 'Alert message',
+		visible: true,
+		type: 'success',
+	},
+};
+const initialStateWarning: DeepPartial<StateSchema> = {
+	alert: {
+		text: 'Alert message',
+		visible: true,
+		type: 'warning',
+	},
+};
 
 export const AlertDanger = Template.bind({});
-AlertDanger.args = {
-	storybookVisible: true,
-	storybookText: 'Alert message',
-	storybookType: 'danger',
-};
+AlertDanger.args = {};
+AlertDanger.decorators = [
+	StoreDecorator(initialStateDanger as StateSchema),
+];
 
 export const AlertSuccess= Template.bind({});
-AlertSuccess.args = {
-	storybookVisible: true,
-	storybookText: 'Alert message',
-	storybookType: 'success',
-};
+AlertSuccess.args = {};
+AlertSuccess.decorators = [
+	StoreDecorator(initialStateSuccess as StateSchema),
+];
 
 export const AlertWarning = Template.bind({});
-AlertWarning.args = {
-	storybookVisible: true,
-	storybookText: 'Alert message',
-	storybookType: 'warning',
-};
+AlertWarning.args = {};
+AlertWarning.decorators = [
+	StoreDecorator(initialStateWarning as StateSchema),
+];

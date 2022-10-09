@@ -1,6 +1,10 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react';
+import {Note} from 'store/notes/types/NotesSchema';
 import {Notes} from './Notes';
-import {Note} from '../../types';
+import {DeepPartial} from '@reduxjs/toolkit';
+import {StateSchema} from 'store/types/StateSchema';
+import {StoreDecorator} from 'helpers/storybook/StoreDecorator/StoreDecorator';
+import {FilterTypes} from 'store/notes/slice/notesSlice';
 
 export default {
 	title: 'components/Notes',
@@ -39,16 +43,45 @@ const notes: Array<Note> = [
 	},
 ];
 
+const initialStateWithNotes: DeepPartial<StateSchema> = {
+	notes: {
+		filter: FilterTypes.ALL,
+		notes,
+	},
+	user: {
+		user: {
+			id: 'id',
+			token: 'token',
+			email: 'mail@mail.ru',
+		},
+	},
+};
+const initialStateWithoutNotes: DeepPartial<StateSchema> = {
+	notes: {
+		filter: FilterTypes.ALL,
+		notes: [],
+	},
+	user: {
+		user: {
+			id: 'id',
+			token: 'token',
+			email: 'mail@mail.ru',
+		},
+	},
+};
+
 export const NotesWithNotes = Template.bind({});
 NotesWithNotes.args = {
-	storybookNotes: notes,
 	handleSort: false,
-	storybookFilter: 'all',
 };
+NotesWithNotes.decorators = [
+	StoreDecorator(initialStateWithNotes as StateSchema),
+];
 
 export const NotesWithoutNotes = Template.bind({});
 NotesWithoutNotes.args = {
-	storybookNotes: [],
 	handleSort: false,
-	storybookFilter: 'all',
 };
+NotesWithoutNotes.decorators = [
+	StoreDecorator(initialStateWithoutNotes as StateSchema),
+];

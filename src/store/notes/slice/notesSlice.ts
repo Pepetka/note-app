@@ -1,22 +1,29 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {child, get, ref} from 'firebase/database';
 import axios from 'axios';
-import {RootState} from 'store';
-import {FilterTypes, FirebaseState, Note} from 'types';
-import {showAlert} from './alertSlice';
-import {database} from '../../firebase';
+import {alertActions} from '../../alert/slice/alertSlice';
+import {database} from '../../../firebase';
 import {withoutId} from 'helpers/withoutId/withoutId';
+import {Note, NotesSchema} from '../types/NotesSchema';
+import {StateSchema} from '../../types/StateSchema';
 
 const url = process.env.REACT_APP_DB_URL;
 
 type ThunkApi = {
 	rejectValue: string
 	fulfillValue: string
-	state: RootState
+	state: StateSchema
+}
+
+export enum FilterTypes {
+	ALL = 'all',
+	DISABLE = 'isDisable',
+	IMPORTANT = 'isImportant',
+	ACTIVE = 'active'
 }
 
 export const fetchNotes = createAsyncThunk<Note[], string, ThunkApi>(
-	'firebase/fetchNotes',
+	'notes/fetchNotes',
 	async (userId, {rejectWithValue}) => {
 		try {
 			const dbRef = ref(database);
@@ -44,7 +51,7 @@ export const removeNote = createAsyncThunk<
 		noteId: string
 	},
 	ThunkApi
->('firebase/removeNote', ({userId, noteId}, {rejectWithValue}) => {
+>('notes/removeNote', ({userId, noteId}, {rejectWithValue}) => {
 	try {
 		axios.delete(`${url}/notes/${userId}/${noteId}.json`);
 
@@ -61,9 +68,9 @@ export const disableNote = createAsyncThunk<
 		noteId: string
 	},
 	ThunkApi
->('firebase/disableNote', async ({userId, noteId}, {getState, rejectWithValue, dispatch}) => {
+>('notes/disableNote', async ({userId, noteId}, {getState, rejectWithValue, dispatch}) => {
 	try {
-		const {notes} = getState().firebase;
+		const {notes} = getState().notes;
 
 		const data = withoutId({
 			...notes.filter((el) => el.id === noteId)[0],
@@ -79,7 +86,7 @@ export const disableNote = createAsyncThunk<
 			return noteId;
 		}
 	} catch (error) {
-		dispatch(showAlert({text: (error as Error).message, type: 'danger'}));
+		dispatch(alertActions.showAlert({text: (error as Error).message, type: 'danger'}));
 		return rejectWithValue((error as Error).message);
 	}
 });
@@ -91,9 +98,9 @@ export const importantNote = createAsyncThunk<
 		noteId: string
 	},
 	ThunkApi
->('firebase/importantNote', async ({userId, noteId}, {getState, rejectWithValue, dispatch}) => {
+>('notes/importantNote', async ({userId, noteId}, {getState, rejectWithValue, dispatch}) => {
 	try {
-		const {notes} = getState().firebase;
+		const {notes} = getState().notes;
 
 		const data = withoutId({
 			...notes.filter((el) => el.id === noteId)[0],
@@ -109,7 +116,7 @@ export const importantNote = createAsyncThunk<
 			return noteId;
 		}
 	} catch (error) {
-		dispatch(showAlert({text: (error as Error).message, type: 'danger'}));
+		dispatch(alertActions.showAlert({text: (error as Error).message, type: 'danger'}));
 		return rejectWithValue((error as Error).message);
 	}
 });
@@ -126,10 +133,10 @@ export const setContent = createAsyncThunk<
 	},
 	ThunkApi
 >(
-	'firebase/setContent',
+	'notes/setContent',
 	async ({content, noteId, userId}, {getState, rejectWithValue, dispatch}) => {
 		try {
-			const {notes} = getState().firebase;
+			const {notes} = getState().notes;
 
 			const data = withoutId({
 				...notes.filter((el) => el.id === noteId)[0],
@@ -144,17 +151,17 @@ export const setContent = createAsyncThunk<
 				return {noteId, content};
 			}
 		} catch (error) {
-			dispatch(showAlert({text: (error as Error).message, type: 'danger'}));
+			dispatch(alertActions.showAlert({text: (error as Error).message, type: 'danger'}));
 			return rejectWithValue((error as Error).message);
 		}
 	},
 );
 
 export const sortNotes = createAsyncThunk<void, { notes: Note[]; userId: string }, ThunkApi>(
-	'firebase/sortNotes',
+	'notes/sortNotes',
 	({notes, userId}, {dispatch, getState}) => {
 		const data = notes.map((note: Note, i: number) => ({...note, order: i}));
-		const prevNotes = getState().firebase.notes;
+		const prevNotes = getState().notes.notes;
 
 		data.forEach((note: Note) => {
 			if (note.order !== prevNotes.filter((el) => el.id === note.id)[0].order) {
@@ -162,16 +169,16 @@ export const sortNotes = createAsyncThunk<void, { notes: Note[]; userId: string 
 			}
 		});
 
-		dispatch(setNotes({notes: data}));
+		dispatch(notesActions.setNotes({notes: data}));
 	},
 );
 
 export const addNote = createAsyncThunk<
 	Note,
 	{ title: string; isImportant: boolean },
-	{ state: RootState }
->('firebase/addNote', async ({title, isImportant}, {getState, rejectWithValue}) => {
-	const {notes} = getState().firebase;
+	{ state: StateSchema }
+>('notes/addNote', async ({title, isImportant}, {getState, rejectWithValue}) => {
+	const {notes} = getState().notes;
 	const {id} = getState().user.user;
 
 	try {
@@ -198,7 +205,7 @@ export const addNote = createAsyncThunk<
 	}
 });
 
-const initialState: FirebaseState = {
+const initialState: NotesSchema = {
 	notes: [],
 	loading: false,
 	filter: FilterTypes.ACTIVE,
@@ -208,8 +215,8 @@ const initialState: FirebaseState = {
 	},
 };
 
-const firebaseSlice = createSlice({
-	name: 'firebase',
+const notesSlice = createSlice({
+	name: 'notes',
 	initialState,
 	reducers: {
 		clearNotes(state) {
@@ -302,5 +309,5 @@ const firebaseSlice = createSlice({
 	},
 });
 
-export const {clearNotes, setNotes, changeFilter} = firebaseSlice.actions;
-export default firebaseSlice.reducer;
+export const notesActions = notesSlice.actions;
+export default notesSlice.reducer;

@@ -1,8 +1,6 @@
 import {useEffect, useRef, useState} from 'react';
 import {CSSTransition} from 'react-transition-group';
-import {disableNote, importantNote, removeNote, setContent} from 'store/slices/firebaseSlice';
-import {useAppDispatch, useAppSelector} from 'hooks/useRedux';
-import {Note} from 'types';
+import {disableNote, importantNote, removeNote, setContent} from 'store/notes/slice/notesSlice';
 import {Draggable} from 'react-beautiful-dnd';
 import {useTranslation} from 'react-i18next';
 import {classNames} from 'helpers/classNames/classNames';
@@ -17,25 +15,28 @@ import {
 	faSortDown,
 	faTrashCan,
 } from '@fortawesome/free-solid-svg-icons';
+import {ModalConfirm} from 'components/ModalConfirm/ModalConfirm';
+import {getUser} from 'store/user/selectors/getUser/getUser';
+import {getFilter} from 'store/notes/selectors/getFilter/getFilter';
+import {Note} from 'store/notes/types/NotesSchema';
+import {useAppDispatch, useAppSelector} from 'hooks/useRedux';
 
 import cls from './NotesItem.module.scss';
 import './NotesItemAnimation.scss';
-import {ModalConfirm} from 'components/ModalConfirm/ModalConfirm';
 
 interface NotesItemProps {
 	note: Note
 	handleSort: boolean
 	index: number
-	storybookFilter?: 'all' | undefined
 }
 
-export const NotesItem = ({note, handleSort, index, storybookFilter}: NotesItemProps) => {
+export const NotesItem = ({note, handleSort, index}: NotesItemProps) => {
 	const dispatch = useAppDispatch();
-	const userId = useAppSelector((state) => state.user.user.id);
-	const {filter} = useAppSelector((state) => state.firebase);
+	const userId = useAppSelector(getUser).id;
+	const filter = useAppSelector(getFilter);
 	const [canText, setCanText] = useState(false);
 	const [contentVisibility, setContentVisibility] = useState(false);
-	const inputRef = useRef<null | HTMLDivElement>(null);
+	const inputRef = useRef<HTMLDivElement>(null);
 	const {t} = useTranslation('home');
 	const [isOpen, setIsOpen] = useState(false);
 
@@ -98,9 +99,9 @@ export const NotesItem = ({note, handleSort, index, storybookFilter}: NotesItemP
 								{
 									[cls.disable]: note.isDisable,
 									[cls.important]: note.isImportant && !note.isDisable,
-									[cls.hide]: (((storybookFilter ?? filter) === 'isDisable' && !note.isDisable) ||
-										((storybookFilter ?? filter) === 'active' && note.isDisable) ||
-										((storybookFilter ?? filter) === 'isImportant' && !note.isImportant)),
+									[cls.hide]: ((filter === 'isDisable' && !note.isDisable) ||
+										(filter === 'active' && note.isDisable) ||
+										(filter === 'isImportant' && !note.isImportant)),
 								},
 							)
 						}
@@ -135,7 +136,7 @@ export const NotesItem = ({note, handleSort, index, storybookFilter}: NotesItemP
 
 							<div className={cls.delete}>
 								<Button
-									onClick={(e) => setIsOpen(true)}
+									onClick={() => setIsOpen(true)}
 									className={cls.btnDelete}
 									theme={ButtonThemes.CLEAR}
 								>

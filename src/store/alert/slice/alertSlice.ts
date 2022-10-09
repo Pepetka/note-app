@@ -1,14 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
+import {AlertSchema} from '../types/AlertSchema';
 
-export type AlertType = 'success' | 'warning' | 'danger'
-
-interface AlertState {
-	text: string
-	type: AlertType
-	visible: boolean
-}
-
-const initialState: AlertState = {
+const initialState: AlertSchema = {
 	text: '',
 	type: 'danger',
 	visible: false,
@@ -29,5 +22,5 @@ const alertSlice = createSlice({
 	},
 });
 
-export const {showAlert, hideAlert} = alertSlice.actions;
+export const alertActions = alertSlice.actions;
 export default alertSlice.reducer;

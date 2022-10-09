@@ -1,7 +1,8 @@
-import {useAppSelector} from './useRedux';
+import {getUser} from 'store/user/selectors/getUser/getUser';
+import {useSelector} from 'react-redux';
 
 export function useAuth() {
-	const {email, token, id} = useAppSelector((state) => state.user.user);
+	const {email, token, id} = useSelector(getUser);
 
 	return {
 		isAuth: !!id,

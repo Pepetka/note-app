@@ -1,12 +1,13 @@
-import {Suspense} from 'react'; import ReactDOM from 'react-dom/client';
+import {Suspense} from 'react';
+import ReactDOM from 'react-dom/client';
 import {App} from 'components/App/App';
 import {ThemeProvider} from 'context/theme/ThemeProvider';
-import {Provider} from 'react-redux';
-import {store} from 'store';
 import {BrowserRouter} from 'react-router-dom';
 import {HandleSortProvider} from 'context/handleSort/HandleSortProvider';
 import {PageLoader} from 'components/PageLoader/PageLoader';
 import {ErrorBoundary} from 'components/ErrorBoundary/ErrorBoundary';
+import {Provider} from 'react-redux';
+import {store} from 'store/store';
 
 import 'style/index.scss';
 import 'localization/i18n';

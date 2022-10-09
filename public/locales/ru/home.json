@@ -10,5 +10,6 @@
 	"All": "Все",
 	"There are no notes": "Нет ни одной заметки",
 	"Add text": "Добавьте текст",
-	"Click to reload notes": "Нажмите для повторной загрузки"
+	"Click to reload notes": "Нажмите для повторной загрузки",
+	"Please enter a note title": "Пожалуйста, введите заголовок заметки"
 }
