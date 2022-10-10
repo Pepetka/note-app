@@ -39,6 +39,7 @@
     "test:ui:json": "node scripts/generate-visual-json-report.js",
     "test:ui:html": "reg-cli --from .loki/report.json --report .loki/report.html",
     "test:ui:ok": "npx loki approve --requireReference --reactUri file:./storybook-static",
+    "test:ui:update": "npx loki update --requireReference --reactUri file:./storybook-static",
     "lint:ts": "eslint \"**/*.{ts,tsx}\"",
     "lint:ts:fix": "eslint \"**/*.{ts,tsx}\" --fix",
     "lint:scss": "npx stylelint \"**/*.scss\"",

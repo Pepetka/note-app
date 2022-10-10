@@ -3,6 +3,7 @@ import {StoreDecorator} from 'helpers/storybook/StoreDecorator/StoreDecorator';
 import {HomePage} from './HomePage';
 import {DeepPartial} from '@reduxjs/toolkit';
 import {StateSchema} from 'store/types/StateSchema';
+import {FilterTypes} from 'store/notes/slice/notesSlice';
 
 export default {
 	title: 'pages/HomePage',
@@ -21,6 +22,15 @@ const initialState: DeepPartial<StateSchema> = {
 			token: 'token',
 			id: 'id',
 		},
+	},
+	notes: {
+		notes: [],
+		error: {
+			get: null,
+			update: null,
+		},
+		filter: FilterTypes.ACTIVE,
+		loading: false,
 	},
 };
 
