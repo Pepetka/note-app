@@ -11,11 +11,12 @@ export const ThemeButton = () => {
 		<Button
 			onClick={onThemeChange}
 			theme={ButtonThemes.CIRCLE}
+			testid='ThemeButton'
 		>
 			{theme === Theme.DARK ? (
-				<FontAwesomeIcon icon={faMoon} />
+				<FontAwesomeIcon data-testid='ThemeButton_moon' icon={faMoon} />
 			) : (
-				<FontAwesomeIcon icon={faSun} />
+				<FontAwesomeIcon data-testid='ThemeButton_sun' icon={faSun} />
 			)}
 		</Button>
 	);

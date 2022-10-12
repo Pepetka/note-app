@@ -15,7 +15,7 @@ export const ModalConfirm = ({isOpen, onClose, onConfirm}: ModalConfirmProps) =>
 
 	return (
 		<Modal isOpen={isOpen} onClose={onClose}>
-			<div className={cls.content}>
+			<div data-testid='ModalConfirm' className={cls.content}>
 				<p>
 					{t('Delete note? Are you sure?')}
 				</p>

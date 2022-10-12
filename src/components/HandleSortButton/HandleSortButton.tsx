@@ -10,11 +10,12 @@ export const HandleSortButton = () => {
 		<Button
 			onClick={onHandleSort}
 			theme={ButtonThemes.CIRCLE}
+			data-testid='HandleSortButton'
 		>
 			{handleSort ? (
-				<FontAwesomeIcon icon={faSort} />
+				<FontAwesomeIcon icon={faSort} data-testid='HandleSortButton_sort' />
 			) : (
-				<FontAwesomeIcon icon={faShuffle} />
+				<FontAwesomeIcon icon={faShuffle} data-testid='HandleSortButton_shuffle' />
 			)}
 		</Button>
 	);

@@ -96,6 +96,7 @@ export const NotesItem = ({note, handleSort, index}: NotesItemProps) => {
 					{...provided.draggableProps}
 					{...provided.dragHandleProps}>
 					<div
+						data-testid='NotesItem'
 						className={
 							classNames(
 								[cls.Note],

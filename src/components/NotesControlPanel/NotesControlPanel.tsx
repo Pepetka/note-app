@@ -13,9 +13,9 @@ export const NotesControlPanel = ({notesLength}: NotesControlPanelProps) => {
 
 	return (
 		<div className={cls.ControlPanel} data-testid='NotesControlPanel'>
-			<div>{t('Number of notes')} {notesLength}</div>
+			<div>{t('Number of notes')} <span>{notesLength}</span></div>
 			<div className={cls.wrapper}>
-				<label onClick={onHandleSort}>
+				<label data-testid='NotesControlPanel_label' onClick={onHandleSort}>
 					{t('Handle Sort')}
 				</label>
 				<Switcher isActive={handleSort} onclick={onHandleSort} />

@@ -19,10 +19,12 @@ interface ButtonProps {
 	theme: ButtonThemes
 	corners?: boolean
 	border?: boolean
+	testid?: string
 }
 export const Button = (
 	{
 		className,
+		testid,
 		children,
 		theme,
 		onClick = () => {},
@@ -34,7 +36,7 @@ export const Button = (
 	}: ButtonProps) => {
 	return (
 		<button
-			data-testid={`Button-${theme}`}
+			data-testid={testid ?? `Button-${theme}`}
 			type={type}
 			className={
 				classNames(

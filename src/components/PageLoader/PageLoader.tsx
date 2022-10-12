@@ -11,7 +11,7 @@ export const PageLoader = ({className}: PageLoaderProps) => {
 	const {theme} = useTheme();
 
 	return (
-		<div className={classNames([cls.PageLoader, theme, 'PageLoader', className])}>
+		<div data-testid='PageLoader' className={classNames([cls.PageLoader, theme, 'PageLoader', className])}>
 			<Loader />
 		</div>
 	);

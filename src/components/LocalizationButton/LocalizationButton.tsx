@@ -26,6 +26,7 @@ export const LocalizationButton = () => {
 		<Button
 			onClick={onChangeLang}
 			theme={ButtonThemes.CIRCLE}
+			testid='LocalizationButton'
 		>
 			{i18n.language}
 		</Button>

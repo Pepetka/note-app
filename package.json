@@ -61,6 +61,7 @@
       "react-hooks"
     ],
     "rules": {
+      "testing-library/no-unnecessary-act": "warn",
       "new-cap": "off",
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "error",

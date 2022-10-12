@@ -5,9 +5,9 @@ import {reorder} from 'helpers/reorder/reorder';
 import {getNotes} from 'store/notes/selectors/getNotes/getNotes';
 import {getUser} from 'store/user/selectors/getUser/getUser';
 import {useAppDispatch, useAppSelector} from 'hooks/useRedux';
+import {sortNotes} from 'store/notes/services/sortNotes/sortNotes';
 
 import cls from './Notes.module.scss';
-import {sortNotes} from 'store/notes/services/sortNotes/sortNotes';
 
 interface Prop {
 	handleSort: boolean

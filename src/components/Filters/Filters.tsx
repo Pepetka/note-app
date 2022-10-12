@@ -42,6 +42,7 @@ export const Filters = () => {
 						onClick={() => onChangeFilter(data)}
 						active={filter === data}
 						className={cls.button}
+						testid={`Filters_${data}`}
 					>
 						{t(name)}
 					</Button>

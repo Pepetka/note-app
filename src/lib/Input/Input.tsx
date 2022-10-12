@@ -11,9 +11,11 @@ interface InputProps {
 	type?: HTMLInputTypeAttribute
 	id?: string
 	withCorners?: boolean
+	testid?: string
 }
 export const Input = forwardRef((props: InputProps, ref: ForwardedRef<HTMLInputElement>) => {
 	const {
+		testid,
 		className,
 		placeholder,
 		onChange,
@@ -26,9 +28,9 @@ export const Input = forwardRef((props: InputProps, ref: ForwardedRef<HTMLInputE
 
 	return (
 		<input
-			data-testid='Input'
 			ref={ref}
 			value={value}
+			data-testid={testid ?? 'Input'}
 			onChange={onChange}
 			type={type}
 			className={classNames([cls.Input, className], {[cls.withCorners]: withCorners})}

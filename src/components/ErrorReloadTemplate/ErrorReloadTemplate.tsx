@@ -14,7 +14,7 @@ export const ErrorReloadTemplate = () => {
 	};
 
 	return (
-		<div className={classNames(['ErrorBoundary', theme, cls.ErrorReloadTemplate])}>
+		<div data-testid='ErrorReloadTemplate' className={classNames(['ErrorBoundary', theme, cls.ErrorReloadTemplate])}>
 			<ReloadTemplate errorMessage={t('Error loading page')} onReload={onReload} />
 		</div>
 	);

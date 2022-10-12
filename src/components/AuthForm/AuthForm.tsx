@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {SubmitHandler, useForm, Controller} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -38,6 +38,11 @@ const schema = yup
 export const AuthForm = ({title, onSubmitForm}: AuthFormProps) => {
 	const [passwordVisibility, setPasswordVisibility] = useState(false);
 	const {t} = useTranslation('auth');
+	const inputRef = useRef<HTMLInputElement>(null);
+
+	useEffect(() => {
+		inputRef.current?.focus();
+	}, []);
 
 	const onPassword = () => {
 		setPasswordVisibility((prev) => !prev);
@@ -55,7 +60,7 @@ export const AuthForm = ({title, onSubmitForm}: AuthFormProps) => {
 	const onSubmit: SubmitHandler<SubmitArgs> = (data) => onSubmitForm(data);
 
 	return (
-		<form className={cls.AuthForm} onSubmit={handleSubmit(onSubmit)} noValidate>
+		<form className={cls.AuthForm} onSubmit={handleSubmit(onSubmit)} noValidate data-testid='AuthForm'>
 			<div className={cls.inputGroup}>
 				<label htmlFor='form-email'>
 					{t('Email address')}
@@ -67,6 +72,7 @@ export const AuthForm = ({title, onSubmitForm}: AuthFormProps) => {
 					render={({field}) => (
 						<Input
 							{...field}
+							ref={inputRef}
 							type='email'
 							id='form-email'
 							placeholder='name@example.com'
@@ -74,7 +80,7 @@ export const AuthForm = ({title, onSubmitForm}: AuthFormProps) => {
 					)}
 				/>
 				{errors.email && (
-					<ErrorMessage errorMessage={errors.email.message!} />
+					<ErrorMessage data-testid='AuthForm_emailError' errorMessage={errors.email.message!} />
 				)}
 			</div>
 			<div className={cls.inputGroup}>
@@ -104,7 +110,7 @@ export const AuthForm = ({title, onSubmitForm}: AuthFormProps) => {
 					</Button>
 				</div>
 				{errors.password && (
-					<ErrorMessage errorMessage={errors.password.message!} />
+					<ErrorMessage data-testid='AuthForm_passwordError' errorMessage={errors.password.message!} />
 				)}
 			</div>
 			<div className={cls.inputGroupCheck}>
@@ -117,7 +123,7 @@ export const AuthForm = ({title, onSubmitForm}: AuthFormProps) => {
 					{t('Remember me')}
 				</label>
 			</div>
-			<Button type='submit' theme={ButtonThemes.PRIMARY} className={cls.button}>
+			<Button testid='AuthForm_btn' type='submit' theme={ButtonThemes.PRIMARY} className={cls.button}>
 				{t(title)}
 			</Button>
 		</form>

@@ -26,6 +26,7 @@ export const Alert = () => {
 				className={
 					classNames([cls.AppAlert, cls[type]])
 				}
+				data-testid='Alert'
 			>
 				<div><strong>{t('Attention')}</strong>
 					<br />

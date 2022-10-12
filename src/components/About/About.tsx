@@ -13,7 +13,7 @@ export const About = ({version = 'v6.0.0'}: AboutProps) => {
 		<div className={cls.About} data-testid='About'>
 			<h2 className={cls.title}>{t('About Note App')}</h2>
 			<p className={cls.text}>
-				<strong className={cls.strong}>{t('App version')}</strong> {version}
+				<strong className={cls.strong}>{t('App version')}</strong> <span>{version}</span>
 				<br />
 				<strong className={cls.strong}>{t('Description')}</strong> {' '}
 				{t('App description')}

@@ -20,7 +20,7 @@ export const NavBar = () => {
 	};
 
 	return (
-		<header className={cls.NavBar}>
+		<header className={cls.NavBar} data-testid='NavBar'>
 			<div className={cls.wrapper}>
 				<nav className={cls.mainLinks}>
 					<div className={cls.brand}>{t('Note App')}</div>
@@ -29,6 +29,7 @@ export const NavBar = () => {
 						<li>
 							<NavLink
 								to={'/'}
+								data-testid='NavBar_home'
 								className={({isActive}) =>
 									classNames([cls.link], {[cls.active]: isActive})
 								}
@@ -39,6 +40,7 @@ export const NavBar = () => {
 						<li>
 							<NavLink
 								to={'/about'}
+								data-testid='NavBar_about'
 								className={({isActive}) =>
 									classNames([cls.link], {[cls.active]: isActive})
 								}
@@ -54,6 +56,7 @@ export const NavBar = () => {
 						{isAuth ? (
 							<NavLink
 								to={'/login'}
+								data-testid='NavBar_logout'
 								className={({isActive}) =>
 									classNames([cls.link], {[cls.active]: isActive})
 								}
@@ -64,6 +67,7 @@ export const NavBar = () => {
 						) : (
 							<NavLink
 								to={'/login'}
+								data-testid='NavBar_login'
 								className={({isActive}) =>
 									classNames([cls.link], {[cls.active]: isActive})
 								}
