@@ -3,7 +3,7 @@ import {StoreDecorator} from 'helpers/storybook/StoreDecorator/StoreDecorator';
 import {HomePage} from './HomePage';
 import {DeepPartial} from '@reduxjs/toolkit';
 import {StateSchema} from 'store/types/StateSchema';
-import {FilterTypes} from 'store/notes/slice/notesSlice';
+import {FilterTypes} from 'store/notes/types/NotesSchema';
 
 export default {
 	title: 'pages/HomePage',
