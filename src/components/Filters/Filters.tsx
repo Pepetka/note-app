@@ -1,8 +1,9 @@
-import {FilterTypes, notesActions} from 'store/notes/slice/notesSlice';
+import {notesActions} from 'store/notes/slice/notesSlice';
 import {useTranslation} from 'react-i18next';
 import {Button, ButtonThemes} from 'lib/Button/Button';
 import {getFilter} from 'store/notes/selectors/getFilter/getFilter';
 import {useAppDispatch, useAppSelector} from 'hooks/useRedux';
+import {FilterTypes} from 'store/notes/types/NotesSchema';
 
 import cls from './Filters.module.scss';
 

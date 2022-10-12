@@ -1,7 +1,7 @@
 import {describe, expect, test} from '@jest/globals';
 import {DeepPartial} from '@reduxjs/toolkit';
+import {FilterTypes} from 'store/notes/types/NotesSchema';
 import {StateSchema} from '../../../types/StateSchema';
-import {FilterTypes} from '../../slice/notesSlice';
 import {getNotesState} from './getNotesState';
 
 describe('getNotesState', () => {

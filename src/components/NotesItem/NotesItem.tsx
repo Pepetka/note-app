@@ -1,6 +1,5 @@
 import {useEffect, useRef, useState} from 'react';
 import {CSSTransition} from 'react-transition-group';
-import {disableNote, importantNote, removeNote, setContent} from 'store/notes/slice/notesSlice';
 import {Draggable} from 'react-beautiful-dnd';
 import {useTranslation} from 'react-i18next';
 import {classNames} from 'helpers/classNames/classNames';
@@ -20,6 +19,10 @@ import {getUser} from 'store/user/selectors/getUser/getUser';
 import {getFilter} from 'store/notes/selectors/getFilter/getFilter';
 import {Note} from 'store/notes/types/NotesSchema';
 import {useAppDispatch, useAppSelector} from 'hooks/useRedux';
+import {setContent} from 'store/notes/services/setContent/setContent';
+import {removeNote} from 'store/notes/services/removeNote/removeNote';
+import {disableNote} from 'store/notes/services/disableNote/disableNote';
+import {importantNote} from 'store/notes/services/importantNote/importantNote';
 
 import cls from './NotesItem.module.scss';
 import './NotesItemAnimation.scss';
@@ -32,7 +35,7 @@ interface NotesItemProps {
 
 export const NotesItem = ({note, handleSort, index}: NotesItemProps) => {
 	const dispatch = useAppDispatch();
-	const userId = useAppSelector(getUser).id;
+	const userId = useAppSelector(getUser)?.id;
 	const filter = useAppSelector(getFilter);
 	const [canText, setCanText] = useState(false);
 	const [contentVisibility, setContentVisibility] = useState(false);

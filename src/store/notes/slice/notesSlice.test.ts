@@ -1,6 +1,6 @@
 import {describe, expect, test} from '@jest/globals';
-import notesReducer, {FilterTypes, notesActions} from './notesSlice';
-import {NotesSchema} from '../types/NotesSchema';
+import notesReducer, {notesActions} from './notesSlice';
+import {FilterTypes, NotesSchema} from '../types/NotesSchema';
 
 describe('notesSlice', () => {
 	test('set notes', () => {

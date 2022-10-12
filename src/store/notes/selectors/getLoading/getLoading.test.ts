@@ -2,7 +2,7 @@ import {describe, expect, test} from '@jest/globals';
 import {getLoading} from './getLoading';
 import {DeepPartial} from '@reduxjs/toolkit';
 import {StateSchema} from '../../../types/StateSchema';
-import {FilterTypes} from '../../slice/notesSlice';
+import {FilterTypes} from '../../types/NotesSchema';
 
 describe('getLoading', () => {
 	const state: DeepPartial<StateSchema> = {

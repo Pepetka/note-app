@@ -39,7 +39,7 @@ export const Login = () => {
 		signInWithEmailAndPassword(auth, email, password)
 			.then(({user}) => {
 				const userData: User = {
-					email: user.email,
+					email: user.email!,
 					id: user.uid,
 					token: user.refreshToken,
 				};
@@ -62,9 +62,9 @@ export const Login = () => {
 		signInWithPopup(auth, provider)
 			.then((result) => {
 				const user: User = {
-					id: result!.user.uid,
-					token: result!.user.refreshToken,
-					email: result!.user.email,
+					id: result.user.uid,
+					token: result.user.refreshToken,
+					email: result.user.email!,
 				};
 
 				dispatch(userActions.setUser(user));

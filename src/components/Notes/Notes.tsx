@@ -1,4 +1,3 @@
-import {sortNotes} from 'store/notes/slice/notesSlice';
 import {DragDropContext, Droppable} from 'react-beautiful-dnd';
 import {NotesList} from 'components/NotesList/NotesList';
 import {useTranslation} from 'react-i18next';
@@ -8,6 +7,7 @@ import {getUser} from 'store/user/selectors/getUser/getUser';
 import {useAppDispatch, useAppSelector} from 'hooks/useRedux';
 
 import cls from './Notes.module.scss';
+import {sortNotes} from 'store/notes/services/sortNotes/sortNotes';
 
 interface Prop {
 	handleSort: boolean
@@ -15,7 +15,7 @@ interface Prop {
 
 export const Notes = ({handleSort}: Prop) => {
 	const notes = useAppSelector(getNotes);
-	const {id} = useAppSelector(getUser);
+	const userId = useAppSelector(getUser)?.id;
 	const dispatch = useAppDispatch();
 	const {t} = useTranslation('home');
 
@@ -30,7 +30,7 @@ export const Notes = ({handleSort}: Prop) => {
 
 		const orderedNotes = reorder(notes, result.source.index, result.destination.index);
 
-		dispatch(sortNotes({notes: orderedNotes, userId: id!}));
+		dispatch(sortNotes({notes: orderedNotes, userId: userId!}));
 	}
 
 	if (notes.length < 1) {

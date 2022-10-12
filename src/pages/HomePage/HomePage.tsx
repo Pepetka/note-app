@@ -1,5 +1,4 @@
 import {useEffect} from 'react';
-import {fetchNotes} from 'store/notes/slice/notesSlice';
 import {useNavigate} from 'react-router-dom';
 import {useAuth} from 'hooks/useAuth';
 import {userActions} from 'store/user/slice/userSlice';
@@ -15,10 +14,11 @@ import {getNotesState} from 'store/notes/selectors/getState/getNotesState';
 import {useTranslation} from 'react-i18next';
 import {useAppSelector, useAppDispatch} from 'hooks/useRedux';
 import {getUser} from 'store/user/selectors/getUser/getUser';
+import {fetchNotes} from 'store/notes/services/fetchNotes/fetchNotes';
 
 export const HomePage = () => {
 	const dispatch = useAppDispatch();
-	const userId = useAppSelector(getUser).id;
+	const userId = useAppSelector(getUser)?.id;
 	const navigate = useNavigate();
 	const {isAuth} = useAuth();
 	const {handleSort} = useHandleSort();

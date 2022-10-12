@@ -1,4 +1,9 @@
-import {FilterTypes} from '../slice/notesSlice';
+export enum FilterTypes {
+	ALL = 'all',
+	DISABLE = 'isDisable',
+	IMPORTANT = 'isImportant',
+	ACTIVE = 'active'
+}
 
 export interface Note {
 	id?: string

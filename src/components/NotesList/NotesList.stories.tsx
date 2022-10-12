@@ -1,11 +1,10 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 import {NotesList} from './NotesList';
 import {DragDecorator} from 'helpers/storybook/DragDecorator/DragDecorator';
-import {Note} from 'store/notes/types/NotesSchema';
+import {FilterTypes, Note} from 'store/notes/types/NotesSchema';
 import {StoreDecorator} from 'helpers/storybook/StoreDecorator/StoreDecorator';
 import {DeepPartial} from '@reduxjs/toolkit';
 import {StateSchema} from 'store/types/StateSchema';
-import {FilterTypes} from 'store/notes/slice/notesSlice';
 
 export default {
 	title: 'components/NotesList',

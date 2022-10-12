@@ -1,9 +1,9 @@
 export interface User {
-	email: string | null
-	token: string | null
-	id: string | null
+	email: string
+	token: string
+	id: string
 }
 
 export interface UserSchema {
-	user: User
+	user: User | null
 }
