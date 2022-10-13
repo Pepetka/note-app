@@ -6,4 +6,6 @@ export interface User {
 
 export interface UserSchema {
 	user: User | null
+	error: string | null
+	loading: boolean
 }

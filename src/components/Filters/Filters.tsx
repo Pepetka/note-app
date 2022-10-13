@@ -7,7 +7,7 @@ import {FilterTypes} from 'store/notes/types/NotesSchema';
 
 import cls from './Filters.module.scss';
 
-const buttons = [
+const buttons: Array<{name: string, data: FilterTypes}> = [
 	{name: 'Active', data: FilterTypes.ACTIVE},
 	{name: 'Important', data: FilterTypes.IMPORTANT},
 	{name: 'Finished', data: FilterTypes.DISABLE},
@@ -19,7 +19,7 @@ export const Filters = () => {
 	const filter = useAppSelector(getFilter);
 	const {t} = useTranslation('home');
 
-	const onChangeFilter = (data: string) => {
+	const onChangeFilter = (data: FilterTypes) => {
 		if (filter === data) {
 			dispatch(notesActions.changeFilter({filter: FilterTypes.ALL}));
 			return;

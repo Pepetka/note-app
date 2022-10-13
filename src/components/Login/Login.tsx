@@ -1,13 +1,12 @@
-import {getAuth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup} from 'firebase/auth';
+import {useEffect} from 'react';
+import {useAuth} from 'hooks/useAuth';
 import {Link, useNavigate} from 'react-router-dom';
 import {AuthForm, SubmitArgs} from 'components/AuthForm/AuthForm';
-import {userActions} from 'store/user/slice/userSlice';
-import {alertActions} from 'store/alert/slice/alertSlice';
-import {toUpperFirs} from 'helpers/toUpperFirst/toUpperFirst';
 import {useTranslation} from 'react-i18next';
 import {Button, ButtonThemes} from 'lib/Button/Button';
-import {User} from 'store/user/types/UserSchema';
 import {useAppDispatch} from 'hooks/useRedux';
+import {loginWithPassword} from 'store/user/services/loginWithPassword/loginWithPassword';
+import {loginWithGoogle} from 'store/user/services/loginWithGoogle/loginWithGoogle';
 
 import cls from './Login.module.scss';
 
@@ -15,72 +14,22 @@ export const Login = () => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 	const {t} = useTranslation('auth');
+	const {isAuth} = useAuth();
 
-	const onShowAlert = (text: string) => {
-		dispatch(
-			alertActions.showAlert({
-				text,
-				type: 'danger',
-			}),
-		);
-
-		setTimeout(() => {
-			dispatch(alertActions.hideAlert());
-		}, 5000);
-	};
+	useEffect(() => {
+		if (isAuth) navigate('/');
+	}, [isAuth, navigate]);
 
 	const handleLogin = ({
 		email,
 		password,
 		rememberMe,
 	}: SubmitArgs) => {
-		const auth = getAuth();
-
-		signInWithEmailAndPassword(auth, email, password)
-			.then(({user}) => {
-				const userData: User = {
-					email: user.email!,
-					id: user.uid,
-					token: user.refreshToken,
-				};
-
-				dispatch(userActions.setUser(userData));
-
-				if (rememberMe) localStorage.setItem('user', JSON.stringify(userData));
-
-				navigate('/');
-			})
-			.catch((error) => {
-				onShowAlert(toUpperFirs(error.message));
-			});
+		dispatch(loginWithPassword({email, password, rememberMe}));
 	};
 
 	const onLogin = () => {
-		const provider = new GoogleAuthProvider();
-		const auth = getAuth();
-
-		signInWithPopup(auth, provider)
-			.then((result) => {
-				const user: User = {
-					id: result.user.uid,
-					token: result.user.refreshToken,
-					email: result.user.email!,
-				};
-
-				dispatch(userActions.setUser(user));
-
-				localStorage.setItem('user', JSON.stringify(user));
-
-				navigate('/');
-			})
-			.catch((error) => {
-				dispatch(
-					alertActions.showAlert({
-						message: error.message,
-						alertType: 'danger',
-					}),
-				);
-			});
+		dispatch(loginWithGoogle());
 	};
 
 	return (

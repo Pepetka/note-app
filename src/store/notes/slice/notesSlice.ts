@@ -1,5 +1,5 @@
-import {createSlice} from '@reduxjs/toolkit';
-import {FilterTypes, NotesSchema} from '../types/NotesSchema';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {FilterTypes, Note, NotesSchema} from '../types/NotesSchema';
 import {fetchNotes} from '../services/fetchNotes/fetchNotes';
 import {disableNote} from '../services/disableNote/disableNote';
 import {removeNote} from '../services/removeNote/removeNote';
@@ -24,10 +24,10 @@ const notesSlice = createSlice({
 		clearNotes(state) {
 			state.notes = [];
 		},
-		setNotes(state, action) {
+		setNotes(state, action: PayloadAction<{ notes: Array<Note> }>) {
 			state.notes = action.payload.notes;
 		},
-		changeFilter(state, action) {
+		changeFilter(state, action: PayloadAction<{filter: FilterTypes}>) {
 			state.filter = action.payload.filter;
 		},
 	},

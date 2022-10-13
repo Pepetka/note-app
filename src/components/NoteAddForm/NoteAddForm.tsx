@@ -7,6 +7,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faExclamation} from '@fortawesome/free-solid-svg-icons';
 import {useAppDispatch} from 'hooks/useRedux';
 import {addNote} from 'store/notes/services/addNote/addNote';
+import {AlertType} from 'store/alert/types/AlertSchema';
 
 import cls from './NoteAddForm.module.scss';
 
@@ -30,7 +31,7 @@ export const NoteAddForm = () => {
 		setIsChecked((isChecked) => !isChecked);
 	};
 
-	const onShowAlert = (text: string, type: string) => {
+	const onShowAlert = (text: string, type: AlertType) => {
 		dispatch(
 			alertActions.showAlert({
 				text,

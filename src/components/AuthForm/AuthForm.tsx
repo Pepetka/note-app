@@ -91,6 +91,7 @@ export const AuthForm = ({title, onSubmitForm}: AuthFormProps) => {
 					<Controller
 						name="password"
 						control={control}
+						defaultValue=""
 						render={({field}) => (
 							<Input
 								{...field}
