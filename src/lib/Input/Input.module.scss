@@ -5,6 +5,10 @@
 	color: var(--primary-color);
 	border: 2px solid var(--default-color);
 	border-radius: 5px;
+
+	&:focus {
+		outline: none;
+	}
 }
 
 .withCorners {

@@ -67,3 +67,18 @@
 	border-left: none;
 	border-right: none;
 }
+
+@media screen and (max-width: 768px) {
+	.Button {
+		&:hover:not(.clear),
+		&:focus:not(.clear) {
+			transform: none;
+		}
+	}
+
+	.clear {
+		&:hover {
+			border: none;
+		}
+	}
+}
