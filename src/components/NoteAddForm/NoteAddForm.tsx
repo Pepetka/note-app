@@ -17,9 +17,14 @@ export const NoteAddForm = () => {
 	const [isChecked, setIsChecked] = useState(false);
 	const {t} = useTranslation('home');
 	const inputRef = useRef<HTMLInputElement>(null);
+	const timerRef = useRef<ReturnType<typeof setTimeout>>();
 
 	useEffect(() => {
 		inputRef.current?.focus();
+
+		return () => {
+			clearTimeout(timerRef.current);
+		};
 	}, []);
 
 	const onValueChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -39,7 +44,7 @@ export const NoteAddForm = () => {
 			}),
 		);
 
-		setTimeout(() => {
+		timerRef.current = setTimeout(() => {
 			dispatch(alertActions.hideAlert());
 		}, 3000);
 	};

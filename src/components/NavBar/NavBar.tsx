@@ -5,6 +5,7 @@ import {userActions} from 'store/user/slice/userSlice';
 import {useTranslation} from 'react-i18next';
 import {classNames} from 'helpers/classNames/classNames';
 import {useAppDispatch} from 'hooks/useRedux';
+import {LocalStorageKeys} from 'const/localStorage';
 
 import cls from './NavBar.module.scss';
 
@@ -16,7 +17,7 @@ export const NavBar = () => {
 	const onLogOut = () => {
 		dispatch(userActions.removeUser());
 		dispatch(notesActions.clearNotes());
-		localStorage.removeItem('user');
+		localStorage.removeItem(LocalStorageKeys.USER);
 	};
 
 	return (

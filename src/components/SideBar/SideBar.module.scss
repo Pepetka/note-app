@@ -43,7 +43,7 @@
 }
 
 .collapsed .button {
-	transform: rotateZ(120deg);
+	transform: rotateZ(120deg) scale(0.5);
 	right: 0;
 	bottom: 0;
 }

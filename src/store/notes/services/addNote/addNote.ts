@@ -8,11 +8,12 @@ const url = process.env.REACT_APP_DB_URL;
 interface AddNoteProps {
 	title: string
 	isImportant: boolean
+	content?: string
 }
 
 export const addNote = createAsyncThunk<Note, AddNoteProps, ThunkApi>(
 	'notes/addNote',
-	async ({title, isImportant}, {getState, rejectWithValue}) => {
+	async ({title, isImportant, content}, {getState, rejectWithValue}) => {
 		const {notes} = getState().notes;
 		const userId = getState().user.user?.id;
 
@@ -23,6 +24,7 @@ export const addNote = createAsyncThunk<Note, AddNoteProps, ThunkApi>(
 				isImportant,
 				isDisable: false,
 				order: notes.length,
+				content,
 			};
 
 			const response = await axios.post(`${url}/notes/${userId}.json`, note);

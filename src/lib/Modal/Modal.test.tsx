@@ -12,7 +12,6 @@ describe('Modal', () => {
 
 	test('close modal', () => {
 		componentTestRender(<Modal isOpen={false}>Modal Content</Modal>);
-		expect(screen.getByTestId('Modal')).toBeInTheDocument();
-		expect(screen.getByTestId('Modal')).toHaveClass('close');
+		expect(screen.queryByTestId('Modal')).not.toBeInTheDocument();
 	});
 });

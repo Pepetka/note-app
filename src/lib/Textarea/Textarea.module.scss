@@ -1,7 +1,7 @@
-.Input {
+.Textarea {
 	width: 100%;
 	background: var(--bg-secondary-color);
-	padding: 10px;
+	padding: 7px;
 	color: var(--primary-color);
 	border: 2px solid var(--default-color);
 	border-radius: 5px;
@@ -11,7 +11,7 @@
 	}
 }
 
-.inputWrapper {
+.textareaWrapper {
 	position: relative;
 	width: 100%;
 }
@@ -22,9 +22,9 @@
 }
 
 .withPlaceholder {
-	height: 70px;
+	height: 160px;
 
-	.Input {
+	.Textarea {
 		position: absolute;
 		bottom: 0;
 		left: 0;

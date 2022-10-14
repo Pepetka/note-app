@@ -1,38 +1,30 @@
-import {
-	ChangeEvent,
-	ForwardedRef,
-	forwardRef,
-	HTMLInputTypeAttribute,
-	InputHTMLAttributes,
-	useEffect,
-	useState,
-} from 'react';
+import {ChangeEvent, ForwardedRef, forwardRef, TextareaHTMLAttributes, useEffect, useState} from 'react';
 import {classNames} from 'helpers/classNames/classNames';
 
-import cls from './Input.module.scss';
+import cls from './Textarea.module.scss';
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement>{
 	className?: string
 	placeholder?: string
-	onChange?: (e: ChangeEvent<HTMLInputElement>) => void
+	onChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void
 	value?: string
-	type?: HTMLInputTypeAttribute
 	id?: string
 	withCorners?: boolean
 	testid?: string
+	rows?: number
 	floatPlaceholder?: string
 }
-export const Input = forwardRef((props: InputProps, ref: ForwardedRef<HTMLInputElement>) => {
+export const Textarea = forwardRef((props: TextareaProps, ref: ForwardedRef<HTMLTextAreaElement>) => {
 	const {
 		testid,
 		className,
 		floatPlaceholder,
+		rows = 5,
 		placeholder,
 		onChange,
 		value,
 		id,
 		withCorners = false,
-		type = 'text',
 		...otherProps
 	} = props;
 	const [isFocused, setIsFocused] = useState(false);
@@ -50,19 +42,19 @@ export const Input = forwardRef((props: InputProps, ref: ForwardedRef<HTMLInputE
 	};
 
 	return (
-		<div className={classNames([cls.inputWrapper], {[cls.withPlaceholder]: !!floatPlaceholder})}>
+		<div className={classNames([cls.textareaWrapper], {[cls.withPlaceholder]: !!floatPlaceholder})}>
 			{!!floatPlaceholder && <span className={classNames([cls.placeholder], {[cls.focused]: isFocused})}>
 				{floatPlaceholder}
 			</span>}
-			<input
+			<textarea
 				ref={ref}
+				rows={rows}
 				value={value}
-				data-testid={testid ?? 'Input'}
+				data-testid={testid ?? 'Textarea'}
 				onChange={onChange}
-				type={type}
 				onFocus={onFocus}
 				onBlur={onBlur}
-				className={classNames([cls.Input, className], {[cls.withCorners]: withCorners})}
+				className={classNames([cls.Textarea, className], {[cls.withCorners]: withCorners})}
 				placeholder={placeholder}
 				id={id}
 				{...otherProps}

@@ -3,6 +3,7 @@ import {createUserWithEmailAndPassword, getAuth} from 'firebase/auth';
 import {User} from '../../types/UserSchema';
 import {ThunkApi} from '../types';
 import {alertActions} from '../../../alert/slice/alertSlice';
+import {LocalStorageKeys} from 'const/localStorage';
 
 interface registerWithPasswordProps {
 	email: string
@@ -24,7 +25,7 @@ export const registerWithPassword = createAsyncThunk<User, registerWithPasswordP
 				token: user.refreshToken,
 			};
 
-			if (rememberMe) localStorage.setItem('user', JSON.stringify(userData));
+			if (rememberMe) localStorage.setItem(LocalStorageKeys.USER, JSON.stringify(userData));
 
 			return userData;
 		} catch (error) {

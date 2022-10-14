@@ -1,5 +1,6 @@
 import {useContext} from 'react';
-import {LOCAL_STORAGE_THEME_KEY, Theme, ThemeContext} from 'context/theme/ThemeContext';
+import {Theme, ThemeContext} from 'context/theme/ThemeContext';
+import {LocalStorageKeys} from 'const/localStorage';
 
 export interface ThemeHook {
 	theme: Theme
@@ -15,7 +16,7 @@ export const useTheme = (): ThemeHook => {
 
 		setTheme(newTheme);
 
-		localStorage.setItem(LOCAL_STORAGE_THEME_KEY, newTheme);
+		localStorage.setItem(LocalStorageKeys.THEME, newTheme);
 	};
 
 	return {

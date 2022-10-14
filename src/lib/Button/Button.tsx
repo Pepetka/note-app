@@ -1,4 +1,4 @@
-import {MouseEvent, ReactNode} from 'react';
+import {ButtonHTMLAttributes, ForwardedRef, forwardRef, MouseEvent, ReactNode} from 'react';
 import {classNames} from 'helpers/classNames/classNames';
 
 import cls from './Button.module.scss';
@@ -10,10 +10,10 @@ export enum ButtonThemes {
 	CIRCLE = 'circle'
 }
 
-interface ButtonProps {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>{
 	className?: string
 	active?: boolean
-	type?: 'button' | 'submit' | 'reset'
+	type?: 'submit' | 'reset' | 'button' | undefined
 	onClick?: (e: MouseEvent<HTMLButtonElement>) => void
 	children?: ReactNode
 	theme: ButtonThemes
@@ -21,8 +21,9 @@ interface ButtonProps {
 	border?: boolean
 	testid?: string
 }
-export const Button = (
-	{
+
+export const Button = forwardRef(( props : ButtonProps, ref: ForwardedRef<HTMLButtonElement>) => {
+	const {
 		className,
 		testid,
 		children,
@@ -33,9 +34,11 @@ export const Button = (
 		border = true,
 		type = 'button',
 		...otherProps
-	}: ButtonProps) => {
+	} = props;
+
 	return (
 		<button
+			ref={ref}
 			data-testid={testid ?? `Button-${theme}`}
 			type={type}
 			className={
@@ -49,4 +52,4 @@ export const Button = (
 			{children}
 		</button>
 	);
-};
+});

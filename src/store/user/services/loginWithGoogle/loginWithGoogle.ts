@@ -3,6 +3,7 @@ import {getAuth, GoogleAuthProvider, signInWithPopup} from 'firebase/auth';
 import {User} from '../../types/UserSchema';
 import {ThunkApi} from '../types';
 import {alertActions} from '../../../alert/slice/alertSlice';
+import {LocalStorageKeys} from 'const/localStorage';
 
 export const loginWithGoogle = createAsyncThunk<User, undefined, ThunkApi>(
 	'user/loginWithGoogle',
@@ -19,7 +20,7 @@ export const loginWithGoogle = createAsyncThunk<User, undefined, ThunkApi>(
 				email: user.email!,
 			};
 
-			localStorage.setItem('user', JSON.stringify(userData));
+			localStorage.setItem(LocalStorageKeys.USER, JSON.stringify(userData));
 
 			return userData;
 		} catch (error) {

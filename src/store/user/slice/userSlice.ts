@@ -3,6 +3,7 @@ import {User, UserSchema} from '../types/UserSchema';
 import {loginWithPassword} from '../services/loginWithPassword/loginWithPassword';
 import {loginWithGoogle} from '../services/loginWithGoogle/loginWithGoogle';
 import {registerWithPassword} from '../services/registerWithPassword/registerWithPassword';
+import {LocalStorageKeys} from 'const/localStorage';
 
 const initialState: UserSchema = {
 	user: null,
@@ -14,6 +15,11 @@ const userSlice = createSlice({
 	name: 'user',
 	initialState,
 	reducers: {
+		initUser(state) {
+			const user = localStorage.getItem(LocalStorageKeys.USER);
+
+			if (user) state.user = JSON.parse(user);
+		},
 		setUser(state, action: PayloadAction<User>) {
 			state.user = action.payload;
 		},

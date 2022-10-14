@@ -1,3 +1,4 @@
+import {useEffect, useRef} from 'react';
 import {alertActions} from 'store/alert/slice/alertSlice';
 import {useTranslation} from 'react-i18next';
 import {classNames} from 'helpers/classNames/classNames';
@@ -15,6 +16,12 @@ export const Alert = () => {
 	const dispatch = useAppDispatch();
 	const {type, visible, text} = useAppSelector(getAlertState);
 	const {t} = useTranslation();
+	const btnRef = useRef<HTMLButtonElement>(null);
+
+	useEffect(() => {
+		btnRef.current?.focus();
+	}, []);
+
 
 	const onCloseAlert = () => {
 		dispatch(alertActions.hideAlert());
@@ -33,6 +40,8 @@ export const Alert = () => {
 					<div>{text}</div>
 				</div>
 				<Button
+					ref={btnRef}
+					autoFocus={true}
 					onClick={onCloseAlert}
 					className={cls.close}
 					theme={ButtonThemes.CLEAR}

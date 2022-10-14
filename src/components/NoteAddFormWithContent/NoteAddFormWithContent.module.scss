@@ -1,0 +1,27 @@
+.NoteAddFormWithContent {
+	display: flex;
+	gap: 5px;
+	flex-direction: column;
+	width: 400px;
+}
+
+.button {
+	align-self: flex-end;
+	margin-top: 10px;
+}
+
+.error {
+	color: red;
+}
+
+.title {
+	text-align: center;
+	color: var(--primary-color);
+	margin-bottom: 10px;
+}
+
+@media screen and (max-width: 768px) {
+	.NoteAddFormWithContent {
+		width: auto;
+	}
+}
