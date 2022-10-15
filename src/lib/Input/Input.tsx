@@ -50,18 +50,24 @@ export const Input = forwardRef((props: InputProps, ref: ForwardedRef<HTMLInputE
 	};
 
 	return (
-		<div className={classNames([cls.inputWrapper], {[cls.withPlaceholder]: !!floatPlaceholder})}>
-			{!!floatPlaceholder && <span className={classNames([cls.placeholder], {[cls.focused]: isFocused})}>
+		<div
+			data-testid='Input_wrapper'
+			className={classNames([cls.inputWrapper], {[cls.withPlaceholder]: !!floatPlaceholder})}
+		>
+			{!!floatPlaceholder && <span
+				data-testid='Input_floatPlaceholder'
+				className={classNames([cls.placeholder], {[cls.focused]: isFocused})}
+			>
 				{floatPlaceholder}
 			</span>}
 			<input
 				ref={ref}
 				value={value}
-				data-testid={testid ?? 'Input'}
 				onChange={onChange}
 				type={type}
 				onFocus={onFocus}
 				onBlur={onBlur}
+				data-testid={testid ?? 'Input'}
 				className={classNames([cls.Input, className], {[cls.withCorners]: withCorners})}
 				placeholder={placeholder}
 				id={id}

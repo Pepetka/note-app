@@ -1,12 +1,11 @@
 import {screen} from '@testing-library/react';
 import '@testing-library/jest-dom';
-import {ModalConfirm} from './ModalConfirm';
+import {DeleteNoteConfirm} from './DeleteNoteConfirm';
 import {componentTestRender} from 'helpers/test/componentTestRender/componentTestRender';
 
-describe('ModalConfirm', () => {
+describe('DeleteNoteConfirm', () => {
 	test('be in the document', () => {
-		componentTestRender(<ModalConfirm isOpen={true} onConfirm={() => {}} onClose={() => {}}/>);
-		expect(screen.getByTestId('Modal')).toBeInTheDocument();
+		componentTestRender(<DeleteNoteConfirm onConfirm={() => {}} onClose={() => {}}/>);
 		expect(screen.getByTestId('DeleteNoteConfirm')).toBeInTheDocument();
 	});
 });

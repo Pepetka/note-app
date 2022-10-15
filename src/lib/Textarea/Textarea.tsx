@@ -42,8 +42,14 @@ export const Textarea = forwardRef((props: TextareaProps, ref: ForwardedRef<HTML
 	};
 
 	return (
-		<div className={classNames([cls.textareaWrapper], {[cls.withPlaceholder]: !!floatPlaceholder})}>
-			{!!floatPlaceholder && <span className={classNames([cls.placeholder], {[cls.focused]: isFocused})}>
+		<div
+			data-testid='Textarea_wrapper'
+			className={classNames([cls.textareaWrapper], {[cls.withPlaceholder]: !!floatPlaceholder})}
+		>
+			{!!floatPlaceholder && <span
+				data-testid='Textarea_floatPlaceholder'
+				className={classNames([cls.placeholder], {[cls.focused]: isFocused})}
+			>
 				{floatPlaceholder}
 			</span>}
 			<textarea

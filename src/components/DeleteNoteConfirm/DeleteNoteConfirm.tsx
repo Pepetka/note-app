@@ -20,7 +20,7 @@ export const DeleteNoteConfirm = ({className, onConfirm, onClose}: DeleteNoteCon
 	}, []);
 
 	return (
-		<div data-testid='ModalConfirm' className={classNames([cls.DeleteNoteConfirm, className])}>
+		<div data-testid='DeleteNoteConfirm' className={classNames([cls.DeleteNoteConfirm, className])}>
 			<p>
 				{t('Delete note? Are you sure?')}
 			</p>

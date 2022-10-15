@@ -1,12 +1,12 @@
 import {screen} from '@testing-library/react';
 import '@testing-library/jest-dom';
-import {ModalConfirm} from './ModalConfirm';
+import {ModalNoteAdd} from './ModalNoteAdd';
 import {componentTestRender} from 'helpers/test/componentTestRender/componentTestRender';
 
-describe('ModalConfirm', () => {
+describe('ModalNoteAdd', () => {
 	test('be in the document', () => {
-		componentTestRender(<ModalConfirm isOpen={true} onConfirm={() => {}} onClose={() => {}}/>);
+		componentTestRender(<ModalNoteAdd isOpen={true} onClose={() => {}}/>);
 		expect(screen.getByTestId('Modal')).toBeInTheDocument();
-		expect(screen.getByTestId('DeleteNoteConfirm')).toBeInTheDocument();
+		expect(screen.getByTestId('NoteAddFormWithContent')).toBeInTheDocument();
 	});
 });

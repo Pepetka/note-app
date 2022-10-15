@@ -16,6 +16,7 @@ export const NoteAddButton = ({className, onClick}: NoteAddButtonProps) => {
 			onClick={onClick}
 			theme={ButtonThemes.SECONDARY}
 			className={classNames([cls.NoteAddButton, className])}
+			testid='NoteAddButton'
 		>
 			<div className={cls.add}>
 				<FontAwesomeIcon icon={faPlus} />

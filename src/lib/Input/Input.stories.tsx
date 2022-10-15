@@ -14,5 +14,12 @@ const Template: ComponentStory<typeof Input> = (args) => <Input {...args} />;
 export const InputStory = Template.bind({});
 InputStory.args = {
 	placeholder: 'Input placeholder',
-	onChange: () => { },
+	onChange: () => {},
+};
+
+export const InputWithFloatPlaceholder = Template.bind({});
+InputWithFloatPlaceholder.args = {
+	floatPlaceholder: 'Input placeholder',
+	onChange: () => {},
+	value: 'Some value',
 };

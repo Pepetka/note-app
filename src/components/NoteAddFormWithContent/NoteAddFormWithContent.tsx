@@ -47,12 +47,12 @@ export const NoteAddFormWithContent = ({className, optionFunc}: NoteAddFormWithC
 	};
 
 	return (
-		<form onSubmit={onSubmit} className={classNames([cls.NoteAddFormWithContent, className])}>
+		<form data-testid='NoteAddFormWithContent' onSubmit={onSubmit} className={classNames([cls.NoteAddFormWithContent, className])}>
 			<h2 className={cls.title}>{t('Add note')}</h2>
-			<Input floatPlaceholder={t('Note title')} value={title} onChange={onChangeTitle} ref={inputRef}/>
-			{error && <p className={cls.error}>{t(error)}</p>}
+			<Input data-testid floatPlaceholder={t('Note title')} value={title} onChange={onChangeTitle} ref={inputRef}/>
+			{error && <p data-testid='NoteAddFormWithContent_error' className={cls.error}>{t(error)}</p>}
 			<Textarea floatPlaceholder={t('Note content')} value={content} onChange={onChangeContent}/>
-			<Button theme={ButtonThemes.PRIMARY} type='submit' className={cls.button}>
+			<Button data-testid='NoteAddFormWithContent_btn' theme={ButtonThemes.PRIMARY} type='submit' className={cls.button}>
 				{t('Add Note')}
 			</Button>
 		</form>
