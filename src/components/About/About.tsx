@@ -6,7 +6,7 @@ interface AboutProps {
 	version?: string
 }
 
-export const About = ({version = 'v6.0.0'}: AboutProps) => {
+export const About = ({version = 'v7.0.0'}: AboutProps) => {
 	const {t} = useTranslation('about');
 
 	return (
