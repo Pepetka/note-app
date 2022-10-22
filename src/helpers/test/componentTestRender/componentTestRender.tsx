@@ -17,13 +17,13 @@ export const componentTestRender = (component: ReactNode, options?: ComponentTes
 	return render(
 		<ThemeProvider>
 			<HandleSortProvider>
-				<StoreProvider initialState={options?.initialState}>
-					<MemoryRouter initialEntries={[options?.route ?? '/']}>
+				<MemoryRouter initialEntries={[options?.route ?? '/']}>
+					<StoreProvider initialState={options?.initialState}>
 						<I18nextProvider i18n={i18nConfigForTesting}>
 							{component}
 						</I18nextProvider>
-					</MemoryRouter>
-				</StoreProvider>
+					</StoreProvider>
+				</MemoryRouter>
 			</HandleSortProvider>
 		</ThemeProvider>,
 	);

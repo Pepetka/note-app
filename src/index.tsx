@@ -16,13 +16,13 @@ root.render(
 	<Suspense fallback={<PageLoader className='PageLoader_app' />}>
 		<ThemeProvider>
 			<HandleSortProvider>
-				<StoreProvider>
-					<BrowserRouter>
+				<BrowserRouter>
+					<StoreProvider>
 						<ErrorBoundary>
 							<App/>
 						</ErrorBoundary>
-					</BrowserRouter>
-				</StoreProvider>
+					</StoreProvider>
+				</BrowserRouter>
 			</HandleSortProvider>
 		</ThemeProvider>
 	</Suspense>,

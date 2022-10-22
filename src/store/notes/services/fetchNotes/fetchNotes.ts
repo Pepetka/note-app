@@ -1,15 +1,12 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {Note} from '../../types/NotesSchema';
-import axios from 'axios';
-import {ThunkApi, ResponseType} from '../types';
+import {ResponseType, ThunkConfig} from '../types';
 
-const url = process.env.REACT_APP_DB_URL;
-
-export const fetchNotes = createAsyncThunk<Note[], string, ThunkApi>(
+export const fetchNotes = createAsyncThunk<Note[], string, ThunkConfig<string>>(
 	'notes/fetchNotes',
-	async (userId, {rejectWithValue}) => {
+	async (userId, {rejectWithValue, extra}) => {
 		try {
-			const response = await axios.get<ResponseType>(`${url}/notes/${userId}.json`);
+			const response = await extra.api.get<ResponseType>(`/${userId}.json`);
 
 			if (response.data) {
 				const notes: Array<Note> = Object.entries(response.data).map((el) => ({...el[1], id: el[0]}));

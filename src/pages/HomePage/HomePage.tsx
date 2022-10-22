@@ -38,7 +38,8 @@ export const HomePage = () => {
 		} else {
 			navigate('/login');
 		}
-	}, [dispatch, isAuth, navigate, userId]);
+		// eslint-disable-next-line
+	}, [isAuth]);
 
 	useEffect(() => {
 		if (error.update) dispatch(alertActions.showAlert({type: 'danger', text: error.update}));

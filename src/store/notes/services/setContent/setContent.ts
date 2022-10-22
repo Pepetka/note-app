@@ -1,10 +1,7 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import axios from 'axios';
 import {alertActions} from 'store/alert/slice/alertSlice';
 import {withoutId} from 'helpers/withoutId/withoutId';
-import {ThunkApi} from '../types';
-
-const url = process.env.REACT_APP_DB_URL;
+import {ThunkConfig} from '../types';
 
 interface SetContentProps {
 	content: string
@@ -17,9 +14,9 @@ interface SetContentReturn {
 	content: string
 }
 
-export const setContent = createAsyncThunk<SetContentReturn, SetContentProps, ThunkApi>(
+export const setContent = createAsyncThunk<SetContentReturn, SetContentProps, ThunkConfig<string>>(
 	'notes/setContent',
-	async ({content, noteId, userId}, {getState, rejectWithValue, dispatch}) => {
+	async ({content, noteId, userId}, {getState, rejectWithValue, extra, dispatch}) => {
 		try {
 			const {notes} = getState().notes;
 
@@ -28,7 +25,7 @@ export const setContent = createAsyncThunk<SetContentReturn, SetContentProps, Th
 				content,
 			});
 
-			const response = await axios.put(`${url}/notes/${userId}/${noteId}.json`, data);
+			const response = await extra.api.put(`/${userId}/${noteId}.json`, data);
 
 			if (response.statusText !== 'OK') {
 				throw new Error('Server Error');

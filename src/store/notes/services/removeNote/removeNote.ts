@@ -1,19 +1,16 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import axios from 'axios';
-import {ThunkApi} from '../types';
-
-const url = process.env.REACT_APP_DB_URL;
+import {ThunkConfig} from '../types';
 
 interface RemoveNoteProps {
 	userId: string
 	noteId: string
 }
 
-export const removeNote = createAsyncThunk<string, RemoveNoteProps, ThunkApi>(
+export const removeNote = createAsyncThunk<string, RemoveNoteProps, ThunkConfig<string>>(
 	'notes/removeNote',
-	({userId, noteId}, {rejectWithValue}) => {
+	({userId, noteId}, {rejectWithValue, extra}) => {
 		try {
-			axios.delete(`${url}/notes/${userId}/${noteId}.json`);
+			extra.api.delete(`/${userId}/${noteId}.json`);
 
 			return noteId;
 		} catch (error) {
