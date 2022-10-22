@@ -12,20 +12,21 @@ import {Notes} from 'components/Notes/Notes';
 import {useHandleSort} from 'hooks/useHandleSort';
 import {getNotesState} from 'store/notes/selectors/getState/getNotesState';
 import {useTranslation} from 'react-i18next';
-import {useAppSelector, useAppDispatch} from 'hooks/useRedux';
+import {useAppDispatch} from 'hooks/useRedux';
 import {getUser} from 'store/user/selectors/getUser/getUser';
 import {fetchNotes} from 'store/notes/services/fetchNotes/fetchNotes';
 import {NoteAddButton} from 'components/NoteAddButton/NoteAddButton';
 import {ModalNoteAdd} from 'components/ModalNoteAdd/ModalNoteAdd';
 import {LocalStorageKeys} from 'const/localStorage';
+import {useSelector} from 'react-redux';
 
 export const HomePage = () => {
 	const dispatch = useAppDispatch();
-	const userId = useAppSelector(getUser)?.id;
+	const userId = useSelector(getUser)?.id;
 	const navigate = useNavigate();
 	const {isAuth} = useAuth();
 	const {handleSort} = useHandleSort();
-	const {loading, notes, error} = useAppSelector(getNotesState);
+	const {loading, notes, error} = useSelector(getNotesState);
 	const {t} = useTranslation('home');
 	const [isOpenModal, setIsOpenModal] = useState(false);
 

@@ -7,14 +7,15 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faXmark} from '@fortawesome/free-solid-svg-icons';
 import {CSSTransition} from 'react-transition-group';
 import {getAlertState} from 'store/alert/selectors/getState/getAlertState';
-import {useAppDispatch, useAppSelector} from 'hooks/useRedux';
+import {useAppDispatch} from 'hooks/useRedux';
+import {useSelector} from 'react-redux';
 
 import cls from './Alert.module.scss';
 import './AlertAnimation.scss';
 
 export const Alert = () => {
 	const dispatch = useAppDispatch();
-	const {type, visible, text} = useAppSelector(getAlertState);
+	const {type, visible, text} = useSelector(getAlertState);
 	const {t} = useTranslation();
 	const btnRef = useRef<HTMLButtonElement>(null);
 

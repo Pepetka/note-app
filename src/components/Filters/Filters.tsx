@@ -2,8 +2,9 @@ import {notesActions} from 'store/notes/slice/notesSlice';
 import {useTranslation} from 'react-i18next';
 import {Button, ButtonThemes} from 'lib/Button/Button';
 import {getFilter} from 'store/notes/selectors/getFilter/getFilter';
-import {useAppDispatch, useAppSelector} from 'hooks/useRedux';
+import {useAppDispatch} from 'hooks/useRedux';
 import {FilterTypes} from 'store/notes/types/NotesSchema';
+import {useSelector} from 'react-redux';
 
 import cls from './Filters.module.scss';
 
@@ -16,7 +17,7 @@ const buttons: Array<{name: string, data: FilterTypes}> = [
 
 export const Filters = () => {
 	const dispatch = useAppDispatch();
-	const filter = useAppSelector(getFilter);
+	const filter = useSelector(getFilter);
 	const {t} = useTranslation('home');
 
 	const onChangeFilter = (data: FilterTypes) => {

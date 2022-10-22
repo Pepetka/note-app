@@ -13,7 +13,5 @@ export const configureReduxStore = (initialState?: StateSchema) => configureStor
 	preloadedState: initialState,
 });
 
-export const store = configureReduxStore();
+export type AppDispatch = ReturnType<typeof configureReduxStore>['dispatch'];
 
-export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch

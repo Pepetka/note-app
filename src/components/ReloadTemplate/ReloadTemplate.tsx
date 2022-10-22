@@ -2,7 +2,7 @@ import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {Button, ButtonThemes} from 'lib/Button/Button';
 import {getError} from 'store/notes/selectors/getError/getError';
-import {useAppSelector} from 'hooks/useRedux';
+import {useSelector} from 'react-redux';
 
 import cls from './ReloadTemplate.module.scss';
 
@@ -12,7 +12,7 @@ interface ReloadTemplateProps {
 }
 
 export const ReloadTemplate = ({onReload, errorMessage}: ReloadTemplateProps) => {
-	const error = useAppSelector(getError);
+	const error = useSelector(getError);
 	const {t} = useTranslation('home');
 
 	return (

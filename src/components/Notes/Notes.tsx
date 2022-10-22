@@ -4,8 +4,9 @@ import {useTranslation} from 'react-i18next';
 import {reorder} from 'helpers/reorder/reorder';
 import {getNotes} from 'store/notes/selectors/getNotes/getNotes';
 import {getUser} from 'store/user/selectors/getUser/getUser';
-import {useAppDispatch, useAppSelector} from 'hooks/useRedux';
+import {useAppDispatch} from 'hooks/useRedux';
 import {sortNotes} from 'store/notes/services/sortNotes/sortNotes';
+import {useSelector} from 'react-redux';
 
 import cls from './Notes.module.scss';
 
@@ -14,8 +15,8 @@ interface Prop {
 }
 
 export const Notes = ({handleSort}: Prop) => {
-	const notes = useAppSelector(getNotes);
-	const userId = useAppSelector(getUser)?.id;
+	const notes = useSelector(getNotes);
+	const userId = useSelector(getUser)?.id;
 	const dispatch = useAppDispatch();
 	const {t} = useTranslation('home');
 

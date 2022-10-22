@@ -18,11 +18,12 @@ import {ModalConfirm} from 'components/ModalConfirm/ModalConfirm';
 import {getUser} from 'store/user/selectors/getUser/getUser';
 import {getFilter} from 'store/notes/selectors/getFilter/getFilter';
 import {Note} from 'store/notes/types/NotesSchema';
-import {useAppDispatch, useAppSelector} from 'hooks/useRedux';
+import {useAppDispatch} from 'hooks/useRedux';
 import {setContent} from 'store/notes/services/setContent/setContent';
 import {removeNote} from 'store/notes/services/removeNote/removeNote';
 import {disableNote} from 'store/notes/services/disableNote/disableNote';
 import {importantNote} from 'store/notes/services/importantNote/importantNote';
+import {useSelector} from 'react-redux';
 
 import cls from './NotesItem.module.scss';
 import './NotesItemAnimation.scss';
@@ -35,8 +36,8 @@ interface NotesItemProps {
 
 export const NotesItem = ({note, handleSort, index}: NotesItemProps) => {
 	const dispatch = useAppDispatch();
-	const userId = useAppSelector(getUser)?.id;
-	const filter = useAppSelector(getFilter);
+	const userId = useSelector(getUser)?.id;
+	const filter = useSelector(getFilter);
 	const [canText, setCanText] = useState(false);
 	const [contentVisibility, setContentVisibility] = useState(false);
 	const inputRef = useRef<HTMLDivElement>(null);
