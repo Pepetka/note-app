@@ -1,4 +1,4 @@
-import {ButtonHTMLAttributes, ForwardedRef, forwardRef, MouseEvent, ReactNode} from 'react';
+import {ButtonHTMLAttributes, ForwardedRef, forwardRef, memo, MouseEvent, ReactNode} from 'react';
 import {classNames} from 'helpers/classNames/classNames';
 
 import cls from './Button.module.scss';
@@ -22,7 +22,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>{
 	testid?: string
 }
 
-export const Button = forwardRef(( props : ButtonProps, ref: ForwardedRef<HTMLButtonElement>) => {
+export const Button = memo(forwardRef(( props : ButtonProps, ref: ForwardedRef<HTMLButtonElement>) => {
 	const {
 		className,
 		testid,
@@ -52,4 +52,4 @@ export const Button = forwardRef(( props : ButtonProps, ref: ForwardedRef<HTMLBu
 			{children}
 		</button>
 	);
-});
+}));

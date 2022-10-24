@@ -1,6 +1,6 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
+import {ThunkConfig} from 'store/types/StateSchema';
 import {Note} from '../../types/NotesSchema';
-import {ThunkConfig} from '../types';
 
 interface AddNoteProps {
 	title: string

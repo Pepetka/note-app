@@ -1,9 +1,9 @@
-import {useEffect} from 'react';
+import {memo, useCallback, useEffect} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Button, ButtonThemes} from 'lib/Button/Button';
 import {LocalStorageKeys} from 'const/localStorage';
 
-export const LocalizationButton = () => {
+export const LocalizationButton = memo(() => {
 	const {i18n} = useTranslation();
 
 	useEffect(() => {
@@ -16,12 +16,12 @@ export const LocalizationButton = () => {
 	}, [i18n]);
 
 
-	const onChangeLang = () => {
+	const onChangeLang = useCallback(() => {
 		const newLang = i18n.language === 'en' ? 'ru' : 'en';
 
 		i18n.changeLanguage(newLang);
 		document.documentElement.lang = newLang;
-	};
+	}, [i18n]);
 
 	return (
 		<Button
@@ -32,4 +32,4 @@ export const LocalizationButton = () => {
 			{i18n.language}
 		</Button>
 	);
-};
+});

@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {memo, useState} from 'react';
 import {ThemeButton} from 'components/ThemeButton/ThemeButton';
 import {LocalizationButton} from 'components/LocalizationButton/LocalizationButton';
 import {HandleSortButton} from 'components/HandleSortButton/HandleSortButton';
@@ -8,7 +8,7 @@ import {faXmark} from '@fortawesome/free-solid-svg-icons';
 
 import cls from './SideBar.module.scss';
 
-export const SideBar = () => {
+export const SideBar = memo(() => {
 	const [collapsed, setCollapsed] = useState(true);
 
 	const onCollapsed = () => {
@@ -37,4 +37,4 @@ export const SideBar = () => {
 			</button>
 		</div>
 	);
-};
+});

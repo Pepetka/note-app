@@ -10,7 +10,7 @@ describe('ReloadTemplate', () => {
 		const state: DeepPartial<StateSchema> = {
 			notes: {
 				error: {
-					update: null,
+					update: undefined,
 					get: 'Some get error',
 				},
 			},

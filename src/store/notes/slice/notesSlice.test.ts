@@ -1,5 +1,5 @@
 import {describe, expect, test} from '@jest/globals';
-import notesReducer, {notesActions} from './notesSlice';
+import {notesReducer, notesActions} from './notesSlice';
 import {FilterTypes, NotesSchema} from '../types/NotesSchema';
 
 describe('notesSlice', () => {
@@ -163,28 +163,19 @@ describe('notesSlice', () => {
 			],
 			loading: false,
 			filter: FilterTypes.ACTIVE,
-			error: {
-				get: null,
-				update: null,
-			},
+			error: {},
 		});
 		expect(notesReducer(undefined, notesActions.clearNotes())).toEqual({
 			notes: [],
 			loading: false,
 			filter: FilterTypes.ACTIVE,
-			error: {
-				get: null,
-				update: null,
-			},
+			error: {},
 		});
 		expect(notesReducer(undefined, notesActions.changeFilter({filter: FilterTypes.DISABLE}))).toEqual({
 			notes: [],
 			loading: false,
 			filter: FilterTypes.DISABLE,
-			error: {
-				get: null,
-				update: null,
-			},
+			error: {},
 		});
 	});
 });

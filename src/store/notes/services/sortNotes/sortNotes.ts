@@ -2,7 +2,7 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {Note} from '../../types/NotesSchema';
 import {notesActions} from 'store/notes/slice/notesSlice';
 import {withoutId} from 'helpers/withoutId/withoutId';
-import {ThunkConfig} from '../types';
+import {ThunkConfig} from 'store/types/StateSchema';
 
 interface SortNotesProps {
 	notes: Note[]

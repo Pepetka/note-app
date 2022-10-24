@@ -1,4 +1,4 @@
-import {useEffect, useRef} from 'react';
+import {memo, useEffect, useRef} from 'react';
 import {alertActions} from 'store/alert/slice/alertSlice';
 import {useTranslation} from 'react-i18next';
 import {classNames} from 'helpers/classNames/classNames';
@@ -13,7 +13,7 @@ import {useSelector} from 'react-redux';
 import cls from './Alert.module.scss';
 import './AlertAnimation.scss';
 
-export const Alert = () => {
+export const Alert = memo(() => {
 	const dispatch = useAppDispatch();
 	const {type, visible, text} = useSelector(getAlertState);
 	const {t} = useTranslation();
@@ -52,4 +52,4 @@ export const Alert = () => {
 			</div>
 		</CSSTransition>
 	);
-};
+});

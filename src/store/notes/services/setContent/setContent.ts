@@ -1,7 +1,7 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {alertActions} from 'store/alert/slice/alertSlice';
 import {withoutId} from 'helpers/withoutId/withoutId';
-import {ThunkConfig} from '../types';
+import {ThunkConfig} from 'store/types/StateSchema';
 
 interface SetContentProps {
 	content: string

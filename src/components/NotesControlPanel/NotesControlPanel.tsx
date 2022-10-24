@@ -1,13 +1,14 @@
 import {useTranslation} from 'react-i18next';
 import {useHandleSort} from 'hooks/useHandleSort';
 import {Switcher} from 'lib/Switcher/Switcher';
+import {memo} from 'react';
 
 import cls from './NotesControlPanel.module.scss';
 
 interface NotesControlPanelProps {
 	notesLength: number
 }
-export const NotesControlPanel = ({notesLength}: NotesControlPanelProps) => {
+export const NotesControlPanel = memo(({notesLength}: NotesControlPanelProps) => {
 	const {t} = useTranslation('home');
 	const {handleSort, onHandleSort} = useHandleSort();
 
@@ -22,4 +23,4 @@ export const NotesControlPanel = ({notesLength}: NotesControlPanelProps) => {
 			</div>
 		</div>
 	);
-};
+});

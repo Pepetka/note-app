@@ -3,7 +3,7 @@ import {
 	ForwardedRef,
 	forwardRef,
 	HTMLInputTypeAttribute,
-	InputHTMLAttributes,
+	InputHTMLAttributes, memo,
 	useEffect,
 	useState,
 } from 'react';
@@ -22,7 +22,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 	testid?: string
 	floatPlaceholder?: string
 }
-export const Input = forwardRef((props: InputProps, ref: ForwardedRef<HTMLInputElement>) => {
+export const Input = memo(forwardRef((props: InputProps, ref: ForwardedRef<HTMLInputElement>) => {
 	const {
 		testid,
 		className,
@@ -75,5 +75,4 @@ export const Input = forwardRef((props: InputProps, ref: ForwardedRef<HTMLInputE
 			/>
 		</div>
 	);
-},
-);
+}));

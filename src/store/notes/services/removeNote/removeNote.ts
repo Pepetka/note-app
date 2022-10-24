@@ -1,5 +1,5 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {ThunkConfig} from '../types';
+import {ThunkConfig} from 'store/types/StateSchema';
 
 interface RemoveNoteProps {
 	userId: string

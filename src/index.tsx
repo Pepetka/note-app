@@ -6,24 +6,24 @@ import {BrowserRouter} from 'react-router-dom';
 import {HandleSortProvider} from 'context/handleSort/HandleSortProvider';
 import {PageLoader} from 'components/PageLoader/PageLoader';
 import {ErrorBoundary} from 'components/ErrorBoundary/ErrorBoundary';
+import {StoreProvider} from 'store/StoreProvider/StoreProvider';
 
 import 'style/index.scss';
 import 'localization/i18n';
-import {StoreProvider} from './store/StoreProvider/StoreProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as Element);
 root.render(
 	<Suspense fallback={<PageLoader className='PageLoader_app' />}>
-		<ThemeProvider>
-			<HandleSortProvider>
-				<BrowserRouter>
-					<StoreProvider>
-						<ErrorBoundary>
+		<BrowserRouter>
+			<StoreProvider>
+				<ErrorBoundary>
+					<ThemeProvider>
+						<HandleSortProvider>
 							<App/>
-						</ErrorBoundary>
-					</StoreProvider>
-				</BrowserRouter>
-			</HandleSortProvider>
-		</ThemeProvider>
+						</HandleSortProvider>
+					</ThemeProvider>
+				</ErrorBoundary>
+			</StoreProvider>
+		</BrowserRouter>
 	</Suspense>,
 );

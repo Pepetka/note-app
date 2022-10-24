@@ -5,7 +5,7 @@ export interface User {
 }
 
 export interface UserSchema {
-	user: User | null
-	error: string | null
+	user?: User
+	error?: string
 	loading: boolean
 }

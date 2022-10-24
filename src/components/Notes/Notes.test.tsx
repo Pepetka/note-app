@@ -24,10 +24,7 @@ describe('Notes', () => {
 				notes,
 				filter: FilterTypes.ALL,
 				loading: false,
-				error: {
-					get: null,
-					update: null,
-				},
+				error: {},
 			},
 		};
 

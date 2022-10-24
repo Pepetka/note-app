@@ -1,4 +1,5 @@
 import {useTranslation} from 'react-i18next';
+import {memo} from 'react';
 
 import cls from './About.module.scss';
 
@@ -6,7 +7,7 @@ interface AboutProps {
 	version?: string
 }
 
-export const About = ({version = 'v7.0.0'}: AboutProps) => {
+export const About = memo(({version = 'v7.0.0'}: AboutProps) => {
 	const {t} = useTranslation('about');
 
 	return (
@@ -20,4 +21,4 @@ export const About = ({version = 'v7.0.0'}: AboutProps) => {
 			</p>
 		</div>
 	);
-};
+});

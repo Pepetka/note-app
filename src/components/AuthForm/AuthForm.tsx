@@ -1,5 +1,5 @@
-import {useEffect, useRef, useState} from 'react';
-import {SubmitHandler, useForm, Controller} from 'react-hook-form';
+import {memo, useEffect, useRef, useState} from 'react';
+import {Controller, SubmitHandler, useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import {useTranslation} from 'react-i18next';
@@ -35,7 +35,7 @@ const schema = yup
 	})
 	.required();
 
-export const AuthForm = ({title, onSubmitForm}: AuthFormProps) => {
+export const AuthForm = memo(({title, onSubmitForm}: AuthFormProps) => {
 	const [passwordVisibility, setPasswordVisibility] = useState(false);
 	const {t} = useTranslation('auth');
 	const inputRef = useRef<HTMLInputElement>(null);
@@ -129,9 +129,9 @@ export const AuthForm = ({title, onSubmitForm}: AuthFormProps) => {
 			</Button>
 		</form>
 	);
-};
+});
 
-const ErrorMessage = ({errorMessage}: { errorMessage: string }) => {
+const ErrorMessage = memo(({errorMessage}: { errorMessage: string }) => {
 	const {t} = useTranslation('auth');
 
 	return (
@@ -139,4 +139,4 @@ const ErrorMessage = ({errorMessage}: { errorMessage: string }) => {
 			{t(errorMessage)}
 		</div>
 	);
-};
+});

@@ -2,8 +2,9 @@ import {useHandleSort} from 'hooks/useHandleSort';
 import {Button, ButtonThemes} from 'lib/Button/Button';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSort, faShuffle} from '@fortawesome/free-solid-svg-icons';
+import {memo} from 'react';
 
-export const HandleSortButton = () => {
+export const HandleSortButton = memo(() => {
 	const {handleSort, onHandleSort} = useHandleSort();
 
 	return (
@@ -19,4 +20,4 @@ export const HandleSortButton = () => {
 			)}
 		</Button>
 	);
-};
+});

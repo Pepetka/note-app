@@ -25,10 +25,7 @@ const initialState: DeepPartial<StateSchema> = {
 	},
 	notes: {
 		notes: [],
-		error: {
-			get: null,
-			update: null,
-		},
+		error: {},
 		filter: FilterTypes.ACTIVE,
 		loading: false,
 	},

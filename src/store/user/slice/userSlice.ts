@@ -6,8 +6,6 @@ import {registerWithPassword} from '../services/registerWithPassword/registerWit
 import {LocalStorageKeys} from 'const/localStorage';
 
 const initialState: UserSchema = {
-	user: null,
-	error: null,
 	loading: false,
 };
 
@@ -21,55 +19,55 @@ const userSlice = createSlice({
 			if (user) state.user = JSON.parse(user);
 		},
 		setUser(state, action: PayloadAction<User>) {
-			state.user = action.payload;
+			localStorage.setItem(LocalStorageKeys.USER, JSON.stringify(action.payload));
 		},
 		removeUser(state) {
-			state.user = null;
+			state.user = undefined;
 		},
 	},
 	extraReducers: (builder) => {
 		builder
 			.addCase(loginWithPassword.pending, (state) => {
 				state.loading = true;
-				state.error = null;
+				state.error = undefined;
 			})
 			.addCase(loginWithPassword.fulfilled, (state, action) => {
 				state.loading = false;
-				state.error = null;
+				state.error = undefined;
 				state.user = action.payload;
 			})
 			.addCase(loginWithPassword.rejected, (state, action) => {
 				state.loading = false;
-				state.error = action.payload!;
+				state.error = action.payload;
 			})
 			.addCase(loginWithGoogle.pending, (state) => {
 				state.loading = true;
-				state.error = null;
+				state.error = undefined;
 			})
 			.addCase(loginWithGoogle.fulfilled, (state, action) => {
 				state.loading = false;
-				state.error = null;
+				state.error = undefined;
 				state.user = action.payload;
 			})
 			.addCase(loginWithGoogle.rejected, (state, action) => {
 				state.loading = false;
-				state.error = action.payload!;
+				state.error = action.payload;
 			})
 			.addCase(registerWithPassword.pending, (state) => {
 				state.loading = true;
-				state.error = null;
+				state.error = undefined;
 			})
 			.addCase(registerWithPassword.fulfilled, (state, action) => {
 				state.loading = false;
-				state.error = null;
+				state.error = undefined;
 				state.user = action.payload;
 			})
 			.addCase(registerWithPassword.rejected, (state, action) => {
 				state.loading = false;
-				state.error = action.payload!;
+				state.error = action.payload;
 			});
 	},
 });
 
 export const userActions = userSlice.actions;
-export default userSlice.reducer;
+export const userReducer = userSlice.reducer;

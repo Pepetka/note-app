@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from 'react';
+import {memo, useCallback, useEffect, useRef, useState} from 'react';
 import {CSSTransition} from 'react-transition-group';
 import {Draggable} from 'react-beautiful-dnd';
 import {useTranslation} from 'react-i18next';
@@ -34,7 +34,7 @@ interface NotesItemProps {
 	index: number
 }
 
-export const NotesItem = ({note, handleSort, index}: NotesItemProps) => {
+export const NotesItem = memo(({note, handleSort, index}: NotesItemProps) => {
 	const dispatch = useAppDispatch();
 	const userId = useSelector(getUser)?.id;
 	const filter = useSelector(getFilter);
@@ -52,7 +52,7 @@ export const NotesItem = ({note, handleSort, index}: NotesItemProps) => {
 		if (canText && inputRef.current) inputRef.current.focus();
 	}, [canText]);
 
-	const onContentSave = (id: string) => {
+	const onContentSave = useCallback((id: string) => () => {
 		setCanText(false);
 
 		if (inputRef.current?.innerHTML) {
@@ -62,32 +62,40 @@ export const NotesItem = ({note, handleSort, index}: NotesItemProps) => {
 				noteId: id,
 			}));
 		}
-	};
+	}, [dispatch, userId]);
 
-	const onRemoveNote = (noteId: string) => {
+	const onRemoveNote = useCallback((noteId: string) => {
 		dispatch(removeNote({noteId, userId: userId!}));
-	};
+	}, [dispatch, userId]);
 
-	const onDisableNote = (noteId: string) => {
+	const onDisableNote = useCallback((noteId: string) => () => {
 		dispatch(disableNote({noteId, userId: userId!}));
-	};
+	}, [dispatch, userId]);
 
-	const onImportantNote = (noteId: string) => {
+	const onImportantNote = useCallback((noteId: string) => () => {
 		dispatch(importantNote({noteId, userId: userId!}));
-	};
+	}, [dispatch, userId]);
 
-	const onTextNote = () => {
+	const onTextNote = useCallback(() => {
 		setCanText((canText) => !canText);
-	};
+	}, []);
 
-	const onChangeVisibility = () => {
+	const onChangeVisibility = useCallback(() => {
 		setContentVisibility((contentVisibility) => !contentVisibility);
-	};
+	}, []);
 
-	const onConfirmDelete = () => {
+	const onConfirmDelete = useCallback(() => {
 		setIsOpen(false);
 		setTimeout(() => onRemoveNote(note.id!), 400);
-	};
+	}, [note.id, onRemoveNote]);
+
+	const onCloseModal = useCallback(() => {
+		setIsOpen(false);
+	}, []);
+
+	const onOpenContent = useCallback(() => {
+		setIsOpen(true);
+	}, []);
 
 	return (
 		<Draggable draggableId={note.id!} index={index} isDragDisabled={!handleSort}>
@@ -116,7 +124,7 @@ export const NotesItem = ({note, handleSort, index}: NotesItemProps) => {
 							<div className={cls.buttonGroup}>
 								<div>
 									<Button
-										onClick={() => onDisableNote(note.id!)}
+										onClick={onDisableNote(note.id!)}
 										className={classNames([], {[cls.btnDisable]: note.isDisable})}
 										theme={ButtonThemes.CLEAR}
 									>
@@ -125,7 +133,7 @@ export const NotesItem = ({note, handleSort, index}: NotesItemProps) => {
 								</div>
 								<div>
 									<Button
-										onClick={() => onImportantNote(note.id!)}
+										onClick={onImportantNote(note.id!)}
 										className={classNames([], {[cls.btnImportant]: note.isImportant})}
 										theme={ButtonThemes.CLEAR}
 									>
@@ -141,7 +149,7 @@ export const NotesItem = ({note, handleSort, index}: NotesItemProps) => {
 
 							<div className={cls.delete}>
 								<Button
-									onClick={() => setIsOpen(true)}
+									onClick={onOpenContent}
 									className={cls.btnDelete}
 									theme={ButtonThemes.CLEAR}
 								>
@@ -149,7 +157,7 @@ export const NotesItem = ({note, handleSort, index}: NotesItemProps) => {
 								</Button>
 							</div>
 
-							<ModalConfirm isOpen={isOpen} onClose={() => setIsOpen(false)} onConfirm={onConfirmDelete} />
+							<ModalConfirm isOpen={isOpen} onClose={onCloseModal} onConfirm={onConfirmDelete} />
 						</div>
 
 						<CSSTransition in={contentVisibility} classNames='noteContent' timeout={300} unmountOnExit>
@@ -174,7 +182,7 @@ export const NotesItem = ({note, handleSort, index}: NotesItemProps) => {
 
 									<div>
 										<Button
-											onClick={() => onContentSave(note.id!)}
+											onClick={onContentSave(note.id!)}
 											className={cls.btnSave}
 											theme={ButtonThemes.CLEAR}
 										>
@@ -199,4 +207,4 @@ export const NotesItem = ({note, handleSort, index}: NotesItemProps) => {
 			)}
 		</Draggable>
 	);
-};
+});

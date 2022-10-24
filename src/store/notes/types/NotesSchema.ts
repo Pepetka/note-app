@@ -20,7 +20,7 @@ export interface NotesSchema {
 	loading: boolean
 	filter: FilterTypes
 	error: {
-		get: string | null
-		update: string | null
+		get?: string
+		update?: string
 	}
 }

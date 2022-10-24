@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Button, ButtonThemes} from 'lib/Button/Button';
 import {getError} from 'store/notes/selectors/getError/getError';
@@ -11,7 +11,7 @@ interface ReloadTemplateProps {
 	errorMessage?: string
 }
 
-export const ReloadTemplate = ({onReload, errorMessage}: ReloadTemplateProps) => {
+export const ReloadTemplate = memo(({onReload, errorMessage}: ReloadTemplateProps) => {
 	const error = useSelector(getError);
 	const {t} = useTranslation('home');
 
@@ -26,4 +26,4 @@ export const ReloadTemplate = ({onReload, errorMessage}: ReloadTemplateProps) =>
 			</Button>
 		</div>
 	);
-};
+});

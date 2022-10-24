@@ -3,7 +3,7 @@ import {useTranslation} from 'react-i18next';
 import {classNames} from 'helpers/classNames/classNames';
 
 import cls from './DeleteNoteConfirm.module.scss';
-import {useEffect, useRef} from 'react';
+import {memo, useEffect, useRef} from 'react';
 
 interface DeleteNoteConfirmProps {
 	className?: string;
@@ -11,7 +11,7 @@ interface DeleteNoteConfirmProps {
 	onClose: () => void
 }
 
-export const DeleteNoteConfirm = ({className, onConfirm, onClose}: DeleteNoteConfirmProps) => {
+export const DeleteNoteConfirm = memo(({className, onConfirm, onClose}: DeleteNoteConfirmProps) => {
 	const {t} = useTranslation();
 	const btnRef = useRef<HTMLButtonElement>(null);
 
@@ -41,4 +41,4 @@ export const DeleteNoteConfirm = ({className, onConfirm, onClose}: DeleteNoteCon
 			</div>
 		</div>
 	);
-};
+});

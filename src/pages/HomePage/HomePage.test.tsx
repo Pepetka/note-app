@@ -27,10 +27,7 @@ describe('HomePage', () => {
 					isDisable: false,
 					order: 0,
 				}],
-				error: {
-					update: null,
-					get: null,
-				},
+				error: {},
 			},
 		};
 
@@ -43,10 +40,7 @@ describe('HomePage', () => {
 			notes: {
 				loading: true,
 				notes: [],
-				error: {
-					update: null,
-					get: null,
-				},
+				error: {},
 			},
 		};
 
@@ -61,7 +55,7 @@ describe('HomePage', () => {
 				loading: false,
 				notes: [],
 				error: {
-					update: null,
+					update: undefined,
 					get: 'fetch error',
 				},
 			},
@@ -77,10 +71,7 @@ describe('HomePage', () => {
 			notes: {
 				loading: false,
 				notes: [],
-				error: {
-					update: null,
-					get: null,
-				},
+				error: {},
 			},
 		};
 

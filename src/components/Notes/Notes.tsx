@@ -7,20 +7,21 @@ import {getUser} from 'store/user/selectors/getUser/getUser';
 import {useAppDispatch} from 'hooks/useRedux';
 import {sortNotes} from 'store/notes/services/sortNotes/sortNotes';
 import {useSelector} from 'react-redux';
+import {memo, useCallback} from 'react';
 
 import cls from './Notes.module.scss';
 
-interface Prop {
+interface NotesProp {
 	handleSort: boolean
 }
 
-export const Notes = ({handleSort}: Prop) => {
+export const Notes = memo(({handleSort}: NotesProp) => {
 	const notes = useSelector(getNotes);
 	const userId = useSelector(getUser)?.id;
 	const dispatch = useAppDispatch();
 	const {t} = useTranslation('home');
 
-	function onDragEnd(result: any) {
+	const onDragEnd = useCallback((result: any) => {
 		if (!result.destination) {
 			return;
 		}
@@ -32,7 +33,7 @@ export const Notes = ({handleSort}: Prop) => {
 		const orderedNotes = reorder(notes, result.source.index, result.destination.index);
 
 		dispatch(sortNotes({notes: orderedNotes, userId: userId!}));
-	}
+	}, [dispatch, notes, userId]);
 
 	if (notes.length < 1) {
 		return (
@@ -54,4 +55,4 @@ export const Notes = ({handleSort}: Prop) => {
 			</Droppable>
 		</DragDropContext>
 	);
-};
+});

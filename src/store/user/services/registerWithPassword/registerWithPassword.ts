@@ -1,9 +1,9 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {createUserWithEmailAndPassword, getAuth} from 'firebase/auth';
 import {User} from '../../types/UserSchema';
-import {ThunkApi} from '../types';
 import {alertActions} from '../../../alert/slice/alertSlice';
-import {LocalStorageKeys} from 'const/localStorage';
+import {userActions} from '../../slice/userSlice';
+import {ThunkConfig} from '../../../types/StateSchema';
 
 interface registerWithPasswordProps {
 	email: string
@@ -11,7 +11,7 @@ interface registerWithPasswordProps {
 	rememberMe: boolean
 }
 
-export const registerWithPassword = createAsyncThunk<User, registerWithPasswordProps, ThunkApi>(
+export const registerWithPassword = createAsyncThunk<User, registerWithPasswordProps, ThunkConfig<string>>(
 	'user/registerWithPassword',
 	async ({email, password, rememberMe}, {rejectWithValue, dispatch}) => {
 		try {
@@ -25,7 +25,7 @@ export const registerWithPassword = createAsyncThunk<User, registerWithPasswordP
 				token: user.refreshToken,
 			};
 
-			if (rememberMe) localStorage.setItem(LocalStorageKeys.USER, JSON.stringify(userData));
+			if (rememberMe) dispatch(userActions.setUser(userData));
 
 			return userData;
 		} catch (error) {

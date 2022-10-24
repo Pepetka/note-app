@@ -11,10 +11,7 @@ const initialState: NotesSchema = {
 	notes: [],
 	loading: false,
 	filter: FilterTypes.ACTIVE,
-	error: {
-		get: null,
-		update: null,
-	},
+	error: {},
 };
 
 const notesSlice = createSlice({
@@ -35,30 +32,27 @@ const notesSlice = createSlice({
 		builder
 			.addCase(fetchNotes.pending, (state) => {
 				state.loading = true;
-				state.error.get = null;
-				state.error.update = null;
+				state.error = {};
 			})
 			.addCase(fetchNotes.fulfilled, (state, action) => {
 				state.notes = action.payload;
 				state.loading = false;
-				state.error.get = null;
-				state.error.update = null;
+				state.error = {};
 			})
 			.addCase(fetchNotes.rejected, (state, action) => {
 				state.loading = false;
 				state.error.get = action.payload!;
-				state.error.update = null;
+				state.error.update = undefined;
 			})
 			.addCase(removeNote.fulfilled, (state, action) => {
 				state.notes = state.notes
 					.filter((note) => note.id !== action.payload)
 					.map((note, i) => ({...note, order: i}));
-				state.error.update = null;
-				state.error.get = null;
+				state.error = {};
 			})
 			.addCase(removeNote.rejected, (state, action) => {
 				state.error.update = action.payload!;
-				state.error.get = null;
+				state.error.get = undefined;
 			})
 			.addCase(disableNote.fulfilled, (state, action) => {
 				state.notes = state.notes.map((note) => {
@@ -67,12 +61,11 @@ const notesSlice = createSlice({
 					}
 					return note;
 				});
-				state.error.update = null;
-				state.error.get = null;
+				state.error = {};
 			})
 			.addCase(disableNote.rejected, (state, action) => {
 				state.error.update = action.payload!;
-				state.error.get = null;
+				state.error.get = undefined;
 			})
 			.addCase(importantNote.fulfilled, (state, action) => {
 				state.notes = state.notes.map((note) => {
@@ -81,20 +74,18 @@ const notesSlice = createSlice({
 					}
 					return note;
 				});
-				state.error.update = null;
-				state.error.get = null;
+				state.error = {};
 			})
 			.addCase(importantNote.rejected, (state, action) => {
 				state.error.update = action.payload!;
 			})
 			.addCase(addNote.fulfilled, (state, action) => {
 				state.notes.push(action.payload);
-				state.error.update = null;
-				state.error.get = null;
+				state.error = {};
 			})
 			.addCase(addNote.rejected, (state, action) => {
 				state.error.update = action.payload!;
-				state.error.get = null;
+				state.error.get = undefined;
 			})
 			.addCase(setContent.fulfilled, (state, action) => {
 				state.notes = state.notes.map((note) => {
@@ -102,8 +93,7 @@ const notesSlice = createSlice({
 
 					return note;
 				});
-				state.error.update = null;
-				state.error.get = null;
+				state.error = {};
 			})
 			.addCase(setContent.rejected, (state, action) => {
 				state.error.update = action.payload!;
@@ -112,4 +102,4 @@ const notesSlice = createSlice({
 });
 
 export const notesActions = notesSlice.actions;
-export default notesSlice.reducer;
+export const notesReducer = notesSlice.reducer;

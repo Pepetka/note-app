@@ -1,7 +1,7 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {withoutId} from 'helpers/withoutId/withoutId';
 import {alertActions} from 'store/alert/slice/alertSlice';
-import {ThunkConfig} from '../types';
+import {ThunkConfig} from 'store/types/StateSchema';
 
 interface DisableNoteProps {
 	userId: string

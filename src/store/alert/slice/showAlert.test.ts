@@ -1,5 +1,5 @@
 import {describe, expect, test} from '@jest/globals';
-import alertReducer, {alertActions} from './alertSlice';
+import {alertReducer, alertActions} from './alertSlice';
 import {AlertSchema} from '../types/AlertSchema';
 
 describe('showAlert', () => {

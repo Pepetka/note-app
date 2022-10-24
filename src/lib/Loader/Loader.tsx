@@ -1,6 +1,7 @@
 import cls from './Loader.module.scss';
+import {memo} from 'react';
 
-export const Loader = () => {
+export const Loader = memo(() => {
 	return (
 		<div className={cls.Loader} data-testid='Loader'>
 			<div className={cls.wrapper}>
@@ -11,4 +12,4 @@ export const Loader = () => {
 			</div>
 		</div>
 	);
-};
+});

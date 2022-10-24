@@ -1,4 +1,4 @@
-import {ChangeEvent, ForwardedRef, forwardRef, TextareaHTMLAttributes, useEffect, useState} from 'react';
+import {ChangeEvent, ForwardedRef, forwardRef, memo, TextareaHTMLAttributes, useEffect, useState} from 'react';
 import {classNames} from 'helpers/classNames/classNames';
 
 import cls from './Textarea.module.scss';
@@ -14,7 +14,7 @@ interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement>{
 	rows?: number
 	floatPlaceholder?: string
 }
-export const Textarea = forwardRef((props: TextareaProps, ref: ForwardedRef<HTMLTextAreaElement>) => {
+export const Textarea = memo(forwardRef((props: TextareaProps, ref: ForwardedRef<HTMLTextAreaElement>) => {
 	const {
 		testid,
 		className,
@@ -67,5 +67,4 @@ export const Textarea = forwardRef((props: TextareaProps, ref: ForwardedRef<HTML
 			/>
 		</div>
 	);
-},
-);
+}));

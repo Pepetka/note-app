@@ -1,4 +1,4 @@
-import {ChangeEvent, MouseEvent, useEffect, useRef, useState} from 'react';
+import {ChangeEvent, memo, MouseEvent, useCallback, useEffect, useRef, useState} from 'react';
 import {alertActions} from 'store/alert/slice/alertSlice';
 import {useTranslation} from 'react-i18next';
 import {Button, ButtonThemes} from 'lib/Button/Button';
@@ -11,7 +11,7 @@ import {AlertType} from 'store/alert/types/AlertSchema';
 
 import cls from './NoteAddForm.module.scss';
 
-export const NoteAddForm = () => {
+export const NoteAddForm = memo(() => {
 	const [value, setValue] = useState('');
 	const dispatch = useAppDispatch();
 	const [isChecked, setIsChecked] = useState(false);
@@ -27,16 +27,16 @@ export const NoteAddForm = () => {
 		};
 	}, []);
 
-	const onValueChange = (e: ChangeEvent<HTMLInputElement>) => {
-		setValue(e.target.value);
-	};
+	const onValueChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+		setValue(event.target.value);
+	}, []);
 
-	const onChecked = (event: MouseEvent<HTMLButtonElement>) => {
+	const onChecked = useCallback((event: MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault();
 		setIsChecked((isChecked) => !isChecked);
-	};
+	}, []);
 
-	const onShowAlert = (text: string, type: AlertType) => {
+	const onShowAlert = useCallback((text: string, type: AlertType) => {
 		dispatch(
 			alertActions.showAlert({
 				text,
@@ -47,10 +47,10 @@ export const NoteAddForm = () => {
 		timerRef.current = setTimeout(() => {
 			dispatch(alertActions.hideAlert());
 		}, 3000);
-	};
+	}, [dispatch]);
 
-	const submitHandler = (e: MouseEvent<HTMLButtonElement>) => {
-		e.preventDefault();
+	const submitHandler = useCallback((event: MouseEvent<HTMLButtonElement>) => {
+		event.preventDefault();
 
 		if (value.trim()) {
 			dispatch(addNote({title: value.trim(), isImportant: isChecked}));
@@ -59,7 +59,7 @@ export const NoteAddForm = () => {
 		} else {
 			onShowAlert(t('Please enter a note title'), 'warning');
 		}
-	};
+	}, [dispatch, isChecked, onShowAlert, t, value]);
 
 	return (
 		<form className={cls.NoteAddForm} data-testid='NoteAddForm'>
@@ -93,4 +93,4 @@ export const NoteAddForm = () => {
 			</Button>
 		</form>
 	);
-};
+});

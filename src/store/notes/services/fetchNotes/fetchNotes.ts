@@ -1,6 +1,7 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {Note} from '../../types/NotesSchema';
-import {ResponseType, ThunkConfig} from '../types';
+import {ResponseType} from '../types';
+import {ThunkConfig} from 'store/types/StateSchema';
 
 export const fetchNotes = createAsyncThunk<Note[], string, ThunkConfig<string>>(
 	'notes/fetchNotes',

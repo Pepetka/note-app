@@ -1,4 +1,4 @@
-import {ChangeEvent, FormEvent, useEffect, useRef, useState} from 'react';
+import {ChangeEvent, FormEvent, memo, useCallback, useEffect, useRef, useState} from 'react';
 import {classNames} from 'helpers/classNames/classNames';
 import {Input} from 'lib/Input/Input';
 import {Textarea} from 'lib/Textarea/Textarea';
@@ -14,7 +14,7 @@ interface NoteAddFormWithContentProps {
 	optionFunc?: () => void
 }
 
-export const NoteAddFormWithContent = ({className, optionFunc}: NoteAddFormWithContentProps) => {
+export const NoteAddFormWithContent = memo(({className, optionFunc}: NoteAddFormWithContentProps) => {
 	const inputRef = useRef<HTMLInputElement>(null);
 	const [title, setTitle] = useState('');
 	const [error, setError] = useState('');
@@ -26,16 +26,16 @@ export const NoteAddFormWithContent = ({className, optionFunc}: NoteAddFormWithC
 		inputRef.current?.focus();
 	}, []);
 
-	const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
+	const onChangeTitle = useCallback((event: ChangeEvent<HTMLInputElement>) => {
 		setTitle(event.target.value);
 		setError('');
-	};
+	}, []);
 
-	const onChangeContent = (event: ChangeEvent<HTMLTextAreaElement>) => {
+	const onChangeContent = useCallback((event: ChangeEvent<HTMLTextAreaElement>) => {
 		setContent(event.target.value);
-	};
+	}, []);
 
-	const onSubmit = (event: FormEvent) => {
+	const onSubmit = useCallback((event: FormEvent) => {
 		event.preventDefault();
 
 		if (title) {
@@ -44,7 +44,7 @@ export const NoteAddFormWithContent = ({className, optionFunc}: NoteAddFormWithC
 		} else {
 			setError('Please enter a note title');
 		}
-	};
+	}, [content, dispatch, optionFunc, title]);
 
 	return (
 		<form data-testid='NoteAddFormWithContent' onSubmit={onSubmit} className={classNames([cls.NoteAddFormWithContent, className])}>
@@ -57,4 +57,4 @@ export const NoteAddFormWithContent = ({className, optionFunc}: NoteAddFormWithC
 			</Button>
 		</form>
 	);
-};
+});
