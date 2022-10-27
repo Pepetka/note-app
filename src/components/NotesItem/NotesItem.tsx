@@ -15,14 +15,14 @@ import {
 	faTrashCan,
 } from '@fortawesome/free-solid-svg-icons';
 import {ModalConfirm} from 'components/ModalConfirm/ModalConfirm';
-import {getUser} from 'store/user/selectors/getUser/getUser';
-import {getFilter} from 'store/notes/selectors/getFilter/getFilter';
-import {Note} from 'store/notes/types/NotesSchema';
+import {getUser} from 'store/model/user/selectors/getUser/getUser';
+import {getFilter} from 'store/model/notes/selectors/getFilter/getFilter';
+import {Note} from 'store/model/notes/types/NotesSchema';
 import {useAppDispatch} from 'hooks/useRedux';
-import {setContent} from 'store/notes/services/setContent/setContent';
-import {removeNote} from 'store/notes/services/removeNote/removeNote';
-import {disableNote} from 'store/notes/services/disableNote/disableNote';
-import {importantNote} from 'store/notes/services/importantNote/importantNote';
+import {setContent} from 'store/model/notes/services/setContent/setContent';
+import {removeNote} from 'store/model/notes/services/removeNote/removeNote';
+import {disableNote} from 'store/model/notes/services/disableNote/disableNote';
+import {importantNote} from 'store/model/notes/services/importantNote/importantNote';
 import {useSelector} from 'react-redux';
 
 import cls from './NotesItem.module.scss';

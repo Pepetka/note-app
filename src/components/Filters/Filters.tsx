@@ -1,9 +1,9 @@
-import {notesActions} from 'store/notes/slice/notesSlice';
+import {notesActions} from 'store/model/notes/slice/notesSlice';
 import {useTranslation} from 'react-i18next';
 import {Button, ButtonThemes} from 'lib/Button/Button';
-import {getFilter} from 'store/notes/selectors/getFilter/getFilter';
+import {getFilter} from 'store/model/notes/selectors/getFilter/getFilter';
 import {useAppDispatch} from 'hooks/useRedux';
-import {FilterTypes} from 'store/notes/types/NotesSchema';
+import {FilterTypes} from 'store/model/notes/types/NotesSchema';
 import {useSelector} from 'react-redux';
 import {memo, useCallback} from 'react';
 

@@ -5,7 +5,7 @@ import {SideBar} from 'components/SideBar/SideBar';
 import {classNames} from 'helpers/classNames/classNames';
 import {useTheme} from 'hooks/useTheme';
 import {memo, useEffect} from 'react';
-import {userActions} from 'store/user/slice/userSlice';
+import {userActions} from 'store/model/user/slice/userSlice';
 import {useAppDispatch} from 'hooks/useRedux';
 
 import '../../firebase';

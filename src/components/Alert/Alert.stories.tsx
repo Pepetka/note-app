@@ -1,7 +1,7 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 import {Alert} from './Alert';
 import {StoreDecorator} from 'helpers/storybook/StoreDecorator/StoreDecorator';
-import {StateSchema} from 'store/types/StateSchema';
+import {StateSchema} from 'store/model/types/StateSchema';
 import {DeepPartial} from '@reduxjs/toolkit';
 
 export default {

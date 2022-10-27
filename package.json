@@ -33,6 +33,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start:dev": "concurrently \"npm start\" \"npm run storybook\"",
     "build": "react-scripts build",
     "test:unit": "react-scripts test",
     "test:unit:nowatch": "react-scripts test --watchAll=false",
@@ -46,7 +47,8 @@
     "lint:scss:fix": "npx stylelint \"**/*.scss\" --fix",
     "storybook": "start-storybook -p 6006",
     "storybook:build": "build-storybook",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "analyze": "craco build"
   },
   "eslintConfig": {
     "extends": [
@@ -142,6 +144,7 @@
     ]
   },
   "devDependencies": {
+    "@craco/craco": "^6.4.5",
     "@storybook/addon-actions": "^6.5.12",
     "@storybook/addon-essentials": "^6.5.12",
     "@storybook/addon-interactions": "^6.5.12",
@@ -162,6 +165,7 @@
     "@types/react-router-dom": "^5.3.3",
     "@types/react-transition-group": "^4.4.5",
     "babel-plugin-named-exports-order": "^0.0.2",
+    "concurrently": "^7.5.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-i18next": "^6.0.0-4",
     "eslint-plugin-react-hooks": "^4.6.0",
@@ -172,7 +176,8 @@
     "stylelint": "^14.12.1",
     "stylelint-config-standard": "^28.0.0",
     "stylelint-config-standard-scss": "^5.0.0",
-    "webpack": "^5.74.0"
+    "webpack": "^5.74.0",
+    "webpack-bundle-analyzer": "^4.7.0"
   },
   "loki": {
     "configurations": {

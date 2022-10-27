@@ -3,8 +3,8 @@ import {AuthForm, SubmitArgs} from 'components/AuthForm/AuthForm';
 import {useTranslation} from 'react-i18next';
 import {Button, ButtonThemes} from 'lib/Button/Button';
 import {useAppDispatch} from 'hooks/useRedux';
-import {loginWithPassword} from 'store/user/services/loginWithPassword/loginWithPassword';
-import {loginWithGoogle} from 'store/user/services/loginWithGoogle/loginWithGoogle';
+import {loginWithPassword} from 'store/model/user/services/loginWithPassword/loginWithPassword';
+import {loginWithGoogle} from 'store/model/user/services/loginWithGoogle/loginWithGoogle';
 import {memo, useCallback} from 'react';
 
 import cls from './Login.module.scss';

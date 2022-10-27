@@ -6,7 +6,7 @@ import {BrowserRouter} from 'react-router-dom';
 import {HandleSortProvider} from 'context/handleSort/HandleSortProvider';
 import {PageLoader} from 'components/PageLoader/PageLoader';
 import {ErrorBoundary} from 'components/ErrorBoundary/ErrorBoundary';
-import {StoreProvider} from 'store/StoreProvider/StoreProvider';
+import {StoreProvider} from 'store/ui/StoreProvider/StoreProvider';
 
 import 'style/index.scss';
 import 'localization/i18n';

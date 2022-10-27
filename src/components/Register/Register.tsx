@@ -4,7 +4,7 @@ import {useTranslation} from 'react-i18next';
 import {useAppDispatch} from 'hooks/useRedux';
 import {memo, useCallback, useEffect} from 'react';
 import {useAuth} from 'hooks/useAuth';
-import {registerWithPassword} from 'store/user/services/registerWithPassword/registerWithPassword';
+import {registerWithPassword} from 'store/model/user/services/registerWithPassword/registerWithPassword';
 
 import cls from './Register.module.scss';
 

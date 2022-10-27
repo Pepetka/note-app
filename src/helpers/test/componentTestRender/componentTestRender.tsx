@@ -3,8 +3,8 @@ import {render} from '@testing-library/react';
 import {I18nextProvider} from 'react-i18next';
 import i18nConfigForTesting from 'localization/i18nTesting';
 import {MemoryRouter} from 'react-router-dom';
-import {StoreProvider} from 'store/StoreProvider/StoreProvider';
-import {StateSchema} from 'store/types/StateSchema';
+import {StoreProvider} from 'store/ui/StoreProvider/StoreProvider';
+import {StateSchema} from 'store/model/types/StateSchema';
 import {HandleSortProvider} from 'context/handleSort/HandleSortProvider';
 import {ThemeProvider} from 'context/theme/ThemeProvider';
 

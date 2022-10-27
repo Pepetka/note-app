@@ -2,10 +2,10 @@ import {DragDropContext, Droppable} from 'react-beautiful-dnd';
 import {NotesList} from 'components/NotesList/NotesList';
 import {useTranslation} from 'react-i18next';
 import {reorder} from 'helpers/reorder/reorder';
-import {getNotes} from 'store/notes/selectors/getNotes/getNotes';
-import {getUser} from 'store/user/selectors/getUser/getUser';
+import {getNotes} from 'store/model/notes/selectors/getNotes/getNotes';
+import {getUser} from 'store/model/user/selectors/getUser/getUser';
 import {useAppDispatch} from 'hooks/useRedux';
-import {sortNotes} from 'store/notes/services/sortNotes/sortNotes';
+import {sortNotes} from 'store/model/notes/services/sortNotes/sortNotes';
 import {useSelector} from 'react-redux';
 import {memo, useCallback} from 'react';
 

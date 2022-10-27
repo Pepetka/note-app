@@ -1,4 +1,4 @@
-import {getUser} from 'store/user/selectors/getUser/getUser';
+import {getUser} from 'store/model/user/selectors/getUser/getUser';
 import {useSelector} from 'react-redux';
 
 export function useAuth() {
