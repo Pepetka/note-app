@@ -46,10 +46,10 @@ describe('addNote', () => {
 
 		expect(thunk.api.post).toHaveBeenCalled();
 		expect(result.meta.requestStatus).toEqual('fulfilled');
-		expect(result.payload).toEqual(
+		expect({...result.payload as Note, date: 'some date'}).toEqual(
 			{
 				id: data.name,
-				date: new Date().toLocaleString(),
+				date: 'some date',
 				isDisable: false,
 				order: state.notes?.notes?.length,
 				...note,
