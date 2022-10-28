@@ -2,13 +2,13 @@ import {Link, useNavigate} from 'react-router-dom';
 import {AuthForm, SubmitArgs} from 'components/AuthForm/AuthForm';
 import {useTranslation} from 'react-i18next';
 import {useAppDispatch} from 'hooks/useRedux';
-import {useEffect} from 'react';
+import {memo, useCallback, useEffect} from 'react';
 import {useAuth} from 'hooks/useAuth';
-import {registerWithPassword} from 'store/user/services/registerWithPassword/registerWithPassword';
+import {registerWithPassword} from 'store/model/user/services/registerWithPassword/registerWithPassword';
 
 import cls from './Register.module.scss';
 
-export const Register = () => {
+export const Register = memo(() => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 	const {t} = useTranslation('auth');
@@ -18,17 +18,16 @@ export const Register = () => {
 		if (isAuth) navigate('/');
 	}, [isAuth, navigate]);
 
-	const handleRegister = ({
-		email,
-		password,
-		rememberMe,
-	}: SubmitArgs) => {
+	const handleRegister = useCallback(({email, password, rememberMe}: SubmitArgs) => {
 		dispatch(registerWithPassword({
 			email,
 			password,
 			rememberMe,
-		}));
-	};
+		}))
+			.then(() => {
+				navigate('/');
+			});
+	}, [dispatch, navigate]);
 
 	return (
 		<div className={cls.Register} data-testid='Register'>
@@ -37,4 +36,4 @@ export const Register = () => {
 				{t('Or')} <Link to='/login'>{t('login')}</Link>
 			</p>
 		</div>);
-};
+});

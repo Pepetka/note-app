@@ -1,7 +1,7 @@
 import {memo} from 'react';
 import {NotesItem} from 'components/NotesItem/NotesItem';
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
-import {Note} from 'store/notes/types/NotesSchema';
+import {Note} from 'store/model/notes/types/NotesSchema';
 
 import './NotesListAnimation.scss';
 

@@ -1,8 +1,5 @@
-import {useEffect, useState} from 'react';
-import {useNavigate} from 'react-router-dom';
-import {useAuth} from 'hooks/useAuth';
-import {userActions} from 'store/user/slice/userSlice';
-import {alertActions} from 'store/alert/slice/alertSlice';
+import {memo, useCallback, useEffect, useState} from 'react';
+import {alertActions} from 'store/model/alert/slice/alertSlice';
 import {NoteAddForm} from 'components/NoteAddForm/NoteAddForm';
 import {NotesControlPanel} from 'components/NotesControlPanel/NotesControlPanel';
 import {Filters} from 'components/Filters/Filters';
@@ -10,30 +7,31 @@ import {ReloadTemplate} from 'components/ReloadTemplate/ReloadTemplate';
 import {Loader} from 'lib/Loader/Loader';
 import {Notes} from 'components/Notes/Notes';
 import {useHandleSort} from 'hooks/useHandleSort';
-import {getNotesState} from 'store/notes/selectors/getState/getNotesState';
+import {getNotesState} from 'store/model/notes/selectors/getState/getNotesState';
 import {useTranslation} from 'react-i18next';
-import {useAppSelector, useAppDispatch} from 'hooks/useRedux';
-import {getUser} from 'store/user/selectors/getUser/getUser';
-import {fetchNotes} from 'store/notes/services/fetchNotes/fetchNotes';
+import {useAppDispatch} from 'hooks/useRedux';
+import {getUser} from 'store/model/user/selectors/getUser/getUser';
+import {fetchNotes} from 'store/model/notes/services/fetchNotes/fetchNotes';
 import {NoteAddButton} from 'components/NoteAddButton/NoteAddButton';
 import {ModalNoteAdd} from 'components/ModalNoteAdd/ModalNoteAdd';
+import {useSelector} from 'react-redux';
+import {useAuth} from 'hooks/useAuth';
+import {useNavigate} from 'react-router-dom';
 import {LocalStorageKeys} from 'const/localStorage';
 
-export const HomePage = () => {
+export const HomePage = memo(() => {
 	const dispatch = useAppDispatch();
-	const userId = useAppSelector(getUser)?.id;
 	const navigate = useNavigate();
 	const {isAuth} = useAuth();
+	const userId = useSelector(getUser)?.id;
 	const {handleSort} = useHandleSort();
-	const {loading, notes, error} = useAppSelector(getNotesState);
+	const {loading, notes, error} = useSelector(getNotesState);
 	const {t} = useTranslation('home');
 	const [isOpenModal, setIsOpenModal] = useState(false);
 
 	useEffect(() => {
-		if (isAuth) {
+		if (isAuth || localStorage.getItem(LocalStorageKeys.USER) || sessionStorage.getItem(LocalStorageKeys.USER)) {
 			dispatch(fetchNotes(userId!));
-		} else if (localStorage.getItem(LocalStorageKeys.USER)) {
-			dispatch(userActions.initUser());
 		} else {
 			navigate('/login');
 		}
@@ -43,17 +41,17 @@ export const HomePage = () => {
 		if (error.update) dispatch(alertActions.showAlert({type: 'danger', text: error.update}));
 	}, [dispatch, error.update]);
 
-	const onReload = () => {
+	const onReload = useCallback(() => {
 		dispatch(fetchNotes(userId!));
-	};
+	}, [dispatch, userId]);
 
-	const onOpenModal = () => {
+	const onOpenModal = useCallback(() => {
 		setIsOpenModal(true);
-	};
+	}, []);
 
-	const onCloseModal = () => {
+	const onCloseModal = useCallback(() => {
 		setIsOpenModal(false);
-	};
+	}, []);
 
 	return (
 		<>
@@ -72,4 +70,4 @@ export const HomePage = () => {
 			<ModalNoteAdd isOpen={isOpenModal} onClose={onCloseModal}/>
 		</>
 	);
-};
+});

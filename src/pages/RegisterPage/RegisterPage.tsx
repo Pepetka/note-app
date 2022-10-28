@@ -1,7 +1,8 @@
 import {Register} from 'components/Register/Register';
 import {useTranslation} from 'react-i18next';
+import {memo} from 'react';
 
-const RegisterPage = () => {
+const RegisterPage = memo(() => {
 	const {t} = useTranslation('auth');
 
 	return (
@@ -11,6 +12,6 @@ const RegisterPage = () => {
 			<Register />
 		</div>
 	);
-};
+});
 
 export default RegisterPage;

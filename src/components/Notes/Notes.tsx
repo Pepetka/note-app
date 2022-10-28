@@ -2,24 +2,26 @@ import {DragDropContext, Droppable} from 'react-beautiful-dnd';
 import {NotesList} from 'components/NotesList/NotesList';
 import {useTranslation} from 'react-i18next';
 import {reorder} from 'helpers/reorder/reorder';
-import {getNotes} from 'store/notes/selectors/getNotes/getNotes';
-import {getUser} from 'store/user/selectors/getUser/getUser';
-import {useAppDispatch, useAppSelector} from 'hooks/useRedux';
-import {sortNotes} from 'store/notes/services/sortNotes/sortNotes';
+import {getNotes} from 'store/model/notes/selectors/getNotes/getNotes';
+import {getUser} from 'store/model/user/selectors/getUser/getUser';
+import {useAppDispatch} from 'hooks/useRedux';
+import {sortNotes} from 'store/model/notes/services/sortNotes/sortNotes';
+import {useSelector} from 'react-redux';
+import {memo, useCallback} from 'react';
 
 import cls from './Notes.module.scss';
 
-interface Prop {
+interface NotesProp {
 	handleSort: boolean
 }
 
-export const Notes = ({handleSort}: Prop) => {
-	const notes = useAppSelector(getNotes);
-	const userId = useAppSelector(getUser)?.id;
+export const Notes = memo(({handleSort}: NotesProp) => {
+	const notes = useSelector(getNotes);
+	const userId = useSelector(getUser)?.id;
 	const dispatch = useAppDispatch();
 	const {t} = useTranslation('home');
 
-	function onDragEnd(result: any) {
+	const onDragEnd = useCallback((result: any) => {
 		if (!result.destination) {
 			return;
 		}
@@ -31,7 +33,7 @@ export const Notes = ({handleSort}: Prop) => {
 		const orderedNotes = reorder(notes, result.source.index, result.destination.index);
 
 		dispatch(sortNotes({notes: orderedNotes, userId: userId!}));
-	}
+	}, [dispatch, notes, userId]);
 
 	if (notes.length < 1) {
 		return (
@@ -53,4 +55,4 @@ export const Notes = ({handleSort}: Prop) => {
 			</Droppable>
 		</DragDropContext>
 	);
-};
+});

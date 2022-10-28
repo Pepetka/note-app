@@ -2,8 +2,7 @@ import {screen} from '@testing-library/react';
 import '@testing-library/jest-dom';
 import {NavBar} from './NavBar';
 import {componentTestRender} from 'helpers/test/componentTestRender/componentTestRender';
-import {DeepPartial} from '@reduxjs/toolkit';
-import {StateSchema} from '../../store/types/StateSchema';
+import {StateSchema} from '../../store/model/types/StateSchema';
 
 describe('NavBar', () => {
 	test('be in the document', () => {

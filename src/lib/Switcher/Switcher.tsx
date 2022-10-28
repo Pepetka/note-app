@@ -1,4 +1,5 @@
 import {classNames} from 'helpers/classNames/classNames';
+import {memo} from 'react';
 
 import cls from './Switcher.module.scss';
 
@@ -8,7 +9,7 @@ interface SwitcherProps {
 	onclick?: () => void
 }
 
-export const Switcher = ({className, onclick, isActive = false}: SwitcherProps) => {
+export const Switcher = memo(({className, onclick, isActive = false}: SwitcherProps) => {
 	return (
 		<span
 			className={classNames([cls.Switcher, className], {[cls.active]: isActive})}
@@ -16,4 +17,4 @@ export const Switcher = ({className, onclick, isActive = false}: SwitcherProps) 
 			data-testid='Switcher'
 		/>
 	);
-};
+});

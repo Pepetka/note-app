@@ -2,8 +2,7 @@ import {screen} from '@testing-library/react';
 import '@testing-library/jest-dom';
 import {HomePage} from './HomePage';
 import {componentTestRender} from 'helpers/test/componentTestRender/componentTestRender';
-import {DeepPartial} from '@reduxjs/toolkit';
-import {StateSchema} from 'store/types/StateSchema';
+import {StateSchema} from 'store/model/types/StateSchema';
 import userEvent from '@testing-library/user-event';
 
 describe('HomePage', () => {
@@ -27,10 +26,7 @@ describe('HomePage', () => {
 					isDisable: false,
 					order: 0,
 				}],
-				error: {
-					update: null,
-					get: null,
-				},
+				error: {},
 			},
 		};
 
@@ -43,10 +39,7 @@ describe('HomePage', () => {
 			notes: {
 				loading: true,
 				notes: [],
-				error: {
-					update: null,
-					get: null,
-				},
+				error: {},
 			},
 		};
 
@@ -61,7 +54,7 @@ describe('HomePage', () => {
 				loading: false,
 				notes: [],
 				error: {
-					update: null,
+					update: undefined,
 					get: 'fetch error',
 				},
 			},
@@ -77,10 +70,7 @@ describe('HomePage', () => {
 			notes: {
 				loading: false,
 				notes: [],
-				error: {
-					update: null,
-					get: null,
-				},
+				error: {},
 			},
 		};
 

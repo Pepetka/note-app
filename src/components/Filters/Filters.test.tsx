@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import {Filters} from './Filters';
 import {componentTestRender} from 'helpers/test/componentTestRender/componentTestRender';
-import {FilterTypes} from 'store/notes/types/NotesSchema';
+import {FilterTypes} from 'store/model/notes/types/NotesSchema';
 
 describe('Filters', () => {
 	test('be in the document', () => {

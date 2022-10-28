@@ -1,8 +1,7 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 import {ReloadTemplate} from './ReloadTemplate';
 import {StoreDecorator} from '../../helpers/storybook/StoreDecorator/StoreDecorator';
-import {DeepPartial} from '@reduxjs/toolkit';
-import {StateSchema} from '../../store/types/StateSchema';
+import {StateSchema} from '../../store/model/types/StateSchema';
 
 export default {
 	title: 'components/ReloadTemplate',

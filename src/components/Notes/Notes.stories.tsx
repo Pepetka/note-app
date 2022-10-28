@@ -1,8 +1,7 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react';
-import {FilterTypes, Note} from 'store/notes/types/NotesSchema';
+import {FilterTypes, Note} from 'store/model/notes/types/NotesSchema';
 import {Notes} from './Notes';
-import {DeepPartial} from '@reduxjs/toolkit';
-import {StateSchema} from 'store/types/StateSchema';
+import {StateSchema} from 'store/model/types/StateSchema';
 import {StoreDecorator} from 'helpers/storybook/StoreDecorator/StoreDecorator';
 
 export default {

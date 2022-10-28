@@ -1,16 +1,17 @@
 import {useTranslation} from 'react-i18next';
 import {useNavigate} from 'react-router-dom';
 import {Button, ButtonThemes} from 'lib/Button/Button';
+import {memo, useCallback} from 'react';
 
 import cls from './NotFoundPage.module.scss';
 
-const NotFoundPage = () => {
+const NotFoundPage = memo(() => {
 	const {t} = useTranslation();
 	const navigate = useNavigate();
 
-	const onNavigate = () => {
+	const onNavigate = useCallback(() => {
 		navigate('/');
-	};
+	}, [navigate]);
 
 	return (
 		<div className={cls.NotFoundPage} data-testid='NotFoundPage'>
@@ -23,6 +24,6 @@ const NotFoundPage = () => {
 			</Button>
 		</div>
 	);
-};
+});
 
 export default NotFoundPage;

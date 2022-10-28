@@ -1,24 +1,24 @@
 import {useAuth} from 'hooks/useAuth';
 import {NavLink} from 'react-router-dom';
-import {notesActions} from 'store/notes/slice/notesSlice';
-import {userActions} from 'store/user/slice/userSlice';
+import {notesActions} from 'store/model/notes/slice/notesSlice';
+import {userActions} from 'store/model/user/slice/userSlice';
 import {useTranslation} from 'react-i18next';
 import {classNames} from 'helpers/classNames/classNames';
 import {useAppDispatch} from 'hooks/useRedux';
 import {LocalStorageKeys} from 'const/localStorage';
+import {memo, useCallback} from 'react';
 
 import cls from './NavBar.module.scss';
 
-export const NavBar = () => {
+export const NavBar = memo(() => {
 	const dispatch = useAppDispatch();
 	const {isAuth} = useAuth();
 	const {t} = useTranslation();
 
-	const onLogOut = () => {
+	const onLogOut = useCallback(() => {
 		dispatch(userActions.removeUser());
 		dispatch(notesActions.clearNotes());
-		localStorage.removeItem(LocalStorageKeys.USER);
-	};
+	}, [dispatch]);
 
 	return (
 		<header className={cls.NavBar} data-testid='NavBar'>
@@ -81,5 +81,5 @@ export const NavBar = () => {
 			</div>
 		</header>
 	);
-};
+});
 

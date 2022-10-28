@@ -1,7 +1,8 @@
 import {Login} from 'components/Login/Login';
 import {useTranslation} from 'react-i18next';
+import {memo} from 'react';
 
-const LoginPage = () => {
+const LoginPage = memo(() => {
 	const {t} = useTranslation('auth');
 
 	return (
@@ -11,6 +12,6 @@ const LoginPage = () => {
 			<Login />
 		</div>
 	);
-};
+});
 
 export default LoginPage;

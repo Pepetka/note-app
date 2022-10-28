@@ -1,11 +1,12 @@
 import {useTranslation} from 'react-i18next';
 import {About} from 'components/About/About';
+import {memo} from 'react';
 
 interface AboutPageProps {
 	version?: string
 }
 
-const AboutPage = ({version}: AboutPageProps) => {
+const AboutPage = memo(({version}: AboutPageProps) => {
 	const {t} = useTranslation('about');
 
 	return (
@@ -14,6 +15,6 @@ const AboutPage = ({version}: AboutPageProps) => {
 			<About version={version} />
 		</div>
 	);
-};
+});
 
 export default AboutPage;

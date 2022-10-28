@@ -1,6 +1,7 @@
 import {classNames} from 'helpers/classNames/classNames';
 import {Modal} from 'lib/Modal/Modal';
 import {NoteAddFormWithContent} from 'components/NoteAddFormWithContent/NoteAddFormWithContent';
+import {memo} from 'react';
 
 interface ModalNoteAddProps {
 	className?: string;
@@ -8,10 +9,10 @@ interface ModalNoteAddProps {
 	onClose: () => void
 }
 
-export const ModalNoteAdd = ({className, isOpen, onClose}: ModalNoteAddProps) => {
+export const ModalNoteAdd = memo(({className, isOpen, onClose}: ModalNoteAddProps) => {
 	return (
 		<Modal isOpen={isOpen} onClose={onClose} className={classNames([className])}>
 			<NoteAddFormWithContent optionFunc={onClose}/>
 		</Modal>
 	);
-};
+});

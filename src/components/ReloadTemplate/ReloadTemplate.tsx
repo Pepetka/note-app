@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Button, ButtonThemes} from 'lib/Button/Button';
-import {getError} from 'store/notes/selectors/getError/getError';
-import {useAppSelector} from 'hooks/useRedux';
+import {getError} from 'store/model/notes/selectors/getError/getError';
+import {useSelector} from 'react-redux';
 
 import cls from './ReloadTemplate.module.scss';
 
@@ -11,8 +11,8 @@ interface ReloadTemplateProps {
 	errorMessage?: string
 }
 
-export const ReloadTemplate = ({onReload, errorMessage}: ReloadTemplateProps) => {
-	const error = useAppSelector(getError);
+export const ReloadTemplate = memo(({onReload, errorMessage}: ReloadTemplateProps) => {
+	const error = useSelector(getError);
 	const {t} = useTranslation('home');
 
 	return (
@@ -26,4 +26,4 @@ export const ReloadTemplate = ({onReload, errorMessage}: ReloadTemplateProps) =>
 			</Button>
 		</div>
 	);
-};
+});
