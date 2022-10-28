@@ -25,7 +25,11 @@ export const registerWithPassword = createAsyncThunk<User, registerWithPasswordP
 				token: user.refreshToken,
 			};
 
-			if (rememberMe) dispatch(userActions.setUser(userData));
+			if (rememberMe) {
+				dispatch(userActions.setUserLocal(userData));
+			} else {
+				dispatch(userActions.setUserSession(userData));
+			}
 
 			return userData;
 		} catch (error) {

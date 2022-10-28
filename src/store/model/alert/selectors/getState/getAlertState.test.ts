@@ -1,6 +1,5 @@
 import {describe, expect, test} from '@jest/globals';
 import {getAlertState} from './getAlertState';
-import {DeepPartial} from '@reduxjs/toolkit';
 import {StateSchema} from '../../../types/StateSchema';
 
 describe('getAlertState', () => {

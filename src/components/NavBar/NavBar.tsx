@@ -18,7 +18,6 @@ export const NavBar = memo(() => {
 	const onLogOut = useCallback(() => {
 		dispatch(userActions.removeUser());
 		dispatch(notesActions.clearNotes());
-		localStorage.removeItem(LocalStorageKeys.USER);
 	}, [dispatch]);
 
 	return (

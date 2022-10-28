@@ -30,7 +30,7 @@ export const HomePage = memo(() => {
 	const [isOpenModal, setIsOpenModal] = useState(false);
 
 	useEffect(() => {
-		if (isAuth || localStorage.getItem(LocalStorageKeys.USER)) {
+		if (isAuth || localStorage.getItem(LocalStorageKeys.USER) || sessionStorage.getItem(LocalStorageKeys.USER)) {
 			dispatch(fetchNotes(userId!));
 		} else {
 			navigate('/login');

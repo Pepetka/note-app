@@ -3,7 +3,6 @@ import {NotesList} from './NotesList';
 import {DragDecorator} from 'helpers/storybook/DragDecorator/DragDecorator';
 import {FilterTypes, Note} from 'store/model/notes/types/NotesSchema';
 import {StoreDecorator} from 'helpers/storybook/StoreDecorator/StoreDecorator';
-import {DeepPartial} from '@reduxjs/toolkit';
 import {StateSchema} from 'store/model/types/StateSchema';
 
 export default {

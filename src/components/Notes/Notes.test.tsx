@@ -2,7 +2,6 @@ import {screen} from '@testing-library/react';
 import '@testing-library/jest-dom';
 import {Notes} from './Notes';
 import {componentTestRender} from 'helpers/test/componentTestRender/componentTestRender';
-import {DeepPartial} from '@reduxjs/toolkit';
 import {StateSchema} from 'store/model/types/StateSchema';
 import {FilterTypes, Note} from 'store/model/notes/types/NotesSchema';
 

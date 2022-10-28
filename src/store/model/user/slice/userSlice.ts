@@ -14,15 +14,20 @@ const userSlice = createSlice({
 	initialState,
 	reducers: {
 		initUser(state) {
-			const user = localStorage.getItem(LocalStorageKeys.USER);
+			const user = localStorage.getItem(LocalStorageKeys.USER) ?? sessionStorage.getItem(LocalStorageKeys.USER);
 
 			if (user) state.user = JSON.parse(user);
 		},
-		setUser(state, action: PayloadAction<User>) {
+		setUserLocal(state, action: PayloadAction<User>) {
 			localStorage.setItem(LocalStorageKeys.USER, JSON.stringify(action.payload));
+		},
+		setUserSession(state, action: PayloadAction<User>) {
+			sessionStorage.setItem(LocalStorageKeys.USER, JSON.stringify(action.payload));
 		},
 		removeUser(state) {
 			state.user = undefined;
+			localStorage.removeItem(LocalStorageKeys.USER);
+			sessionStorage.removeItem(LocalStorageKeys.USER);
 		},
 	},
 	extraReducers: (builder) => {

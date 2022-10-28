@@ -27,11 +27,9 @@ export const setContent = createAsyncThunk<SetContentReturn, SetContentProps, Th
 
 			const response = await extra.api.put(`/${userId}/${noteId}.json`, data);
 
-			if (response.statusText !== 'OK') {
-				throw new Error('Server Error');
-			} else {
-				return {noteId, content};
-			}
+			if (response.statusText !== 'OK') throw new Error('Server Error');
+
+			return {noteId, content};
 		} catch (error) {
 			dispatch(alertActions.showAlert({text: (error as Error).message, type: 'danger'}));
 			return rejectWithValue((error as Error).message);

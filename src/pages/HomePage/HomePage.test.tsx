@@ -2,7 +2,6 @@ import {screen} from '@testing-library/react';
 import '@testing-library/jest-dom';
 import {HomePage} from './HomePage';
 import {componentTestRender} from 'helpers/test/componentTestRender/componentTestRender';
-import {DeepPartial} from '@reduxjs/toolkit';
 import {StateSchema} from 'store/model/types/StateSchema';
 import userEvent from '@testing-library/user-event';
 

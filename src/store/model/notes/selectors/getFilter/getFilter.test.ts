@@ -1,6 +1,5 @@
 import {describe, expect, test} from '@jest/globals';
 import {getFilter} from './getFilter';
-import {DeepPartial} from '@reduxjs/toolkit';
 import {StateSchema} from '../../../types/StateSchema';
 import {FilterTypes} from 'store/model/notes/types/NotesSchema';
 

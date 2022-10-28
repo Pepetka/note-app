@@ -5,7 +5,7 @@ import {alertActions} from '../../../alert/slice/alertSlice';
 import {userActions} from '../../slice/userSlice';
 import {ThunkConfig} from 'store/model/types/StateSchema';
 
-export const loginWithGoogle = createAsyncThunk<User, undefined, ThunkConfig<string>>(
+export const loginWithGoogle = createAsyncThunk<User, void, ThunkConfig<string>>(
 	'user/loginWithGoogle',
 	async (_, {rejectWithValue, dispatch}) => {
 		try {
@@ -20,7 +20,7 @@ export const loginWithGoogle = createAsyncThunk<User, undefined, ThunkConfig<str
 				email: user.email!,
 			};
 
-			dispatch(userActions.setUser(userData));
+			dispatch(userActions.setUserLocal(userData));
 
 			return userData;
 		} catch (error) {

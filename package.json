@@ -63,6 +63,7 @@
       "react-hooks"
     ],
     "rules": {
+      "no-undef": "off",
       "testing-library/no-unnecessary-act": "warn",
       "new-cap": "off",
       "react-hooks/rules-of-hooks": "error",

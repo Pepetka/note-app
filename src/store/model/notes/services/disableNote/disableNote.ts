@@ -22,11 +22,9 @@ export const disableNote = createAsyncThunk<string, DisableNoteProps, ThunkConfi
 
 			const response = await extra.api.put(`/${userId}/${noteId}.json`, data);
 
-			if (response.statusText !== 'OK') {
-				throw new Error('Server Error');
-			} else {
-				return noteId;
-			}
+			if (response.statusText !== 'OK') throw new Error('Server Error');
+
+			return noteId;
 		} catch (error) {
 			dispatch(alertActions.showAlert({text: (error as Error).message, type: 'danger'}));
 			return rejectWithValue((error as Error).message);

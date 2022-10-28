@@ -6,6 +6,7 @@ import {removeNote} from '../services/removeNote/removeNote';
 import {importantNote} from '../services/importantNote/importantNote';
 import {addNote} from '../services/addNote/addNote';
 import {setContent} from '../services/setContent/setContent';
+import {sortNotes} from '../services/sortNotes/sortNotes';
 
 const initialState: NotesSchema = {
 	notes: [],
@@ -96,6 +97,13 @@ const notesSlice = createSlice({
 				state.error = {};
 			})
 			.addCase(setContent.rejected, (state, action) => {
+				state.error.update = action.payload!;
+			})
+			.addCase(sortNotes.fulfilled, (state, action) => {
+				state.notes = action.payload;
+				state.error = {};
+			})
+			.addCase(sortNotes.rejected, (state, action) => {
 				state.error.update = action.payload!;
 			});
 	},

@@ -1,7 +1,6 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 import {StoreDecorator} from 'helpers/storybook/StoreDecorator/StoreDecorator';
 import {HomePage} from './HomePage';
-import {DeepPartial} from '@reduxjs/toolkit';
 import {StateSchema} from 'store/model/types/StateSchema';
 import {FilterTypes} from 'store/model/notes/types/NotesSchema';
 

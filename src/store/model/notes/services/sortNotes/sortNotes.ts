@@ -1,6 +1,6 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {Note} from '../../types/NotesSchema';
-import {notesActions} from 'store/model/notes/slice/notesSlice';
+import {notesActions} from '../../slice/notesSlice';
 import {withoutId} from 'helpers/withoutId/withoutId';
 import {ThunkConfig} from 'store/model/types/StateSchema';
 
@@ -9,9 +9,9 @@ interface SortNotesProps {
 	userId: string
 }
 
-export const sortNotes = createAsyncThunk<void, SortNotesProps, ThunkConfig<string>>(
+export const sortNotes = createAsyncThunk<Array<Note>, SortNotesProps, ThunkConfig<string>>(
 	'notes/sortNotes',
-	({notes, userId}, {dispatch, getState, extra}) => {
+	({notes, userId}, {getState, rejectWithValue, extra}) => {
 		const data = notes.map((note: Note, i: number) => ({...note, order: i}));
 		const prevNotes = getState().notes.notes;
 
@@ -21,6 +21,6 @@ export const sortNotes = createAsyncThunk<void, SortNotesProps, ThunkConfig<stri
 			}
 		});
 
-		dispatch(notesActions.setNotes({notes: data}));
+		return data;
 	},
 );

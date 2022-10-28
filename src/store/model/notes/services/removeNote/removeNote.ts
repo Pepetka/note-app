@@ -8,9 +8,11 @@ interface RemoveNoteProps {
 
 export const removeNote = createAsyncThunk<string, RemoveNoteProps, ThunkConfig<string>>(
 	'notes/removeNote',
-	({userId, noteId}, {rejectWithValue, extra}) => {
+	async ({userId, noteId}, {rejectWithValue, extra}) => {
 		try {
-			extra.api.delete(`/${userId}/${noteId}.json`);
+			const response = await extra.api.delete(`/${userId}/${noteId}.json`);
+
+			if (response.statusText !== 'OK') throw new Error('Server error');
 
 			return noteId;
 		} catch (error) {

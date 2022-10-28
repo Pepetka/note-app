@@ -8,14 +8,17 @@ export const fetchNotes = createAsyncThunk<Note[], string, ThunkConfig<string>>(
 	async (userId, {rejectWithValue, extra}) => {
 		try {
 			const response = await extra.api.get<ResponseType>(`/${userId}.json`);
+			let notes: Array<Note> = [];
+
+			if (response.statusText !== 'OK') throw new Error('server error');
 
 			if (response.data) {
-				const notes: Array<Note> = Object.entries(response.data).map((el) => ({...el[1], id: el[0]}));
-
-				return notes.sort((a, b) => a.order - b.order);
-			} else {
-				return [];
+				notes = Object.entries(response.data)
+					.map((el) => ({...el[1], id: el[0]}))
+					.sort((a, b) => a.order - b.order);
 			}
+
+			return notes;
 		} catch (error) {
 			return rejectWithValue((error as Error).message);
 		}
