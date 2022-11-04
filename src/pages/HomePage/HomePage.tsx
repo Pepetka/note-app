@@ -4,7 +4,6 @@ import {NoteAddForm} from 'components/NoteAddForm/NoteAddForm';
 import {NotesControlPanel} from 'components/NotesControlPanel/NotesControlPanel';
 import {Filters} from 'components/Filters/Filters';
 import {ReloadTemplate} from 'components/ReloadTemplate/ReloadTemplate';
-import {Loader} from 'lib/Loader/Loader';
 import {Notes} from 'components/Notes/Notes';
 import {useHandleSort} from 'hooks/useHandleSort';
 import {getNotesState} from 'store/model/notes/selectors/getState/getNotesState';
@@ -17,25 +16,28 @@ import {ModalNoteAdd} from 'components/ModalNoteAdd/ModalNoteAdd';
 import {useSelector} from 'react-redux';
 import {useAuth} from 'hooks/useAuth';
 import {useNavigate} from 'react-router-dom';
-import {LocalStorageKeys} from 'const/localStorage';
+import {getInit} from 'store/model/user/selectors/getInit/getInit';
 
 export const HomePage = memo(() => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 	const {isAuth} = useAuth();
 	const userId = useSelector(getUser)?.id;
+	const _init = useSelector(getInit);
 	const {handleSort} = useHandleSort();
-	const {loading, notes, error} = useSelector(getNotesState);
+	const {notes, error} = useSelector(getNotesState);
 	const {t} = useTranslation('home');
 	const [isOpenModal, setIsOpenModal] = useState(false);
 
 	useEffect(() => {
-		if (isAuth || localStorage.getItem(LocalStorageKeys.USER) || sessionStorage.getItem(LocalStorageKeys.USER)) {
+		if (!_init) return;
+
+		if (isAuth) {
 			dispatch(fetchNotes(userId!));
 		} else {
 			navigate('/login');
 		}
-	}, [dispatch, isAuth, navigate, userId]);
+	}, [_init, dispatch, isAuth, navigate, userId]);
 
 	useEffect(() => {
 		if (error.update) dispatch(alertActions.showAlert({type: 'danger', text: error.update}));
@@ -60,12 +62,12 @@ export const HomePage = memo(() => {
 				<NoteAddForm />
 				<NotesControlPanel notesLength={notes.length} />
 				<Filters />
-				{error.get ? (
-					<ReloadTemplate onReload={onReload} />
-				) : loading ? <Loader /> : <>
-					<Notes handleSort={handleSort}/>
-					<NoteAddButton onClick={onOpenModal} />
-				</>}
+				{
+					error.get ?
+						<ReloadTemplate onReload={onReload} /> :
+						<Notes handleSort={handleSort}/>
+				}
+				<NoteAddButton onClick={onOpenModal} />
 			</div>
 			<ModalNoteAdd isOpen={isOpenModal} onClose={onCloseModal}/>
 		</>

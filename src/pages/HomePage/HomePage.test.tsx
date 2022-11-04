@@ -45,7 +45,7 @@ describe('HomePage', () => {
 
 		componentTestRender(<HomePage/>, {initialState: state as StateSchema});
 		expect(screen.queryByTestId('Notes')).not.toBeInTheDocument();
-		expect(screen.getByTestId('Loader')).toBeInTheDocument();
+		expect(screen.getByTestId('NoteSkeleton')).toBeInTheDocument();
 	});
 
 	test('fetch error', () => {

@@ -7,6 +7,7 @@ import {LocalStorageKeys} from 'const/localStorage';
 
 const initialState: UserSchema = {
 	loading: false,
+	_init: false,
 };
 
 const userSlice = createSlice({
@@ -17,6 +18,7 @@ const userSlice = createSlice({
 			const user = localStorage.getItem(LocalStorageKeys.USER) ?? sessionStorage.getItem(LocalStorageKeys.USER);
 
 			if (user) state.user = JSON.parse(user);
+			state._init = true;
 		},
 		setUserLocal(state, action: PayloadAction<User>) {
 			localStorage.setItem(LocalStorageKeys.USER, JSON.stringify(action.payload));

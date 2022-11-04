@@ -6,3 +6,9 @@
 .empty {
 	text-align: center;
 }
+
+.skeleton {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}

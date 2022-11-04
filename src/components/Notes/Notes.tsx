@@ -6,8 +6,11 @@ import {getNotes} from 'store/model/notes/selectors/getNotes/getNotes';
 import {getUser} from 'store/model/user/selectors/getUser/getUser';
 import {useAppDispatch} from 'hooks/useRedux';
 import {sortNotes} from 'store/model/notes/services/sortNotes/sortNotes';
+import {getLoading} from 'store/model/notes/selectors/getLoading/getLoading';
 import {useSelector} from 'react-redux';
 import {memo, useCallback} from 'react';
+import {getFilter} from 'store/model/notes/selectors/getFilter/getFilter';
+import {NoteSkeleton} from 'components/NoteSkeleton/NoteSkeleton';
 
 import cls from './Notes.module.scss';
 
@@ -17,6 +20,7 @@ interface NotesProp {
 
 export const Notes = memo(({handleSort}: NotesProp) => {
 	const notes = useSelector(getNotes);
+	const loading = useSelector(getLoading);
 	const userId = useSelector(getUser)?.id;
 	const dispatch = useAppDispatch();
 	const {t} = useTranslation('home');
@@ -35,7 +39,17 @@ export const Notes = memo(({handleSort}: NotesProp) => {
 		dispatch(sortNotes({notes: orderedNotes, userId: userId!}));
 	}, [dispatch, notes, userId]);
 
-	if (notes.length < 1) {
+	if (loading) {
+		return (
+			<div data-testid='NoteSkeleton' className={cls.skeleton}>
+				<NoteSkeleton/>
+				<NoteSkeleton/>
+				<NoteSkeleton/>
+			</div>
+		);
+	}
+
+	if (!notes.length) {
 		return (
 			<div className={cls.empty}>
 				<h1>{t('There are no notes')}</h1>
