@@ -9,6 +9,8 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
 
 import cls from './AuthForm.module.scss';
+import {VStack} from '../../lib/Flex/VStack';
+import {HStack} from '../../lib/Flex/HStack';
 
 export interface SubmitArgs {
 	email: string
@@ -60,73 +62,75 @@ export const AuthForm = memo(({title, onSubmitForm}: AuthFormProps) => {
 	const onSubmit: SubmitHandler<SubmitArgs> = (data) => onSubmitForm(data);
 
 	return (
-		<form className={cls.AuthForm} onSubmit={handleSubmit(onSubmit)} noValidate data-testid='AuthForm'>
-			<div className={cls.inputGroup}>
-				<label htmlFor='form-email'>
-					{t('Email address')}
-				</label>
-				<Controller
-					name="email"
-					control={control}
-					defaultValue=""
-					render={({field}) => (
-						<Input
-							{...field}
-							ref={inputRef}
-							type='email'
-							id='form-email'
-							placeholder='name@example.com'
-						/>
-					)}
-				/>
-				{errors.email && (
-					<ErrorMessage data-testid='AuthForm_emailError' errorMessage={errors.email.message!} />
-				)}
-			</div>
-			<div className={cls.inputGroup}>
-				<label htmlFor='form-password'>
-					{t('Password')}
-				</label>
-				<div className={cls.password}>
+		<form onSubmit={handleSubmit(onSubmit)} noValidate data-testid='AuthForm'>
+			<VStack gap='8' align='start'>
+				<VStack align='start' w100>
+					<label htmlFor='form-email'>
+						{t('Email address')}
+					</label>
 					<Controller
-						name="password"
+						name="email"
 						control={control}
 						defaultValue=""
 						render={({field}) => (
 							<Input
 								{...field}
-								type={passwordVisibility ? 'text' : 'password'}
-								id='form-password'
-								withCorners
+								ref={inputRef}
+								type='email'
+								id='form-email'
+								placeholder='name@example.com'
 							/>
 						)}
 					/>
-					<Button
-						onClick={onPassword}
-						className={cls.visibilityBtn}
-						corners
-						theme={ButtonThemes.PRIMARY}
-					>
-						{passwordVisibility ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />}
-					</Button>
-				</div>
-				{errors.password && (
-					<ErrorMessage data-testid='AuthForm_passwordError' errorMessage={errors.password.message!} />
-				)}
-			</div>
-			<div className={cls.inputGroupCheck}>
-				<label>
-					<input
-						{...register('rememberMe')}
-						type='checkbox'
-						className={cls.inputCheck}
-					/>
-					{t('Remember me')}
-				</label>
-			</div>
-			<Button testid='AuthForm_btn' type='submit' theme={ButtonThemes.PRIMARY} className={cls.button}>
-				{t(title)}
-			</Button>
+					{errors.email && (
+						<ErrorMessage data-testid='AuthForm_emailError' errorMessage={errors.email.message!} />
+					)}
+				</VStack>
+				<VStack align='start' w100>
+					<label htmlFor='form-password'>
+						{t('Password')}
+					</label>
+					<HStack w100>
+						<Controller
+							name="password"
+							control={control}
+							defaultValue=""
+							render={({field}) => (
+								<Input
+									{...field}
+									type={passwordVisibility ? 'text' : 'password'}
+									id='form-password'
+									withCorners
+								/>
+							)}
+						/>
+						<Button
+							onClick={onPassword}
+							className={cls.visibilityBtn}
+							corners
+							theme={ButtonThemes.PRIMARY}
+						>
+							{passwordVisibility ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />}
+						</Button>
+					</HStack>
+					{errors.password && (
+						<ErrorMessage data-testid='AuthForm_passwordError' errorMessage={errors.password.message!} />
+					)}
+				</VStack>
+				<HStack justify='start'>
+					<label>
+						<input
+							{...register('rememberMe')}
+							type='checkbox'
+							className={cls.inputCheck}
+						/>
+						{t('Remember me')}
+					</label>
+				</HStack>
+				<Button testid='AuthForm_btn' type='submit' theme={ButtonThemes.PRIMARY} className={cls.button}>
+					{t(title)}
+				</Button>
+			</VStack>
 		</form>
 	);
 });

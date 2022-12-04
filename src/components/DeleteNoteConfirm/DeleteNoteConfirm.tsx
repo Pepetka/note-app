@@ -1,9 +1,9 @@
 import {Button, ButtonThemes} from 'lib/Button/Button';
 import {useTranslation} from 'react-i18next';
 import {classNames} from 'helpers/classNames/classNames';
-
-import cls from './DeleteNoteConfirm.module.scss';
 import {memo, useEffect, useRef} from 'react';
+import {VStack} from 'lib/Flex/VStack';
+import {HStack} from 'lib/Flex/HStack';
 
 interface DeleteNoteConfirmProps {
 	className?: string;
@@ -20,11 +20,11 @@ export const DeleteNoteConfirm = memo(({className, onConfirm, onClose}: DeleteNo
 	}, []);
 
 	return (
-		<div data-testid='DeleteNoteConfirm' className={classNames([cls.DeleteNoteConfirm, className])}>
+		<VStack align='center' gap='24' data-testid='DeleteNoteConfirm' className={classNames([className])}>
 			<p>
 				{t('Delete note? Are you sure?')}
 			</p>
-			<div className={cls.control}>
+			<HStack gap='24'>
 				<Button
 					ref={btnRef}
 					theme={ButtonThemes.PRIMARY}
@@ -38,7 +38,7 @@ export const DeleteNoteConfirm = memo(({className, onConfirm, onClose}: DeleteNo
 				>
 					{t('Close')}
 				</Button>
-			</div>
-		</div>
+			</HStack>
+		</VStack>
 	);
 });

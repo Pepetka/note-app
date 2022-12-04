@@ -7,6 +7,7 @@ import {getScrollbarWidth} from 'helpers/scrollbarWidth/scrollbarWidth';
 
 import cls from './Modal.module.scss';
 import './ModalAnimation.scss';
+import {HStack} from '../Flex/HStack';
 
 interface ModalProps {
 	className?: string;
@@ -33,24 +34,12 @@ export const Modal = ({className, children, isOpen, onClose}: ModalProps) => {
 				setIsClose(false);
 
 				window.addEventListener('keydown', onKeyClose);
-
-				if ((document.querySelector('#sideBar') as HTMLElement)) {
-					(document.querySelector('#sideBar') as HTMLElement).style.marginRight = `${getScrollbarWidth()}px`;
-				}
-				document.body.style.overflowY = 'hidden';
-				document.body.style.marginRight = `${getScrollbarWidth()}px`;
 			});
 		} else {
 			setIsOpened(false);
 
 			closeTimerRef.current = setTimeout(() => {
 				setIsClose(true);
-
-				if ((document.querySelector('#sideBar') as HTMLElement)) {
-					(document.querySelector('#sideBar') as HTMLElement).style.marginRight = '0';
-				}
-				document.body.style.overflowY = 'scroll';
-				document.body.style.marginRight = '0';
 			}, 300);
 		}
 
@@ -73,11 +62,13 @@ export const Modal = ({className, children, isOpen, onClose}: ModalProps) => {
 					data-testid='Modal'
 				>
 					<div className={cls.overlay} onClick={onClose}>
-						<CSSTransition in={isOpened} classNames='modalContent' timeout={300}>
-							<div className={cls.content} onClick={onContentClick}>
-								{children}
-							</div>
-						</CSSTransition>
+						<HStack justify='center' align='center' w100 h100>
+							<CSSTransition in={isOpened} classNames='modalContent' timeout={300}>
+								<div className={cls.content} onClick={onContentClick}>
+									{children}
+								</div>
+							</CSSTransition>
+						</HStack>
 					</div>
 				</div>
 			</CSSTransition>

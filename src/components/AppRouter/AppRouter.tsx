@@ -1,4 +1,4 @@
-import {Suspense} from 'react';
+import {memo, Suspense} from 'react';
 import {Route, RouteProps, Routes} from 'react-router-dom';
 import {HomePage} from 'pages/HomePage/HomePage';
 import {AboutPageLazy} from 'pages/AboutPage/AboutPage.lazy';
@@ -47,11 +47,11 @@ const routeConfig: Record<AppRoutes, RouteProps> = {
 	},
 };
 
-export const AppRouter = () => {
+export const AppRouter = memo(() => {
 	return (
 		<Suspense fallback={<PageLoader/>}>
 			<Routes>
-				{Object.entries(routeConfig).map(([_, {path, element}]) => (
+				{Object.values(routeConfig).map(({path, element}) => (
 					<Route
 						key={path}
 						path={path}
@@ -60,4 +60,4 @@ export const AppRouter = () => {
 			</Routes>
 		</Suspense>
 	);
-};
+});

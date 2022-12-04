@@ -1,16 +1,7 @@
 .Filter {
 	margin-block: 20px;
-	display: flex;
-	justify-content: center;
-	gap: 20px;
 }
 
 .button {
 	box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.7);
-}
-
-@media screen and (max-width: 768px) {
-	.Filter {
-		gap: 10px;
-	}
 }

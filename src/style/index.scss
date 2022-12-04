@@ -39,10 +39,6 @@
 	}
 }
 
-body {
-	overflow-y: scroll;
-}
-
 button {
 	cursor: pointer;
 }
@@ -55,4 +51,24 @@ h1 {
 
 label {
 	cursor: pointer;
+}
+
+* {
+	scrollbar-width: 10px;
+	scrollbar-color: var(--secondary-color) var(--primary-color);
+}
+
+*::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+	background: var(--secondary-color);
+}
+
+*::-webkit-scrollbar-thumb {
+	background-color: var(--bg-primary-color);
+	border-radius: 5px;
+	border: 1px solid var(--primary-color);
 }

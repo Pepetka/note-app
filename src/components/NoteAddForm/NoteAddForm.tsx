@@ -10,6 +10,7 @@ import {addNote} from 'store/model/notes/services/addNote/addNote';
 import {AlertType} from 'store/model/alert/types/AlertSchema';
 
 import cls from './NoteAddForm.module.scss';
+import {HStack} from '../../lib/Flex/HStack';
 
 export const NoteAddForm = memo(() => {
 	const [value, setValue] = useState('');
@@ -62,35 +63,37 @@ export const NoteAddForm = memo(() => {
 	}, [dispatch, isChecked, onShowAlert, t, value]);
 
 	return (
-		<form className={cls.NoteAddForm} data-testid='NoteAddForm'>
-			<Input
-				value={value}
-				onChange={onValueChange}
-				placeholder={t('Enter note title')}
-				withCorners
-				ref={inputRef}
-			/>
-			<Button
-				onClick={onChecked}
-				className={cls.important}
-				corners
-				border={false}
-				active={isChecked}
-				theme={ButtonThemes.SECONDARY}
-				type='button'
-			>
-				<FontAwesomeIcon icon={faExclamation} />
-			</Button>
-			<Button
-				onClick={submitHandler}
-				className={cls.button}
-				corners
-				theme={ButtonThemes.PRIMARY}
-				type='submit'
-				testid='NoteAddForm_btn'
-			>
-				{t('Add Note')}
-			</Button>
+		<form data-testid='NoteAddForm'>
+			<HStack>
+				<Input
+					value={value}
+					onChange={onValueChange}
+					placeholder={t('Enter note title')}
+					withCorners
+					ref={inputRef}
+				/>
+				<Button
+					onClick={onChecked}
+					className={cls.important}
+					corners
+					border={false}
+					active={isChecked}
+					theme={ButtonThemes.SECONDARY}
+					type='button'
+				>
+					<FontAwesomeIcon icon={faExclamation} />
+				</Button>
+				<Button
+					onClick={submitHandler}
+					className={cls.button}
+					corners
+					theme={ButtonThemes.PRIMARY}
+					type='submit'
+					testid='NoteAddForm_btn'
+				>
+					{t('Add Note')}
+				</Button>
+			</HStack>
 		</form>
 	);
 });

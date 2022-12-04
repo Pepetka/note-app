@@ -2,6 +2,7 @@ import {ButtonHTMLAttributes, ForwardedRef, forwardRef, memo, MouseEvent, ReactN
 import {classNames} from 'helpers/classNames/classNames';
 
 import cls from './Button.module.scss';
+import {HStack} from '../Flex/HStack';
 
 export enum ButtonThemes {
 	PRIMARY = 'primary',
@@ -20,6 +21,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>{
 	corners?: boolean
 	border?: boolean
 	testid?: string
+	w100?: boolean
 }
 
 export const Button = memo(forwardRef(( props : ButtonProps, ref: ForwardedRef<HTMLButtonElement>) => {
@@ -33,6 +35,7 @@ export const Button = memo(forwardRef(( props : ButtonProps, ref: ForwardedRef<H
 		corners = false,
 		border = true,
 		type = 'button',
+		w100,
 		...otherProps
 	} = props;
 
@@ -44,12 +47,14 @@ export const Button = memo(forwardRef(( props : ButtonProps, ref: ForwardedRef<H
 			className={
 				classNames(
 					[cls.Button, cls[theme], className],
-					{[cls.active]: active, [cls.withoutCorners]: !corners, [cls.withoutBorders]: !border})
+					{[cls.active]: active, [cls.withoutCorners]: !corners, [cls.withoutBorders]: !border, [cls.w100]: w100})
 			}
 			onClick={(e) => onClick(e)}
 			{...otherProps}
 		>
-			{children}
+			<HStack w100 h100 justify='center' align='center'>
+				{children}
+			</HStack>
 		</button>
 	);
 }));

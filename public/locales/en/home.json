@@ -14,5 +14,13 @@
 	"Please enter a note title": "Please enter a note title",
 	"Add note": "Add note",
 	"Note content": "Note content",
-	"Note title": "Note title"
+	"Note title": "Note title",
+	"Enabled note": "Enabled note",
+	"Disable note": "Disable note",
+	"Unimportant note": "Unimportant note",
+	"Important note": "Important note",
+	"Delete note": "Delete note",
+	"Add/Edit note content": "Add/Edit note content",
+	"Safe note content": "Safe note content",
+	"Open/Close note content": "Open/Close note content"
 }

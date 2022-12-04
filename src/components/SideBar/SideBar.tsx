@@ -1,4 +1,4 @@
-import {memo, useState} from 'react';
+import {memo, useCallback, useState} from 'react';
 import {ThemeButton} from 'components/ThemeButton/ThemeButton';
 import {LocalizationButton} from 'components/LocalizationButton/LocalizationButton';
 import {HandleSortButton} from 'components/HandleSortButton/HandleSortButton';
@@ -11,9 +11,9 @@ import cls from './SideBar.module.scss';
 export const SideBar = memo(() => {
 	const [collapsed, setCollapsed] = useState(true);
 
-	const onCollapsed = () => {
+	const onCollapsed = useCallback(() => {
 		setCollapsed((collapsed) => !collapsed);
-	};
+	}, []);
 
 	return (
 		<div data-testid='SideBar' id='sideBar' className={classNames([cls.SideBar], {[cls.collapsed]: collapsed})}>

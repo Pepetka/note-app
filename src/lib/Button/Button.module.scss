@@ -3,9 +3,6 @@
 	color: var(--primary-color);
 	padding: 10px;
 	white-space: nowrap;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 
 	&:hover:not(.clear),
 	&:focus:not(.clear) {
@@ -66,6 +63,10 @@
 .withoutBorders {
 	border-left: none;
 	border-right: none;
+}
+
+.w100 {
+	width: 100%;
 }
 
 @media screen and (max-width: 768px) {

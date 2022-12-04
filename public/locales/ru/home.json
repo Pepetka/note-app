@@ -14,5 +14,13 @@
 	"Please enter a note title": "Пожалуйста, введите заголовок заметки",
 	"Add note": "Добавить заметку",
 	"Note content": "Тело заметки",
-	"Note title": "Заголовок заметки"
+	"Note title": "Заголовок заметки",
+	"Enabled note": "Сделать активной",
+	"Disable note": "Завершить",
+	"Unimportant note": "Сделать неважной",
+	"Important note": "Сделать важной",
+	"Delete note": "Удалить заметку",
+	"Add/Edit note content": "Добавить/Изменить текст заметки",
+	"Safe note content": "Сохранить текст заметки",
+	"Open/Close note content": "Открыть/Закрыть заметку"
 }

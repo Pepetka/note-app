@@ -9,8 +9,8 @@ import {sortNotes} from 'store/model/notes/services/sortNotes/sortNotes';
 import {getLoading} from 'store/model/notes/selectors/getLoading/getLoading';
 import {useSelector} from 'react-redux';
 import {memo, useCallback} from 'react';
-import {getFilter} from 'store/model/notes/selectors/getFilter/getFilter';
 import {NoteSkeleton} from 'components/NoteSkeleton/NoteSkeleton';
+import {VStack} from 'lib/Flex/VStack';
 
 import cls from './Notes.module.scss';
 
@@ -41,11 +41,11 @@ export const Notes = memo(({handleSort}: NotesProp) => {
 
 	if (loading) {
 		return (
-			<div data-testid='NoteSkeleton' className={cls.skeleton}>
+			<VStack w100 data-testid='NoteSkeleton' gap='16'>
 				<NoteSkeleton/>
 				<NoteSkeleton/>
 				<NoteSkeleton/>
-			</div>
+			</VStack>
 		);
 	}
 
@@ -61,10 +61,10 @@ export const Notes = memo(({handleSort}: NotesProp) => {
 		<DragDropContext onDragEnd={onDragEnd}>
 			<Droppable droppableId='droppable'>
 				{(provided) => (
-					<div className={cls.Notes} {...provided.droppableProps} ref={provided.innerRef} data-testid='Notes'>
+					<VStack w100 {...provided.droppableProps} ref={provided.innerRef} data-testid='Notes'>
 						<NotesList notes={notes} handleSort={handleSort} />
 						{provided.placeholder}
-					</div>
+					</VStack>
 				)}
 			</Droppable>
 		</DragDropContext>

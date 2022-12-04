@@ -3,8 +3,7 @@ import {useTranslation} from 'react-i18next';
 import {Button, ButtonThemes} from 'lib/Button/Button';
 import {getError} from 'store/model/notes/selectors/getError/getError';
 import {useSelector} from 'react-redux';
-
-import cls from './ReloadTemplate.module.scss';
+import {VStack} from 'lib/Flex/VStack';
 
 interface ReloadTemplateProps {
 	onReload: () => void
@@ -16,7 +15,7 @@ export const ReloadTemplate = memo(({onReload, errorMessage}: ReloadTemplateProp
 	const {t} = useTranslation('home');
 
 	return (
-		<div className={cls.FetchError} data-testid='ReloadTemplate'>
+		<VStack justify='center' align='center' data-testid='ReloadTemplate'>
 			<h1>{errorMessage ?? error.get}</h1>
 			<Button
 				onClick={onReload}
@@ -24,6 +23,6 @@ export const ReloadTemplate = memo(({onReload, errorMessage}: ReloadTemplateProp
 			>
 				{t('Click to reload notes')}
 			</Button>
-		</div>
+		</VStack>
 	);
 });

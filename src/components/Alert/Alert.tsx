@@ -12,6 +12,7 @@ import {useSelector} from 'react-redux';
 
 import cls from './Alert.module.scss';
 import './AlertAnimation.scss';
+import {HStack} from '../../lib/Flex/HStack';
 
 export const Alert = memo(() => {
 	const dispatch = useAppDispatch();
@@ -30,7 +31,9 @@ export const Alert = memo(() => {
 
 	return (
 		<CSSTransition in={visible} classNames='alert' timeout={300} unmountOnExit>
-			<div
+			<HStack
+				justify='between'
+				w100
 				className={
 					classNames([cls.AppAlert, cls[type]])
 				}
@@ -49,7 +52,7 @@ export const Alert = memo(() => {
 				>
 					<FontAwesomeIcon icon={faXmark} />
 				</Button>
-			</div>
+			</HStack>
 		</CSSTransition>
 	);
 });

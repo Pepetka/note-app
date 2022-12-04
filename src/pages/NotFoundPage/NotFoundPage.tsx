@@ -2,8 +2,7 @@ import {useTranslation} from 'react-i18next';
 import {useNavigate} from 'react-router-dom';
 import {Button, ButtonThemes} from 'lib/Button/Button';
 import {memo, useCallback} from 'react';
-
-import cls from './NotFoundPage.module.scss';
+import {VStack} from 'lib/Flex/VStack';
 
 const NotFoundPage = memo(() => {
 	const {t} = useTranslation();
@@ -14,7 +13,7 @@ const NotFoundPage = memo(() => {
 	}, [navigate]);
 
 	return (
-		<div className={cls.NotFoundPage} data-testid='NotFoundPage'>
+		<VStack align='center' data-testid='NotFoundPage'>
 			<h1>{t('Page not found')}</h1>
 			<Button
 				theme={ButtonThemes.PRIMARY}
@@ -22,7 +21,7 @@ const NotFoundPage = memo(() => {
 			>
 				{t('To main')}
 			</Button>
-		</div>
+		</VStack>
 	);
 });
 

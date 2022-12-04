@@ -2,6 +2,7 @@ import {useTranslation} from 'react-i18next';
 import {useHandleSort} from 'hooks/useHandleSort';
 import {Switcher} from 'lib/Switcher/Switcher';
 import {memo} from 'react';
+import {HStack} from 'lib/Flex/HStack';
 
 import cls from './NotesControlPanel.module.scss';
 
@@ -13,14 +14,14 @@ export const NotesControlPanel = memo(({notesLength}: NotesControlPanelProps) =>
 	const {handleSort, onHandleSort} = useHandleSort();
 
 	return (
-		<div className={cls.ControlPanel} data-testid='NotesControlPanel'>
+		<HStack justify='between' className={cls.ControlPanel} data-testid='NotesControlPanel'>
 			<div>{t('Number of notes')} <span>{notesLength}</span></div>
-			<div className={cls.wrapper}>
+			<HStack gap='8'>
 				<label data-testid='NotesControlPanel_label' onClick={onHandleSort}>
 					{t('Handle Sort')}
 				</label>
 				<Switcher isActive={handleSort} onclick={onHandleSort} />
-			</div>
-		</div>
+			</HStack>
+		</HStack>
 	);
 });

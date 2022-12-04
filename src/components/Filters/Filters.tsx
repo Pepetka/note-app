@@ -8,6 +8,7 @@ import {useSelector} from 'react-redux';
 import {memo, useCallback} from 'react';
 
 import cls from './Filters.module.scss';
+import {HStack} from '../../lib/Flex/HStack';
 
 const buttons: Array<{name: string, data: FilterTypes}> = [
 	{name: 'Active', data: FilterTypes.ACTIVE},
@@ -31,7 +32,7 @@ export const Filters = memo(() => {
 	}, [dispatch, filter]);
 
 	return (
-		<div className={cls.Filter} data-testid='Filters'>
+		<HStack gap={window.innerWidth <= 768 ? '8' : '24'} justify='center' className={cls.Filter} data-testid='Filters'>
 			{buttons.map(({data, name}) => {
 				if (data === FilterTypes.ALL && window.innerWidth <= 768) {
 					return null;
@@ -50,6 +51,6 @@ export const Filters = memo(() => {
 					</Button>
 				);
 			})}
-		</div>
+		</HStack>
 	);
 });

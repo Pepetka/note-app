@@ -8,28 +8,11 @@
 .wrapper {
 	margin-inline: auto;
 	width: 90%;
-	height: 100%;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
 }
 
 .brand {
 	color: var(--primary-color);
 	font-weight: bold;
-}
-
-.mainLinks {
-	display: flex;
-	justify-content: center;
-	gap: 10px;
-}
-
-.list {
-	margin: 0;
-	list-style: none;
-	display: flex;
-	gap: 10px;
 }
 
 .link {

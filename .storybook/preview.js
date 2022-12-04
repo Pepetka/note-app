@@ -4,6 +4,7 @@ import {RouterDecorator} from "../src/helpers/storybook/RouterDecorator/RouterDe
 import {LocalizationDecorator} from "../src/helpers/storybook/LocalizationDecorator/LocalizationDecorator";
 import {HandleSortDecorator} from "../src/helpers/storybook/HandleSortDecorator/HandleSortDecorator";
 import {Theme} from "../src/context/theme/ThemeContext";
+import {Lang} from "../src/localization/i18n";
 import {StoreDecorator} from "../src/helpers/storybook/StoreDecorator/StoreDecorator";
 
 export const parameters = {
@@ -20,12 +21,12 @@ export const globalTypes = {
   globalLocale: {
     name: 'Locale',
     description: 'Internationalization locale',
-    defaultValue: 'en',
+    defaultValue: Lang.EN,
     toolbar: {
       icon: 'globe',
       items: [
-        { value: 'en', title: 'English' },
-        { value: 'ru', title: 'Russian' },
+        { value: Lang.EN, title: 'English' },
+        { value: Lang.RU, title: 'Russian' },
       ],
       showName: true,
     },

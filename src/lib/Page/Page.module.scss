@@ -1,0 +1,16 @@
+.Page {
+	overflow-y: scroll;
+	height: calc(100vh - var(--navbar-height));
+}
+
+.contentWrapper {
+	padding-block: 30px;
+	width: 80%;
+	margin: 0 auto;
+}
+
+@media screen and (max-width: 768px) {
+	.contentWrapper {
+		width: 90%;
+	}
+}

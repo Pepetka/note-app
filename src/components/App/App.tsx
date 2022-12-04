@@ -7,10 +7,9 @@ import {useTheme} from 'hooks/useTheme';
 import {memo, useEffect} from 'react';
 import {userActions} from 'store/model/user/slice/userSlice';
 import {useAppDispatch} from 'hooks/useRedux';
+import {Page} from 'lib/Page/Page';
 
 import '../../firebase';
-
-import cls from './App.module.scss';
 
 export const App = memo(() => {
 	const {theme} = useTheme();
@@ -23,12 +22,10 @@ export const App = memo(() => {
 	return (
 		<div className={classNames(['App', theme])}>
 			<NavBar />
-			<main>
-				<div className={cls.AppContainer}>
-					<Alert />
-					<AppRouter/>
-				</div>
-			</main>
+			<Page>
+				<Alert />
+				<AppRouter/>
+			</Page>
 			<SideBar />
 		</div>
 	);

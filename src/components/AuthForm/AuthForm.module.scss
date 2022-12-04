@@ -1,22 +1,3 @@
-.AuthForm {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	gap: 10px;
-}
-
-.inputGroup {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-}
-
-.inputGroupCheck {
-	display: flex;
-	justify-content: flex-start;
-}
-
 .inputCheck {
 	margin-right: 5px;
 }
@@ -35,12 +16,8 @@
 	}
 }
 
-.password {
-	width: 100%;
-	display: flex;
-}
-
 .visibilityBtn {
+	align-self: normal;
 	width: 50px;
 	border-top-right-radius: 5px;
 	border-bottom-right-radius: 5px;
