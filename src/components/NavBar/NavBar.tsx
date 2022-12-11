@@ -1,12 +1,12 @@
-import {useAuth} from 'hooks/useAuth';
+import {useAuth} from 'shared/hooks/useAuth';
 import {NavLink} from 'react-router-dom';
 import {notesActions} from 'store/model/notes/slice/notesSlice';
 import {userActions} from 'store/model/user/slice/userSlice';
 import {useTranslation} from 'react-i18next';
-import {classNames} from 'helpers/classNames/classNames';
-import {useAppDispatch} from 'hooks/useRedux';
+import {classNames} from 'shared/helpers/classNames/classNames';
+import {useAppDispatch} from 'shared/hooks/useRedux';
 import {memo, useCallback} from 'react';
-import {HStack} from 'lib/Flex/HStack';
+import {HStack} from 'shared/lib/Flex/HStack';
 
 import cls from './NavBar.module.scss';
 

@@ -1,16 +1,16 @@
 import {DragDropContext, Droppable} from 'react-beautiful-dnd';
 import {NotesList} from 'components/NotesList/NotesList';
 import {useTranslation} from 'react-i18next';
-import {reorder} from 'helpers/reorder/reorder';
+import {reorder} from 'shared/helpers/reorder/reorder';
 import {getNotes} from 'store/model/notes/selectors/getNotes/getNotes';
 import {getUser} from 'store/model/user/selectors/getUser/getUser';
-import {useAppDispatch} from 'hooks/useRedux';
+import {useAppDispatch} from 'shared/hooks/useRedux';
 import {sortNotes} from 'store/model/notes/services/sortNotes/sortNotes';
 import {getLoading} from 'store/model/notes/selectors/getLoading/getLoading';
 import {useSelector} from 'react-redux';
 import {memo, useCallback} from 'react';
 import {NoteSkeleton} from 'components/NoteSkeleton/NoteSkeleton';
-import {VStack} from 'lib/Flex/VStack';
+import {VStack} from 'shared/lib/Flex/VStack';
 
 import cls from './Notes.module.scss';
 
@@ -21,7 +21,7 @@ interface NotesProp {
 export const Notes = memo(({handleSort}: NotesProp) => {
 	const notes = useSelector(getNotes);
 	const loading = useSelector(getLoading);
-	const userId = useSelector(getUser)?.id;
+	const userData = useSelector(getUser);
 	const dispatch = useAppDispatch();
 	const {t} = useTranslation('home');
 
@@ -36,8 +36,8 @@ export const Notes = memo(({handleSort}: NotesProp) => {
 
 		const orderedNotes = reorder(notes, result.source.index, result.destination.index);
 
-		dispatch(sortNotes({notes: orderedNotes, userId: userId!}));
-	}, [dispatch, notes, userId]);
+		dispatch(sortNotes({notes: orderedNotes, userId: userData!.id}));
+	}, [dispatch, notes, userData]);
 
 	if (loading) {
 		return (

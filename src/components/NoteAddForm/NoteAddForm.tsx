@@ -1,16 +1,16 @@
 import {ChangeEvent, memo, MouseEvent, useCallback, useEffect, useRef, useState} from 'react';
 import {alertActions} from 'store/model/alert/slice/alertSlice';
 import {useTranslation} from 'react-i18next';
-import {Button, ButtonThemes} from 'lib/Button/Button';
-import {Input} from 'lib/Input/Input';
+import {Button, ButtonThemes} from 'shared/lib/Button/Button';
+import {Input} from 'shared/lib/Input/Input';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faExclamation} from '@fortawesome/free-solid-svg-icons';
-import {useAppDispatch} from 'hooks/useRedux';
+import {useAppDispatch} from 'shared/hooks/useRedux';
 import {addNote} from 'store/model/notes/services/addNote/addNote';
 import {AlertType} from 'store/model/alert/types/AlertSchema';
 
 import cls from './NoteAddForm.module.scss';
-import {HStack} from '../../lib/Flex/HStack';
+import {HStack} from '../../shared/lib/Flex/HStack';
 
 export const NoteAddForm = memo(() => {
 	const [value, setValue] = useState('');

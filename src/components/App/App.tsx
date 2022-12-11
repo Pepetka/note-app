@@ -2,12 +2,12 @@ import {NavBar} from 'components/NavBar/NavBar';
 import {Alert} from 'components/Alert/Alert';
 import {AppRouter} from 'components/AppRouter/AppRouter';
 import {SideBar} from 'components/SideBar/SideBar';
-import {classNames} from 'helpers/classNames/classNames';
-import {useTheme} from 'hooks/useTheme';
+import {classNames} from 'shared/helpers/classNames/classNames';
+import {useTheme} from 'shared/hooks/useTheme';
 import {memo, useEffect} from 'react';
 import {userActions} from 'store/model/user/slice/userSlice';
-import {useAppDispatch} from 'hooks/useRedux';
-import {Page} from 'lib/Page/Page';
+import {useAppDispatch} from 'shared/hooks/useRedux';
+import {Page} from 'shared/lib/Page/Page';
 
 import '../../firebase';
 

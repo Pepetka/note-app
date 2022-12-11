@@ -1,8 +1,8 @@
 import {useTranslation} from 'react-i18next';
-import {useHandleSort} from 'hooks/useHandleSort';
-import {Switcher} from 'lib/Switcher/Switcher';
+import {useHandleSort} from 'shared/hooks/useHandleSort';
+import {Switcher} from 'shared/lib/Switcher/Switcher';
 import {memo} from 'react';
-import {HStack} from 'lib/Flex/HStack';
+import {HStack} from 'shared/lib/Flex/HStack';
 
 import cls from './NotesControlPanel.module.scss';
 

@@ -1,7 +1,7 @@
 import {memo, useCallback, useEffect} from 'react';
 import {useTranslation} from 'react-i18next';
-import {Button, ButtonThemes} from 'lib/Button/Button';
-import {LocalStorageKeys} from 'const/localStorage';
+import {Button, ButtonThemes} from 'shared/lib/Button/Button';
+import {LocalStorageKeys} from 'shared/const/localStorage';
 import {Lang} from 'localization/i18n';
 
 export const LocalizationButton = memo(() => {

@@ -3,7 +3,7 @@ import {alertReducer} from './model/alert/slice/alertSlice';
 import {notesReducer} from './model/notes/slice/notesSlice';
 import {userReducer} from './model/user/slice/userSlice';
 import {StateSchema} from './model/types/StateSchema';
-import {$api} from 'api/api';
+import {$api} from 'shared/api/api';
 import {createReducerManager} from './model/reducerManager/reducerManager';
 
 export const configureReduxStore = (initialState?: StateSchema, asyncReducers?: ReducersMapObject<StateSchema>) => {

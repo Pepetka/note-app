@@ -1,8 +1,8 @@
 import {memo} from 'react';
-import {classNames} from 'helpers/classNames/classNames';
-import {Skeleton} from 'lib/Skeleton/Skeleton';
-import {VStack} from 'lib/Flex/VStack';
-import {HStack} from 'lib/Flex/HStack';
+import {classNames} from 'shared/helpers/classNames/classNames';
+import {Skeleton} from 'shared/lib/Skeleton/Skeleton';
+import {VStack} from 'shared/lib/Flex/VStack';
+import {HStack} from 'shared/lib/Flex/HStack';
 
 import cls from './NoteSkeleton.module.scss';
 

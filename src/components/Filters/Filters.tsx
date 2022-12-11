@@ -1,14 +1,14 @@
 import {notesActions} from 'store/model/notes/slice/notesSlice';
 import {useTranslation} from 'react-i18next';
-import {Button, ButtonThemes} from 'lib/Button/Button';
+import {Button, ButtonThemes} from 'shared/lib/Button/Button';
 import {getFilter} from 'store/model/notes/selectors/getFilter/getFilter';
-import {useAppDispatch} from 'hooks/useRedux';
+import {useAppDispatch} from 'shared/hooks/useRedux';
 import {FilterTypes} from 'store/model/notes/types/NotesSchema';
 import {useSelector} from 'react-redux';
 import {memo, useCallback} from 'react';
 
 import cls from './Filters.module.scss';
-import {HStack} from '../../lib/Flex/HStack';
+import {HStack} from '../../shared/lib/Flex/HStack';
 
 const buttons: Array<{name: string, data: FilterTypes}> = [
 	{name: 'Active', data: FilterTypes.ACTIVE},

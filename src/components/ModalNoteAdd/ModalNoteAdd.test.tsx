@@ -1,7 +1,7 @@
 import {screen} from '@testing-library/react';
 import '@testing-library/jest-dom';
 import {ModalNoteAdd} from './ModalNoteAdd';
-import {componentTestRender} from 'helpers/test/componentTestRender/componentTestRender';
+import {componentTestRender} from 'shared/helpers/test/componentTestRender/componentTestRender';
 
 describe('ModalNoteAdd', () => {
 	test('be in the document', () => {

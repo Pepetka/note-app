@@ -1,6 +1,6 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 import {Filters} from './Filters';
-import {StoreDecorator} from 'helpers/storybook/StoreDecorator/StoreDecorator';
+import {StoreDecorator} from 'shared/helpers/storybook/StoreDecorator/StoreDecorator';
 
 export default {
 	title: 'components/Filters',

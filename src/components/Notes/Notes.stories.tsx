@@ -2,7 +2,7 @@ import {ComponentMeta, ComponentStory} from '@storybook/react';
 import {FilterTypes, Note} from 'store/model/notes/types/NotesSchema';
 import {Notes} from './Notes';
 import {StateSchema} from 'store/model/types/StateSchema';
-import {StoreDecorator} from 'helpers/storybook/StoreDecorator/StoreDecorator';
+import {StoreDecorator} from 'shared/helpers/storybook/StoreDecorator/StoreDecorator';
 
 export default {
 	title: 'components/Notes',

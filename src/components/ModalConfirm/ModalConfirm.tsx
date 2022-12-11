@@ -1,4 +1,4 @@
-import {Modal} from 'lib/Modal/Modal';
+import {Modal} from 'shared/lib/Modal/Modal';
 import {DeleteNoteConfirm} from 'components/DeleteNoteConfirm/DeleteNoteConfirm';
 import {memo} from 'react';
 

@@ -1,8 +1,8 @@
 import {useTranslation} from 'react-i18next';
 import {useNavigate} from 'react-router-dom';
-import {Button, ButtonThemes} from 'lib/Button/Button';
+import {Button, ButtonThemes} from 'shared/lib/Button/Button';
 import {memo, useCallback} from 'react';
-import {VStack} from 'lib/Flex/VStack';
+import {VStack} from 'shared/lib/Flex/VStack';
 
 const NotFoundPage = memo(() => {
 	const {t} = useTranslation();

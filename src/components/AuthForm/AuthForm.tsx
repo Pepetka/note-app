@@ -3,14 +3,14 @@ import {Controller, SubmitHandler, useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import {useTranslation} from 'react-i18next';
-import {Button, ButtonThemes} from 'lib/Button/Button';
-import {Input} from 'lib/Input/Input';
+import {Button, ButtonThemes} from 'shared/lib/Button/Button';
+import {Input} from 'shared/lib/Input/Input';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
 
 import cls from './AuthForm.module.scss';
-import {VStack} from '../../lib/Flex/VStack';
-import {HStack} from '../../lib/Flex/HStack';
+import {VStack} from '../../shared/lib/Flex/VStack';
+import {HStack} from '../../shared/lib/Flex/HStack';
 
 export interface SubmitArgs {
 	email: string

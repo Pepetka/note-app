@@ -1,11 +1,11 @@
 import 'loki/configure-react';
-import {StyleDecorator} from "../src/helpers/storybook/StyleDecorator/StyleDecorator";
-import {RouterDecorator} from "../src/helpers/storybook/RouterDecorator/RouterDecorator";
-import {LocalizationDecorator} from "../src/helpers/storybook/LocalizationDecorator/LocalizationDecorator";
-import {HandleSortDecorator} from "../src/helpers/storybook/HandleSortDecorator/HandleSortDecorator";
+import {StyleDecorator} from "../src/shared/helpers/storybook/StyleDecorator/StyleDecorator";
+import {RouterDecorator} from "../src/shared/helpers/storybook/RouterDecorator/RouterDecorator";
+import {LocalizationDecorator} from "../src/shared/helpers/storybook/LocalizationDecorator/LocalizationDecorator";
+import {HandleSortDecorator} from "../src/shared/helpers/storybook/HandleSortDecorator/HandleSortDecorator";
 import {Theme} from "../src/context/theme/ThemeContext";
 import {Lang} from "../src/localization/i18n";
-import {StoreDecorator} from "../src/helpers/storybook/StoreDecorator/StoreDecorator";
+import {StoreDecorator} from "../src/shared/helpers/storybook/StoreDecorator/StoreDecorator";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },

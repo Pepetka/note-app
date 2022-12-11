@@ -3,7 +3,7 @@ import {User, UserSchema} from '../types/UserSchema';
 import {loginWithPassword} from '../services/loginWithPassword/loginWithPassword';
 import {loginWithGoogle} from '../services/loginWithGoogle/loginWithGoogle';
 import {registerWithPassword} from '../services/registerWithPassword/registerWithPassword';
-import {LocalStorageKeys} from 'const/localStorage';
+import {LocalStorageKeys} from 'shared/const/localStorage';
 
 const initialState: UserSchema = {
 	loading: false,

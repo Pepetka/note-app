@@ -1,8 +1,8 @@
-import {Loader} from 'lib/Loader/Loader';
-import {classNames} from 'helpers/classNames/classNames';
-import {useTheme} from 'hooks/useTheme';
+import {Loader} from 'shared/lib/Loader/Loader';
+import {classNames} from 'shared/helpers/classNames/classNames';
+import {useTheme} from 'shared/hooks/useTheme';
 import {memo} from 'react';
-import {HStack} from 'lib/Flex/HStack';
+import {HStack} from 'shared/lib/Flex/HStack';
 
 import cls from './PageLoader.module.scss';
 

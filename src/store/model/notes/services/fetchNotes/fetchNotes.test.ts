@@ -1,5 +1,5 @@
 import {describe, expect, test} from '@jest/globals';
-import {TestAsyncThunk} from 'helpers/test/asyncThunk/asyncThunk';
+import {TestAsyncThunk} from 'shared/helpers/test/asyncThunk/asyncThunk';
 import {fetchNotes} from './fetchNotes';
 import {ResponseType} from '../types';
 

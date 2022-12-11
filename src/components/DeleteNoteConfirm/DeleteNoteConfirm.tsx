@@ -1,9 +1,9 @@
-import {Button, ButtonThemes} from 'lib/Button/Button';
+import {Button, ButtonThemes} from 'shared/lib/Button/Button';
 import {useTranslation} from 'react-i18next';
-import {classNames} from 'helpers/classNames/classNames';
+import {classNames} from 'shared/helpers/classNames/classNames';
 import {memo, useEffect, useRef} from 'react';
-import {VStack} from 'lib/Flex/VStack';
-import {HStack} from 'lib/Flex/HStack';
+import {VStack} from 'shared/lib/Flex/VStack';
+import {HStack} from 'shared/lib/Flex/HStack';
 
 interface DeleteNoteConfirmProps {
 	className?: string;

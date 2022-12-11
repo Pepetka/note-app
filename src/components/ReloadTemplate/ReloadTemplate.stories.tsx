@@ -1,6 +1,6 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 import {ReloadTemplate} from './ReloadTemplate';
-import {StoreDecorator} from '../../helpers/storybook/StoreDecorator/StoreDecorator';
+import {StoreDecorator} from '../../shared/helpers/storybook/StoreDecorator/StoreDecorator';
 import {StateSchema} from '../../store/model/types/StateSchema';
 
 export default {

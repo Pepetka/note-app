@@ -12,7 +12,4 @@ export default {
 const Template: ComponentStory<typeof NoteAddButton> = (args) => <NoteAddButton {...args} />;
 
 export const NoteAddButtonStory = Template.bind({});
-NoteAddButtonStory.args = {
-	onClick: () => {},
-};
-
+NoteAddButtonStory.args = {};

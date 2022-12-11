@@ -2,7 +2,7 @@ import {memo, useCallback, useState} from 'react';
 import {ThemeButton} from 'components/ThemeButton/ThemeButton';
 import {LocalizationButton} from 'components/LocalizationButton/LocalizationButton';
 import {HandleSortButton} from 'components/HandleSortButton/HandleSortButton';
-import {classNames} from 'helpers/classNames/classNames';
+import {classNames} from 'shared/helpers/classNames/classNames';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faXmark} from '@fortawesome/free-solid-svg-icons';
 

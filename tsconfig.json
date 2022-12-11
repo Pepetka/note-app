@@ -19,6 +19,7 @@
 		"jsx": "react-jsx",
 		"skipLibCheck": true,
 		"baseUrl": "src",
+		"include": ["src"],
 		"outDir": "./build/"
 	},
 	"ts-node": {

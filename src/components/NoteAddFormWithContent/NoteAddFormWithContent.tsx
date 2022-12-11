@@ -1,10 +1,10 @@
 import {ChangeEvent, FormEvent, memo, useCallback, useEffect, useRef} from 'react';
-import {classNames} from 'helpers/classNames/classNames';
-import {Input} from 'lib/Input/Input';
-import {Textarea} from 'lib/Textarea/Textarea';
-import {Button, ButtonThemes} from 'lib/Button/Button';
+import {classNames} from 'shared/helpers/classNames/classNames';
+import {Input} from 'shared/lib/Input/Input';
+import {Textarea} from 'shared/lib/Textarea/Textarea';
+import {Button, ButtonThemes} from 'shared/lib/Button/Button';
 import {useTranslation} from 'react-i18next';
-import {useAppDispatch} from 'hooks/useRedux';
+import {useAppDispatch} from 'shared/hooks/useRedux';
 import {addNote} from 'store/model/notes/services/addNote/addNote';
 import {useSelector} from 'react-redux';
 import {getNoteFormTitle} from 'store/model/noteForm/selectors/getNoteFormTitle/getNoteFormTitle';
@@ -14,7 +14,7 @@ import {noteFormActions, noteFormReducer} from 'store/model/noteForm/slice/noteF
 import {DynamicModuleLoader} from 'store/ui/DynamicModuleLoader/DynamicModuleLoader';
 
 import cls from './NoteAddFormWithContent.module.scss';
-import {VStack} from 'lib/Flex/VStack';
+import {VStack} from 'shared/lib/Flex/VStack';
 
 interface NoteAddFormWithContentProps {
 	className?: string;

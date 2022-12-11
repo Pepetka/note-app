@@ -1,7 +1,7 @@
 import {screen} from '@testing-library/react';
 import '@testing-library/jest-dom';
 import {HandleSortButton} from './HandleSortButton';
-import {componentTestRender} from 'helpers/test/componentTestRender/componentTestRender';
+import {componentTestRender} from 'shared/helpers/test/componentTestRender/componentTestRender';
 import userEvent from '@testing-library/user-event';
 
 describe('HandleSortButton', () => {

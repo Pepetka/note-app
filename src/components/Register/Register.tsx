@@ -1,33 +1,23 @@
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {AuthForm, SubmitArgs} from 'components/AuthForm/AuthForm';
 import {useTranslation} from 'react-i18next';
-import {useAppDispatch} from 'hooks/useRedux';
-import {memo, useCallback, useEffect} from 'react';
-import {useAuth} from 'hooks/useAuth';
+import {useAppDispatch} from 'shared/hooks/useRedux';
+import {memo, useCallback} from 'react';
 import {registerWithPassword} from 'store/model/user/services/registerWithPassword/registerWithPassword';
 
 import cls from './Register.module.scss';
 
 export const Register = memo(() => {
 	const dispatch = useAppDispatch();
-	const navigate = useNavigate();
 	const {t} = useTranslation('auth');
-	const {isAuth} = useAuth();
-
-	useEffect(() => {
-		if (isAuth) navigate('/');
-	}, [isAuth, navigate]);
 
 	const handleRegister = useCallback(({email, password, rememberMe}: SubmitArgs) => {
 		dispatch(registerWithPassword({
 			email,
 			password,
 			rememberMe,
-		}))
-			.then(() => {
-				navigate('/');
-			});
-	}, [dispatch, navigate]);
+		}));
+	}, [dispatch]);
 
 	return (
 		<div className={cls.Register} data-testid='Register'>

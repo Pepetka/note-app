@@ -1,9 +1,9 @@
 import React, {memo} from 'react';
 import {useTranslation} from 'react-i18next';
-import {Button, ButtonThemes} from 'lib/Button/Button';
+import {Button, ButtonThemes} from 'shared/lib/Button/Button';
 import {getError} from 'store/model/notes/selectors/getError/getError';
 import {useSelector} from 'react-redux';
-import {VStack} from 'lib/Flex/VStack';
+import {VStack} from 'shared/lib/Flex/VStack';
 
 interface ReloadTemplateProps {
 	onReload: () => void

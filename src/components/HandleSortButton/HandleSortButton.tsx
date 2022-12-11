@@ -1,5 +1,5 @@
-import {useHandleSort} from 'hooks/useHandleSort';
-import {Button, ButtonThemes} from 'lib/Button/Button';
+import {useHandleSort} from 'shared/hooks/useHandleSort';
+import {Button, ButtonThemes} from 'shared/lib/Button/Button';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSort, faShuffle} from '@fortawesome/free-solid-svg-icons';
 import {memo} from 'react';
