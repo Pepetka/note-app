@@ -15,7 +15,7 @@
 	position: absolute;
 	white-space: nowrap;
 	background: var(--primary-color);
-	z-index: 2;
+	z-index: var(--z-popup);
 	padding: 5px;
 	border-radius: 5px;
 	color: var(--bg-primary-color);
@@ -25,7 +25,7 @@
 .arrow {
 	position: absolute;
 	background: var(--primary-color);
-	z-index: -1;
+	z-index: var(--z-hide);
 	width: 20px;
 	height: 20px;
 	transform: rotate(45deg);

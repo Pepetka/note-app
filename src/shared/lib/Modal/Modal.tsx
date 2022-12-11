@@ -1,13 +1,14 @@
-import {ReactNode, useEffect, useRef, useState, MouseEvent, useCallback} from 'react';
+import {ReactNode} from 'react';
 import {CSSTransition} from 'react-transition-group';
 import {classNames} from 'shared/helpers/classNames/classNames';
 import {Portal} from 'shared/lib/Portal/Portal';
 import {useTheme} from 'shared/hooks/useTheme';
-import {getScrollbarWidth} from 'shared/helpers/scrollbarWidth/scrollbarWidth';
+import {HStack} from 'shared/lib/Flex/HStack';
+import {Overlay} from 'shared/lib/Overlay/Overlay';
+import {useModal} from 'shared/hooks/useModal';
 
 import cls from './Modal.module.scss';
 import './ModalAnimation.scss';
-import {HStack} from '../Flex/HStack';
 
 interface ModalProps {
 	className?: string;
@@ -17,42 +18,11 @@ interface ModalProps {
 }
 
 export const Modal = ({className, children, isOpen, onClose}: ModalProps) => {
-	const [isClose, setIsClose] = useState(true);
-	const [isOpened, setIsOpened] = useState(false);
-	const openTimerRef = useRef<ReturnType<typeof setTimeout>>();
-	const closeTimerRef = useRef<ReturnType<typeof setTimeout>>();
 	const {theme} = useTheme();
-
-	const onKeyClose = useCallback((event: KeyboardEvent) => {
-		if ((event.key === 'Escape' || event.key === 'Space') && onClose) onClose();
-	}, [onClose]);
-
-	useEffect(() => {
-		if (isOpen) {
-			openTimerRef.current = setTimeout(() => {
-				setIsOpened(true);
-				setIsClose(false);
-
-				window.addEventListener('keydown', onKeyClose);
-			});
-		} else {
-			setIsOpened(false);
-
-			closeTimerRef.current = setTimeout(() => {
-				setIsClose(true);
-			}, 300);
-		}
-
-		return () => {
-			clearTimeout(closeTimerRef.current);
-			clearTimeout(openTimerRef.current);
-			window.removeEventListener('keydown', onKeyClose);
-		};
-	}, [isOpen, onKeyClose]);
-
-	const onContentClick = (event: MouseEvent<HTMLDivElement>) => {
-		event.stopPropagation();
-	};
+	const {isClose, isOpened} = useModal({
+		isOpen,
+		onClose,
+	});
 
 	return (
 		<Portal>
@@ -61,15 +31,14 @@ export const Modal = ({className, children, isOpen, onClose}: ModalProps) => {
 					className={classNames([cls.Modal, className, theme, 'AppModal'], {[cls.close]: isClose})}
 					data-testid='Modal'
 				>
-					<div className={cls.overlay} onClick={onClose}>
-						<HStack justify='center' align='center' w100 h100>
-							<CSSTransition in={isOpened} classNames='modalContent' timeout={300}>
-								<div className={cls.content} onClick={onContentClick}>
-									{children}
-								</div>
-							</CSSTransition>
-						</HStack>
-					</div>
+					<Overlay onClick={onClose}/>
+					<HStack justify='center' align='center' w100 h100>
+						<CSSTransition in={isOpened} classNames='modalContent' timeout={300}>
+							<div className={cls.content}>
+								{children}
+							</div>
+						</CSSTransition>
+					</HStack>
 				</div>
 			</CSSTransition>
 		</Portal>
