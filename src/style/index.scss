@@ -13,7 +13,8 @@
 .App,
 .PageLoader,
 .ErrorBoundary,
-.AppModal {
+.AppModal,
+.AppDrawer {
 	font: var(--font-m);
 }
 
@@ -37,6 +38,10 @@
 		-webkit-text-fill-color: var(--primary-color);
 		caret-color: var(--primary-color);
 	}
+}
+
+body {
+	overflow: hidden;
 }
 
 button {

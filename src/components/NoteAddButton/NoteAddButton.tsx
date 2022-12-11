@@ -9,6 +9,8 @@ import {useTranslation} from 'react-i18next';
 import {ModalNoteAdd} from 'components/ModalNoteAdd/ModalNoteAdd';
 
 import cls from './NoteAddButton.module.scss';
+import {DrawerNoteAdd} from '../DrawerNoteAdd/DrawerNoteAdd';
+import {BrowserView, MobileView} from 'react-device-detect';
 
 interface NoteAddButtonProps {
 	className?: string;
@@ -44,7 +46,12 @@ export const NoteAddButton = memo(({className}: NoteAddButtonProps) => {
 					</HStack>
 				</Button>
 			</Popover>
-			<ModalNoteAdd isOpen={isOpenModal} onClose={onCloseModal}/>
+			<BrowserView>
+				<ModalNoteAdd isOpen={isOpenModal} onClose={onCloseModal}/>
+			</BrowserView>
+			<MobileView>
+				<DrawerNoteAdd isOpen={isOpenModal} onClose={onCloseModal}/>
+			</MobileView>
 		</>
 	);
 });

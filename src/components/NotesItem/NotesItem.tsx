@@ -24,12 +24,14 @@ import {removeNote} from 'store/model/notes/services/removeNote/removeNote';
 import {disableNote} from 'store/model/notes/services/disableNote/disableNote';
 import {importantNote} from 'store/model/notes/services/importantNote/importantNote';
 import {useSelector} from 'react-redux';
+import {HStack} from 'shared/lib/Flex/HStack';
+import {VStack} from 'shared/lib/Flex/VStack';
+import {Popover} from 'shared/lib/Popover/Popover';
 
 import cls from './NotesItem.module.scss';
 import './NotesItemAnimation.scss';
-import {HStack} from '../../shared/lib/Flex/HStack';
-import {VStack} from '../../shared/lib/Flex/VStack';
-import {Popover} from '../../shared/lib/Popover/Popover';
+import {DrawerConfirm} from '../DrawerConfirm/DrawerConfirm';
+import {BrowserView, MobileView} from 'react-device-detect';
 
 interface NotesItemProps {
 	note: Note
@@ -179,7 +181,12 @@ export const NotesItem = memo(({note, handleSort, index}: NotesItemProps) => {
 								</Popover>
 							</HStack>
 
-							<ModalConfirm isOpen={isOpen} onClose={onCloseModal} onConfirm={onConfirmDelete} />
+							<BrowserView>
+								<ModalConfirm isOpen={isOpen} onClose={onCloseModal} onConfirm={onConfirmDelete} />
+							</BrowserView>
+							<MobileView>
+								<DrawerConfirm isOpen={isOpen} onClose={onCloseModal} onConfirm={onConfirmDelete} />
+							</MobileView>
 						</HStack>
 
 						<CSSTransition in={contentVisibility} classNames='noteContent' timeout={300} unmountOnExit>
