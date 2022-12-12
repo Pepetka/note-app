@@ -1,7 +1,7 @@
 import {screen} from '@testing-library/react';
 import '@testing-library/jest-dom';
 import {NoteAddForm} from './NoteAddForm';
-import {componentTestRender} from 'helpers/test/componentTestRender/componentTestRender';
+import {componentTestRender} from 'shared/helpers/test/componentTestRender/componentTestRender';
 import userEvent from '@testing-library/user-event';
 import {Alert} from '../Alert/Alert';
 

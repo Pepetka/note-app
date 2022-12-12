@@ -2,7 +2,7 @@ import {screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import {Filters} from './Filters';
-import {componentTestRender} from 'helpers/test/componentTestRender/componentTestRender';
+import {componentTestRender} from 'shared/helpers/test/componentTestRender/componentTestRender';
 import {FilterTypes} from 'store/model/notes/types/NotesSchema';
 
 describe('Filters', () => {

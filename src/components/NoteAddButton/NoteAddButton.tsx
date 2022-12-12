@@ -1,27 +1,57 @@
 import {faPlus} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {classNames} from 'helpers/classNames/classNames';
-import {Button, ButtonThemes} from 'lib/Button/Button';
-import {memo} from 'react';
+import {classNames} from 'shared/helpers/classNames/classNames';
+import {Button, ButtonThemes} from 'shared/lib/Button/Button';
+import {memo, useCallback, useState} from 'react';
+import {HStack} from 'shared/lib/Flex/HStack';
+import {Popover} from 'shared/lib/Popover/Popover';
+import {useTranslation} from 'react-i18next';
+import {ModalNoteAdd} from 'components/ModalNoteAdd/ModalNoteAdd';
 
 import cls from './NoteAddButton.module.scss';
+import {DrawerNoteAdd} from '../DrawerNoteAdd/DrawerNoteAdd';
+import {BrowserView, MobileView} from 'react-device-detect';
 
 interface NoteAddButtonProps {
 	className?: string;
-	onClick: () => void
 }
 
-export const NoteAddButton = memo(({className, onClick}: NoteAddButtonProps) => {
+export const NoteAddButton = memo(({className}: NoteAddButtonProps) => {
+	const {t} = useTranslation('home');
+	const [isOpenModal, setIsOpenModal] = useState(false);
+
+	const onOpenModal = useCallback(() => {
+		setIsOpenModal(true);
+	}, []);
+
+	const onCloseModal = useCallback(() => {
+		setIsOpenModal(false);
+	}, []);
+
 	return (
-		<Button
-			onClick={onClick}
-			theme={ButtonThemes.SECONDARY}
-			className={classNames([cls.NoteAddButton, className])}
-			testid='NoteAddButton'
-		>
-			<div className={cls.add}>
-				<FontAwesomeIcon icon={faPlus} />
-			</div>
-		</Button>
+		<>
+			<Popover
+				w100
+				popoverContent={t('Add note')}
+				position='top'
+			>
+				<Button
+					onClick={onOpenModal}
+					theme={ButtonThemes.SECONDARY}
+					className={classNames([cls.NoteAddButton, className])}
+					testid='NoteAddButton'
+				>
+					<HStack justify='center' align='center' className={cls.add}>
+						<FontAwesomeIcon icon={faPlus}/>
+					</HStack>
+				</Button>
+			</Popover>
+			<BrowserView>
+				<ModalNoteAdd isOpen={isOpenModal} onClose={onCloseModal}/>
+			</BrowserView>
+			<MobileView>
+				<DrawerNoteAdd isOpen={isOpenModal} onClose={onCloseModal}/>
+			</MobileView>
+		</>
 	);
 });

@@ -1,7 +1,4 @@
 .NoteAddFormWithContent {
-	display: flex;
-	gap: 5px;
-	flex-direction: column;
 	width: 400px;
 }
 
@@ -15,6 +12,7 @@
 }
 
 .title {
+	width: 100%;
 	text-align: center;
 	color: var(--primary-color);
 	margin-bottom: 10px;

@@ -1,8 +1,8 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 import {NotesList} from './NotesList';
-import {DragDecorator} from 'helpers/storybook/DragDecorator/DragDecorator';
+import {DragDecorator} from 'shared/helpers/storybook/DragDecorator/DragDecorator';
 import {FilterTypes, Note} from 'store/model/notes/types/NotesSchema';
-import {StoreDecorator} from 'helpers/storybook/StoreDecorator/StoreDecorator';
+import {StoreDecorator} from 'shared/helpers/storybook/StoreDecorator/StoreDecorator';
 import {StateSchema} from 'store/model/types/StateSchema';
 
 export default {

@@ -1,9 +1,9 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 import {NotesItem} from './NotesItem';
-import {DragDecorator} from 'helpers/storybook/DragDecorator/DragDecorator';
+import {DragDecorator} from 'shared/helpers/storybook/DragDecorator/DragDecorator';
 import {FilterTypes, Note} from 'store/model/notes/types/NotesSchema';
 import {StateSchema} from 'store/model/types/StateSchema';
-import {StoreDecorator} from 'helpers/storybook/StoreDecorator/StoreDecorator';
+import {StoreDecorator} from 'shared/helpers/storybook/StoreDecorator/StoreDecorator';
 
 export default {
 	title: 'components/NotesItem',

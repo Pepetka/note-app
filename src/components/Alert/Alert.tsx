@@ -1,23 +1,44 @@
-import {memo, useEffect, useRef} from 'react';
+import {CSSProperties, memo, useEffect, useRef} from 'react';
 import {alertActions} from 'store/model/alert/slice/alertSlice';
 import {useTranslation} from 'react-i18next';
-import {classNames} from 'helpers/classNames/classNames';
-import {Button, ButtonThemes} from 'lib/Button/Button';
+import {classNames} from 'shared/helpers/classNames/classNames';
+import {Button, ButtonThemes} from 'shared/lib/Button/Button';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faXmark} from '@fortawesome/free-solid-svg-icons';
-import {CSSTransition} from 'react-transition-group';
+import {Transition} from 'react-transition-group';
 import {getAlertState} from 'store/model/alert/selectors/getState/getAlertState';
-import {useAppDispatch} from 'hooks/useRedux';
+import {useAppDispatch} from 'shared/hooks/useRedux';
 import {useSelector} from 'react-redux';
+import {HStack} from 'shared/lib/Flex/HStack';
 
 import cls from './Alert.module.scss';
-import './AlertAnimation.scss';
+
+const duration = 300;
+
+const defaultStyle: CSSProperties = {
+	opacity: 0,
+	transform: 'scale(0.3)',
+	transition: `all ${duration}ms ease-in-out`,
+};
+
+const animateStyle: Record<string, CSSProperties> = {
+	entering: {},
+	entered: {
+		opacity: 1,
+		transform: 'scale(1)',
+	},
+	exiting: {},
+	exited: {
+		opacity: 0,
+		transform: 'scale(0.3)',
+	},
+};
 
 export const Alert = memo(() => {
 	const dispatch = useAppDispatch();
 	const {type, visible, text} = useSelector(getAlertState);
 	const {t} = useTranslation();
-	const btnRef = useRef<HTMLButtonElement>(null);
+	const btnRef = useRef<HTMLButtonElement | null>(null);
 
 	useEffect(() => {
 		btnRef.current?.focus();
@@ -29,27 +50,35 @@ export const Alert = memo(() => {
 	};
 
 	return (
-		<CSSTransition in={visible} classNames='alert' timeout={300} unmountOnExit>
-			<div
-				className={
-					classNames([cls.AppAlert, cls[type]])
-				}
-				data-testid='Alert'
-			>
-				<div><strong>{t('Attention')}</strong>
-					<br />
-					<div>{text}</div>
-				</div>
-				<Button
-					ref={btnRef}
-					autoFocus={true}
-					onClick={onCloseAlert}
-					className={cls.close}
-					theme={ButtonThemes.CLEAR}
+		<Transition in={visible} timeout={duration} unmountOnExit>
+			{(state) => (
+				<HStack
+					justify='between'
+					w100
+					className={
+						classNames([cls.AppAlert, cls[type]])
+					}
+					style={{
+						...defaultStyle,
+						...animateStyle[state],
+					}}
+					data-testid='Alert'
 				>
-					<FontAwesomeIcon icon={faXmark} />
-				</Button>
-			</div>
-		</CSSTransition>
+					<div><strong>{t('Attention')}</strong>
+						<br />
+						<div>{text}</div>
+					</div>
+					<Button
+						ref={btnRef}
+						autoFocus={true}
+						onClick={onCloseAlert}
+						className={cls.close}
+						theme={ButtonThemes.CLEAR}
+					>
+						<FontAwesomeIcon icon={faXmark} />
+					</Button>
+				</HStack>
+			)}
+		</Transition>
 	);
 });

@@ -1,8 +1,8 @@
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {AuthForm, SubmitArgs} from 'components/AuthForm/AuthForm';
 import {useTranslation} from 'react-i18next';
-import {Button, ButtonThemes} from 'lib/Button/Button';
-import {useAppDispatch} from 'hooks/useRedux';
+import {Button, ButtonThemes} from 'shared/lib/Button/Button';
+import {useAppDispatch} from 'shared/hooks/useRedux';
 import {loginWithPassword} from 'store/model/user/services/loginWithPassword/loginWithPassword';
 import {loginWithGoogle} from 'store/model/user/services/loginWithGoogle/loginWithGoogle';
 import {memo, useCallback} from 'react';
@@ -11,7 +11,6 @@ import cls from './Login.module.scss';
 
 export const Login = memo(() => {
 	const dispatch = useAppDispatch();
-	const navigate = useNavigate();
 	const {t} = useTranslation('auth');
 
 	const handleLogin = useCallback(({email, password, rememberMe}: SubmitArgs) => {
@@ -19,20 +18,14 @@ export const Login = memo(() => {
 			email,
 			password,
 			rememberMe,
-		}))
-			.then(() => {
-				navigate('/');
-			});
-	}, [dispatch, navigate]);
+		}));
+	}, [dispatch]);
 
 	const onLogin = useCallback(
 		() => {
-			dispatch(loginWithGoogle())
-				.then(() => {
-					navigate('/');
-				});
+			dispatch(loginWithGoogle());
 		},
-		[dispatch, navigate],
+		[dispatch],
 	);
 
 	return (

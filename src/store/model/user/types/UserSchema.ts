@@ -8,4 +8,5 @@ export interface UserSchema {
 	user?: User
 	error?: string
 	loading: boolean
+	_init?: boolean
 }

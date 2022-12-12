@@ -1,7 +1,8 @@
 import {memo, useCallback, useEffect} from 'react';
 import {useTranslation} from 'react-i18next';
-import {Button, ButtonThemes} from 'lib/Button/Button';
-import {LocalStorageKeys} from 'const/localStorage';
+import {Button, ButtonThemes} from 'shared/lib/Button/Button';
+import {LocalStorageKeys} from 'shared/const/localStorage';
+import {Lang} from 'localization/i18n';
 
 export const LocalizationButton = memo(() => {
 	const {i18n} = useTranslation();
@@ -17,7 +18,7 @@ export const LocalizationButton = memo(() => {
 
 
 	const onChangeLang = useCallback(() => {
-		const newLang = i18n.language === 'en' ? 'ru' : 'en';
+		const newLang = i18n.language === Lang.EN ? Lang.RU : Lang.EN;
 
 		i18n.changeLanguage(newLang);
 		document.documentElement.lang = newLang;

@@ -1,10 +1,10 @@
 import {ChangeEvent, FormEvent, memo, useCallback, useEffect, useRef} from 'react';
-import {classNames} from 'helpers/classNames/classNames';
-import {Input} from 'lib/Input/Input';
-import {Textarea} from 'lib/Textarea/Textarea';
-import {Button, ButtonThemes} from 'lib/Button/Button';
+import {classNames} from 'shared/helpers/classNames/classNames';
+import {Input} from 'shared/lib/Input/Input';
+import {Textarea} from 'shared/lib/Textarea/Textarea';
+import {Button, ButtonThemes} from 'shared/lib/Button/Button';
 import {useTranslation} from 'react-i18next';
-import {useAppDispatch} from 'hooks/useRedux';
+import {useAppDispatch} from 'shared/hooks/useRedux';
 import {addNote} from 'store/model/notes/services/addNote/addNote';
 import {useSelector} from 'react-redux';
 import {getNoteFormTitle} from 'store/model/noteForm/selectors/getNoteFormTitle/getNoteFormTitle';
@@ -14,6 +14,7 @@ import {noteFormActions, noteFormReducer} from 'store/model/noteForm/slice/noteF
 import {DynamicModuleLoader} from 'store/ui/DynamicModuleLoader/DynamicModuleLoader';
 
 import cls from './NoteAddFormWithContent.module.scss';
+import {VStack} from 'shared/lib/Flex/VStack';
 
 interface NoteAddFormWithContentProps {
 	className?: string;
@@ -54,13 +55,15 @@ export const NoteAddFormWithContent = memo(({className, optionFunc}: NoteAddForm
 	return (
 		<DynamicModuleLoader reducerKey='noteForm' reducer={noteFormReducer}>
 			<form data-testid='NoteAddFormWithContent' onSubmit={onSubmit} className={classNames([cls.NoteAddFormWithContent, className])}>
-				<h2 className={cls.title}>{t('Add note')}</h2>
-				<Input data-testid floatPlaceholder={t('Note title')} value={title} onChange={onChangeTitle} ref={inputRef}/>
-				{error && <p data-testid='NoteAddFormWithContent_error' className={cls.error}>{t(error)}</p>}
-				<Textarea floatPlaceholder={t('Note content')} value={content} onChange={onChangeContent}/>
-				<Button data-testid='NoteAddFormWithContent_btn' theme={ButtonThemes.PRIMARY} type='submit' className={cls.button}>
-					{t('Add Note')}
-				</Button>
+				<VStack gap='8'>
+					<h2 className={cls.title}>{t('Add note')}</h2>
+					<Input data-testid floatPlaceholder={t('Note title')} value={title} onChange={onChangeTitle} ref={inputRef}/>
+					{error && <p data-testid='NoteAddFormWithContent_error' className={cls.error}>{t(error)}</p>}
+					<Textarea floatPlaceholder={t('Note content')} value={content} onChange={onChangeContent}/>
+					<Button data-testid='NoteAddFormWithContent_btn' theme={ButtonThemes.PRIMARY} type='submit' className={cls.button}>
+						{t('Add Note')}
+					</Button>
+				</VStack>
 			</form>
 		</DynamicModuleLoader>
 	);

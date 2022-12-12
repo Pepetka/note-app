@@ -2,7 +2,7 @@ import {ComponentMeta, ComponentStory} from '@storybook/react';
 import {FilterTypes, Note} from 'store/model/notes/types/NotesSchema';
 import {Notes} from './Notes';
 import {StateSchema} from 'store/model/types/StateSchema';
-import {StoreDecorator} from 'helpers/storybook/StoreDecorator/StoreDecorator';
+import {StoreDecorator} from 'shared/helpers/storybook/StoreDecorator/StoreDecorator';
 
 export default {
 	title: 'components/Notes',
@@ -67,6 +67,20 @@ const initialStateWithoutNotes: DeepPartial<StateSchema> = {
 		},
 	},
 };
+const initialStateLoading: DeepPartial<StateSchema> = {
+	notes: {
+		filter: FilterTypes.ALL,
+		notes: [],
+		loading: true,
+	},
+	user: {
+		user: {
+			id: 'id',
+			token: 'token',
+			email: 'mail@mail.ru',
+		},
+	},
+};
 
 export const NotesWithNotes = Template.bind({});
 NotesWithNotes.args = {
@@ -82,4 +96,12 @@ NotesWithoutNotes.args = {
 };
 NotesWithoutNotes.decorators = [
 	StoreDecorator(initialStateWithoutNotes as StateSchema),
+];
+
+export const NotesLoading = Template.bind({});
+NotesLoading.args = {
+	handleSort: false,
+};
+NotesLoading.decorators = [
+	StoreDecorator(initialStateLoading as StateSchema),
 ];

@@ -12,7 +12,7 @@ interface NotesListProps {
 
 export const NotesList = memo(({notes, handleSort}: NotesListProps) => {
 	return (
-		<TransitionGroup data-testid='NotesList'>
+		<TransitionGroup data-testid='NotesList' style={{width: '100%'}}>
 			{notes
 				.map((note: Note, index: number) => {
 					return (

@@ -2,7 +2,7 @@ import {screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import {SideBar} from './SideBar';
-import {componentTestRender} from 'helpers/test/componentTestRender/componentTestRender';
+import {componentTestRender} from 'shared/helpers/test/componentTestRender/componentTestRender';
 
 describe('SideBar', () => {
 	test('be in the document', () => {

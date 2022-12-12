@@ -1,7 +1,7 @@
-import {screen} from '@testing-library/react';
+import {act, screen} from '@testing-library/react';
 import '@testing-library/jest-dom';
 import {HomePage} from './HomePage';
-import {componentTestRender} from 'helpers/test/componentTestRender/componentTestRender';
+import {componentTestRender} from 'shared/helpers/test/componentTestRender/componentTestRender';
 import {StateSchema} from 'store/model/types/StateSchema';
 import userEvent from '@testing-library/user-event';
 
@@ -45,7 +45,7 @@ describe('HomePage', () => {
 
 		componentTestRender(<HomePage/>, {initialState: state as StateSchema});
 		expect(screen.queryByTestId('Notes')).not.toBeInTheDocument();
-		expect(screen.getByTestId('Loader')).toBeInTheDocument();
+		expect(screen.getByTestId('NoteSkeleton')).toBeInTheDocument();
 	});
 
 	test('fetch error', () => {
@@ -77,7 +77,9 @@ describe('HomePage', () => {
 		componentTestRender(<HomePage/>, {initialState: state as StateSchema});
 
 		expect(screen.queryByTestId('Modal')).not.toBeInTheDocument();
-		await userEvent.click(screen.getByTestId('NoteAddButton'));
+		await act(() => {
+			userEvent.click(screen.getByTestId('NoteAddButton'));
+		});
 
 		expect(screen.getByTestId('Modal')).toBeInTheDocument();
 		expect(screen.getByTestId('NoteAddFormWithContent')).toBeInTheDocument();

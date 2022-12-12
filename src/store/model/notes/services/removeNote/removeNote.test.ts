@@ -1,5 +1,5 @@
 import {describe, expect, test} from '@jest/globals';
-import {TestAsyncThunk} from 'helpers/test/asyncThunk/asyncThunk';
+import {TestAsyncThunk} from 'shared/helpers/test/asyncThunk/asyncThunk';
 import {removeNote} from './removeNote';
 import {StateSchema} from '../../../types/StateSchema';
 

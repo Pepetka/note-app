@@ -18,6 +18,17 @@
 		"noFallthroughCasesInSwitch": true,
 		"jsx": "react-jsx",
 		"skipLibCheck": true,
-		"baseUrl": "src"
-	}
+		"baseUrl": "src",
+		"include": ["src"],
+		"outDir": "./build/"
+	},
+	"ts-node": {
+		"compilerOptions": {
+			"module": "CommonJS"
+		}
+	},
+	"include": [
+		"src/**/*.ts",
+		"src/**/*.tsx"
+	]
 }

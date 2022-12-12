@@ -1,5 +1,5 @@
-import {classNames} from 'helpers/classNames/classNames';
-import {Modal} from 'lib/Modal/Modal';
+import {classNames} from 'shared/helpers/classNames/classNames';
+import {Modal} from 'shared/lib/Modal/Modal';
 import {NoteAddFormWithContent} from 'components/NoteAddFormWithContent/NoteAddFormWithContent';
 import {memo} from 'react';
 

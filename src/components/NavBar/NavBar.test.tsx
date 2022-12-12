@@ -1,7 +1,7 @@
 import {screen} from '@testing-library/react';
 import '@testing-library/jest-dom';
 import {NavBar} from './NavBar';
-import {componentTestRender} from 'helpers/test/componentTestRender/componentTestRender';
+import {componentTestRender} from 'shared/helpers/test/componentTestRender/componentTestRender';
 import {StateSchema} from '../../store/model/types/StateSchema';
 
 describe('NavBar', () => {

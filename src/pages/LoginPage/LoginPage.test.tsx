@@ -1,7 +1,7 @@
 import {screen} from '@testing-library/react';
 import '@testing-library/jest-dom';
 import LoginPage from './LoginPage';
-import {componentTestRender} from 'helpers/test/componentTestRender/componentTestRender';
+import {componentTestRender} from 'shared/helpers/test/componentTestRender/componentTestRender';
 
 describe('LoginPage', () => {
 	test('be in the document', () => {

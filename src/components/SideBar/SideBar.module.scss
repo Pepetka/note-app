@@ -36,10 +36,18 @@
 	border: 1px solid var(--primary-color);
 	transform: rotateZ(0deg);
 	transition: 0.2s all linear;
+
+	&:hover {
+		transform: scale(1.05);
+	}
 }
 
 .collapsed .open {
 	transform: rotateZ(45deg);
+
+	&:hover {
+		transform: rotateZ(45deg) scale(1.05);
+	}
 }
 
 .collapsed .button {

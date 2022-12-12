@@ -1,0 +1,48 @@
+.Textarea {
+	width: 100%;
+	background: var(--bg-secondary-color);
+	padding: 7px;
+	color: var(--primary-color);
+	border: 2px solid var(--default-color);
+	border-radius: 5px;
+
+	&:focus {
+		outline: none;
+	}
+}
+
+.textareaWrapper {
+	position: relative;
+	width: 100%;
+}
+
+.withCorners {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.withPlaceholder {
+	height: 160px;
+
+	.Textarea {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+	}
+}
+
+.placeholder {
+	color: var(--secondary-color);
+	pointer-events: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	transform: translateY(35px) translateX(10px);
+	transition: transform 0.3s ease-out;
+	z-index: var(--z-popup);
+}
+
+.focused {
+	color: var(--primary-color);
+	transform: translateY(0) translateX(-7px) scale(0.9);
+}

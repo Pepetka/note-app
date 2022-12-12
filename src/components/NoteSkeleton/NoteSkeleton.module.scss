@@ -1,0 +1,23 @@
+.NoteSkeleton {
+	border: 1px solid var(--secondary-color);
+	border-radius: 10px;
+}
+
+.main {
+	flex: 1;
+	padding: 10px;
+	width: 100%;
+}
+
+.header {
+	flex: 1 1 0;
+	padding-block: 4px;
+}
+
+.bthGroup {
+	flex: 1 1 0;
+}
+
+.btn {
+	flex: 1 1 0;
+}

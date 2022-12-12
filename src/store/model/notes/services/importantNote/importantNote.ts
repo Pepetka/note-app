@@ -1,5 +1,5 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {withoutId} from 'helpers/withoutId/withoutId';
+import {withoutId} from 'shared/helpers/withoutId/withoutId';
 import {alertActions} from 'store/model/alert/slice/alertSlice';
 import {ThunkConfig} from 'store/model/types/StateSchema';
 

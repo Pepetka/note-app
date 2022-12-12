@@ -1,0 +1,32 @@
+.popoverWrapper {
+	display: inline-block;
+	position: relative;
+}
+
+.triggerWrapper {
+	display: inline-block;
+}
+
+.w100 {
+	width: 100%;
+}
+
+.Popover {
+	position: absolute;
+	white-space: nowrap;
+	background: var(--primary-color);
+	z-index: var(--z-popup);
+	padding: 5px;
+	border-radius: 5px;
+	color: var(--bg-primary-color);
+	box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.7);
+}
+
+.arrow {
+	position: absolute;
+	background: var(--primary-color);
+	z-index: var(--z-hide);
+	width: 20px;
+	height: 20px;
+	transform: rotate(45deg);
+}
