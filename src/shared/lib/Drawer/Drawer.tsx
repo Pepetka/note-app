@@ -83,7 +83,7 @@ export const Drawer = memo(
 
 		return (
 			<Portal>
-				<CSSTransition unmountOnExit timeout={duration} in={isOpen}>
+				<Transition unmountOnExit timeout={duration} in={isOpen}>
 					<div
 						className={classNames([cls.Drawer, className, theme, 'AppDrawer'], {[cls.close]: isClose})}
 						data-testid='Drawer'
@@ -109,7 +109,7 @@ export const Drawer = memo(
 							</Transition>
 						</HStack>
 					</div>
-				</CSSTransition>
+				</Transition>
 			</Portal>
 		);
 	},

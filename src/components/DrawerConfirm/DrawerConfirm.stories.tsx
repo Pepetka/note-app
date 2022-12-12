@@ -12,4 +12,8 @@ export default {
 const Template: ComponentStory<typeof DrawerConfirm> = (args) => <DrawerConfirm {...args} />;
 
 export const DrawerConfirmStory = Template.bind({});
-DrawerConfirmStory.args = {};
+DrawerConfirmStory.args = {
+	onConfirm: () => {},
+	isOpen: true,
+	onClose: () => {},
+};

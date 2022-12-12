@@ -8,6 +8,8 @@
 # testing
 /coverage
 /storybook-static
+/jest-html-reporters-attach
+jest_html_reporters.html
 
 # production
 /build

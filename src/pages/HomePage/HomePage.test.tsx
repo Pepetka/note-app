@@ -1,4 +1,4 @@
-import {screen} from '@testing-library/react';
+import {act, screen} from '@testing-library/react';
 import '@testing-library/jest-dom';
 import {HomePage} from './HomePage';
 import {componentTestRender} from 'shared/helpers/test/componentTestRender/componentTestRender';
@@ -77,7 +77,9 @@ describe('HomePage', () => {
 		componentTestRender(<HomePage/>, {initialState: state as StateSchema});
 
 		expect(screen.queryByTestId('Modal')).not.toBeInTheDocument();
-		await userEvent.click(screen.getByTestId('NoteAddButton'));
+		await act(() => {
+			userEvent.click(screen.getByTestId('NoteAddButton'));
+		});
 
 		expect(screen.getByTestId('Modal')).toBeInTheDocument();
 		expect(screen.getByTestId('NoteAddFormWithContent')).toBeInTheDocument();
