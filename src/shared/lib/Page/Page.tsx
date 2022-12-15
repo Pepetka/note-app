@@ -1,4 +1,5 @@
 import {ReactNode} from 'react';
+import {SideBar} from 'components/SideBar/SideBar';
 import cls from './Page.module.scss';
 
 interface PageProps {
@@ -11,6 +12,7 @@ export const Page = ({children}: PageProps) => {
 			<div className={cls.contentWrapper}>
 				{children}
 			</div>
+			<SideBar />
 		</main>
 	);
 };

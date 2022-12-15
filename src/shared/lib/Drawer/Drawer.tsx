@@ -1,5 +1,5 @@
 import {CSSProperties, memo, ReactNode, TouchEvent, useRef, useState} from 'react';
-import {CSSTransition, Transition} from 'react-transition-group';
+import {Transition} from 'react-transition-group';
 import {classNames} from '../../helpers/classNames/classNames';
 import {Overlay} from '../Overlay/Overlay';
 import {HStack} from '../Flex/HStack';
@@ -31,17 +31,17 @@ export const Drawer = memo(
 		const nodeRef = useRef<HTMLDivElement>(null);
 
 		const transitionStyles: Record<string, CSSProperties> = {
-			entering: {
-				opacity: 1,
-				transform: 'translateY(0)',
+			enter: {
+				opacity: 0.5,
+				transform: 'translateY(100%)',
 			},
 			entered: {
 				opacity: 1,
 				transform: `translateY(${translate})`,
 			},
-			exiting: {
-				opacity: 0.5,
-				transform: 'translateY(100%)',
+			exit: {
+				opacity: 1,
+				transform: `translateY(${translate})`,
 			},
 			exited: {
 				opacity: 0.5,
@@ -50,7 +50,7 @@ export const Drawer = memo(
 		};
 
 		const defaultStyle = {
-			transition: `all ${translate !== '0' ? '0' : duration}ms ease-in-out`,
+			transition: `all ${translate !== '0' ? 0 : (startPosition ? 100 : duration)}ms ease-in-out`,
 			transform: 'translateY(100%)',
 			opacity: 0.5,
 		};
@@ -66,11 +66,16 @@ export const Drawer = memo(
 			const velocity = (endPosition - startPosition!) / (endTime - startTime!);
 
 			setTranslate('0');
-			setStartPosition(null);
-			setStartTime(null);
 
 			if (velocity > 0.3) {
 				onClose?.();
+				setTimeout(() => {
+					setStartPosition(null);
+					setStartTime(null);
+				}, 300);
+			} else {
+				setStartPosition(null);
+				setStartTime(null);
 			}
 		};
 
@@ -78,7 +83,7 @@ export const Drawer = memo(
 			const currentPosition = event.changedTouches[0].screenY;
 			const translate = currentPosition - startPosition!;
 
-			setTranslate(translate >= 0 ? `${translate}px` : '0');
+			setTranslate(translate >= -30 ? `${translate}px` : '-30px');
 		};
 
 		return (

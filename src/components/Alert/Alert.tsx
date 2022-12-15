@@ -22,12 +22,18 @@ const defaultStyle: CSSProperties = {
 };
 
 const animateStyle: Record<string, CSSProperties> = {
-	entering: {},
+	enter: {
+		opacity: 0,
+		transform: 'scale(0.3)',
+	},
 	entered: {
 		opacity: 1,
 		transform: 'scale(1)',
 	},
-	exiting: {},
+	exit: {
+		opacity: 1,
+		transform: 'scale(1)',
+	},
 	exited: {
 		opacity: 0,
 		transform: 'scale(0.3)',
