@@ -41,7 +41,7 @@ export const Notes = memo(({handleSort}: NotesProp) => {
 
 	if (loading) {
 		return (
-			<VStack w100 data-testid='NoteSkeleton' gap='16'>
+			<VStack style={{marginBottom: '16px'}} w100 data-testid='NoteSkeleton' gap='16'>
 				<NoteSkeleton/>
 				<NoteSkeleton/>
 				<NoteSkeleton/>
