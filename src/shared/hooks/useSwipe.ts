@@ -78,7 +78,7 @@ export const useSwipe = (
 
 	const getDuration = useCallback(() => {
 		return translate !== '0' ? 0 : (startPosition !== null ? 100 : duration);
-	}, [startPosition, translate]);
+	}, [duration, startPosition, translate]);
 
 	return {
 		translate,
