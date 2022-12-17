@@ -12,32 +12,59 @@ interface UseSwipePropsBase {
 	isSwipeDisabled?: boolean
 	limits?: LimitsType
 	condition: 'velocity' | 'coordinate'
+	fixedLimits?: boolean
+	blindArea?: number
 }
 
 type UseSwipePropsVelocity = UseSwipePropsBase & {
 	condition: 'velocity'
-	topSpeed?: number
+	topSpeed: number
 	topCoordinate?: never
 }
 
 type UseSwipePropsCoordinate = UseSwipePropsBase & {
 	condition: 'coordinate'
 	topSpeed?: never
-	topCoordinate?: number
+	topCoordinate: number
 }
 
 type UseSwipeProps = UseSwipePropsVelocity | UseSwipePropsCoordinate
 
 export const useSwipe = (
-	{onClose, direction = 'y', topSpeed = 0.3, topCoordinate = 50, condition, duration, isSwipeDisabled = false, limits}: UseSwipeProps,
+	{
+		onClose,
+		direction = 'y',
+		topSpeed,
+		topCoordinate,
+		condition,
+		duration,
+		isSwipeDisabled = false,
+		limits,
+		fixedLimits,
+		blindArea = 0,
+	}: UseSwipeProps,
 ) => {
 	const [startPosition, setStartPosition] = useState<number | null>(null);
-	const [translate, setTranslate] = useState('0');
+	const [defaultTranslate, setDefaultTranslate] = useState(0);
+	const [translate, setTranslate] = useState(defaultTranslate);
 	const [startTime, setStartTime] = useState<number | null>(null);
+	const [blindAreaInited, setBlindAreaInited] = useState(false);
+
 	const onTouchStartHandle = useCallback((event: TouchEvent<HTMLDivElement>) => {
+		setBlindAreaInited(false);
 		setStartPosition(direction === 'y' ? event.changedTouches[0].screenY : event.changedTouches[0].screenX);
 		setStartTime(Date.now());
 	}, [direction]);
+
+	const changeDefaultLimits = useCallback(() => {
+		if (fixedLimits && limits?.topLimit && limits?.bottomLimit) {
+			const currentTranslate = defaultTranslate === 0 ? (translate > 0 ? limits?.topLimit : limits?.bottomLimit) : 0;
+			setDefaultTranslate(currentTranslate);
+			return currentTranslate;
+		} else {
+			return 0;
+		}
+	}, [defaultTranslate, fixedLimits, limits?.bottomLimit, limits?.topLimit, translate]);
 
 	const onTouchEndHandle = useCallback((event: TouchEvent<HTMLDivElement>) => {
 		const endPosition = direction === 'y' ? event.changedTouches[0].screenY : event.changedTouches[0].screenX;
@@ -46,39 +73,46 @@ export const useSwipe = (
 		const velocity = coordinate / (endTime - startTime!);
 		const closeCondition = condition === 'velocity' ? (Math.abs(velocity) > topSpeed) : (Math.abs(coordinate) > topCoordinate);
 
-		setTranslate('0');
-
 		if (closeCondition) {
 			onClose?.();
 			setTimeout(() => {
 				setStartPosition(null);
 				setStartTime(null);
 			}, duration);
+			setTranslate(changeDefaultLimits());
 		} else {
 			setStartPosition(null);
 			setStartTime(null);
+			setTranslate(defaultTranslate);
 		}
-	}, [condition, direction, duration, onClose, startPosition, startTime, topCoordinate, topSpeed]);
+	}, [condition, defaultTranslate, direction, duration, onClose, startPosition, startTime, changeDefaultLimits, topCoordinate, topSpeed]);
 
 	const onTouchMoveHandle = useCallback((event: TouchEvent<HTMLDivElement>) => {
 		const currentPosition = direction === 'y' ? event.changedTouches[0].screenY : event.changedTouches[0].screenX;
 		const diff = currentPosition - startPosition!;
-		let translate = `${diff}px`;
+		let currentTranslate = diff + defaultTranslate;
 
 		if (limits?.bottomLimit) {
-			translate = diff > limits.bottomLimit ? translate : `${limits.bottomLimit}px`;
+			currentTranslate = currentTranslate > limits.bottomLimit ?
+				currentTranslate :
+				limits.bottomLimit;
 		}
 
 		if (limits?.topLimit) {
-			translate = diff < limits.topLimit ? translate : `${limits.topLimit}px`;
+			currentTranslate = currentTranslate < limits.topLimit ?
+				currentTranslate :
+				limits.topLimit;
 		}
 
-		setTranslate(translate);
-	}, [direction, limits?.bottomLimit, limits?.topLimit, startPosition]);
+		if (Math.abs(diff) > blindArea || blindAreaInited) {
+			setTranslate(currentTranslate);
+			setBlindAreaInited(true);
+		}
+	}, [blindArea, blindAreaInited, defaultTranslate, direction, limits?.bottomLimit, limits?.topLimit, startPosition]);
 
 	const getDuration = useCallback(() => {
-		return translate !== '0' ? 0 : (startPosition !== null ? 100 : duration);
-	}, [duration, startPosition, translate]);
+		return translate !== defaultTranslate ? 0 : (startPosition !== null ? 100 : duration);
+	}, [defaultTranslate, duration, startPosition, translate]);
 
 	return {
 		translate,

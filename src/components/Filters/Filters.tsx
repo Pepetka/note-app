@@ -6,9 +6,9 @@ import {useAppDispatch} from 'shared/hooks/useRedux';
 import {FilterTypes} from 'store/model/notes/types/NotesSchema';
 import {useSelector} from 'react-redux';
 import {memo, useCallback} from 'react';
+import {HStack} from 'shared/lib/Flex/HStack';
 
 import cls from './Filters.module.scss';
-import {HStack} from '../../shared/lib/Flex/HStack';
 
 const buttons: Array<{name: string, data: FilterTypes}> = [
 	{name: 'Active', data: FilterTypes.ACTIVE},

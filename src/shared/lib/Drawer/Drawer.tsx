@@ -31,6 +31,7 @@ export const Drawer = memo(
 			onClose,
 			duration,
 			condition: 'velocity',
+			topSpeed: 0.3,
 			limits: {
 				bottomLimit: -50,
 			},
@@ -43,11 +44,11 @@ export const Drawer = memo(
 			},
 			entered: {
 				opacity: 1,
-				transform: `translateY(${translate})`,
+				transform: `translateY(${translate}px)`,
 			},
 			exit: {
 				opacity: 1,
-				transform: `translateY(${translate})`,
+				transform: `translateY(${translate}px)`,
 			},
 			exited: {
 				opacity: 0.5,
