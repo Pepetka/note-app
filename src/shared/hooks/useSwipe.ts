@@ -7,7 +7,7 @@ interface LimitsType {
 
 interface UseSwipePropsBase {
 	onClose?: () => void
-	duration: number
+	duration?: number
 	direction?: 'x' | 'y'
 	isSwipeDisabled?: boolean
 	limits?: LimitsType
@@ -37,7 +37,7 @@ export const useSwipe = (
 		topSpeed,
 		topCoordinate,
 		condition,
-		duration,
+		duration = 0,
 		isSwipeDisabled = false,
 		limits,
 		fixedLimits,
@@ -55,6 +55,15 @@ export const useSwipe = (
 		setStartPosition(direction === 'y' ? event.changedTouches[0].screenY : event.changedTouches[0].screenX);
 		setStartTime(Date.now());
 	}, [direction]);
+
+	const onForceClose = useCallback(() => {
+		setTimeout(() => {
+			setStartPosition(null);
+			setStartTime(null);
+		}, duration);
+		setTranslate(0);
+		setDefaultTranslate(0);
+	}, [duration]);
 
 	const changeDefaultLimits = useCallback(() => {
 		if (fixedLimits && limits?.topLimit && limits?.bottomLimit) {
@@ -120,5 +129,6 @@ export const useSwipe = (
 		onTouchStartHandle: isSwipeDisabled ? undefined : onTouchStartHandle,
 		onTouchEndHandle: isSwipeDisabled ? undefined : onTouchEndHandle,
 		onTouchMoveHandle: isSwipeDisabled ? undefined : onTouchMoveHandle,
+		onForceClose,
 	};
 };

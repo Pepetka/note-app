@@ -11,8 +11,9 @@
 	--font-xl: var(--font-size-xl) / var(--font-line-xl) var(--font-family-main);
 	--navbar-height: 70px;
 	--overlay-color: rgba(0, 0, 0, 0.8);
-	--z-popup: 1;
-	--z-overlay: 1;
-	--z-modal: 2;
+	--z-base: 1;
+	--z-popup: 2;
+	--z-overlay: 2;
+	--z-modal: 3;
 	--z-hide: -1;
 }

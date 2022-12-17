@@ -4,6 +4,7 @@
 	border: 1px solid var(--secondary-color);
 	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.8);
 	margin-bottom: 16px;
+	position: relative;
 }
 
 .hide {
@@ -42,6 +43,7 @@
 
 .delete {
 	flex: 1 1 0;
+	width: 100px;
 }
 
 .date {
@@ -96,9 +98,37 @@
 	display: inline-block;
 }
 
-@media screen and (max-width: 768px) {
-	.title {
-		width: 170px;
-		text-align: center;
-	}
+.swipeDelete {
+	position: absolute;
+	right: 0;
+	top: 0;
+	height: 100%;
+	width: 110px;
+	border-bottom-right-radius: 10px;
+	border-top-right-radius: 10px;
+	background: #ff7d7d;
+}
+
+.swipeBtnGroup {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 210px;
+	border-bottom-left-radius: 10px;
+	border-top-left-radius: 10px;
+}
+
+.swipeDisable {
+	height: 100%;
+	width: 100px;
+	border-bottom-left-radius: 10px;
+	border-top-left-radius: 10px;
+	background: #9e9494;
+}
+
+.swipeImportant {
+	height: 100%;
+	width: 110px;
+	background: #ff7d7d;
 }

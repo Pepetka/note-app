@@ -1,8 +1,8 @@
 import {ButtonHTMLAttributes, ForwardedRef, forwardRef, memo, MouseEvent, ReactNode} from 'react';
 import {classNames} from 'shared/helpers/classNames/classNames';
+import {HStack} from 'shared/lib/Flex/HStack';
 
 import cls from './Button.module.scss';
-import {HStack} from '../Flex/HStack';
 
 export enum ButtonThemes {
 	PRIMARY = 'primary',
