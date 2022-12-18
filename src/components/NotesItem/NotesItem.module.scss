@@ -3,7 +3,6 @@
 	border-radius: 10px;
 	border: 1px solid var(--secondary-color);
 	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.8);
-	margin-bottom: 16px;
 	position: relative;
 }
 
@@ -102,7 +101,7 @@
 	position: absolute;
 	right: 0;
 	top: 0;
-	height: 100%;
+	height: calc(100% - 16px);
 	width: 110px;
 	border-bottom-right-radius: 10px;
 	border-top-right-radius: 10px;
@@ -113,7 +112,7 @@
 	position: absolute;
 	left: 0;
 	top: 0;
-	height: 100%;
+	height: calc(100% - 16px);
 	width: 210px;
 	border-bottom-left-radius: 10px;
 	border-top-left-radius: 10px;
