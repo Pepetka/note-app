@@ -1,7 +1,6 @@
 import {NavBar} from 'components/NavBar/NavBar';
 import {Alert} from 'components/Alert/Alert';
 import {AppRouter} from 'components/AppRouter/AppRouter';
-import {SideBar} from 'components/SideBar/SideBar';
 import {classNames} from 'shared/helpers/classNames/classNames';
 import {useTheme} from 'shared/hooks/useTheme';
 import {memo, useEffect} from 'react';
@@ -26,7 +25,6 @@ export const App = memo(() => {
 				<Alert />
 				<AppRouter/>
 			</Page>
-			<SideBar />
 		</div>
 	);
 });

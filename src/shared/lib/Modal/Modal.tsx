@@ -24,12 +24,18 @@ const defaultStyle: CSSProperties = {
 };
 
 const animateStyle: Record<string, CSSProperties> = {
-	entering: {},
+	enter: {
+		opacity: 0,
+		transform: 'scale(0.3)',
+	},
 	entered: {
 		opacity: 1,
 		transform: 'scale(1)',
 	},
-	exiting: {},
+	exit: {
+		opacity: 1,
+		transform: 'scale(1)',
+	},
 	exited: {
 		opacity: 0,
 		transform: 'scale(0.3)',
@@ -45,14 +51,14 @@ export const Modal = ({className, children, isOpen, onClose}: ModalProps) => {
 
 	return (
 		<Portal>
-			<Transition unmountOnExit timeout={300} in={isOpen}>
+			<Transition unmountOnExit timeout={duration} in={isOpen}>
 				<div
 					className={classNames([cls.Modal, className, theme, 'AppModal'], {[cls.close]: isClose})}
 					data-testid='Modal'
 				>
 					<Overlay onClick={onClose}/>
 					<HStack justify='center' align='center' w100 h100>
-						<Transition in={isOpened} timeout={300}>
+						<Transition in={isOpened} timeout={duration}>
 							{(state) => (
 								<div
 									style={{

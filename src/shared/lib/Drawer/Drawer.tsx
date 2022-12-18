@@ -1,11 +1,12 @@
-import {CSSProperties, memo, ReactNode, TouchEvent, useRef, useState} from 'react';
-import {CSSTransition, Transition} from 'react-transition-group';
-import {classNames} from '../../helpers/classNames/classNames';
-import {Overlay} from '../Overlay/Overlay';
-import {HStack} from '../Flex/HStack';
-import {Portal} from '../Portal/Portal';
-import {useTheme} from '../../hooks/useTheme';
-import {useModal} from '../../hooks/useModal';
+import {CSSProperties, memo, ReactNode, useRef} from 'react';
+import {Transition} from 'react-transition-group';
+import {classNames} from 'shared/helpers/classNames/classNames';
+import {Overlay} from 'shared/lib/Overlay/Overlay';
+import {HStack} from 'shared/lib/Flex/HStack';
+import {Portal} from 'shared/lib/Portal/Portal';
+import {useTheme} from 'shared/hooks/useTheme';
+import {useSwipe} from 'shared/hooks/useSwipe';
+import {useModal} from 'shared/hooks/useModal';
 
 import cls from './Drawer.module.scss';
 
@@ -21,27 +22,33 @@ const duration = 300;
 export const Drawer = memo(
 	({className, children, isOpen, onClose}: DrawerProps) => {
 		const {theme} = useTheme();
-		const [startPosition, setStartPosition] = useState<number | null>(null);
-		const [translate, setTranslate] = useState('0');
-		const [startTime, setStartTime] = useState<number | null>(null);
 		const {isClose, isOpened} = useModal({
 			isOpen,
 			onClose,
 		});
 		const nodeRef = useRef<HTMLDivElement>(null);
+		const {translate, getDuration, onTouchStartHandle, onTouchEndHandle, onTouchMoveHandle} = useSwipe({
+			onClose,
+			duration,
+			condition: 'velocity',
+			topSpeed: 0.3,
+			limits: {
+				bottomLimit: -50,
+			},
+		});
 
 		const transitionStyles: Record<string, CSSProperties> = {
-			entering: {
-				opacity: 1,
-				transform: 'translateY(0)',
+			enter: {
+				opacity: 0.5,
+				transform: 'translateY(100%)',
 			},
 			entered: {
 				opacity: 1,
-				transform: `translateY(${translate})`,
+				transform: `translateY(${translate}px)`,
 			},
-			exiting: {
-				opacity: 0.5,
-				transform: 'translateY(100%)',
+			exit: {
+				opacity: 1,
+				transform: `translateY(${translate}px)`,
 			},
 			exited: {
 				opacity: 0.5,
@@ -50,35 +57,9 @@ export const Drawer = memo(
 		};
 
 		const defaultStyle = {
-			transition: `all ${translate !== '0' ? '0' : duration}ms ease-in-out`,
+			transition: `all ${getDuration()}ms ease-in-out`,
 			transform: 'translateY(100%)',
 			opacity: 0.5,
-		};
-
-		const onTouchStartHandle = (event: TouchEvent<HTMLDivElement>) => {
-			setStartPosition(event.changedTouches[0].screenY);
-			setStartTime(Date.now());
-		};
-
-		const onTouchEndHandle = (event: TouchEvent<HTMLDivElement>) => {
-			const endPosition = event.changedTouches[0].screenY;
-			const endTime = Date.now();
-			const velocity = (endPosition - startPosition!) / (endTime - startTime!);
-
-			setTranslate('0');
-			setStartPosition(null);
-			setStartTime(null);
-
-			if (velocity > 0.3) {
-				onClose?.();
-			}
-		};
-
-		const onTouchMoveHandle = (event: TouchEvent<HTMLDivElement>) => {
-			const currentPosition = event.changedTouches[0].screenY;
-			const translate = currentPosition - startPosition!;
-
-			setTranslate(translate >= 0 ? `${translate}px` : '0');
 		};
 
 		return (
