@@ -14,7 +14,7 @@ describe('Notes', () => {
 				title: 'some title',
 				isDisable: false,
 				date: 'some date',
-				id: '',
+				id: '1',
 			},
 		];
 

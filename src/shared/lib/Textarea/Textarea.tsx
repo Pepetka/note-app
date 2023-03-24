@@ -29,7 +29,7 @@ export const Textarea = memo(forwardRef((props: TextareaProps, ref: ForwardedRef
 		rows = 5,
 		placeholder,
 		onChange,
-		value,
+		value = '',
 		id,
 		withCorners = false,
 		...otherProps

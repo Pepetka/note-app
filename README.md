@@ -16,6 +16,8 @@
 
 ## Скрипты
 
+- `npm run deploy` - deploy сборки из папки build
+
 - `npm start` - запуск dev проекта
 
 - `npm run start:dev` - запуск dev проекта + запуск storybook

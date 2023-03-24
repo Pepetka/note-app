@@ -329,7 +329,7 @@ export const NotesItemBase = memo(({handleSort, note}: NotesItemBaseProps) => {
 
 export const NotesItem = memo(({note, handleSort, index}: NotesItemProps) => {
 	return (
-		<Draggable draggableId={note.id!} index={index} isDragDisabled={!handleSort}>
+		<Draggable draggableId={note?.id ?? ''} index={index} isDragDisabled={!handleSort}>
 			{(provided) => (
 				<div
 					ref={provided.innerRef}
