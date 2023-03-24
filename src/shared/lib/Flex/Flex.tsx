@@ -8,14 +8,41 @@ type FlexGap = '0' | '8' | '16' | '24' | '32';
 type FlexDirection = 'row' | 'column';
 
 export interface FlexProps extends HTMLAttributes<HTMLDivElement>{
+	/**
+	 * Дополнительные классы
+	 */
 	className?: string
+	/**
+	 * Содержимое компонента
+	 */
 	children: ReactNode
+	/**
+	 * Флаг, отвечающий за возможность занять 100% ширины контейнера
+	 */
 	w100?: boolean
+	/**
+	 * Флаг, отвечающий за возможность занять 100% высоты контейнера
+	 */
 	h100?: boolean
+	/**
+	 * Пропс, отвечающий за значение свойства justify-content
+	 */
 	justify?: FlexJustify
+	/**
+	 * Пропс, отвечающий за значение свойства align-items
+	 */
 	align?: FlexAlign
+	/**
+	 * Пропс, отвечающий за значение свойства gap
+	 */
 	gap?: FlexGap
+	/**
+	 * Пропс, отвечающий за значение свойства flex-direction
+	 */
 	direction?: FlexDirection
+	/**
+	 * ID компонента при тестировании
+	 */
 	'data-testid'?: string
 }
 

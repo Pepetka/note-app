@@ -30,6 +30,20 @@ type UseSwipePropsCoordinate = UseSwipePropsBase & {
 
 type UseSwipeProps = UseSwipePropsVelocity | UseSwipePropsCoordinate
 
+/**
+ * Хук, возвращающий инструменты, необходимые для контроля всех компонентов использующих свайпы
+ * @param onClose - функция, закрывающая компонент
+ * @param direction - направление свайпа
+ * @param topSpeed - максимальная скорость свайпа, при превышении которой будет вызываться onClose
+ * @param topCoordinate - максимальная координата свайпа, при превышении которой будет вызываться onClose
+ * @param condition - условие, по которому будет вызываться onClose ('velocity' - превышение topSpeed; 'coordinate'
+ * - превышение topCoordinate)
+ * @param duration - длительность анимации
+ * @param isSwipeDisabled - флаг, отвечающий за отключение свайпа
+ * @param limits - объект с пределами сдвига компонента
+ * @param fixedLimits - флаг, отвечающий за залипание компонента при достижении пределов
+ * @param blindArea - слепая зона (сдвиг элемента начинается только при свайпе, превышающим данное значение)
+ */
 export const useSwipe = (
 	{
 		onClose,

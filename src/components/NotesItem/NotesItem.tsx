@@ -40,16 +40,21 @@ interface NotesItemProps {
 	index: number
 }
 
-export const NotesItem = memo(({note, handleSort, index}: NotesItemProps) => {
+interface NotesItemBaseProps {
+	note: Note
+	handleSort: boolean
+}
+
+export const NotesItemBase = memo(({handleSort, note}: NotesItemBaseProps) => {
 	const dispatch = useAppDispatch();
 	const userData = useSelector(getUser);
 	const filter = useSelector(getFilter);
 	const [canText, setCanText] = useState(false);
 	const [contentVisibility, setContentVisibility] = useState(false);
-	const inputRef = useRef<HTMLDivElement>(null);
 	const {t} = useTranslation('home');
 	const [isOpen, setIsOpen] = useState(false);
 	const nodeRef = useRef<HTMLDivElement | null>(null);
+	const inputRef = useRef<HTMLDivElement>(null);
 	const {translate, onTouchStartHandle, onTouchEndHandle, onTouchMoveHandle, onForceClose} = useSwipe({
 		direction: 'x',
 		condition: 'coordinate',
@@ -127,199 +132,211 @@ export const NotesItem = memo(({note, handleSort, index}: NotesItemProps) => {
 		},
 	}), []);
 
+	if ((filter === 'isDisable' && !note.isDisable) ||
+		(filter === 'active' && note.isDisable) ||
+		(filter === 'isImportant' && !note.isImportant)) {
+		return null;
+	}
+
 	return (
-		<Draggable draggableId={note.id!} index={index} isDragDisabled={!handleSort}>
+		<div
+			style={{position: 'relative', paddingBottom: '16px'}}
+		>
+			<MobileView>
+				<HStack className={classNames([cls.buttonGroup, cls.swipeBtnGroup], {
+					[cls.hide]: ((filter === 'isDisable' && !note.isDisable) ||
+						(filter === 'active' && note.isDisable) ||
+						(filter === 'isImportant' && !note.isImportant)),
+				})}>
+					<Button
+						corners
+						onClick={onDisableNote(note.id!)}
+						className={classNames([cls.swipeDisable], {[cls.btnDisable]: note.isDisable})}
+						theme={ButtonThemes.CLEAR}
+					>
+						{note.isDisable ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />}
+					</Button>
+					<Button
+						corners
+						onClick={onImportantNote(note.id!)}
+						className={classNames([cls.swipeImportant], {[cls.btnImportant]: note.isImportant})}
+						theme={ButtonThemes.CLEAR}
+					>
+						<FontAwesomeIcon icon={faCircleExclamation} />
+					</Button>
+				</HStack>
+
+				<Button
+					corners
+					onClick={onOpenContent}
+					className={classNames([cls.btnDelete, cls.swipeDelete], {
+						[cls.hide]: ((filter === 'isDisable' && !note.isDisable) ||
+							(filter === 'active' && note.isDisable) ||
+							(filter === 'isImportant' && !note.isImportant)),
+					})}
+					theme={ButtonThemes.CLEAR}
+				>
+					<FontAwesomeIcon icon={faTrashCan} />
+				</Button>
+			</MobileView>
+
+			<div
+				ref={nodeRef}
+				data-testid='NotesItem'
+				className={
+					classNames(
+						[cls.Note],
+						{
+							[cls.disable]: note.isDisable,
+							[cls.important]: note.isImportant && !note.isDisable,
+							[cls.hide]: ((filter === 'isDisable' && !note.isDisable) ||
+								(filter === 'active' && note.isDisable) ||
+								(filter === 'isImportant' && !note.isImportant)),
+						},
+					)
+				}
+				onTouchStart={onTouchStartHandle}
+				onTouchEnd={onTouchEndHandle}
+				onTouchMove={onTouchMoveHandle}
+				style={{
+					cursor: handleSort ? 'grab' : 'auto',
+					left: `${translate}px`,
+				}}
+			>
+				<HStack align='center' className={cls.wrapper}>
+					<BrowserView>
+						<HStack className={cls.buttonGroup}>
+							<Popover
+								popoverContent={note.isDisable ? t('Enabled note') : t('Disable note')}
+								position='bottom-start'
+							>
+								<Button
+									onClick={onDisableNote(note.id!)}
+									className={classNames([], {[cls.btnDisable]: note.isDisable})}
+									theme={ButtonThemes.CLEAR}
+								>
+									{note.isDisable ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />}
+								</Button>
+							</Popover>
+							<Popover
+								popoverContent={note.isImportant ? t('Unimportant note') : t('Important note')}
+								position='bottom-start'
+							>
+								<Button
+									onClick={onImportantNote(note.id!)}
+									className={classNames([], {[cls.btnImportant]: note.isImportant})}
+									theme={ButtonThemes.CLEAR}
+								>
+									<FontAwesomeIcon icon={faCircleExclamation} />
+								</Button>
+							</Popover>
+						</HStack>
+					</BrowserView>
+
+					<VStack align='center' justify='center' className={cls.info}>
+						<strong className={cls.title}>{note.title}</strong>
+						<small className={cls.date}>{note.date}</small>
+					</VStack>
+
+					<BrowserView>
+						<HStack justify='end' className={cls.delete}>
+							<Popover
+								popoverContent={t('Delete note')}
+								position='bottom-end'
+							>
+								<Button
+									onClick={onOpenContent}
+									className={cls.btnDelete}
+									theme={ButtonThemes.CLEAR}
+								>
+									<FontAwesomeIcon icon={faTrashCan} />
+								</Button>
+							</Popover>
+						</HStack>
+					</BrowserView>
+
+					<BrowserView>
+						<ModalConfirm isOpen={isOpen} onClose={onCloseModal} onConfirm={onConfirmDelete} />
+					</BrowserView>
+					<MobileView>
+						<DrawerConfirm isOpen={isOpen} onClose={onCloseModal} onConfirm={onConfirmDelete} />
+					</MobileView>
+				</HStack>
+
+				<CSSTransition in={contentVisibility} classNames='noteContent' timeout={300} unmountOnExit>
+					<HStack justify='between' gap='24' className={cls.content}>
+						<div
+							ref={inputRef}
+							contentEditable={canText}
+							data-placeholder={t('Add text')}
+							className={cls.input}
+						></div>
+
+						<VStack justify='end' align='end' className={cls.control}>
+							<div>
+								<Popover
+									popoverContent={t('Add/Edit note content')}
+									position='bottom-end'
+								>
+									<Button
+										onClick={onTextNote}
+										className={classNames([], {[cls.btnCanText]: canText})}
+										theme={ButtonThemes.CLEAR}
+									>
+										<FontAwesomeIcon icon={faPenClip} />
+									</Button>
+								</Popover>
+							</div>
+
+							<div>
+								<Popover
+									popoverContent={t('Safe note content')}
+									position='bottom-end'
+								>
+									<Button
+										onClick={onContentSave(note.id!)}
+										className={cls.btnSave}
+										theme={ButtonThemes.CLEAR}
+									>
+										<FontAwesomeIcon icon={faFloppyDisk} />
+									</Button>
+								</Popover>
+							</div>
+						</VStack>
+					</HStack>
+				</CSSTransition>
+
+				<div className={cls.collapse}>
+					<Popover
+						w100
+						popoverContent={t('Open/Close note content')}
+						position='bottom'
+					>
+						<Button
+							w100
+							className={classNames([cls.btnCollapse], {[cls.btnOpen]: contentVisibility})}
+							onClick={onChangeVisibility}
+							theme={ButtonThemes.CLEAR}
+						>
+							<FontAwesomeIcon icon={faSortDown} />
+						</Button>
+					</Popover>
+				</div>
+			</div>
+		</div>
+	);
+});
+
+export const NotesItem = memo(({note, handleSort, index}: NotesItemProps) => {
+	return (
+		<Draggable draggableId={note?.id ?? ''} index={index} isDragDisabled={!handleSort}>
 			{(provided) => (
 				<div
 					ref={provided.innerRef}
 					{...provided.draggableProps}
 					{...provided.dragHandleProps}
 				>
-					<div
-						style={{position: 'relative'}}
-					>
-						<MobileView>
-							<HStack className={classNames([cls.buttonGroup, cls.swipeBtnGroup], {
-								[cls.hide]: ((filter === 'isDisable' && !note.isDisable) ||
-									(filter === 'active' && note.isDisable) ||
-									(filter === 'isImportant' && !note.isImportant)),
-							})}>
-								<Button
-									corners
-									onClick={onDisableNote(note.id!)}
-									className={classNames([cls.swipeDisable], {[cls.btnDisable]: note.isDisable})}
-									theme={ButtonThemes.CLEAR}
-								>
-									{note.isDisable ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />}
-								</Button>
-								<Button
-									corners
-									onClick={onImportantNote(note.id!)}
-									className={classNames([cls.swipeImportant], {[cls.btnImportant]: note.isImportant})}
-									theme={ButtonThemes.CLEAR}
-								>
-									<FontAwesomeIcon icon={faCircleExclamation} />
-								</Button>
-							</HStack>
-
-							<Button
-								corners
-								onClick={onOpenContent}
-								className={classNames([cls.btnDelete, cls.swipeDelete], {
-									[cls.hide]: ((filter === 'isDisable' && !note.isDisable) ||
-										(filter === 'active' && note.isDisable) ||
-										(filter === 'isImportant' && !note.isImportant)),
-								})}
-								theme={ButtonThemes.CLEAR}
-							>
-								<FontAwesomeIcon icon={faTrashCan} />
-							</Button>
-						</MobileView>
-
-						<div
-							ref={nodeRef}
-							data-testid='NotesItem'
-							className={
-								classNames(
-									[cls.Note],
-									{
-										[cls.disable]: note.isDisable,
-										[cls.important]: note.isImportant && !note.isDisable,
-										[cls.hide]: ((filter === 'isDisable' && !note.isDisable) ||
-											(filter === 'active' && note.isDisable) ||
-											(filter === 'isImportant' && !note.isImportant)),
-									},
-								)
-							}
-							onTouchStart={onTouchStartHandle}
-							onTouchEnd={onTouchEndHandle}
-							onTouchMove={onTouchMoveHandle}
-							style={{
-								cursor: handleSort ? 'grab' : 'auto',
-								left: `${translate}px`,
-							}}
-						>
-							<HStack align='center' className={cls.wrapper}>
-								<BrowserView>
-									<HStack className={cls.buttonGroup}>
-										<Popover
-											popoverContent={note.isDisable ? t('Enabled note') : t('Disable note')}
-											position='bottom-start'
-										>
-											<Button
-												onClick={onDisableNote(note.id!)}
-												className={classNames([], {[cls.btnDisable]: note.isDisable})}
-												theme={ButtonThemes.CLEAR}
-											>
-												{note.isDisable ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />}
-											</Button>
-										</Popover>
-										<Popover
-											popoverContent={note.isImportant ? t('Unimportant note') : t('Important note')}
-											position='bottom-start'
-										>
-											<Button
-												onClick={onImportantNote(note.id!)}
-												className={classNames([], {[cls.btnImportant]: note.isImportant})}
-												theme={ButtonThemes.CLEAR}
-											>
-												<FontAwesomeIcon icon={faCircleExclamation} />
-											</Button>
-										</Popover>
-									</HStack>
-								</BrowserView>
-
-								<VStack align='center' justify='center' className={cls.info}>
-									<strong className={cls.title}>{note.title}</strong>
-									<small className={cls.date}>{note.date}</small>
-								</VStack>
-
-								<BrowserView>
-									<HStack justify='end' className={cls.delete}>
-										<Popover
-											popoverContent={t('Delete note')}
-											position='bottom-end'
-										>
-											<Button
-												onClick={onOpenContent}
-												className={cls.btnDelete}
-												theme={ButtonThemes.CLEAR}
-											>
-												<FontAwesomeIcon icon={faTrashCan} />
-											</Button>
-										</Popover>
-									</HStack>
-								</BrowserView>
-
-								<BrowserView>
-									<ModalConfirm isOpen={isOpen} onClose={onCloseModal} onConfirm={onConfirmDelete} />
-								</BrowserView>
-								<MobileView>
-									<DrawerConfirm isOpen={isOpen} onClose={onCloseModal} onConfirm={onConfirmDelete} />
-								</MobileView>
-							</HStack>
-
-							<CSSTransition in={contentVisibility} classNames='noteContent' timeout={300} unmountOnExit>
-								<HStack justify='between' gap='24' className={cls.content}>
-									<div
-										ref={inputRef}
-										contentEditable={canText}
-										data-placeholder={t('Add text')}
-										className={cls.input}
-									></div>
-
-									<VStack justify='end' align='end' className={cls.control}>
-										<div>
-											<Popover
-												popoverContent={t('Add/Edit note content')}
-												position='bottom-end'
-											>
-												<Button
-													onClick={onTextNote}
-													className={classNames([], {[cls.btnCanText]: canText})}
-													theme={ButtonThemes.CLEAR}
-												>
-													<FontAwesomeIcon icon={faPenClip} />
-												</Button>
-											</Popover>
-										</div>
-
-										<div>
-											<Popover
-												popoverContent={t('Safe note content')}
-												position='bottom-end'
-											>
-												<Button
-													onClick={onContentSave(note.id!)}
-													className={cls.btnSave}
-													theme={ButtonThemes.CLEAR}
-												>
-													<FontAwesomeIcon icon={faFloppyDisk} />
-												</Button>
-											</Popover>
-										</div>
-									</VStack>
-								</HStack>
-							</CSSTransition>
-
-							<div className={cls.collapse}>
-								<Popover
-									w100
-									popoverContent={t('Open/Close note content')}
-									position='bottom'
-								>
-									<Button
-										w100
-										className={classNames([cls.btnCollapse], {[cls.btnOpen]: contentVisibility})}
-										onClick={onChangeVisibility}
-										theme={ButtonThemes.CLEAR}
-									>
-										<FontAwesomeIcon icon={faSortDown} />
-									</Button>
-								</Popover>
-							</div>
-						</div>
-					</div>
+					<NotesItemBase handleSort={handleSort} note={note} />
 				</div>
 			)}
 		</Draggable>

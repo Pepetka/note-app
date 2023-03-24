@@ -1,70 +1,122 @@
-# Getting Started with Create React App
+## Production build
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**[Note App](https://note-app-ebfd8.web.app/)**
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Запуск проекта
 
-### `npm start`
+- `npm install` - установка зависимостей
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- `npm start` - запуск dev проекта
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- `npm run start:dev` - запуск dev проекта + запуск storybook
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Скрипты
 
-### `npm run build`
+- `npm run deploy` - deploy сборки из папки build
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- `npm start` - запуск dev проекта
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- `npm run start:dev` - запуск dev проекта + запуск storybook
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- `npm run build` - сборка проекта
 
-### `npm run eject`
+- `npm run test:unit` - запуск unit тесов с jest
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- `npm run test:unit:nowatch` - запуск unit тесов с jest без отслеживания изменений в файлах
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- `npm run test:ui` - запуск скриншотных тестов с loki
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- `npm run test:ui:report` - генерация отчета по скриншотным тестам
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- `npm run test:ui:ok` - подтверждения новых скриншотов
 
-## Learn More
+- `npm run test:ui:update` - обновление скриншотов
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- `npm run lint:ts` - проверка ts файлов линтером
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- `npm run lint:ts:fix` - исправление ts файлов линтером
 
-### Code Splitting
+- `npm run lint:scss` - проверка scss файлов style-линтером
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- `npm run lint:scss:fix` - исправление scss файлов style-линтером
 
-### Analyzing the Bundle Size
+- `npm run storybook` - запуск storybook
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- `npm run storybook:build` - сборка storybook
 
-### Making a Progressive Web App
+- `npm run prepare` - прекоммит хуки с husky
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## Интернационализация проекта
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Для интернационализации проекта используется библиотека i18next.
+Переводы хранятся в `public/locales`.
+Конфиг хранится в `src/localization`.
 
-### Deployment
+Для комфортной работы с библиотекой рекомендуется установка соответствующих плагинов для среды разработки.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Документация библиотеки - [i18next](https://react.i18next.com/)
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+## Тестирование
+
+Тестирование состоит их 3 типов тестов:
+1) `npm run test:unit` - unit тестирование с jest
+2) `npm run test:unit` - тестирование компонентов с React testing library
+3) `npm run test:ui` - скриншотное тестирование ui с loki
+
+[Подробнее о тестировании](./docs/test.md)
+
+---
+
+## Линтинг
+
+В проекте используется eslint для проверки typescript кода и stylelint для проверки файлов со стилями.
+
+##### Скрипты для запуска линтеров
+- `npm run lint:ts` - проверка ts файлов линтером
+- `npm run lint:ts:fix` - исправление ts файлов линтером
+- `npm run lint:scss` - проверка scss файлов style-линтером
+- `npm run lint:scss:fix` - исправление scss файлов style-линтером
+
+---
+
+## Storybook
+
+В проекте для каждого компонента описываются стори-кейсы.
+
+Файл со стори-кейсами (.stories.tsx) находятся рядом с компонентом.
+
+`npm run storybook` - запуск storybook
+
+[Подробнее о Storybook](./docs/storybook.md)
+
+---
+
+## CI pipeline и pre-commit хуки
+
+Конфигурация github actions находится в /.github/workflows.
+В ci прогоняются все виды тестов, сборка проекта и storybook, линтинг.
+
+В прекоммит хуках происходит проверка линтинга, конфиг находится в [/.husky](./.husky)
+
+---
+
+## Работа с состоянием проекта
+
+Взаимодействие с данными осуществляется с помощью менеджера состояния redux toolkit.
+
+Запросы на сервер отправляются с применением [Axios в async thunk](./src/shared/api/api.ts).
+
+Для асинхронного подключения reducer используется
+[ReducerManager](./src/store/model/reducerManager/reducerManager.ts), применяемый в HOC
+[DynamicModuleLoader](./src/store/ui/DynamicModuleLoader/DynamicModuleLoader.tsx)
+
+---

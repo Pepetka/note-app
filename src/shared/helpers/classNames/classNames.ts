@@ -1,3 +1,8 @@
+/**
+ * Функция, возвращающая классы в виде строки
+ * @param classes - массив классов, применяемых всегда
+ * @param addClasses - объект в виде {дополнительный класс: условие, по которому добавляется класс}
+ */
 export const classNames = (classes: Array<string | undefined>, addClasses: Record<string, boolean | undefined> = {}) => {
 	return [
 		...classes,

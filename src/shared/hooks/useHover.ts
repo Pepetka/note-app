@@ -6,6 +6,10 @@ interface UseHoverReturn {
 	onMouseLeave: () => void
 }
 
+/**
+ * Хук, возвращающий флаг, показывающий наведен ли курсор на элемент, и функции, отслеживающие наведение курсора на
+ * элемент и сход курсора с элемента
+ */
 export const useHover = (): UseHoverReturn => {
 	const [hover, setHover] = useState(false);
 	const touchSupport = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);

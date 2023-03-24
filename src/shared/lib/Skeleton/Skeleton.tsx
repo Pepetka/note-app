@@ -3,11 +3,29 @@ import {CSSProperties, memo} from 'react';
 import cls from './Skeleton.module.scss';
 
 interface SkeletonProps {
+	/**
+	 * Дополнительные классы
+	 */
 	className?: string
+	/**
+	 * Ширина компонента
+	 */
 	width: number | string
+	/**
+	 * Высота компонента
+	 */
 	height?: number | string
+	/**
+	 * Флаг, отвечающий за округление компонента
+	 */
 	circle?: boolean
+	/**
+	 * Значение скругления компонента
+	 */
 	border?: string
+	/**
+	 * Отступ компонента
+	 */
 	margin?: number
 }
 

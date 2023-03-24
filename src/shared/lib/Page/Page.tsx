@@ -3,6 +3,9 @@ import {SideBar} from 'components/SideBar/SideBar';
 import cls from './Page.module.scss';
 
 interface PageProps {
+	/**
+	 * Содержимое страницы
+	 */
 	children: ReactNode
 }
 

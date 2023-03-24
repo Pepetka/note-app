@@ -1,5 +1,6 @@
 import {screen} from '@testing-library/react';
 import '@testing-library/jest-dom';
+import {act} from 'react-dom/test-utils';
 import {HandleSortButton} from './HandleSortButton';
 import {componentTestRender} from 'shared/helpers/test/componentTestRender/componentTestRender';
 import userEvent from '@testing-library/user-event';
@@ -15,7 +16,9 @@ describe('HandleSortButton', () => {
 		expect(screen.getByTestId('HandleSortButton_shuffle')).toBeInTheDocument();
 		expect(screen.queryByTestId('HandleSortButton_sort')).not.toBeInTheDocument();
 
-		userEvent.click(screen.getByTestId('HandleSortButton'));
+		act(() => {
+			userEvent.click(screen.getByTestId('HandleSortButton'));
+		});
 
 		expect(screen.queryByTestId('HandleSortButton_shuffle')).not.toBeInTheDocument();
 		expect(screen.getByTestId('HandleSortButton_sort')).toBeInTheDocument();

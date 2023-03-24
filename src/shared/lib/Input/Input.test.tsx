@@ -5,17 +5,17 @@ import {componentTestRender} from 'shared/helpers/test/componentTestRender/compo
 
 describe('Input', () => {
 	test('be in the document', () => {
-		componentTestRender(<Input/>);
+		componentTestRender(<Input onChange={() => {}} value="" />);
 		expect(screen.getByTestId('Input')).toBeInTheDocument();
 	});
 
 	test('with corners', () => {
-		componentTestRender(<Input withCorners/>);
+		componentTestRender(<Input onChange={() => {}} value="" withCorners/>);
 		expect(screen.getByTestId('Input')).toHaveClass('withCorners');
 	});
 
 	test('float placeholder', async () => {
-		componentTestRender(<Input floatPlaceholder='some placeholder'/>);
+		componentTestRender(<Input onChange={() => {}} value="" floatPlaceholder='some placeholder'/>);
 		expect(screen.getByTestId('Input_wrapper')).toHaveClass('withPlaceholder');
 		expect(screen.getByTestId('Input_floatPlaceholder')).toBeInTheDocument();
 

@@ -9,6 +9,7 @@ import cls from './NotesControlPanel.module.scss';
 interface NotesControlPanelProps {
 	notesLength: number
 }
+
 export const NotesControlPanel = memo(({notesLength}: NotesControlPanelProps) => {
 	const {t} = useTranslation('home');
 	const {handleSort, onHandleSort} = useHandleSort();

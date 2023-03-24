@@ -5,17 +5,17 @@ import {componentTestRender} from 'shared/helpers/test/componentTestRender/compo
 
 describe('Textarea', () => {
 	test('be in the document', () => {
-		componentTestRender(<Textarea/>);
+		componentTestRender(<Textarea onChange={() => {}} value=""/>);
 		expect(screen.getByTestId('Textarea')).toBeInTheDocument();
 	});
 
 	test('with corners', () => {
-		componentTestRender(<Textarea withCorners/>);
+		componentTestRender(<Textarea onChange={() => {}} value="" withCorners/>);
 		expect(screen.getByTestId('Textarea')).toHaveClass('withCorners');
 	});
 
 	test('float placeholder', async () => {
-		componentTestRender(<Textarea floatPlaceholder='some placeholder'/>);
+		componentTestRender(<Textarea onChange={() => {}} value="" floatPlaceholder='some placeholder'/>);
 		expect(screen.getByTestId('Textarea_wrapper')).toHaveClass('withPlaceholder');
 		expect(screen.getByTestId('Textarea_floatPlaceholder')).toBeInTheDocument();
 

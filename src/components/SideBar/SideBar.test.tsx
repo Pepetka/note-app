@@ -1,5 +1,6 @@
 import {screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import {act} from 'react-dom/test-utils';
 import '@testing-library/jest-dom';
 import {SideBar} from './SideBar';
 import {componentTestRender} from 'shared/helpers/test/componentTestRender/componentTestRender';
@@ -9,11 +10,15 @@ describe('SideBar', () => {
 		componentTestRender(<SideBar/>);
 		expect(screen.getByTestId('SideBar')).toBeInTheDocument();
 	});
-	test('toggle collapse', async () => {
+	test('toggle collapse', () => {
 		componentTestRender(<SideBar/>);
 
 		expect(screen.getByTestId('SideBar')).toHaveClass('collapsed');
-		await userEvent.click(screen.getByTestId('SideBar-collapse'));
+
+		act(() => {
+			userEvent.click(screen.getByTestId('SideBar-collapse'));
+		});
+
 		expect(screen.getByTestId('SideBar')).not.toHaveClass('collapsed');
 	});
 });

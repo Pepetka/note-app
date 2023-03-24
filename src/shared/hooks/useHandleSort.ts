@@ -6,6 +6,10 @@ export interface HandleSortHook {
 	onHandleSort: () => void
 }
 
+/**
+ * Хук, возвращающий флаг, показывающий включена ли ручная сортировка, и функцию, включающую/выключающую ручную
+ * сортировку
+ */
 export const useHandleSort = (): HandleSortHook => {
 	const {handleSort, setHandleSort} = useContext(HandleSortContext);
 
