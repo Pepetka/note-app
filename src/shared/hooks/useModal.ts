@@ -5,6 +5,12 @@ interface UseModalProps {
 	isOpen: boolean
 }
 
+/**
+ * Хук, возвращающий флаги, определяющие завершение процесса открытия и закрытия модального окна.
+ * Дополнительно хук отслеживает нажатие клавиш 'Escape' и 'Space', вызываю функцию onClose
+ * @param onClose - функция, закрывающая модальное окно
+ * @param isOpen - флаг, определяющий открыто ли модальное окно
+ */
 export const useModal = ({onClose, isOpen}: UseModalProps) => {
 	const [isClose, setIsClose] = useState(true);
 	const [isOpened, setIsOpened] = useState(false);

@@ -3,7 +3,13 @@ import {classNames} from 'shared/helpers/classNames/classNames';
 import cls from './Overlay.module.scss';
 
 interface OverlayProps {
+	/**
+	 * Дополнительные классы
+	 */
 	className?: string
+	/**
+	 * Функция, вызываемая при клике на компонент
+	 */
 	onClick?: () => void
 }
 

@@ -12,14 +12,21 @@ import {classNames} from 'shared/helpers/classNames/classNames';
 import cls from './Input.module.scss';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+	/**
+	 * Дополнительные классы
+	 */
 	className?: string
-	placeholder?: string
-	onChange?: (e: ChangeEvent<HTMLInputElement>) => void
-	value?: string
-	type?: HTMLInputTypeAttribute
-	id?: string
+	/**
+	 * Флаг, отвечающий за отсутствие скруглений углов справа
+	 */
 	withCorners?: boolean
+	/**
+	 * ID компонента при тестировании
+	 */
 	testid?: string
+	/**
+	 * Плавающий placeholder
+	 */
 	floatPlaceholder?: string
 }
 export const Input = memo(forwardRef((props: InputProps, ref: ForwardedRef<HTMLInputElement>) => {
@@ -29,7 +36,7 @@ export const Input = memo(forwardRef((props: InputProps, ref: ForwardedRef<HTMLI
 		floatPlaceholder,
 		placeholder,
 		onChange,
-		value,
+		value = '',
 		id,
 		withCorners = false,
 		type = 'text',

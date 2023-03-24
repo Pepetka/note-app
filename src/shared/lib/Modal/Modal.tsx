@@ -10,9 +10,21 @@ import {useModal} from 'shared/hooks/useModal';
 import cls from './Modal.module.scss';
 
 interface ModalProps {
+	/**
+	 * Дополнительные классы
+	 */
 	className?: string;
+	/**
+	 * Содержимое модального окна
+	 */
 	children: ReactNode
+	/**
+	 * Функция, закрывающая модальное окно
+	 */
 	onClose?: () => void
+	/**
+	 * Флаг, отвечающий за открытие модального окна
+	 */
 	isOpen: boolean
 }
 

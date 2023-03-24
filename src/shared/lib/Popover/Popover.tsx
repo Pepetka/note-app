@@ -5,10 +5,25 @@ import {useHover} from 'shared/hooks/useHover';
 import {Placement, useFloating, arrow, offset} from '@floating-ui/react-dom-interactions';
 
 interface PopoverProps {
+	/**
+	 * Дополнительные классы
+	 */
 	className?: string
+	/**
+	 * Триггер, взаимодействие с которым открывает контент
+	 */
 	children: ReactNode
+	/**
+	 * Контент
+	 */
 	popoverContent: ReactNode
+	/**
+	 * Позиция, занимаемая контентом после открытия
+	 */
 	position?: Placement
+	/**
+	 * Флаг, отвечающий за возможность занять 100% ширины контейнера
+	 */
 	w100?: boolean
 }
 

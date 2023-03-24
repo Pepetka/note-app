@@ -11,9 +11,21 @@ import {useModal} from 'shared/hooks/useModal';
 import cls from './Drawer.module.scss';
 
 interface DrawerProps {
+	/**
+	 * Дополнительные классы
+	 */
 	className?: string;
+	/**
+	 * Содержимое компонента
+	 */
 	children: ReactNode
+	/**
+	 * Функция, закрывающая drawer
+	 */
 	onClose?: () => void
+	/**
+	 * Флаг, отвечающий за открытие компонента
+	 */
 	isOpen: boolean
 }
 

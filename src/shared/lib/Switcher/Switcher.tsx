@@ -4,8 +4,17 @@ import {memo} from 'react';
 import cls from './Switcher.module.scss';
 
 interface SwitcherProps {
+	/**
+	 * Дополнительные классы
+	 */
 	className?: string
+	/**
+	 * Флаг, отвечающий за то, в каком положении находится компонент
+	 */
 	isActive?: boolean
+	/**
+	 * Функция, вызываемая при клике на компонент
+	 */
 	onclick?: () => void
 }
 

@@ -1,17 +1,24 @@
-import {ChangeEvent, ForwardedRef, forwardRef, memo, TextareaHTMLAttributes, useEffect, useState} from 'react';
+import {ForwardedRef, forwardRef, memo, TextareaHTMLAttributes, useEffect, useState} from 'react';
 import {classNames} from 'shared/helpers/classNames/classNames';
 
 import cls from './Textarea.module.scss';
 
 interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement>{
+	/**
+	 * Дополнительные классы
+	 */
 	className?: string
-	placeholder?: string
-	onChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void
-	value?: string
-	id?: string
+	/**
+	 * Флаг, отвечающий за отсутствие скруглений углов справа
+	 */
 	withCorners?: boolean
+	/**
+	 * ID компонента при тестировании
+	 */
 	testid?: string
-	rows?: number
+	/**
+	 * Плавающий placeholder
+	 */
 	floatPlaceholder?: string
 }
 export const Textarea = memo(forwardRef((props: TextareaProps, ref: ForwardedRef<HTMLTextAreaElement>) => {

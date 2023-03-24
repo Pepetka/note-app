@@ -8,6 +8,9 @@ export interface ThemeHook {
 	setTheme: (theme: Theme) => void
 }
 
+/**
+ * Хук, возвращающий тему приложения и функции для изменения темы
+ */
 export const useTheme = (): ThemeHook => {
 	const {theme, setTheme} = useContext(ThemeContext);
 
